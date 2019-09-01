@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Movie &amp; Tv Show</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="poster_content">Poster</string>
+    <string name="movies_tab">Movies</string>
+    <string name="tv_shows_tab">Tv Shows</string>
+    <string name="overlay_poster">overlay foto</string>
+    <string name="release">Tanggal Rilis</string>
+    <string name="title">judul</string>
+    <string name="date">release</string>
+    <string name="description">desc</string>
+    <string name="overview">Ringkasan</string>
+    <string name="menu1">Bahasa</string>
+
+    <string-array name="movie_title">
+        <item>Aquaman</item>
+        <item>A Star Is Reborn</item>
+        <item>Avengers: Infinity War</item>
+        <item>Bird Box</item>
+        <item>Bohemian Rhapsody</item>
+        <item>Bumblebee</item>
+        <item>Creed II</item>
+        <item>Once Upon a Deadpool</item>
+        <item>How to Train Your Dragon: The Hidden World</item>
+        <item>Dragon Ball Super: Broly</item>
+        <item>Glass</item>
+        <item>Hunter Killer</item>
+        <item>Mary Poppins Returns</item>
+        <item>Mortal Engines</item>
+        <item>Preman Pensiun</item>
+        <item>Robin Hood</item>
+        <item>Spider-Man: Into the Spider-Verse</item>
+        <item>The Girl in the Spider\'s Web</item>
+        <item>The Mule</item>
+        <item>Venom</item>
+    </string-array>
+
+    <string-array name="movie_poster">
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/5Kg76ldv7VxeX9YlcQXiowHgdX6.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/rGfGfgL2pEPCfhIvqHXieXFn7gp.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/5Ka49BWWyKMXr93YMbH5wLN7aAM.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/f03YksE4NggUjG75toz4H1YAGRf.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/a0j18XNVhP4RcW3wXwsqT0kVoQm.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/uTVGku4LibMGyKgQvjBtv3OYfAX.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/gLhYg9NIvIPKVRTtvzCWnp1qJWG.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/7xfWyoz4SF5LHZ713eMtC2aZ0lT.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/AiRfixFcfTkNbn2A73qVJPlpkUo.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/w4ibr8R702DCjwYniry1D1XwQXj.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/klazQbxk3yfuZ8JcfO9jdKOZQJ7.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg</item>
+    </string-array>
+
+    <string-array name="movie_desc">
+        <item>Dulunya merupakan rumah bagi peradaban paling maju di Bumi, Atlantis sekarang merupakan kerajaan bawah laut yang diperintah oleh Raja Orm yang haus kekuasaan. Dengan pasukan yang sangat besar, Orm berencana untuk menaklukkan orang-orang samudera yang tersisa dan kemudian ke permukaan dunia. Yang menghalangi jalannya adalah Arthur Curry, saudara tiri manusia setengah manusia Orm dan pewaris sejati takhta.</item>
+        <item>Musisi kawakan Jackson Maine menemukan - dan jatuh cinta dengan - artis yang sedang berjuang Ally. Dia baru saja menyerah pada mimpinya untuk menjadi besar sebagai penyanyi - sampai Jack membujuknya menjadi sorotan. Tetapi bahkan ketika karier Ally lepas landas, sisi pribadi dari hubungan mereka hancur, ketika Jack berjuang terus-menerus dengan setan-setan internalnya sendiri.</item>
+        <item>Ketika Avengers dan sekutu mereka terus melindungi dunia dari ancaman yang terlalu besar untuk ditangani oleh satu pahlawan, bahaya baru telah muncul dari bayang-bayang kosmik: Thanos. Seorang lalim penghinaan intergalaksi, tujuannya adalah untuk mengumpulkan semua enam Batu Infinity, artefak kekuatan tak terbayangkan, dan menggunakannya untuk menimbulkan keinginannya yang terpelintir pada semua kenyataan. Segala yang Avengers telah perjuangkan telah mengarah ke saat ini - nasib Bumi dan keberadaannya sendiri tidak pernah lebih pasti.</item>
+        <item>Lima tahun setelah kehadiran tak terlihat yang tak menyenangkan membuat sebagian besar masyarakat bunuh diri, seorang yang selamat dan dua anaknya melakukan upaya putus asa untuk mencapai keselamatan.</item>
+        <item>Penyanyi Freddie Mercury, gitaris Brian May, drummer Roger Taylor dan gitaris bass John Deacon mengambil dunia musik dengan badai ketika mereka membentuk band rock \'n\' roll Queen pada tahun 1970. Lagu-lagu hit menjadi klasik instan. Ketika gaya hidup Mercury yang semakin liar mulai lepas kendali, Queen segera menghadapi tantangan terbesarnya - menemukan cara untuk menjaga band bersama di tengah kesuksesan dan kelebihan.</item>
+        <item>Dalam pelarian pada tahun 1987, Bumblebee menemukan tempat perlindungan di tempat barang rongsokan di kota pantai kecil California. Charlie, di puncak usia 18 dan berusaha menemukan tempatnya di dunia, menemukan Bumblebee, bekas luka pertempuran dan patah. Ketika Charlie menghidupkannya, dia dengan cepat mengetahui bahwa ini bukan bug VW kuning biasa.</item>
+        <item>Antara kewajiban pribadi dan pelatihan untuk pertarungan besar berikutnya melawan lawan yang memiliki ikatan dengan masa lalu keluarganya, Adonis Creed menghadapi tantangan hidupnya.</item>
+        <item>Fred Savage yang diculik dipaksa untuk menahan Deadpool PG-13 membawakan Deadpool 2 sebagai kisah Putri Pengantin yang penuh keajaiban, keajaiban &amp; nol F.</item>
+        <item>Ketika Hiccup memenuhi mimpinya untuk menciptakan utopia naga yang damai, penemuan Toothless \'dari pasangan yang tak teruji dan sukar ditangkap membuat Night Fury menjauh. Ketika bahaya meningkat di rumah dan pemerintahan Hiccup sebagai kepala desa diuji, baik naga dan pengendara harus membuat keputusan yang mustahil untuk menyelamatkan jenis mereka.</item>
+        <item>Bumi damai setelah Turnamen Kekuasaan. Menyadari bahwa alam semesta masih memiliki banyak orang yang lebih kuat untuk dilihat, Goku menghabiskan seluruh hari pelatihannya untuk mencapai ketinggian yang lebih besar. Lalu suatu hari, Goku dan Vegeta dihadapkan pada seorang Saiyan bernama \'Broly\' yang belum pernah mereka lihat sebelumnya. Orang-orang Saiyan seharusnya hampir sepenuhnya musnah dalam kehancuran Planet Vegeta, jadi apa yang dilakukan orang ini di Bumi? Pertemuan antara tiga Saiyan yang telah mengikuti takdir yang sangat berbeda ini berubah menjadi pertempuran yang luar biasa, dengan bahkan Frieza (kembali dari Neraka) terperangkap dalam campuran.</item>
+        <item>Dalam serangkaian pertemuan yang meningkat, mantan penjaga keamanan David Dunn menggunakan kemampuan supernaturalnya untuk melacak Kevin Wendell Crumb, seorang lelaki terganggu yang memiliki dua puluh empat kepribadian. Sementara itu, kehadiran bayangan Elia Price muncul sebagai seorang orkestra yang menyimpan rahasia penting bagi keduanya.</item>
+        <item>Kapten Glass dari USS Arkansas menemukan bahwa kudeta sedang terjadi di Rusia, jadi ia dan krunya bergabung dengan kelompok elit yang bekerja di lapangan untuk mencegah perang.</item>
+        <item>Dalam London era Depresi, Jane dan Michael Banks yang sudah dewasa, bersama dengan tiga anak Michael, dikunjungi oleh Mary Poppins yang penuh teka-teki setelah kehilangan pribadi. Melalui keterampilan magisnya yang unik, dan dengan bantuan temannya Jack, dia membantu keluarga menemukan kembali sukacita dan keajaiban yang hilang dalam hidup mereka.</item>
+        <item>Beribu-ribu tahun di masa depan, kota-kota di bumi menjelajah dunia dengan roda besar, saling melahap dalam perjuangan untuk sumber daya yang semakin berkurang. Di salah satu kota traksi besar ini, London tua, Tom Natsworthy mengalami perjumpaan tak terduga dengan seorang wanita muda misterius dari daerah terlantar yang akan mengubah jalan hidupnya selamanya.</item>
+        <item>Setelah tiga tahun, bisnis Muslihat (Epi Kusnandar), yang telah pensiun sebagai preman, memiliki masalah. Penurunan penjualan. Muslihat juga menghadapi masalah baru ketika Safira (Safira Maharani), satu-satunya anak perempuannya, tumbuh di masa remaja dan mulai dikunjungi oleh anak laki-laki. Masalah yang lebih besar: gesekan antara mantan bawahannya.</item>
+        <item>Seorang pejuang perang yang keras dan komandan Moornya melakukan pemberontakan yang berani melawan mahkota Inggris yang korup.</item>
+        <item>Miles Morales menyulap hidupnya antara menjadi siswa sekolah menengah dan menjadi manusia laba-laba. Ketika Wilson "Kingpin" Fisk menggunakan collider super, yang lain dari seberang Spider-Verse diangkut ke dimensi ini.</item>
+        <item>Di Stockholm, Swedia, peretas Lisbeth Salander disewa oleh Frans Balder, seorang insinyur komputer, untuk mengambil program yang menurutnya terlalu berbahaya untuk ada.</item>
+        <item>Earl Stone, seorang pria berusia 80-an, bangkrut, sendirian, dan menghadapi penyitaan bisnisnya ketika ia ditawari pekerjaan yang hanya mengharuskannya mengemudi. Cukup mudah, tetapi, tanpa diketahui Earl, dia baru saja mendaftar sebagai kurir narkoba untuk kartel Meksiko. Dia melakukannya dengan baik sehingga muatannya meningkat secara eksponensial, dan Earl menabrak radar agen DEA yang sibuk mengisi daya.</item>
+        <item>Jurnalis investigasi Eddie Brock mencoba untuk kembali setelah skandal, tetapi secara tidak sengaja menjadi tuan rumah Venom, seorang simbiot alien yang sangat kuat dan sakti. Segera, ia harus mengandalkan kekuatan barunya untuk melindungi dunia dari organisasi bayangan yang mencari simbiosis mereka sendiri.</item>
+    </string-array>
+
+    <string-array name="movie_release">
+        <item>21 Desember 2018</item>
+        <item>5 Oktober 2018</item>
+        <item>27 April 2018</item>
+        <item>12 November 2018</item>
+        <item>2 November 2018</item>
+        <item>21 Desember 2018</item>
+        <item>21 November 2018</item>
+        <item>11 Desember 2018</item>
+        <item>22 Februari 2019</item>
+        <item>13 Desember 2018</item>
+        <item>18 Januari 2019</item>
+        <item>26 Oktober 2018</item>
+        <item>19 Desember 2018</item>
+        <item>14 Desember 2018</item>
+        <item>17 Januari 2019</item>
+        <item>21 November 2018</item>
+        <item>14 Desember 2018</item>
+        <item>9 November 2018</item>
+        <item>14 Desember 2018</item>
+        <item>5 Oktober 2018</item>
+    </string-array>
+
+    <!--    TV SHOW  -->
+    <string-array name="tvShow_title">
+        <item>I Am Not an Animal</item>
+        <item>Chernobyl</item>
+        <item>Rick and Morty</item>
+        <item>Breaking Bad</item>
+        <item>Hunter X Hunter</item>
+        <item>Sherlock</item>
+        <item>Planet Earth II</item>
+        <item>Stranger Things</item>
+        <item>The Twilight Zone</item>
+        <item>Avatar: The Last Airbender</item>
+        <item>The Wire</item>
+        <item>Death Note</item>
+        <item>Peaky Blinders</item>
+        <item>Fargo</item>
+        <item>The Sopranos</item>
+        <item>Planet Earth</item>
+        <item>Neon Genesis Evangelion</item>
+        <item>Steins;Gate</item>
+        <item>Band of Brothers</item>
+        <item>Chappelle\'s Show</item>
+    </string-array>
+    <string-array name="tvShow_poster">
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/nMhv6jG5dtLdW7rgguYWvpbk0YN.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJdfO3ahgAMf2rcmhoqngjBBZW1.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/1yeVJox3rjo2jBKrrihIMj7uoS9.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/yWBcBIO9OrF3E85C5Arols6QNnG.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/f9zGxLHGyQB10cMDZNY5ZcGKhZi.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/uy5QoTu8fc6fGXMCTMbpQJFUEB0.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/7uY4pCOxbEdv4M8jTE4uMPVoSIW.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/sB8V0pQtJZ17v8FLXMOcYz6045c.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/dg7NuKDjmS6OzuNy33qt8kSkPA1.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/g8hHbsRmHYoWYizhWCk87vpkrmy.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/jeWoeUQyHdxGFNZCrzbOUP78FiZ.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/e890UetS6XH7kqltlZ8VU6qDaHU.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/u0cLcBQITrYqfHsn06fxnQwtqiE.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/tI5hLHgrfOTOhPjX22vlo9YsdgE.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/4n063I6pRLaN3vAbd5y6Xx9b3PW.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/5DZix6ggRiFEbsGqUeTAI1z2wtX.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/yRXTVpDRBA3983C3HjoY0SO4dV6.jpg</item>
+        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/o5FI6Xu30m2HDim07f6bHAos9ZC.jpg</item>
+    </string-array>
+    <string-array name="tvShow_desc">
+        <item>I Am Not An Animal adalah serial komedi animasi tentang satu-satunya enam hewan yang berbicara di dunia, yang keberadaannya dalam unit penglihatan terbalik ketika mereka dibebaskan oleh aktivis hak-hak hewan.</item>
+        <item>Dramatisasi kisah nyata dari salah satu bencana buatan manusia terburuk dalam sejarah, kecelakaan nuklir bencana di Chernobyl. Sebuah kisah tentang pria dan wanita pemberani yang berkorban untuk menyelamatkan Eropa dari bencana yang tak terbayangkan.</item>
+        <item>Rick adalah orang tua yang tidak seimbang secara mental tetapi berbakat secara ilmiah yang baru-baru ini terhubung kembali dengan keluarganya. Dia menghabiskan sebagian besar waktunya dengan melibatkan cucunya yang muda, Morty, dalam petualangan berbahaya dan aneh di luar angkasa dan alam semesta alternatif. Ditambah dengan kehidupan keluarga Morty yang sudah tidak stabil, peristiwa-peristiwa ini menyebabkan banyak kesusahan di rumah dan sekolah.</item>
+        <item>Ketika Walter White, seorang guru kimia New Mexico, didiagnosis dengan kanker stadium III dan diberi prognosis hanya dua tahun lagi untuk hidup. Dia menjadi dipenuhi dengan rasa takut dan keinginan yang tak henti-hentinya untuk mengamankan masa depan keuangan keluarganya dengan biaya berapa pun ketika dia memasuki dunia narkoba dan kejahatan yang berbahaya.</item>
+        <item>Suatu hari Gon Freecss yang berusia dua belas tahun menemukan bahwa ayah yang selalu diberi tahu bahwa ayahnya sudah mati, masih hidup dan sehat. Ayahnya, Ging, adalah seorang Pemburu — anggota elit masyarakat dengan lisensi untuk pergi ke mana pun atau melakukan hampir semua hal. Gon, yang bertekad untuk mengikuti jejak ayahnya, memutuskan untuk mengambil Ujian Hunter dan akhirnya menemukan ayahnya untuk membuktikan dirinya sebagai Hunter dalam haknya sendiri. Namun di tengah jalan, dia belajar bahwa ada lebih banyak untuk menjadi seorang Pemburu daripada yang diperkirakan sebelumnya, dan tantangan yang harus dia hadapi dianggap sebagai yang terberat di dunia.</item>
+        <item>Pembaruan modern menemukan detektif terkenal dan mitra dokternya memecahkan kejahatan di London abad ke-21.</item>
+        <item>David Attenborough menyajikan seri dokumenter yang mengeksplorasi bagaimana hewan memenuhi tantangan untuk bertahan hidup di habitat paling ikonik di bumi.</item>
+        <item>Ketika seorang bocah lelaki menghilang, sebuah kota kecil mengungkap misteri yang melibatkan eksperimen rahasia, kekuatan gaib yang menakutkan, dan seorang gadis kecil yang aneh.</item>
+        <item>Serangkaian cerita yang tidak berhubungan yang berisi drama, thriller psikologis, fantasi, fiksi ilmiah, ketegangan, dan / atau horor, sering diakhiri dengan twist yang mengerikan atau tidak terduga.</item>
+        <item>Dalam dunia sihir unsur yang hancur akibat perang, seorang anak lelaki bangkit untuk melakukan pencarian mistik yang berbahaya untuk memenuhi takdirnya sebagai Avatar, dan membawa kedamaian bagi dunia.</item>
+        <item>Diceritakan dari sudut pandang detektif pembunuhan dan narkotika Baltimore serta target-target mereka, seri ini menangkap alam semesta di mana perang nasional melawan narkoba telah menjadi birokrasi yang permanen dan mandiri, dan perbedaan antara yang baik dan yang jahat secara rutin dilenyapkan.</item>
+        <item>Light Yagami adalah siswa ace dengan prospek luar biasa — dan dia bosan. Tapi semua itu berubah ketika dia menemukan Death Note, sebuah buku catatan yang dijatuhkan oleh dewa kematian Shinigami yang nakal. Setiap manusia yang namanya tertulis di notebook akan mati, dan Light telah bersumpah untuk menggunakan kekuatan Death Note untuk menyingkirkan dunia kejahatan. Tetapi apakah Light akan berhasil dalam tujuannya yang mulia, atau akankah Death Note mengubahnya menjadi hal yang ia lawan?</item>
+        <item>Sebuah epik keluarga gangster berlatar tahun 1919 di Birmingham, Inggris dan berpusat pada sebuah geng yang menjahit pisau cukur di puncak topi mereka, dan bos mereka yang ganas, Tommy Shelby, yang bermaksud untuk naik di dunia.</item>
+        <item>Serangkaian antologi erat terkait dengan cerita yang melibatkan kejahatan, kekerasan dan pembunuhan yang berbasis di dan sekitar Minnesota.</item>
+        <item>Kisah mafia Italia-Amerika yang berpusat di New Jersey Tony Soprano dan kesulitan yang dia hadapi ketika dia mencoba untuk menyeimbangkan persyaratan yang saling bertentangan dalam kehidupan rumah tangganya dan organisasi kriminal yang dipimpinnya. Kesulitan-kesulitan itu sering disorot melalui hubungan profesionalnya yang berkelanjutan dengan psikiater Jennifer Melfi. Acara ini menampilkan anggota keluarga Tony dan rekanan Mafia dalam peran dan alur cerita yang menonjol, terutama istrinya, Carmela, dan sepupunya serta anak didiknya, Christopher Moltisanti.</item>
+        <item>David Attenborough merayakan keanekaragaman dunia alam yang menakjubkan dalam seri dokumenter epik ini, yang difilmkan selama empat tahun di 64 negara berbeda.</item>
+        <item>Pada pergantian abad, para Malaikat kembali ke Bumi, berusaha untuk memusnahkan umat manusia dalam kemarahan apokaliptik. Hancur, sisa-sisa terakhir umat manusia bergerak di bawah tanah untuk menunggu hari ketika para Malaikat akan kembali untuk menyelesaikan pekerjaan. Lima belas tahun kemudian, hari itu telah datang … tetapi kali ini, umat manusia siap melawan dengan senjata bio-mekanis yang mengerikan yang dikenal sebagai Evangelions. Saksikan Shinji, Rei, Asuka, dan seluruh agen bayangan Saraf yang bertempur untuk menyelamatkan bumi dari kehancuran total.</item>
+        <item>Sekelompok teman telah menyesuaikan microwave mereka sehingga dapat mengirim pesan teks ke masa lalu. Ketika mereka melakukan percobaan yang berbeda, sebuah organisasi bernama SERN yang telah melakukan penelitian sendiri tentang perjalanan waktu melacak mereka dan sekarang karakter harus menemukan cara untuk menghindari penangkapan oleh mereka.</item>
+        <item>Diambil dari wawancara dengan orang-orang yang selamat dari Kompi Easy, serta jurnal dan surat-surat mereka, Band of Brothers menceritakan pengalaman para pria ini dari pelatihan penerjun payung di Georgia sampai akhir perang. Sebagai kompi senapan elit yang terjun payung ke Normandia pagi-pagi sekali, para peserta Pertempuran Bulge, dan menyaksikan kengerian perang, orang-orang Kompi Easy tahu keberanian dan ketakutan luar biasa - dan menjadi barang legenda. Berdasarkan buku terkenal Stephen E. Ambrose dengan nama yang sama.</item>
+        <item>Pertunjukan Chappelle adalah serial televisi komedi sketsa Amerika yang dibuat oleh komedian Dave Chappelle dan Neal Brennan, dengan Chappelle menjadi pembawa acara serta membintangi berbagai sketsa. Chappelle, Brennan dan Michele Armor adalah produser eksekutif acara tersebut. Serial ini ditayangkan perdana pada 22 Januari 2003, di jaringan televisi kabel Amerika, Comedy Central. Acara ini berlangsung selama dua musim lengkap dan musim ketiga yang terpotong. \ N "+
+                            "\ n" +
+                            "Setelah banyak penundaan, produksi musim ketiga dari pertunjukan itu tiba-tiba berakhir ketika Chappelle meninggalkan pertunjukan. Tiga episode dikompilasi dari pekerjaan yang selesai dan episode ini ditayangkan dari 9 Juli hingga 23 Juli 2006. Re-running sering ditayangkan di Comedy Pusat dan seluruh dunia di MTV di Jerman, Komedi Tengah di Brasil, Jaringan Komedi di Kanada, Saluran Komedi dan 7 teman di Australia dan FX di Inggris. \ N "+
+                            "\ n" +
+                            "Pertunjukan Chappelle juga ditampilkan di WGN America dan disindikasikan ke berbagai stasiun televisi di seluruh AS termasuk MyNetworkTV. Panduan TV memberinya peringkat # 31 dalam daftar" 100 Acara Top TV "mereka.</item>
+    </string-array>
+    <string-array name="tvShow_release">
+        <item>10 Mei 2004</item>
+        <item>6 Mei 2019</item>
+        <item>2 Desember 2013</item>
+        <item>20 Januari 2008</item>
+        <item>2 Oktober 2011</item>
+        <item>25 Juli 2010</item>
+        <item>6 November 2016</item>
+        <item>15 Juli 2016</item>
+        <item>2 Oktober 1959</item>
+        <item>21 Februari 2005</item>
+        <item>2 Juni 2002</item>
+        <item>4 Oktober 2006</item>
+        <item>12 September 2013</item>
+        <item>15 April 2014</item>
+        <item>10 Januari 1999</item>
+        <item>5 Maret 2006</item>
+        <item>4 Oktober 1995</item>
+        <item>6 April 2011</item>
+        <item>9 September 2001</item>
+        <item>22 Januari 2003</item>
+    </string-array>
+
+
+
+
+</resources>
