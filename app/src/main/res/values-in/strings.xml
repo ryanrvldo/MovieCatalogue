@@ -4,8 +4,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="poster_content">Poster</string>
-    <string name="movies_tab">Movies</string>
-    <string name="tv_shows_tab">Tv Shows</string>
+    <string name="movies_tab">Film</string>
+    <string name="tv_shows_tab">Acara TV</string>
     <string name="overlay_poster">overlay foto</string>
     <string name="release">Tanggal Rilis</string>
     <string name="title">judul</string>
