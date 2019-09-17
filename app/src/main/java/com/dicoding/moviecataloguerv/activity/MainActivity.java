@@ -1,29 +1,28 @@
-package com.dicoding.moviecataloguerv;
+package com.dicoding.moviecataloguerv.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.fragment.MovieFragment;
 import com.dicoding.moviecataloguerv.fragment.TvShowFragment;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
 
     @Override
 
@@ -31,15 +30,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
 
         ViewPager viewPager = findViewById(R.id.viewpager);
         createViewPager(viewPager);
 
-        tabLayout = findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        createTabIcons();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.app_name);
@@ -62,22 +60,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void createTabIcons() {
-        TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabOne.setText(R.string.movies_tab);
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.movie_white_36dp, 0, 0);
-        tabLayout.getTabAt(0).setCustomView(tabOne);
-
-        TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabTwo.setText(R.string.tv_shows_tab);
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.live_tv_white_36dp, 0, 0);
-        tabLayout.getTabAt(1).setCustomView(tabTwo);
-    }
-
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MovieFragment(), String.valueOf(R.string.movies_tab));
-        adapter.addFragment(new TvShowFragment(), String.valueOf(R.string.tv_shows_tab));
+        adapter.addFragment(new MovieFragment(), getResources().getString(R.string.movies_tab));
+        adapter.addFragment(new TvShowFragment(), getResources().getString(R.string.tv_shows_tab));
         viewPager.setAdapter(adapter);
     }
 
@@ -89,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             super(manager);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);

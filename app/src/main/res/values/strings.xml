@@ -1,207 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Movie &amp; Tv Show</string>
+    <string name="app_name">Movie Catalogue</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="poster_content">Poster</string>
     <string name="movies_tab">Movies</string>
     <string name="tv_shows_tab">Tv Shows</string>
-    <string name="overlay_poster">overlay photo</string>
     <string name="release">Date Release</string>
     <string name="title">title</string>
-    <string name="date">release</string>
     <string name="description">desc</string>
     <string name="overview">Overview</string>
-    <string name="menu1">language</string>
-
-    <string-array name="movie_title">
-        <item>Aquaman</item>
-        <item>A Star Is Reborn</item>
-        <item>Avengers: Infinity War</item>
-        <item>Bird Box</item>
-        <item>Bohemian Rhapsody</item>
-        <item>Bumblebee</item>
-        <item>Creed II</item>
-        <item>Once Upon a Deadpool</item>
-        <item>How to Train Your Dragon: The Hidden World</item>
-        <item>Dragon Ball Super: Broly</item>
-        <item>Glass</item>
-        <item>Hunter Killer</item>
-        <item>Mary Poppins Returns</item>
-        <item>Mortal Engines</item>
-        <item>Retired Thug</item>
-        <item>Robin Hood</item>
-        <item>Spider-Man: Into the Spider-Verse</item>
-        <item>The Girl in the Spider\'s Web</item>
-        <item>The Mule</item>
-        <item>Venom</item>
-    </string-array>
-    
-    <string-array name="movie_poster">
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/5Kg76ldv7VxeX9YlcQXiowHgdX6.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/rGfGfgL2pEPCfhIvqHXieXFn7gp.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/5Ka49BWWyKMXr93YMbH5wLN7aAM.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/f03YksE4NggUjG75toz4H1YAGRf.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/a0j18XNVhP4RcW3wXwsqT0kVoQm.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/uTVGku4LibMGyKgQvjBtv3OYfAX.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/gLhYg9NIvIPKVRTtvzCWnp1qJWG.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/7xfWyoz4SF5LHZ713eMtC2aZ0lT.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/AiRfixFcfTkNbn2A73qVJPlpkUo.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/w4ibr8R702DCjwYniry1D1XwQXj.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/klazQbxk3yfuZ8JcfO9jdKOZQJ7.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg</item>
-    </string-array>
-
-    <string-array name="movie_desc">
-        <item>Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm\'s half-human, half-Atlantean brother and true heir to the throne.</item>
-        <item>Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally\'s career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.</item>
-        <item>As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.</item>
-        <item>Five years after an ominous unseen presence drives most of society to suicide, a survivor and her two children make a desperate bid to reach safety.</item>
-        <item>Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock \'n\' roll band Queen in 1970. Hit songs become instant classics. When Mercury\'s increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet – finding a way to keep the band together amid the success and excess.</item>
-        <item>On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken. When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.</item>
-        <item>Between personal obligations and training for his next big fight against an opponent with ties to his family\'s past, Adonis Creed is up against the challenge of his life.</item>
-        <item>A kidnapped Fred Savage is forced to endure Deadpool\'s PG-13 rendition of Deadpool 2 as a Princess Bride-esque story that\'s full of magic, wonder &amp; zero F\'s.</item>
-        <item>As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind.</item>
-        <item>Earth is peaceful following the Tournament of Power. Realizing that the universes still hold many more strong people yet to see, Goku spends all his days training to reach even greater heights. Then one day, Goku and Vegeta are faced by a Saiyan called \'Broly\' who they\'ve never seen before. The Saiyans were supposed to have been almost completely wiped out in the destruction of Planet Vegeta, so what\'s this one doing on Earth? This encounter between the three Saiyans who have followed completely different destinies turns into a stupendous battle, with even Frieza (back from Hell) getting caught up in the mix.</item>
-        <item>In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men.</item>
-        <item>Captain Glass of the USS Arkansas discovers that a coup d\'état is taking place in Russia, so he and his crew join an elite group working on the ground to prevent a war.</item>
-        <item>In Depression-era London, a now-grown Jane and Michael Banks, along with Michael\'s three children, are visited by the enigmatic Mary Poppins following a personal loss. Through her unique magical skills, and with the aid of her friend Jack, she helps the family rediscover the joy and wonder missing in their lives.</item>
-        <item>Many thousands of years in the future, Earth’s cities roam the globe on huge wheels, devouring each other in a struggle for ever diminishing resources. On one of these massive traction cities, the old London, Tom Natsworthy has an unexpected encounter with a mysterious young woman from the wastelands who will change the course of his life forever.</item>
-        <item>After three years, the business of Muslihat (Epi Kusnandar), who has retired as a thug, has a problem. Sales decline. Muslihat also faces new problems when Safira (Safira Maharani), her only daughter, grows up in adolescence and begins to be visited by boys. A bigger problem: frictions between his former subordinates.</item>
-        <item>A war-hardened Crusader and his Moorish commander mount an audacious revolt against the corrupt English crown.</item>
-        <item>Miles Morales is juggling his life between being a high school student and being a spider-man. When Wilson \"Kingpin\" Fisk uses a super collider, others from across the Spider-Verse are transported to this dimension.</item>
-        <item>In Stockholm, Sweden, hacker Lisbeth Salander is hired by Frans Balder, a computer engineer, to retrieve a program that he believes it is too dangerous to exist.</item>
-        <item>Earl Stone, a man in his 80s, is broke, alone, and facing foreclosure of his business when he is offered a job that simply requires him to drive. Easy enough, but, unbeknownst to Earl, he’s just signed on as a drug courier for a Mexican cartel. He does so well that his cargo increases exponentially, and Earl hit the radar of hard-charging DEA agent Colin Bates.</item>
-        <item>Investigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote. Soon, he must rely on his newfound powers to protect the world from a shadowy organization looking for a symbiote of their own.</item>
-    </string-array>
-
-    <string-array name="movie_release">
-        <item>December 21, 2018</item>
-        <item>October 5, 2018</item>
-        <item>April 27, 2018</item>
-        <item>November 12, 2018</item>
-        <item>November 2, 2018</item>
-        <item>December 21, 2018</item>
-        <item>November 21, 2018</item>
-        <item>December 11, 2018</item>
-        <item>February 22, 2019</item>
-        <item>December 13, 2018</item>
-        <item>January 18, 2019</item>
-        <item>October 26, 2018</item>
-        <item>December 19, 2018</item>
-        <item>December 14, 2018</item>
-        <item>January 17, 2019</item>
-        <item>November 21, 2018</item>
-        <item>December 14, 2018</item>
-        <item>November 9, 2018</item>
-        <item>December 14, 2018</item>
-        <item>October 5, 2018</item>
-    </string-array>
-
-<!--    TV SHOW  -->
-    <string-array name="tvShow_title">
-        <item>I Am Not an Animal</item>
-        <item>Chernobyl</item>
-        <item>Rick and Morty</item>
-        <item>Breaking Bad</item>
-        <item>Hunter X Hunter</item>
-        <item>Sherlock</item>
-        <item>Planet Earth II</item>
-        <item>Stranger Things</item>
-        <item>The Twilight Zone</item>
-        <item>Avatar: The Last Airbender</item>
-        <item>The Wire</item>
-        <item>Death Note</item>
-        <item>Peaky Blinders</item>
-        <item>Fargo</item>
-        <item>The Sopranos</item>
-        <item>Planet Earth</item>
-        <item>Neon Genesis Evangelion</item>
-        <item>Steins;Gate</item>
-        <item>Band of Brothers</item>
-        <item>Chappelle\'s Show</item>
-    </string-array>
-       <string-array name="tvShow_poster">
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/nMhv6jG5dtLdW7rgguYWvpbk0YN.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJdfO3ahgAMf2rcmhoqngjBBZW1.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/1yeVJox3rjo2jBKrrihIMj7uoS9.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/yWBcBIO9OrF3E85C5Arols6QNnG.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/f9zGxLHGyQB10cMDZNY5ZcGKhZi.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/uy5QoTu8fc6fGXMCTMbpQJFUEB0.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/7uY4pCOxbEdv4M8jTE4uMPVoSIW.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/sB8V0pQtJZ17v8FLXMOcYz6045c.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/dg7NuKDjmS6OzuNy33qt8kSkPA1.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/g8hHbsRmHYoWYizhWCk87vpkrmy.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/jeWoeUQyHdxGFNZCrzbOUP78FiZ.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/e890UetS6XH7kqltlZ8VU6qDaHU.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/u0cLcBQITrYqfHsn06fxnQwtqiE.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/tI5hLHgrfOTOhPjX22vlo9YsdgE.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/4n063I6pRLaN3vAbd5y6Xx9b3PW.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/5DZix6ggRiFEbsGqUeTAI1z2wtX.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/yRXTVpDRBA3983C3HjoY0SO4dV6.jpg</item>
-        <item>https://image.tmdb.org/t/p/w600_and_h900_bestv2/o5FI6Xu30m2HDim07f6bHAos9ZC.jpg</item>
-    </string-array>
-       <string-array name="tvShow_desc">
-        <item>I Am Not An Animal is an animated comedy series about the only six talking animals in the world, whose cosseted existence in a vivisection unit is turned upside down when they are liberated by animal rights activists.</item>
-        <item>A dramatization of the true story of one of the worst man-made catastrophes in history, the catastrophic nuclear accident at Chernobyl. A tale of the brave men and women who sacrificed to save Europe from unimaginable disaster.</item>
-        <item>Rick is a mentally-unbalanced but scientifically-gifted old man who has recently reconnected with his family. He spends most of his time involving his young grandson Morty in dangerous, outlandish adventures throughout space and alternate universes. Compounded with Morty\'s already unstable family life, these events cause Morty much distress at home and school.</item>
-        <item>When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family\'s financial future at any cost as he enters the dangerous world of drugs and crime.</item>
-        <item>Twelve-year-old Gon Freecss one day discovers that the father he had always been told was dead was alive and well. His Father, Ging, is a Hunter—a member of society\'s elite with a license to go anywhere or do almost anything. Gon, determined to follow in his father\'s footsteps, decides to take the Hunter Examination and eventually find his father to prove himself as a Hunter in his own right. But on the way, he learns that there is more to becoming a Hunter than previously thought, and the challenges that he must face are considered the toughest in the world.</item>
-        <item>A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.</item>
-        <item>David Attenborough presents a documentary series exploring how animals meet the challenges of surviving in the most iconic habitats on earth.</item>
-        <item>When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.</item>
-        <item>A series of unrelated stories containing drama, psychological thriller, fantasy, science fiction, suspense, and/or horror, often concluding with a macabre or unexpected twist.</item>
-        <item>In a war-torn world of elemental magic, a young boy reawakens to undertake a dangerous mystic quest to fulfill his destiny as the Avatar, and bring peace to the world.</item>
-        <item>Told from the points of view of both the Baltimore homicide and narcotics detectives and their targets, the series captures a universe in which the national war on drugs has become a permanent, self-sustaining bureaucracy, and distinctions between good and evil are routinely obliterated.</item>
-        <item>Light Yagami is an ace student with great prospects—and he’s bored out of his mind. But all that changes when he finds the Death Note, a notebook dropped by a rogue Shinigami death god. Any human whose name is written in the notebook dies, and Light has vowed to use the power of the Death Note to rid the world of evil. But will Light succeed in his noble goal, or will the Death Note turn him into the very thing he fights against?</item>
-        <item>A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.</item>
-        <item>A close-knit anthology series dealing with stories involving malice, violence and murder based in and around Minnesota.</item>
-        <item>The story of New Jersey-based Italian-American mobster Tony Soprano and the difficulties he faces as he tries to balance the conflicting requirements of his home life and the criminal organization he heads. Those difficulties are often highlighted through his ongoing professional relationship with psychiatrist Jennifer Melfi. The show features Tony\'s family members and Mafia associates in prominent roles and story arcs, most notably his wife Carmela and his cousin and protégé Christopher Moltisanti.</item>
-        <item>David Attenborough celebrates the amazing variety of the natural world in this epic documentary series, filmed over four years across 64 different countries.</item>
-        <item>At the turn of the century, the Angels returned to Earth, seeking to wipe out humanity in an apocalyptic fury. Devastated, mankind\'s last remnants moved underground to wait for the day when the Angels would come back to finish the job. Fifteen years later, that day has come… but this time, humanity is ready to fight back with terrifying bio-mechanical weapons known as the Evangelions. Watch as Shinji, Rei, Asuka and the rest of the mysterious shadow agency Nerv battle to save earth from total annihilation.</item>
-        <item>A group of friends have customized their microwave so that it can send text messages to the past. As they perform different experiments, an organization named SERN who has been doing their own research on time travel tracks them down and now the characters have to find a way to avoid being captured by them.</item>
-        <item>Drawn from interviews with survivors of Easy Company, as well as their journals and letters, Band of Brothers chronicles the experiences of these men from paratrooper training in Georgia through the end of the war. As an elite rifle company parachuting into Normandy early on D-Day morning, participants in the Battle of the Bulge, and witness to the horrors of war, the men of Easy knew extraordinary bravery and extraordinary fear - and became the stuff of legend. Based on Stephen E. Ambrose\'s acclaimed book of the same name.</item>
-        <item>Chappelle\'s Show is an American sketch comedy television series created by comedians Dave Chappelle and Neal Brennan, with Chappelle hosting the show as well as starring in various sketches. Chappelle, Brennan and Michele Armour were the show\'s executive producers. The series premiered on January 22, 2003, on the American cable television network Comedy Central. The show ran for two complete seasons and a third, truncated season.\n" +
-                            "\n" +
-                            "After numerous delays, production of the third season of the show was abruptly ended when Chappelle left the show. Three episodes were compiled from the completed work and these episodes aired from July 9 to July 23, 2006. Re-runs frequently air on Comedy Central and around the world on MTV in Germany, Comedy Central in Brazil, The Comedy Network in Canada, The Comedy Channel and 7mate in Australia and FX in the United Kingdom.\n" +
-                            "\n" +
-                            "Chappelle\'s Show was also shown on WGN America and was syndicated to various television stations across the U.S. including MyNetworkTV. TV Guide ranked it #31 on their list of \"TV\'s Top 100 Shows\".</item>
-    </string-array>
-       <string-array name="tvShow_release">
-        <item>May 10, 2004</item>
-        <item>May 6, 2019</item>
-        <item>December 2, 2013</item>
-        <item>January 20, 2008</item>
-        <item>October 2, 2011</item>
-        <item>July 25, 2010</item>
-        <item>November 6, 2016</item>
-        <item>July 15, 2016</item>
-        <item>October 2, 1959</item>
-        <item>February 21, 2005</item>
-        <item>June 2, 2002</item>
-        <item>October 4, 2006</item>
-        <item>September 12, 2013</item>
-        <item>April 15, 2014</item>
-        <item>January 10, 1999</item>
-        <item>March 5, 2006</item>
-        <item>October 4, 1995</item>
-        <item>April 6, 2011</item>
-        <item>September 9, 2001</item>
-        <item>January 22, 2003</item>
-    </string-array>
-
-
+    <string name="menu1">Language</string>
+    <string name="rating_ex">5.5</string>
+    <string name="genre_ex">Horror, Fiction</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="date_ex">2019</string>
+    <string name="tvShow_title">Tv Show Title</string>
+    <string name="trailers">Trailers</string>
 
 
 </resources>

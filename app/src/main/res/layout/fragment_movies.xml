@@ -7,7 +7,7 @@
     tools:context=".fragment.MovieFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/rvMovies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -16,7 +16,8 @@
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
         android:scrollbars="vertical"
+        android:background="@color/colorPrimaryDark"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item_grid" />
+        tools:listitem="@layout/item_movie" />
 
 </RelativeLayout>
