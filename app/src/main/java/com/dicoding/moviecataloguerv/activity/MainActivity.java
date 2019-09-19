@@ -25,23 +25,23 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar_main);
-        setSupportActionBar(toolbar);
-
         ViewPager viewPager = findViewById(R.id.viewpager);
-        createViewPager(viewPager);
-
         TabLayout tabLayout = findViewById(R.id.tabs);
+
+        setSupportActionBar(toolbar);
+        createViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.app_name);
+            getSupportActionBar().setIcon(R.mipmap.ic_logo);
         }
+
     }
 
     @Override

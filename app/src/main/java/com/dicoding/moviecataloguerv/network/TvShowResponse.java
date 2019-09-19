@@ -1,6 +1,6 @@
 package com.dicoding.moviecataloguerv.network;
 
-import com.dicoding.moviecataloguerv.model.TvShow;
+import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,7 +13,7 @@ public class TvShowResponse {
 
     @SerializedName("results")
     @Expose
-    private List<TvShow> tvShows;
+    private List<TvShowItems> tvShowItems;
 
     @SerializedName("total_pages")
     @Expose
@@ -31,12 +31,12 @@ public class TvShowResponse {
         this.page = page;
     }
 
-    public List<TvShow> getTvShows() {
-        return tvShows;
+    public List<TvShowItems> getTvShowItems() {
+        return tvShowItems;
     }
 
-    public void setTvShows(List<TvShow> tvShows) {
-        this.tvShows = tvShows;
+    public void setTvShowItems(List<TvShowItems> tvShowItems) {
+        this.tvShowItems = tvShowItems;
     }
 
     public int getTotalPages() {

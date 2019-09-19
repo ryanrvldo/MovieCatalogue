@@ -1,6 +1,6 @@
 package com.dicoding.moviecataloguerv.network;
 
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,7 +13,7 @@ public class MovieResponse {
 
     @SerializedName("results")
     @Expose
-    private List<Movie> movies;
+    private List<MovieItems> movieItems;
 
     @SerializedName("total_pages")
     @Expose
@@ -31,12 +31,12 @@ public class MovieResponse {
         this.page = page;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
+    public List<MovieItems> getMovieItems() {
+        return movieItems;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+    public void setMovieItems(List<MovieItems> movieItems) {
+        this.movieItems = movieItems;
     }
 
     public int getTotalPages() {

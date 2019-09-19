@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,7 @@ import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
 import com.dicoding.moviecataloguerv.model.Genre;
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MoviesData;
 import com.dicoding.moviecataloguerv.network.getGenresCallback;
 import com.dicoding.moviecataloguerv.network.getMoviesCallback;
@@ -32,14 +33,16 @@ import java.util.List;
 public class MovieFragment extends Fragment {
 
     private RecyclerView moviesList;
-    private MoviesAdapter adapter;
+    private ProgressBar progressBar;
 
+    private MoviesAdapter adapter;
     private MoviesData moviesData;
+
     private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
         @Override
-        public void onItemClick(Movie movie) {
+        public void onItemClick(MovieItems movieItems) {
             Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
             startActivity(intent);
         }
     };
@@ -60,18 +63,30 @@ public class MovieFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         moviesList = view.findViewById(R.id.rvMovies);
+        progressBar = view.findViewById(R.id.progressBar);
 
         moviesData = MoviesData.getInstance();
         moviesList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        showLoading(true);
         getGenres();
     }
 
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
     private void getGenres() {
-        moviesData.getGenres(new getGenresCallback() {
+        moviesData.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
             @Override
             public void onSuccess(List<Genre> genres) {
                 getMovies(genres);
+                showLoading(false);
+                moviesList.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -82,10 +97,10 @@ public class MovieFragment extends Fragment {
     }
 
     private void getMovies(final List<Genre> genres) {
-        moviesData.getMovies(new getMoviesCallback() {
+        moviesData.getMovies(getResources().getString(R.string.language), new getMoviesCallback() {
             @Override
-            public void onSuccess(List<Movie> movies) {
-                adapter = new MoviesAdapter(movies, getActivity(), genres, onItemClicked);
+            public void onSuccess(List<MovieItems> movieItems) {
+                adapter = new MoviesAdapter(movieItems, getActivity(), genres, onItemClicked);
                 moviesList.setAdapter(adapter);
             }
 
@@ -98,6 +113,6 @@ public class MovieFragment extends Fragment {
 
     private void showError() {
         Toast.makeText(getContext(), "Please check your internet connection!", Toast.LENGTH_SHORT).show();
+        getGenres();
     }
-
 }

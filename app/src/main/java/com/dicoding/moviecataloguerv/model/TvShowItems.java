@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class TvShow {
+public class TvShowItems {
     @SerializedName("id")
     @Expose
     private int id;

@@ -1,10 +1,10 @@
 package com.dicoding.moviecataloguerv.network;
 
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.model.MovieItems;
 
 public interface onGetMovieCallback {
 
-    void onSuccess(Movie movie);
+    void onSuccess(MovieItems movieItems);
 
     void onError();
 }

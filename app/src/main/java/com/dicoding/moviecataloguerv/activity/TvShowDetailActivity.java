@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.Trailer;
-import com.dicoding.moviecataloguerv.model.TvShow;
+import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowsData;
 import com.dicoding.moviecataloguerv.network.getGenresCallback;
 import com.dicoding.moviecataloguerv.network.onGetTrailersCallback;
@@ -45,6 +46,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
     private RatingBar tvShowRating;
     private LinearLayout tvShowTrailers;
     private TextView trailersLabel;
+    private ProgressBar progressBar;
 
     private TvShowsData tvShowsData;
     private int tvShowId;
@@ -59,7 +61,16 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
         setupToolbar();
         initUI();
+        showLoading(true);
         getTvShow();
+    }
+
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void setupToolbar() {
@@ -82,29 +93,31 @@ public class TvShowDetailActivity extends AppCompatActivity {
         tvShowRating = findViewById(R.id.tvShowDetailsRating);
         tvShowTrailers = findViewById(R.id.tvShowTrailers);
         trailersLabel = findViewById(R.id.trailersLabel);
+        progressBar = findViewById(R.id.progressBar);
     }
 
     private void getTvShow() {
-        tvShowsData.getTvShow(tvShowId, new onGetTvShowCallback() {
+        tvShowsData.getTvShow(tvShowId, getResources().getString(R.string.language), new onGetTvShowCallback() {
             @Override
-            public void onSuccess(TvShow tvShow) {
-                tvShowTitle.setText(tvShow.getTitle());
+            public void onSuccess(TvShowItems tvShowItems) {
+                tvShowTitle.setText(tvShowItems.getTitle());
                 tvShowOverviewLabel.setVisibility(View.VISIBLE);
-                tvShowOverview.setText(tvShow.getOverview());
+                tvShowOverview.setText(tvShowItems.getOverview());
                 tvShowRating.setVisibility(View.VISIBLE);
-                tvShowRating.setRating(tvShow.getRating() / 2);
-                getGenres(tvShow);
-                tvShowReleaseDate.setText(tvShow.getReleaseDate());
+                tvShowRating.setRating(tvShowItems.getRating() / 2);
+                getGenres(tvShowItems);
+                tvShowReleaseDate.setText(tvShowItems.getReleaseDate());
                 if (!isFinishing()) {
                     Glide.with(TvShowDetailActivity.this)
-                            .load(IMAGE_BASE_URL + tvShow.getBackdrop())
+                            .load(IMAGE_BASE_URL + tvShowItems.getBackdrop())
                             .error(R.drawable.error)
                             .placeholder(R.drawable.placeholder)
                             .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                             .into(tvShowBackdrop);
+                    showLoading(false);
                 }
 
-                getTrailers(tvShow);
+                getTrailers(tvShowItems);
             }
 
             @Override
@@ -114,13 +127,13 @@ public class TvShowDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void getGenres(final TvShow tvShow) {
-        tvShowsData.getGenres(new getGenresCallback() {
+    private void getGenres(final TvShowItems tvShowItems) {
+        tvShowsData.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
             @Override
             public void onSuccess(List<Genre> genres) {
-                if (tvShow.getGenres() != null) {
+                if (tvShowItems.getGenres() != null) {
                     List<String> currentGenres = new ArrayList<>();
-                    for (Genre genre : tvShow.getGenres()) {
+                    for (Genre genre : tvShowItems.getGenres()) {
                         currentGenres.add(genre.getName());
                     }
                     tvShowGenres.setText(TextUtils.join(", ", currentGenres));
@@ -134,8 +147,8 @@ public class TvShowDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void getTrailers(TvShow tvShow) {
-        tvShowsData.getTrailers(tvShow.getId(), new onGetTrailersCallback() {
+    private void getTrailers(TvShowItems tvShowItems) {
+        tvShowsData.getTrailers(tvShowItems.getId(), getResources().getString(R.string.language), new onGetTrailersCallback() {
             @Override
             public void onSuccess(List<Trailer> trailers) {
                 trailersLabel.setVisibility(View.VISIBLE);

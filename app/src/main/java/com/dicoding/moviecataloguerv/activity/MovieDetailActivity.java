@@ -7,18 +7,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.MovieViewModel;
 import com.dicoding.moviecataloguerv.model.MoviesData;
 import com.dicoding.moviecataloguerv.model.Trailer;
 import com.dicoding.moviecataloguerv.network.getGenresCallback;
@@ -45,6 +48,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     private RatingBar movieRating;
     private LinearLayout movieTrailers;
     private TextView trailersLabel;
+    private ProgressBar progressBar;
+    private MovieViewModel movieViewModel;
 
     private MoviesData moviesData;
     private int movieId;
@@ -57,9 +62,22 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieId = getIntent().getIntExtra(MOVIE_ID, movieId);
         moviesData = MoviesData.getInstance();
 
+//        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+//        movieViewModel.init();
+//        movieViewModel.getMoviesData().observe(this, MovieResponse);
+
         setupToolbar();
         initUI();
+        showLoading(true);
         getMovie();
+    }
+
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void setupToolbar() {
@@ -82,29 +100,30 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieRating = findViewById(R.id.movieDetailsRating);
         movieTrailers = findViewById(R.id.movieTrailers);
         trailersLabel = findViewById(R.id.trailersLabel);
+        progressBar = findViewById(R.id.progressBar);
     }
 
     private void getMovie() {
-        moviesData.getMovie(movieId, new onGetMovieCallback() {
+        moviesData.getMovie(movieId, getResources().getString(R.string.language), new onGetMovieCallback() {
             @Override
-            public void onSuccess(Movie movie) {
-                movieTitle.setText(movie.getTitle());
+            public void onSuccess(MovieItems movieItems) {
+                movieTitle.setText(movieItems.getTitle());
                 movieOverviewLabel.setVisibility(View.VISIBLE);
-                movieOverview.setText(movie.getOverview());
+                movieOverview.setText(movieItems.getOverview());
                 movieRating.setVisibility(View.VISIBLE);
-                movieRating.setRating(movie.getRating() / 2);
-                getGenres(movie);
-                movieReleaseDate.setText(movie.getReleaseDate());
+                movieRating.setRating(movieItems.getRating() / 2);
+                movieReleaseDate.setText(movieItems.getReleaseDate());
+                getGenres(movieItems);
+                getTrailers(movieItems);
                 if (!isFinishing()) {
                     Glide.with(MovieDetailActivity.this)
-                            .load(IMAGE_BASE_URL + movie.getBackdrop())
+                            .load(IMAGE_BASE_URL + movieItems.getBackdrop())
                             .error(R.drawable.error)
                             .placeholder(R.drawable.placeholder)
                             .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                             .into(movieBackdrop);
+                    showLoading(false);
                 }
-
-                getTrailers(movie);
             }
 
             @Override
@@ -114,13 +133,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void getGenres(final Movie movie) {
-        moviesData.getGenres(new getGenresCallback() {
+    private void getGenres(final MovieItems movieItems) {
+        moviesData.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
             @Override
             public void onSuccess(List<Genre> genres) {
-                if (movie.getGenres() != null) {
+                if (movieItems.getGenres() != null) {
                     List<String> currentGenres = new ArrayList<>();
-                    for (Genre genre : movie.getGenres()) {
+                    for (Genre genre : movieItems.getGenres()) {
                         currentGenres.add(genre.getName());
                     }
                     movieGenres.setText(TextUtils.join(", ", currentGenres));
@@ -134,8 +153,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void getTrailers(Movie movie) {
-        moviesData.getTrailers(movie.getId(), new onGetTrailersCallback() {
+    private void getTrailers(MovieItems movieItems) {
+        moviesData.getTrailers(movieItems.getId(), getResources().getString(R.string.language), new onGetTrailersCallback() {
             @Override
             public void onSuccess(List<Trailer> trailers) {
                 trailersLabel.setVisibility(View.VISIBLE);

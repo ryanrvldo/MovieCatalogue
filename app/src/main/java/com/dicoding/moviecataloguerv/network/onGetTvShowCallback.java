@@ -1,10 +1,10 @@
 package com.dicoding.moviecataloguerv.network;
 
-import com.dicoding.moviecataloguerv.model.TvShow;
+import com.dicoding.moviecataloguerv.model.TvShowItems;
 
 public interface onGetTvShowCallback {
 
-    void onSuccess(TvShow tvShow);
+    void onSuccess(TvShowItems tvShowItems);
 
     void onError();
 }

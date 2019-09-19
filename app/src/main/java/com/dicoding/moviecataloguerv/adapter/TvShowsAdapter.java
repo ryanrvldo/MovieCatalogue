@@ -15,22 +15,22 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
-import com.dicoding.moviecataloguerv.model.TvShow;
+import com.dicoding.moviecataloguerv.model.TvShowItems;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowViewHolder> {
 
-    private List<TvShow> tvShows;
+    private List<TvShowItems> tvShowItems;
     private List<Genre> genreList;
     private Context context;
     private OnItemClicked onItemClicked;
 
     private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
 
-    public TvShowsAdapter(List<TvShow> tvShows, Context context, List<Genre> genreList, OnItemClicked onItemClicked) {
-        this.tvShows = tvShows;
+    public TvShowsAdapter(List<TvShowItems> tvShowItems, Context context, List<Genre> genreList, OnItemClicked onItemClicked) {
+        this.tvShowItems = tvShowItems;
         this.context = context;
         this.genreList = genreList;
         this.onItemClicked = onItemClicked;
@@ -45,16 +45,16 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
 
     @Override
     public void onBindViewHolder(@NonNull TvShowViewHolder holder, int position) {
-        holder.bind(tvShows.get(position));
+        holder.bind(tvShowItems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return tvShows.size();
+        return tvShowItems.size();
     }
 
     public interface OnItemClicked {
-        void onItemClick(TvShow tvShow);
+        void onItemClick(TvShowItems tvShowItems);
     }
 
     class TvShowViewHolder extends RecyclerView.ViewHolder {
@@ -63,7 +63,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
         TextView tvRating;
         TextView tvGenres;
         ImageView tvPoster;
-        TvShow tvShow;
+        TvShowItems tvShowItems;
 
         TvShowViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,20 +76,20 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClicked.onItemClick(tvShow);
+                    onItemClicked.onItemClick(tvShowItems);
                 }
             });
         }
 
-        private void bind(TvShow tvShow) {
-            this.tvShow = tvShow;
+        private void bind(TvShowItems tvShowItems) {
+            this.tvShowItems = tvShowItems;
 
-            tvReleaseDate.setText(tvShow.getReleaseDate().split("-")[0]);
-            tvTitle.setText(tvShow.getTitle());
-            tvRating.setText(String.valueOf(tvShow.getRating()));
-            tvGenres.setText(getGenres(tvShow.getGenreIds()));
+            tvReleaseDate.setText(tvShowItems.getReleaseDate().split("-")[0]);
+            tvTitle.setText(tvShowItems.getTitle());
+            tvRating.setText(String.valueOf(tvShowItems.getRating()));
+            tvGenres.setText(getGenres(tvShowItems.getGenreIds()));
             Glide.with(itemView)
-                    .load(IMAGE_BASE_URL + tvShow.getPosterPath())
+                    .load(IMAGE_BASE_URL + tvShowItems.getPosterPath())
                     .error(R.drawable.error)
                     .placeholder(R.drawable.placeholder)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))

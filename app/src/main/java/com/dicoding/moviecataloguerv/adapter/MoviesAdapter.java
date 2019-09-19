@@ -15,23 +15,21 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.model.MovieItems;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
-    private List<Movie> movies;
+    private List<MovieItems> movieItems;
     private List<Genre> genreList;
     private Context context;
     private OnItemClicked onItemClicked;
 
 
-    private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
-
-    public MoviesAdapter(List<Movie> movies, Context context, List<Genre> genreList, OnItemClicked onItemClicked) {
-        this.movies = movies;
+    public MoviesAdapter(List<MovieItems> movieItems, Context context, List<Genre> genreList, OnItemClicked onItemClicked) {
+        this.movieItems = movieItems;
         this.context = context;
         this.genreList = genreList;
         this.onItemClicked = onItemClicked;
@@ -46,16 +44,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, final int position) {
-        holder.bind(movies.get(position));
+        holder.bind(movieItems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return movieItems.size();
     }
 
     public interface OnItemClicked {
-        void onItemClick(Movie movie);
+        void onItemClick(MovieItems movieItems);
+    }
+
+    public void setData(List<MovieItems> items) {
+
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +66,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         TextView tvRating;
         TextView tvGenres;
         ImageView tvPoster;
-        Movie movie;
+        MovieItems movieItems;
 
         MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,20 +79,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClicked.onItemClick(movie);
+                    onItemClicked.onItemClick(movieItems);
                 }
             });
         }
 
-        private void bind(Movie movie) {
-            this.movie = movie;
+        private void bind(MovieItems movieItems) {
+            this.movieItems = movieItems;
 
-            tvReleaseDate.setText(movie.getReleaseDate().split("-")[0]);
-            tvTitle.setText(movie.getTitle());
-            tvRating.setText(String.valueOf(movie.getRating()));
-            tvGenres.setText(getGenres(movie.getGenreIds()));
+            tvReleaseDate.setText(movieItems.getReleaseDate().split("-")[0]);
+            tvTitle.setText(movieItems.getTitle());
+            tvRating.setText(String.valueOf(movieItems.getRating()));
+            tvGenres.setText(getGenres(movieItems.getGenreIds()));
+            String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
             Glide.with(itemView)
-                    .load(IMAGE_BASE_URL + movie.getPosterPath())
+                    .load(IMAGE_BASE_URL + movieItems.getPosterPath())
                     .error(R.drawable.error)
                     .placeholder(R.drawable.placeholder)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))

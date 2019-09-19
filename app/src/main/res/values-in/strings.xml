@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Movie &amp; Tv Show</string>
+    <string name="app_name">Movie Catalogue</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="poster_content">Poster</string>
@@ -17,6 +17,7 @@
     <string name="date_ex">2019</string>
     <string name="tvShow_title">Judul Acara TV</string>
     <string name="trailers">Trailers</string>
-
+    <string name="language">id</string>
+    <string name="icstar">icStar</string>
 
 </resources>

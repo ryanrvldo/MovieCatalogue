@@ -1,7 +1,7 @@
 package com.dicoding.moviecataloguerv.network;
 
-import com.dicoding.moviecataloguerv.model.Movie;
-import com.dicoding.moviecataloguerv.model.TvShow;
+import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.TvShowItems;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -32,14 +32,14 @@ public interface Api {
 
 
     @GET("movie/{movie_id}")
-    Call<Movie> getMovie(
+    Call<MovieItems> getMovie(
             @Path("movie_id") int id,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
 
     @GET("tv/{tv_id}")
-    Call<TvShow> getTvShow(
+    Call<TvShowItems> getTvShow(
             @Path("tv_id") int id,
             @Query("api_key") String apiKey,
             @Query("language") String language
