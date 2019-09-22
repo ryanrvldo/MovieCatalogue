@@ -14,22 +14,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.MovieItems;
-import com.dicoding.moviecataloguerv.model.MovieViewModel;
-import com.dicoding.moviecataloguerv.model.MoviesData;
+import com.dicoding.moviecataloguerv.model.MoviesRepo;
 import com.dicoding.moviecataloguerv.model.Trailer;
 import com.dicoding.moviecataloguerv.network.getGenresCallback;
 import com.dicoding.moviecataloguerv.network.onGetMovieCallback;
 import com.dicoding.moviecataloguerv.network.onGetTrailersCallback;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -49,10 +47,11 @@ public class MovieDetailActivity extends AppCompatActivity {
     private LinearLayout movieTrailers;
     private TextView trailersLabel;
     private ProgressBar progressBar;
-    private MovieViewModel movieViewModel;
+    private CollapsingToolbarLayout collapsingToolbar;
 
-    private MoviesData moviesData;
+    private MoviesRepo moviesRepo;
     private int movieId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +59,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_detail);
 
         movieId = getIntent().getIntExtra(MOVIE_ID, movieId);
-        moviesData = MoviesData.getInstance();
-
-//        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
-//        movieViewModel.init();
-//        movieViewModel.getMoviesData().observe(this, MovieResponse);
+        moviesRepo = MoviesRepo.getInstance();
 
         setupToolbar();
         initUI();
@@ -101,10 +96,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieTrailers = findViewById(R.id.movieTrailers);
         trailersLabel = findViewById(R.id.trailersLabel);
         progressBar = findViewById(R.id.progressBar);
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
     }
 
     private void getMovie() {
-        moviesData.getMovie(movieId, getResources().getString(R.string.language), new onGetMovieCallback() {
+        moviesRepo.getMovie(movieId, getResources().getString(R.string.language), new onGetMovieCallback() {
             @Override
             public void onSuccess(MovieItems movieItems) {
                 movieTitle.setText(movieItems.getTitle());
@@ -113,17 +109,16 @@ public class MovieDetailActivity extends AppCompatActivity {
                 movieRating.setVisibility(View.VISIBLE);
                 movieRating.setRating(movieItems.getRating() / 2);
                 movieReleaseDate.setText(movieItems.getReleaseDate());
+                collapsingToolbar.setTitle(getResources().getString(R.string.movie_detail));
                 getGenres(movieItems);
                 getTrailers(movieItems);
-                if (!isFinishing()) {
-                    Glide.with(MovieDetailActivity.this)
-                            .load(IMAGE_BASE_URL + movieItems.getBackdrop())
-                            .error(R.drawable.error)
-                            .placeholder(R.drawable.placeholder)
-                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
-                            .into(movieBackdrop);
-                    showLoading(false);
-                }
+                Glide.with(MovieDetailActivity.this)
+                        .load(IMAGE_BASE_URL + movieItems.getBackdrop())
+                        .error(R.drawable.error)
+                        .placeholder(R.drawable.placeholder)
+                        .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
+                        .into(movieBackdrop);
+                showLoading(false);
             }
 
             @Override
@@ -134,11 +129,11 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void getGenres(final MovieItems movieItems) {
-        moviesData.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
+        moviesRepo.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
             @Override
-            public void onSuccess(List<Genre> genres) {
+            public void onSuccess(ArrayList<Genre> genres) {
                 if (movieItems.getGenres() != null) {
-                    List<String> currentGenres = new ArrayList<>();
+                    ArrayList<String> currentGenres = new ArrayList<>();
                     for (Genre genre : movieItems.getGenres()) {
                         currentGenres.add(genre.getName());
                     }
@@ -154,9 +149,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void getTrailers(MovieItems movieItems) {
-        moviesData.getTrailers(movieItems.getId(), getResources().getString(R.string.language), new onGetTrailersCallback() {
+        moviesRepo.getTrailers(movieItems.getId(), new onGetTrailersCallback() {
             @Override
-            public void onSuccess(List<Trailer> trailers) {
+            public void onSuccess(ArrayList<Trailer> trailers) {
                 trailersLabel.setVisibility(View.VISIBLE);
                 movieTrailers.removeAllViews();
                 for (final Trailer trailer : trailers) {

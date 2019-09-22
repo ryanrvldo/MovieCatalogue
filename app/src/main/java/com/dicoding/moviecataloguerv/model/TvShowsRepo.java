@@ -17,33 +17,33 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TvShowsData {
+public class TvShowsRepo {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
     private static final String API_KEY = "79cfc0b909c3e2a8083827dc3a084234";
 
-    private static TvShowsData data;
+    private static TvShowsRepo data;
 
     private Api api;
 
-    private TvShowsData(Api api) {
+    private TvShowsRepo(Api api) {
         this.api = api;
     }
 
-    public static TvShowsData getInstance() {
+    public static TvShowsRepo getInstance() {
         if (data == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            data = new TvShowsData(retrofit.create(Api.class));
+            data = new TvShowsRepo(retrofit.create(Api.class));
         }
         return data;
     }
 
     public void getTvShows(String language, final getTvShowCallback callback) {
-        api.getDiscoverTvShows(API_KEY, language, 1)
+        api.getDiscoverTvShows(API_KEY, language, 2)
                 .enqueue(new Callback<TvShowResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
@@ -60,7 +60,7 @@ public class TvShowsData {
                     }
 
                     @Override
-                    public void onFailure(Call<TvShowResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
                         callback.onError();
                     }
                 });
@@ -68,10 +68,10 @@ public class TvShowsData {
 
 
     public void getGenres(String language, final getGenresCallback callback) {
-        api.getGenres(API_KEY, language)
+        api.getTvGenres(API_KEY, language)
                 .enqueue(new Callback<GenresResponse>() {
                     @Override
-                    public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
+                    public void onResponse(@NonNull Call<GenresResponse> call, @NonNull Response<GenresResponse> response) {
                         if (response.isSuccessful()) {
                             GenresResponse genresResponse = response.body();
                             if (genresResponse != null && genresResponse.getGenres() != null) {
@@ -85,7 +85,7 @@ public class TvShowsData {
                     }
 
                     @Override
-                    public void onFailure(Call<GenresResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<GenresResponse> call, @NonNull Throwable t) {
                         callback.onError();
                     }
                 });
@@ -95,7 +95,7 @@ public class TvShowsData {
         api.getTvShow(tvShowId, API_KEY, language)
                 .enqueue(new Callback<TvShowItems>() {
                     @Override
-                    public void onResponse(Call<TvShowItems> call, Response<TvShowItems> response) {
+                    public void onResponse(@NonNull Call<TvShowItems> call, @NonNull Response<TvShowItems> response) {
                         if (response.isSuccessful()) {
                             TvShowItems tvShowItems = response.body();
                             if (tvShowItems != null) {
@@ -109,17 +109,17 @@ public class TvShowsData {
                     }
 
                     @Override
-                    public void onFailure(Call<TvShowItems> call, Throwable t) {
+                    public void onFailure(@NonNull Call<TvShowItems> call, @NonNull Throwable t) {
                         callback.onError();
                     }
                 });
     }
 
-    public void getTrailers(int tvShowId, String language, final onGetTrailersCallback callback) {
-        api.getTrailers(tvShowId, API_KEY, language)
+    public void getTrailers(int tvShowId, final onGetTrailersCallback callback) {
+        api.getTvTrailers(tvShowId, API_KEY, "en-us")
                 .enqueue(new Callback<TrailerResponse>() {
                     @Override
-                    public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+                    public void onResponse(@NonNull Call<TrailerResponse> call, @NonNull Response<TrailerResponse> response) {
                         if (response.isSuccessful()) {
                             TrailerResponse trailerResponse = response.body();
                             if (trailerResponse != null && trailerResponse.getTrailers() != null) {
@@ -133,7 +133,7 @@ public class TvShowsData {
                     }
 
                     @Override
-                    public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<TrailerResponse> call, @NonNull Throwable t) {
                         callback.onError();
                     }
                 });

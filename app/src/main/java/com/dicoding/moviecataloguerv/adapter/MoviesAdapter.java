@@ -18,17 +18,15 @@ import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
-    private List<MovieItems> movieItems;
-    private List<Genre> genreList;
+    private ArrayList<MovieItems> movieItems;
+    private ArrayList<Genre> genreList;
     private Context context;
     private OnItemClicked onItemClicked;
 
-
-    public MoviesAdapter(List<MovieItems> movieItems, Context context, List<Genre> genreList, OnItemClicked onItemClicked) {
+    public MoviesAdapter(ArrayList<MovieItems> movieItems, Context context, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
         this.movieItems = movieItems;
         this.context = context;
         this.genreList = genreList;
@@ -54,10 +52,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     public interface OnItemClicked {
         void onItemClick(MovieItems movieItems);
-    }
-
-    public void setData(List<MovieItems> items) {
-
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -100,8 +94,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                     .into(tvPoster);
         }
 
-        private String getGenres(List<Integer> genreIds) {
-            List<String> movieGenres = new ArrayList<>();
+        private String getGenres(ArrayList<Integer> genreIds) {
+            ArrayList<String> movieGenres = new ArrayList<>();
             for (Integer genreId : genreIds) {
                 for (Genre genre : genreList) {
                     if (genre.getId() == genreId) {

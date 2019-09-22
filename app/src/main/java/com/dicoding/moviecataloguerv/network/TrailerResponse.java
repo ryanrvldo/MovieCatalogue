@@ -4,18 +4,18 @@ import com.dicoding.moviecataloguerv.model.Trailer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class TrailerResponse {
     @SerializedName("results")
     @Expose
-    private List<Trailer> trailers;
+    private ArrayList<Trailer> trailers;
 
-    public List<Trailer> getTrailers() {
+    public ArrayList<Trailer> getTrailers() {
         return trailers;
     }
 
-    public void setTrailers(List<Trailer> trailers) {
+    public void setTrailers(ArrayList<Trailer> trailers) {
         this.trailers = trailers;
     }
 }

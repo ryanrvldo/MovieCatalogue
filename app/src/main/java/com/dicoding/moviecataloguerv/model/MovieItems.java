@@ -3,7 +3,7 @@ package com.dicoding.moviecataloguerv.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MovieItems {
     @SerializedName("id")
@@ -32,7 +32,7 @@ public class MovieItems {
 
     @SerializedName("genre_ids")
     @Expose
-    private List<Integer> genreIds;
+    private ArrayList<Integer> genreIds;
 
     @SerializedName("backdrop_path")
     @Expose
@@ -40,7 +40,7 @@ public class MovieItems {
 
     @SerializedName("genres")
     @Expose
-    private List<Genre> genres;
+    private ArrayList<Genre> genres;
 
     public String getBackdrop() {
         return backdrop;
@@ -50,11 +50,11 @@ public class MovieItems {
         this.backdrop = backdrop;
     }
 
-    public List<Genre> getGenres() {
+    public ArrayList<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
     }
 
@@ -106,11 +106,11 @@ public class MovieItems {
         this.rating = rating;
     }
 
-    public List<Integer> getGenreIds() {
+    public ArrayList<Integer> getGenreIds() {
         return genreIds;
     }
 
-    public void setGenreIds(List<Integer> genreIds) {
+    public void setGenreIds(ArrayList<Integer> genreIds) {
         this.genreIds = genreIds;
     }
 }

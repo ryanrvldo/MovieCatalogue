@@ -15,21 +15,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
+import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowViewHolder> {
 
-    private List<TvShowItems> tvShowItems;
-    private List<Genre> genreList;
+    private ArrayList<TvShowItems> tvShowItems;
+    private ArrayList<Genre> genreList;
     private Context context;
     private OnItemClicked onItemClicked;
 
-    private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
-
-    public TvShowsAdapter(List<TvShowItems> tvShowItems, Context context, List<Genre> genreList, OnItemClicked onItemClicked) {
+    public TvShowsAdapter(ArrayList<TvShowItems> tvShowItems, Context context, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
         this.tvShowItems = tvShowItems;
         this.context = context;
         this.genreList = genreList;
@@ -88,6 +86,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             tvTitle.setText(tvShowItems.getTitle());
             tvRating.setText(String.valueOf(tvShowItems.getRating()));
             tvGenres.setText(getGenres(tvShowItems.getGenreIds()));
+            String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
             Glide.with(itemView)
                     .load(IMAGE_BASE_URL + tvShowItems.getPosterPath())
                     .error(R.drawable.error)
@@ -96,8 +95,8 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
                     .into(tvPoster);
         }
 
-        private String getGenres(List<Integer> genreIds) {
-            List<String> movieGenres = new ArrayList<>();
+        private String getGenres(ArrayList<Integer> genreIds) {
+            ArrayList<String> movieGenres = new ArrayList<>();
             for (Integer genreId : genreIds) {
                 for (Genre genre : genreList) {
                     if (genre.getId() == genreId) {

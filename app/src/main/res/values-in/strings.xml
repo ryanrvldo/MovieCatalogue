@@ -16,8 +16,10 @@
     <string name="movie_title">Judul Film</string>
     <string name="date_ex">2019</string>
     <string name="tvShow_title">Judul Acara TV</string>
-    <string name="trailers">Trailers</string>
+    <string name="trailers">Trailer</string>
     <string name="language">id</string>
     <string name="icstar">icStar</string>
+    <string name="movie_detail">Detail Film</string>
+    <string name="tvShow_detail">Detail Acara TV</string>
 
 </resources>

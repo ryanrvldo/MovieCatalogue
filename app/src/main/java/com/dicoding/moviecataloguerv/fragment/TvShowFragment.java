@@ -20,11 +20,11 @@ import com.dicoding.moviecataloguerv.activity.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
 import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
-import com.dicoding.moviecataloguerv.model.TvShowsData;
+import com.dicoding.moviecataloguerv.model.TvShowsRepo;
 import com.dicoding.moviecataloguerv.network.getGenresCallback;
 import com.dicoding.moviecataloguerv.network.getTvShowCallback;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -32,10 +32,10 @@ import java.util.List;
  */
 public class TvShowFragment extends Fragment {
 
-    private RecyclerView tvShowsList;
+    private RecyclerView tvShowsRV;
     private ProgressBar progressBar;
 
-    private TvShowsData tvShowsData;
+    private TvShowsRepo tvShowsRepo;
     private TvShowsAdapter adapter;
 
     public TvShowFragment() {
@@ -53,22 +53,44 @@ public class TvShowFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tvShowsRV = view.findViewById(R.id.rvTvShow);
         progressBar = view.findViewById(R.id.progressBar);
-        tvShowsList = view.findViewById(R.id.rvTvShow);
-
-        tvShowsData = TvShowsData.getInstance();
-        tvShowsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         showLoading(true);
-        getGenres();
+        tvShowsRepo = TvShowsRepo.getInstance();
+        tvShowsRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        setGenres();
     }
 
-    private void showLoading(Boolean state) {
-        if (state) {
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
+    private void setGenres() {
+        tvShowsRepo.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
+            @Override
+            public void onSuccess(ArrayList<Genre> genres) {
+                setTvShows(genres);
+                showLoading(false);
+            }
+
+            @Override
+            public void onError() {
+                showError();
+            }
+        });
+    }
+
+    private void setTvShows(final ArrayList<Genre> genres) {
+        tvShowsRepo.getTvShows(getResources().getString(R.string.language), new getTvShowCallback() {
+            @Override
+            public void onSuccess(ArrayList<TvShowItems> tvShowItems) {
+                adapter = new TvShowsAdapter(tvShowItems, getActivity(), genres, onItemClicked);
+                tvShowsRV.setAdapter(adapter);
+            }
+
+            @Override
+            public void onError() {
+                showError();
+            }
+        });
     }
 
     private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
@@ -80,35 +102,14 @@ public class TvShowFragment extends Fragment {
         }
     };
 
-    private void getGenres() {
-        tvShowsData.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
-            @Override
-            public void onSuccess(List<Genre> genres) {
-                getTvShows(genres);
-                showLoading(false);
-                tvShowsList.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onError() {
-                showError();
-            }
-        });
-    }
-
-    private void getTvShows(final List<Genre> genres) {
-        tvShowsData.getTvShows(getResources().getString(R.string.language), new getTvShowCallback() {
-            @Override
-            public void onSuccess(List<TvShowItems> tvShowItems) {
-                adapter = new TvShowsAdapter(tvShowItems, getActivity(), genres, onItemClicked);
-                tvShowsList.setAdapter(adapter);
-            }
-
-            @Override
-            public void onError() {
-                showError();
-            }
-        });
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+            tvShowsRV.setVisibility(View.GONE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            tvShowsRV.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showError() {

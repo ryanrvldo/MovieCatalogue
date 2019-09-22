@@ -4,7 +4,7 @@ import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MovieResponse {
     @SerializedName("page")
@@ -13,7 +13,7 @@ public class MovieResponse {
 
     @SerializedName("results")
     @Expose
-    private List<MovieItems> movieItems;
+    private ArrayList<MovieItems> movieItems;
 
     @SerializedName("total_pages")
     @Expose
@@ -31,11 +31,11 @@ public class MovieResponse {
         this.page = page;
     }
 
-    public List<MovieItems> getMovieItems() {
+    public ArrayList<MovieItems> getMovieItems() {
         return movieItems;
     }
 
-    public void setMovieItems(List<MovieItems> movieItems) {
+    public void setMovieItems(ArrayList<MovieItems> movieItems) {
         this.movieItems = movieItems;
     }
 

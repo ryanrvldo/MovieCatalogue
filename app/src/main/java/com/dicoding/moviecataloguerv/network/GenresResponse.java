@@ -4,18 +4,18 @@ import com.dicoding.moviecataloguerv.model.Genre;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class GenresResponse {
     @SerializedName("genres")
     @Expose
-    private List<Genre> genres;
+    private ArrayList<Genre> genres;
 
-    public List<Genre> getGenres() {
+    public ArrayList<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
     }
 }

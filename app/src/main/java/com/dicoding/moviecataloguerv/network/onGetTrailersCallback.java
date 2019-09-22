@@ -2,10 +2,10 @@ package com.dicoding.moviecataloguerv.network;
 
 import com.dicoding.moviecataloguerv.model.Trailer;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface onGetTrailersCallback {
-    void onSuccess(List<Trailer> trailers);
+    void onSuccess(ArrayList<Trailer> trailers);
 
     void onError();
 }

@@ -19,6 +19,8 @@
     <string name="trailers">Trailers</string>
     <string name="language">en-US</string>
     <string name="icstar">icStar</string>
+    <string name="movie_detail">Movie Detail</string>
+    <string name="tvShow_detail">Tv Show Detail</string>
 
 
 </resources>

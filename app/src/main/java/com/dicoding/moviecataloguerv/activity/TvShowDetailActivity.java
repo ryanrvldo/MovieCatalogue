@@ -21,13 +21,13 @@ import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.Trailer;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
-import com.dicoding.moviecataloguerv.model.TvShowsData;
+import com.dicoding.moviecataloguerv.model.TvShowsRepo;
 import com.dicoding.moviecataloguerv.network.getGenresCallback;
 import com.dicoding.moviecataloguerv.network.onGetTrailersCallback;
 import com.dicoding.moviecataloguerv.network.onGetTvShowCallback;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TvShowDetailActivity extends AppCompatActivity {
 
@@ -47,8 +47,9 @@ public class TvShowDetailActivity extends AppCompatActivity {
     private LinearLayout tvShowTrailers;
     private TextView trailersLabel;
     private ProgressBar progressBar;
+    private CollapsingToolbarLayout collapsingToolbar;
 
-    private TvShowsData tvShowsData;
+    private TvShowsRepo tvShowsRepo;
     private int tvShowId;
 
     @Override
@@ -57,7 +58,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tv_show_detail);
 
         tvShowId = getIntent().getIntExtra(TV_SHOW_ID, tvShowId);
-        tvShowsData = TvShowsData.getInstance();
+        tvShowsRepo = TvShowsRepo.getInstance();
 
         setupToolbar();
         initUI();
@@ -79,7 +80,6 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -94,10 +94,11 @@ public class TvShowDetailActivity extends AppCompatActivity {
         tvShowTrailers = findViewById(R.id.tvShowTrailers);
         trailersLabel = findViewById(R.id.trailersLabel);
         progressBar = findViewById(R.id.progressBar);
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
     }
 
     private void getTvShow() {
-        tvShowsData.getTvShow(tvShowId, getResources().getString(R.string.language), new onGetTvShowCallback() {
+        tvShowsRepo.getTvShow(tvShowId, getResources().getString(R.string.language), new onGetTvShowCallback() {
             @Override
             public void onSuccess(TvShowItems tvShowItems) {
                 tvShowTitle.setText(tvShowItems.getTitle());
@@ -105,18 +106,16 @@ public class TvShowDetailActivity extends AppCompatActivity {
                 tvShowOverview.setText(tvShowItems.getOverview());
                 tvShowRating.setVisibility(View.VISIBLE);
                 tvShowRating.setRating(tvShowItems.getRating() / 2);
-                getGenres(tvShowItems);
                 tvShowReleaseDate.setText(tvShowItems.getReleaseDate());
-                if (!isFinishing()) {
-                    Glide.with(TvShowDetailActivity.this)
-                            .load(IMAGE_BASE_URL + tvShowItems.getBackdrop())
-                            .error(R.drawable.error)
-                            .placeholder(R.drawable.placeholder)
-                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
-                            .into(tvShowBackdrop);
-                    showLoading(false);
-                }
-
+                collapsingToolbar.setTitle(getResources().getString(R.string.tvShow_detail));
+                getGenres(tvShowItems);
+                Glide.with(TvShowDetailActivity.this)
+                        .load(IMAGE_BASE_URL + tvShowItems.getBackdrop())
+                        .error(R.drawable.error)
+                        .placeholder(R.drawable.placeholder)
+                        .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
+                        .into(tvShowBackdrop);
+                showLoading(false);
                 getTrailers(tvShowItems);
             }
 
@@ -128,11 +127,11 @@ public class TvShowDetailActivity extends AppCompatActivity {
     }
 
     private void getGenres(final TvShowItems tvShowItems) {
-        tvShowsData.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
+        tvShowsRepo.getGenres(getResources().getString(R.string.language), new getGenresCallback() {
             @Override
-            public void onSuccess(List<Genre> genres) {
+            public void onSuccess(ArrayList<Genre> genres) {
                 if (tvShowItems.getGenres() != null) {
-                    List<String> currentGenres = new ArrayList<>();
+                    ArrayList<String> currentGenres = new ArrayList<>();
                     for (Genre genre : tvShowItems.getGenres()) {
                         currentGenres.add(genre.getName());
                     }
@@ -148,9 +147,9 @@ public class TvShowDetailActivity extends AppCompatActivity {
     }
 
     private void getTrailers(TvShowItems tvShowItems) {
-        tvShowsData.getTrailers(tvShowItems.getId(), getResources().getString(R.string.language), new onGetTrailersCallback() {
+        tvShowsRepo.getTrailers(tvShowItems.getId(), new onGetTrailersCallback() {
             @Override
-            public void onSuccess(List<Trailer> trailers) {
+            public void onSuccess(ArrayList<Trailer> trailers) {
                 trailersLabel.setVisibility(View.VISIBLE);
                 tvShowTrailers.removeAllViews();
                 for (final Trailer trailer : trailers) {
