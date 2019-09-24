@@ -1,4 +1,4 @@
-package com.dicoding.moviecataloguerv.activity;
+package com.dicoding.moviecataloguerv;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.fragment.MovieFragment;
 import com.dicoding.moviecataloguerv.fragment.TvShowFragment;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -24,15 +23,23 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MaterialToolbar toolbar;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_main);
-        ViewPager viewPager = findViewById(R.id.viewpager);
-        TabLayout tabLayout = findViewById(R.id.tabs);
+        toolbar = findViewById(R.id.toolbar_main);
+        viewPager = findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.tabs);
 
+        setup();
+    }
+
+    private void setup() {
         setSupportActionBar(toolbar);
         createViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -41,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.app_name);
             getSupportActionBar().setIcon(R.mipmap.ic_logo);
         }
-
     }
 
     @Override
@@ -50,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu1) {
+        if (item.getItemId() == R.id.localization) {
             Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(mIntent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
         ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
+            super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @NonNull
@@ -96,5 +102,4 @@ public class MainActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
-
 }

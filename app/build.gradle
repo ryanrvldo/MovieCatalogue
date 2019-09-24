@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "TMDB_API_KEY", '"79cfc0b909c3e2a8083827dc3a084234"')
+        buildConfigField("String", "TMDB_BASE_URL", '"https://api.themoviedb.org/3/"')
+        buildConfigField("String", "TMDB_IMAGE_BASE_URL", '"http://image.tmdb.org/t/p/w780"')
+        buildConfigField("String", "YOUTUBE_VIDEO_URL", '"http://www.youtube.com/watch?v=%s"')
+        buildConfigField("String", "YOUTUBE_THUMBNAIL_URL", '"http://img.youtube.com/vi/%s/0.jpg"')
     }
     buildTypes {
         release {

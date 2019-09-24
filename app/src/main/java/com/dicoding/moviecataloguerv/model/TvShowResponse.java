@@ -1,19 +1,18 @@
-package com.dicoding.moviecataloguerv.network;
+package com.dicoding.moviecataloguerv.model;
 
-import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class MovieResponse {
+public class TvShowResponse {
     @SerializedName("page")
     @Expose
     private int page;
 
     @SerializedName("results")
     @Expose
-    private ArrayList<MovieItems> movieItems;
+    private ArrayList<TvShowItems> tvShowItems;
 
     @SerializedName("total_pages")
     @Expose
@@ -31,12 +30,12 @@ public class MovieResponse {
         this.page = page;
     }
 
-    public ArrayList<MovieItems> getMovieItems() {
-        return movieItems;
+    public ArrayList<TvShowItems> getTvShowItems() {
+        return tvShowItems;
     }
 
-    public void setMovieItems(ArrayList<MovieItems> movieItems) {
-        this.movieItems = movieItems;
+    public void setTvShowItems(ArrayList<TvShowItems> tvShowItems) {
+        this.tvShowItems = tvShowItems;
     }
 
     public int getTotalPages() {

@@ -1,7 +1,11 @@
 package com.dicoding.moviecataloguerv.network;
 
+import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.MovieResponse;
+import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.TvShowResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

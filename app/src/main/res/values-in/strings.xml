@@ -18,8 +18,9 @@
     <string name="tvShow_title">Judul Acara TV</string>
     <string name="trailers">Trailer</string>
     <string name="language">id</string>
-    <string name="icstar">icStar</string>
+    <string name="icStar">icStar</string>
     <string name="movie_detail">Detail Film</string>
     <string name="tvShow_detail">Detail Acara TV</string>
+    <string name="image_before_loading">Gambar sebelum memuat</string>
 
 </resources>

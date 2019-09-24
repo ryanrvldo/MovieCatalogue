@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dicoding.moviecataloguerv">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dicoding.moviecataloguerv"
+    tools:ignore="GoogleAppIndexingWarning">
+
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
@@ -11,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MovieDetailActivity"/>
-        <activity android:name=".activity.TvShowDetailActivity"></activity>
+        <activity android:name=".activity.TvShowDetailActivity"/>
     </application>
 
 

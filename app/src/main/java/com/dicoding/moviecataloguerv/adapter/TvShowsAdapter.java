@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.Genre;
-import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 
 import java.util.ArrayList;
@@ -86,9 +86,8 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             tvTitle.setText(tvShowItems.getTitle());
             tvRating.setText(String.valueOf(tvShowItems.getRating()));
             tvGenres.setText(getGenres(tvShowItems.getGenreIds()));
-            String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
             Glide.with(itemView)
-                    .load(IMAGE_BASE_URL + tvShowItems.getPosterPath())
+                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getPosterPath())
                     .error(R.drawable.error)
                     .placeholder(R.drawable.placeholder)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))

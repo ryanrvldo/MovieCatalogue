@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:contentDescription="@string/icstar"
+            android:contentDescription="@string/icStar"
             android:src="@drawable/ic_star_black_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/movie_rating"
             app:layout_constraintEnd_toStartOf="@+id/movie_rating"

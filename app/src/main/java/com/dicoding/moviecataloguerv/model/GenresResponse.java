@@ -1,6 +1,5 @@
-package com.dicoding.moviecataloguerv.network;
+package com.dicoding.moviecataloguerv.model;
 
-import com.dicoding.moviecataloguerv.model.Genre;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
