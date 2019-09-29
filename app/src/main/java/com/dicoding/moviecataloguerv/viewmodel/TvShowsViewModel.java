@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.dicoding.moviecataloguerv.model.GenresResponse;
+import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
@@ -18,6 +19,7 @@ public class TvShowsViewModel extends ViewModel {
     private MutableLiveData<GenresResponse> genres;
     private MutableLiveData<TvShowItems> itemsTv;
     private MutableLiveData<TrailerResponse> trailers;
+    private MutableLiveData<SimilarResponse> similar;
 
     private Repository repository;
 
@@ -57,5 +59,14 @@ public class TvShowsViewModel extends ViewModel {
             trailers = repository.getTvTrailers(tvShowId);
         }
         return trailers;
+    }
+
+    public LiveData<SimilarResponse> getSimilar(int tvShowId) {
+        if (similar == null) {
+            similar = new MutableLiveData<>();
+            repository = Repository.getInstance();
+            similar = repository.getTvSimilar(tvShowId);
+        }
+        return similar;
     }
 }

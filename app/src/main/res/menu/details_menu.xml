@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:menuCategory="container">
+        <item
+            android:id="@+id/favorite"
+            android:title="@string/favorite"
+            android:icon="@drawable/ic_favorite"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/add"
+            android:title="@string/favorite"
+            android:icon="@drawable/ic_playlist_add"
+            app:showAsAction="always" />
+    </group>
+
+</menu>

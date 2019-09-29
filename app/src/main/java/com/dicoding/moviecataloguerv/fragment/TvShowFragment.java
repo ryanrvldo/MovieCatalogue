@@ -44,18 +44,22 @@ public class TvShowFragment extends Fragment {
     private Observer<TvShowResponse> getTvShows = new Observer<TvShowResponse>() {
         @Override
         public void onChanged(TvShowResponse tvShowResponse) {
-            ArrayList<TvShowItems> tvShowItems = tvShowResponse.getTvShowItems();
-            tvShowItemsArrayList.addAll(tvShowItems);
-            tvShowsAdapter.notifyDataSetChanged();
+            if (tvShowResponse != null) {
+                ArrayList<TvShowItems> tvShowItems = tvShowResponse.getTvShowItems();
+                tvShowItemsArrayList.addAll(tvShowItems);
+                tvShowsAdapter.notifyDataSetChanged();
+            }
         }
     };
     private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
         @Override
         public void onChanged(GenresResponse genresResponse) {
-            ArrayList<Genre> genreItems = genresResponse.getGenres();
-            genreArrayList.addAll(genreItems);
-            tvShowsAdapter.notifyDataSetChanged();
-            showLoading(false);
+            if (genresResponse != null) {
+                ArrayList<Genre> genreItems = genresResponse.getGenres();
+                genreArrayList.addAll(genreItems);
+                tvShowsAdapter.notifyDataSetChanged();
+                showLoading(false);
+            }
         }
     };
     private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
@@ -75,14 +79,14 @@ public class TvShowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tv_shows, container, false);
+        return inflater.inflate(R.layout.fragment_movies, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvShowsRV = view.findViewById(R.id.rvTvShow);
+        tvShowsRV = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
         showLoading(true);

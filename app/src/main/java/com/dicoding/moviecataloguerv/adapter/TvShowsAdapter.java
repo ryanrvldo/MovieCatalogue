@@ -37,7 +37,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
     @NonNull
     @Override
     public TvShowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_tv_show, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
         return new TvShowViewHolder(view);
     }
 
@@ -65,11 +65,11 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
 
         TvShowViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvReleaseDate = itemView.findViewById(R.id.tvShow_release_date);
-            tvTitle = itemView.findViewById(R.id.tvShow_title);
-            tvRating = itemView.findViewById(R.id.tvShow_rating);
-            tvGenres = itemView.findViewById(R.id.tvShow_genre);
-            tvPoster = itemView.findViewById(R.id.tvShow_poster);
+            tvReleaseDate = itemView.findViewById(R.id.movie_release_date);
+            tvTitle = itemView.findViewById(R.id.movie_title);
+            tvRating = itemView.findViewById(R.id.movie_rating);
+            tvGenres = itemView.findViewById(R.id.movie_genre);
+            tvPoster = itemView.findViewById(R.id.movie_poster);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

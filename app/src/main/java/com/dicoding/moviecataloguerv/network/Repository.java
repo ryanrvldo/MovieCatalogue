@@ -7,6 +7,7 @@ import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
+import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
@@ -184,5 +185,41 @@ public class Repository {
             }
         });
         return trailersData;
+    }
+
+    public MutableLiveData<SimilarResponse> getMovieSimilar(int movieId) {
+        final MutableLiveData<SimilarResponse> similarData = new MutableLiveData<>();
+        api.getMovieSimilar(movieId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<SimilarResponse>() {
+            @Override
+            public void onResponse(Call<SimilarResponse> call, Response<SimilarResponse> response) {
+                if (response.isSuccessful()) {
+                    similarData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimilarResponse> call, Throwable t) {
+                similarData.postValue(null);
+            }
+        });
+        return similarData;
+    }
+
+    public MutableLiveData<SimilarResponse> getTvSimilar(int tvShowId) {
+        final MutableLiveData<SimilarResponse> similarData = new MutableLiveData<>();
+        api.getTvSimilar(tvShowId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<SimilarResponse>() {
+            @Override
+            public void onResponse(Call<SimilarResponse> call, Response<SimilarResponse> response) {
+                if (response.isSuccessful()) {
+                    similarData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimilarResponse> call, Throwable t) {
+                similarData.postValue(null);
+            }
+        });
+        return similarData;
     }
 }

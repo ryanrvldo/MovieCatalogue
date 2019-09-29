@@ -46,19 +46,26 @@ public class MovieFragment extends Fragment {
     private Observer<MovieResponse> getMovies = new Observer<MovieResponse>() {
         @Override
         public void onChanged(MovieResponse movieResponse) {
-            ArrayList<MovieItems> movieItems = movieResponse.getMovieItems();
-            movieItemsArrayList.addAll(movieItems);
-            moviesAdapter.notifyDataSetChanged();
+            if (movieResponse != null) {
+                ArrayList<MovieItems> movieItems = movieResponse.getMovieItems();
+                movieItemsArrayList.addAll(movieItems);
+                moviesAdapter.notifyDataSetChanged();
+            } else {
+                MoviesViewModel moviesViewModel = new MoviesViewModel();
+                moviesViewModel.getMovies(getResources().getString(R.string.language));
+            }
         }
 
     };
     private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
         @Override
         public void onChanged(GenresResponse genresResponse) {
-            ArrayList<Genre> genreItems = genresResponse.getGenres();
-            genreArrayList.addAll(genreItems);
-            moviesAdapter.notifyDataSetChanged();
-            showLoading(false);
+            if (genresResponse != null) {
+                ArrayList<Genre> genreItems = genresResponse.getGenres();
+                genreArrayList.addAll(genreItems);
+//                moviesAdapter.notifyDataSetChanged();
+                showLoading(false);
+            }
         }
     };
     private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {

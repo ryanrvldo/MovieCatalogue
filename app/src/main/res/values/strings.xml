@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources>
     <string name="app_name">Movie Catalogue</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -22,6 +22,9 @@
     <string name="movie_detail">Movie Detail</string>
     <string name="tvShow_detail">Tv Show Detail</string>
     <string name="image_before_loading">image before loading</string>
+    <string name="favorite">Favorite</string>
+    <string name="trailer_title">Trailer Title</string>
+    <string name="similar">Similar</string>
 
 
 </resources>

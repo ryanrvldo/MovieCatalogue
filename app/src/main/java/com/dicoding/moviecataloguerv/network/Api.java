@@ -3,6 +3,7 @@ package com.dicoding.moviecataloguerv.network;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
+import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
@@ -57,14 +58,28 @@ public interface Api {
     @GET("movie/{movie_id}/videos")
     Call<TrailerResponse> getMovieTrailers(
             @Path("movie_id") int id,
-            @Query("api_key") String apiKEy,
+            @Query("api_key") String apiKey,
             @Query("language") String language
     );
 
     @GET("tv/{tv_id}/videos")
     Call<TrailerResponse> getTvTrailers(
             @Path("tv_id") int id,
-            @Query("api_key") String apiKEy,
+            @Query("api_key") String apiKey,
+            @Query("language") String language
+    );
+
+    @GET("movie/{movie_id}/similar")
+    Call<SimilarResponse> getMovieSimilar(
+            @Path("movie_id") int id,
+            @Query("api_key") String apiKey,
+            @Query("language") String language
+    );
+
+    @GET("tv/{tv_id}/similar")
+    Call<SimilarResponse> getTvSimilar(
+            @Path("tv_id") int id,
+            @Query("api_key") String apiKey,
             @Query("language") String language
     );
 }
