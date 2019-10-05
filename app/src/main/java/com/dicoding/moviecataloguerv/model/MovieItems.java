@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class MovieItems {
+
     @SerializedName("id")
     @Expose
     private int id;
@@ -41,22 +42,6 @@ public class MovieItems {
     @SerializedName("genres")
     @Expose
     private ArrayList<Genre> genres;
-
-    public String getBackdrop() {
-        return backdrop;
-    }
-
-    public void setBackdrop(String backdrop) {
-        this.backdrop = backdrop;
-    }
-
-    public ArrayList<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<Genre> genres) {
-        this.genres = genres;
-    }
 
     public int getId() {
         return id;
@@ -112,5 +97,21 @@ public class MovieItems {
 
     public void setGenreIds(ArrayList<Integer> genreIds) {
         this.genreIds = genreIds;
+    }
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
+    }
+
+    public ArrayList<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<Genre> genres) {
+        this.genres = genres;
     }
 }

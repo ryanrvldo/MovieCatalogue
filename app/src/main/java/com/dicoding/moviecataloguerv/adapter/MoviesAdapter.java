@@ -1,6 +1,5 @@
 package com.dicoding.moviecataloguerv.adapter;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,20 +23,35 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     private ArrayList<MovieItems> movieItems;
     private ArrayList<Genre> genreList;
-    private Context context;
     private OnItemClicked onItemClicked;
 
-    public MoviesAdapter(ArrayList<MovieItems> movieItems, Context context, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
+    public MoviesAdapter(ArrayList<MovieItems> movieItems, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
         this.movieItems = movieItems;
-        this.context = context;
         this.genreList = genreList;
         this.onItemClicked = onItemClicked;
+    }
+
+    public void refillMovie(ArrayList<MovieItems> items) {
+        this.movieItems = new ArrayList<>();
+        this.movieItems.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void clearMovie() {
+        this.movieItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void refillGenre(ArrayList<Genre> genres) {
+        this.genreList = new ArrayList<>();
+        this.genreList.addAll(genres);
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_movie, viewGroup, false);
         return new MovieViewHolder(view);
     }
 

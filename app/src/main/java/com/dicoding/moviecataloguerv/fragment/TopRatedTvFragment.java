@@ -13,9 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.TvShowDetailActivity;
@@ -27,39 +28,35 @@ import com.dicoding.moviecataloguerv.model.TvShowResponse;
 import com.dicoding.moviecataloguerv.viewmodel.TvShowsViewModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TvShowFragment extends Fragment {
+public class TopRatedTvFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private ArrayList<TvShowItems> tvShowItemsArrayList = new ArrayList<>();
-    private ArrayList<Genre> genreArrayList = new ArrayList<>();
-
-    private RecyclerView tvShowsRV;
+    private RecyclerView tvShowRV;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout refreshLayout;
 
     private TvShowsAdapter tvShowsAdapter;
-    private Observer<TvShowResponse> getTvShows = new Observer<TvShowResponse>() {
+    private TvShowsViewModel tvShowsViewModel;
+
+    private String language;
+
+    private Observer<TvShowResponse> getTopRated = new Observer<TvShowResponse>() {
         @Override
-        public void onChanged(TvShowResponse tvShowResponse) {
-            if (tvShowResponse != null) {
-                ArrayList<TvShowItems> tvShowItems = tvShowResponse.getTvShowItems();
-                tvShowItemsArrayList.addAll(tvShowItems);
-                tvShowsAdapter.notifyDataSetChanged();
+        public void onChanged(TvShowResponse tvResponse) {
+            if (tvResponse != null) {
+                tvShowsAdapter.refillTv(tvResponse.getTvShowItems());
             }
         }
+
     };
     private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
         @Override
         public void onChanged(GenresResponse genresResponse) {
-            if (genresResponse != null) {
-                ArrayList<Genre> genreItems = genresResponse.getGenres();
-                genreArrayList.addAll(genreItems);
-                tvShowsAdapter.notifyDataSetChanged();
-                showLoading(false);
-            }
+            tvShowsAdapter.refillGenre(genresResponse.getGenres());
+            showLoading(false);
         }
     };
     private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
@@ -71,49 +68,65 @@ public class TvShowFragment extends Fragment {
         }
     };
 
-    public TvShowFragment() {
+    public TopRatedTvFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        language = getResources().getString(R.string.language);
         return inflater.inflate(R.layout.fragment_movies, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tvShowsRV = view.findViewById(R.id.rvMovies);
+        tvShowRV = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
+        refreshLayout = view.findViewById(R.id.refresh_layout);
+        refreshLayout.setOnRefreshListener(this);
+
+        tvShowRV.setHasFixedSize(true);
+        tvShowRV.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        setMoviesRV();
         showLoading(true);
-        TvShowsViewModel tvShowsViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(TvShowsViewModel.class);
-        Log.d("FragmentTV", "Loaded");
-
-        tvShowsViewModel.getTvShows(getResources().getString(R.string.language)).observe(getActivity(), getTvShows);
-        tvShowsViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), getGenres);
-
-        setTvShowsRV();
+        tvShowsViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(TvShowsViewModel.class);
+        observeData();
     }
 
-    private void setTvShowsRV() {
+    private void observeData() {
+        tvShowsViewModel.getTopRatedTv(getResources().getString(R.string.language)).observe(getActivity(), getTopRated);
+        tvShowsViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), getGenres);
+        Log.d("FragmentTvTopRated", "Loaded");
+    }
+
+    private void setMoviesRV() {
         if (tvShowsAdapter == null) {
-            tvShowsAdapter = new TvShowsAdapter(tvShowItemsArrayList, getActivity(), genreArrayList, onItemClicked);
-            tvShowsRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-            tvShowsRV.setAdapter(tvShowsAdapter);
+            tvShowsAdapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), new ArrayList<Genre>(), onItemClicked);
+            tvShowRV.setAdapter(tvShowsAdapter);
         }
     }
 
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            tvShowsRV.setVisibility(View.GONE);
+            tvShowRV.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
-            tvShowsRV.setVisibility(View.VISIBLE);
+            tvShowRV.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        refreshLayout.setRefreshing(true);
+        tvShowsViewModel.setTopRatedTv(language);
+        tvShowsViewModel.setGenres(language);
+        observeData();
+        refreshLayout.setRefreshing(false);
     }
 }

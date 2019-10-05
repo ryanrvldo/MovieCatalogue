@@ -12,6 +12,9 @@ import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,11 +31,18 @@ public class Repository {
         this.api = api;
     }
 
+    private static OkHttpClient providesOkHttpClientBuilder() {
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        return httpClient.readTimeout(1200, TimeUnit.SECONDS)
+                .connectTimeout(1200, TimeUnit.SECONDS).build();
+    }
+
     public static Repository getInstance() {
         if (repository == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BuildConfig.TMDB_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(providesOkHttpClientBuilder())
                     .build();
 
             repository = new Repository(retrofit.create(Api.class));
@@ -40,37 +50,37 @@ public class Repository {
         return repository;
     }
 
-    public MutableLiveData<MovieResponse> getMovies(String language) {
+    public MutableLiveData<MovieResponse> getMovies(String category, String language) {
         final MutableLiveData<MovieResponse> moviesData = new MutableLiveData<>();
-        api.getDiscoverMovies(BuildConfig.TMDB_API_KEY, language, 1).enqueue(new Callback<MovieResponse>() {
+        api.getMovies(category, BuildConfig.TMDB_API_KEY, language, 1).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    moviesData.postValue(response.body());
+                    moviesData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
-                moviesData.postValue(null);
+                moviesData.setValue(null);
             }
         });
         return moviesData;
     }
 
-    public MutableLiveData<GenresResponse> getMovieGenres(String language) {
+    public MutableLiveData<GenresResponse> getGenres(String type, String language) {
         final MutableLiveData<GenresResponse> genresData = new MutableLiveData<>();
-        api.getMovieGenres(BuildConfig.TMDB_API_KEY, language).enqueue(new Callback<GenresResponse>() {
+        api.getGenres(type, BuildConfig.TMDB_API_KEY, language).enqueue(new Callback<GenresResponse>() {
             @Override
             public void onResponse(@NonNull Call<GenresResponse> call, @NonNull Response<GenresResponse> response) {
                 if (response.isSuccessful()) {
-                    genresData.postValue(response.body());
+                    genresData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<GenresResponse> call, @NonNull Throwable t) {
-                genresData.postValue(null);
+                genresData.setValue(null);
             }
         });
         return genresData;
@@ -82,73 +92,54 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<MovieItems> call, @NonNull Response<MovieItems> response) {
                 if (response.isSuccessful()) {
-                    movieData.postValue(response.body());
+                    movieData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<MovieItems> call, @NonNull Throwable t) {
-                movieData.postValue(null);
+                movieData.setValue(null);
             }
         });
         return movieData;
     }
 
-    public MutableLiveData<TrailerResponse> getMovieTrailers(int movieId) {
+    public MutableLiveData<TrailerResponse> getTrailers(String type, int movieId) {
         final MutableLiveData<TrailerResponse> trailersData = new MutableLiveData<>();
-        api.getMovieTrailers(movieId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<TrailerResponse>() {
+        api.getTrailers(type, movieId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<TrailerResponse>() {
             @Override
             public void onResponse(@NonNull Call<TrailerResponse> call, @NonNull Response<TrailerResponse> response) {
                 if (response.isSuccessful()) {
-                    trailersData.postValue(response.body());
+                    trailersData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<TrailerResponse> call, @NonNull Throwable t) {
-                trailersData.postValue(null);
+                trailersData.setValue(null);
             }
         });
         return trailersData;
     }
 
     //TvShow
-    public MutableLiveData<TvShowResponse> getTvShows(String language) {
+    public MutableLiveData<TvShowResponse> getTvShows(String category, String language) {
         final MutableLiveData<TvShowResponse> tvShowsData = new MutableLiveData<>();
-        api.getDiscoverTvShows(BuildConfig.TMDB_API_KEY, language, 1).enqueue(new Callback<TvShowResponse>() {
+        api.getTvShows(category, BuildConfig.TMDB_API_KEY, language, 1).enqueue(new Callback<TvShowResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 if (response.isSuccessful()) {
-                    tvShowsData.postValue(response.body());
+                    tvShowsData.setValue(response.body());
                 }
 
             }
 
             @Override
             public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
-                tvShowsData.postValue(null);
+                tvShowsData.setValue(null);
             }
         });
         return tvShowsData;
-    }
-
-
-    public MutableLiveData<GenresResponse> getTvGenres(String language) {
-        final MutableLiveData<GenresResponse> genresData = new MutableLiveData<>();
-        api.getTvGenres(BuildConfig.TMDB_API_KEY, language).enqueue(new Callback<GenresResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<GenresResponse> call, @NonNull Response<GenresResponse> response) {
-                if (response.isSuccessful()) {
-                    genresData.postValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<GenresResponse> call, @NonNull Throwable t) {
-                genresData.postValue(null);
-            }
-        });
-        return genresData;
     }
 
     public MutableLiveData<TvShowItems> getTvShowItems(int tvShowId, String language) {
@@ -157,67 +148,31 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<TvShowItems> call, @NonNull Response<TvShowItems> response) {
                 if (response.isSuccessful()) {
-                    tvShowData.postValue(response.body());
+                    tvShowData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<TvShowItems> call, @NonNull Throwable t) {
-                tvShowData.postValue(null);
+                tvShowData.setValue(null);
             }
         });
         return tvShowData;
     }
 
-    public MutableLiveData<TrailerResponse> getTvTrailers(int tvShowId) {
-        final MutableLiveData<TrailerResponse> trailersData = new MutableLiveData<>();
-        api.getTvTrailers(tvShowId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<TrailerResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<TrailerResponse> call, @NonNull Response<TrailerResponse> response) {
-                if (response.isSuccessful()) {
-                    trailersData.postValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<TrailerResponse> call, @NonNull Throwable t) {
-                trailersData.postValue(null);
-            }
-        });
-        return trailersData;
-    }
-
-    public MutableLiveData<SimilarResponse> getMovieSimilar(int movieId) {
+    public MutableLiveData<SimilarResponse> getSimilar(String type, int movieId) {
         final MutableLiveData<SimilarResponse> similarData = new MutableLiveData<>();
-        api.getMovieSimilar(movieId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<SimilarResponse>() {
+        api.getSimilar(type, movieId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<SimilarResponse>() {
             @Override
-            public void onResponse(Call<SimilarResponse> call, Response<SimilarResponse> response) {
+            public void onResponse(@NonNull Call<SimilarResponse> call, @NonNull Response<SimilarResponse> response) {
                 if (response.isSuccessful()) {
-                    similarData.postValue(response.body());
+                    similarData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<SimilarResponse> call, Throwable t) {
-                similarData.postValue(null);
-            }
-        });
-        return similarData;
-    }
-
-    public MutableLiveData<SimilarResponse> getTvSimilar(int tvShowId) {
-        final MutableLiveData<SimilarResponse> similarData = new MutableLiveData<>();
-        api.getTvSimilar(tvShowId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<SimilarResponse>() {
-            @Override
-            public void onResponse(Call<SimilarResponse> call, Response<SimilarResponse> response) {
-                if (response.isSuccessful()) {
-                    similarData.postValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SimilarResponse> call, Throwable t) {
-                similarData.postValue(null);
+            public void onFailure(@NonNull Call<SimilarResponse> call, @NonNull Throwable t) {
+                similarData.setValue(null);
             }
         });
         return similarData;

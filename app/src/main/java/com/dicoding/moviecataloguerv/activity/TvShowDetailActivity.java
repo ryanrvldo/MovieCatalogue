@@ -13,13 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -42,9 +43,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
     public static String TV_SHOW_ID = "tvShow_id";
 
-    private ArrayList<Trailer> trailerArrayList = new ArrayList<>();
-    private ArrayList<Genre> genreArrayList = new ArrayList<>();
-    private ArrayList<Similar> similarArrayList = new ArrayList<>();
+    private TvShowsViewModel tvShowsViewModel;
 
     private ImageView tvShowBackdrop;
     private TextView tvShowTitle;
@@ -59,13 +58,18 @@ public class TvShowDetailActivity extends AppCompatActivity {
     private ImageView backgroundLoading;
     private AppBarLayout appBarLayout;
     private ConstraintLayout constraintLayout;
+    private TextView tvShowTrailerLabel;
+    private TextView tvShowSimilarLabel;
+    private TextView ratingText;
 
+    private String language;
     private int tvShowId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+        language = getResources().getString(R.string.language);
 
         setupToolbar();
         initUI();
@@ -73,13 +77,37 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
         tvShowId = getIntent().getIntExtra(TV_SHOW_ID, tvShowId);
 
-        TvShowsViewModel tvShowsViewModel = ViewModelProviders.of(this).get(TvShowsViewModel.class);
-        Log.d("TvShowDetail", "Loaded");
+        tvShowsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvShowsViewModel.class);
+        observeData();
+    }
 
-        tvShowsViewModel.getSimilar(tvShowId).observe(this, getSimilar);
-        tvShowsViewModel.getTrailers(tvShowId).observe(this, getTrailers);
-        tvShowsViewModel.getGenres(getResources().getString(R.string.language)).observe(this, getGenres);
-        tvShowsViewModel.getTvShowItems(tvShowId, getResources().getString(R.string.language)).observe(this, getTvShowItems);
+    private void observeData() {
+        tvShowsViewModel.getTvShowItems(tvShowId, language).observe(this, new Observer<TvShowItems>() {
+            @Override
+            public void onChanged(TvShowItems tvShowItems) {
+                setTvShow();
+            }
+        });
+        tvShowsViewModel.getGenres(language).observe(this, new Observer<GenresResponse>() {
+            @Override
+            public void onChanged(GenresResponse genresResponse) {
+                setGenres();
+            }
+        });
+        tvShowsViewModel.getTrailers(tvShowId).observe(this, new Observer<TrailerResponse>() {
+            @Override
+            public void onChanged(TrailerResponse trailerResponse) {
+                setTrailers();
+            }
+        });
+        tvShowsViewModel.getSimilar(tvShowId).observe(this, new Observer<SimilarResponse>() {
+            @Override
+            public void onChanged(SimilarResponse similarResponse) {
+                setSimilar();
+                showLoading(false);
+            }
+        });
+        Log.d("TvShowDetail", "Loaded");
     }
 
     private void setupToolbar() {
@@ -106,6 +134,9 @@ public class TvShowDetailActivity extends AppCompatActivity {
         backgroundLoading = findViewById(R.id.background_loading);
         appBarLayout = findViewById(R.id.app_bar);
         constraintLayout = findViewById(R.id.constraint);
+        tvShowTrailerLabel = findViewById(R.id.trailersLabel);
+        tvShowSimilarLabel = findViewById(R.id.similarLabel);
+        ratingText = findViewById(R.id.rating_text);
     }
 
     private void showLoading(Boolean state) {
@@ -120,6 +151,123 @@ public class TvShowDetailActivity extends AppCompatActivity {
             appBarLayout.setVisibility(View.VISIBLE);
             constraintLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void setTvShow() {
+        TvShowItems tvShowItems = tvShowsViewModel.getTvShowItems(tvShowId, language).getValue();
+        if (tvShowItems == null) {
+            showError();
+        } else {
+            tvShowTitle.setText(tvShowItems.getTitle());
+            tvShowOverview.setText(tvShowItems.getOverview());
+            tvShowRating.setRating(tvShowItems.getRating() / 2);
+            ratingText.setText(String.format("%s / 10", String.valueOf(tvShowItems.getRating())));
+            tvShowReleaseDate.setText(tvShowItems.getReleaseDate());
+            collapsingToolbar.setTitle(tvShowItems.getTitle());
+
+            if (tvShowItems.getGenres() != null) {
+                ArrayList<String> currentGenres = new ArrayList<>();
+                for (Genre genre : tvShowItems.getGenres()) {
+                    currentGenres.add(genre.getName());
+                }
+                tvShowGenres.setText(TextUtils.join(", ", currentGenres));
+            }
+
+            Glide.with(TvShowDetailActivity.this)
+                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getBackdrop())
+                    .error(R.drawable.error)
+                    .placeholder(R.drawable.placeholder)
+                    .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
+                    .into(tvShowBackdrop);
+        }
+    }
+
+    private void setGenres() {
+        GenresResponse genresResponse = tvShowsViewModel.getGenres(language).getValue();
+        if (genresResponse != null && genresResponse.getGenres() == null) {
+            showError();
+        }
+    }
+
+    private void setTrailers() {
+        TrailerResponse trailerResponse = tvShowsViewModel.getTrailers(tvShowId).getValue();
+        tvShowTrailers.removeAllViews();
+        if (trailerResponse != null) {
+            if (trailerResponse.getTrailers() == null) {
+                tvShowTrailerLabel.setVisibility(View.GONE);
+                tvShowTrailers.setVisibility(View.GONE);
+                showError();
+            } else {
+                for (final Trailer trailer : trailerResponse.getTrailers()) {
+                    View parent = getLayoutInflater().inflate(R.layout.thumbnail_trailer, tvShowTrailers, false);
+                    ImageView thumbnail = parent.findViewById(R.id.thumbnail_trailer);
+                    TextView tvTrailerTitle = parent.findViewById(R.id.trailerTitle);
+
+                    tvTrailerTitle.setText(trailer.getName());
+                    thumbnail.requestLayout();
+                    thumbnail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showTrailer(String.format(BuildConfig.YOUTUBE_VIDEO_URL, trailer.getKey()));
+                        }
+                    });
+
+                    Glide.with(TvShowDetailActivity.this)
+                            .load(String.format(BuildConfig.YOUTUBE_THUMBNAIL_URL, trailer.getKey()))
+                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
+                            .into(thumbnail);
+                    tvShowTrailers.addView(parent);
+                }
+            }
+        } else {
+            showError();
+        }
+    }
+
+    private void setSimilar() {
+        SimilarResponse similarResponse = tvShowsViewModel.getSimilar(tvShowId).getValue();
+        tvShowSimilar.removeAllViews();
+        if (similarResponse != null) {
+            if (similarResponse.getSimilar() == null) {
+                tvShowSimilarLabel.setVisibility(View.GONE);
+                tvShowSimilar.setVisibility(View.GONE);
+                showError();
+            } else {
+                for (final Similar similar : similarResponse.getSimilar()) {
+                    View parent = getLayoutInflater().inflate(R.layout.thumbnail_similar, tvShowSimilar, false);
+                    ImageView thumbnailSimilar = parent.findViewById(R.id.thumbnail_similar);
+                    TextView tvSimilarTitle = parent.findViewById(R.id.similarMovieTitle);
+                    TextView tvSimilarRating = parent.findViewById(R.id.cv_movie_rating);
+
+                    tvSimilarTitle.setText(similar.getName());
+                    tvSimilarRating.setText(String.valueOf(similar.getRating()));
+
+                    thumbnailSimilar.requestLayout();
+                    thumbnailSimilar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(TvShowDetailActivity.this, TvShowDetailActivity.class);
+                            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, similar.getId());
+                            startActivity(intent);
+                        }
+                    });
+
+                    Glide.with(TvShowDetailActivity.this)
+                            .load(BuildConfig.TMDB_IMAGE_BASE_URL + similar.getPosterPath())
+                            .error(R.drawable.error)
+                            .placeholder(R.drawable.placeholder)
+                            .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark).centerCrop())
+                            .into(thumbnailSimilar);
+                    tvShowSimilar.addView(parent);
+                }
+            }
+        } else {
+            showError();
+        }
+    }
+
+    private void showError() {
+        Toast.makeText(this, "Check your internet connection.", Toast.LENGTH_SHORT).show();
     }
 
     private void showTrailer(String url) {
@@ -141,107 +289,13 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.favorite:
+                Toast.makeText(this, "Added to favorite tv shows.", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.add:
+                Toast.makeText(this, "Added to watch later tv shows", Toast.LENGTH_SHORT).show();
+        }
         return super.onOptionsItemSelected(item);
     }
-
-    private Observer<TvShowItems> getTvShowItems = new Observer<TvShowItems>() {
-        @Override
-        public void onChanged(TvShowItems tvShowItems) {
-            tvShowTitle.setText(tvShowItems.getTitle());
-            tvShowOverview.setText(tvShowItems.getOverview());
-            tvShowRating.setRating(tvShowItems.getRating() / 2);
-            tvShowReleaseDate.setText(tvShowItems.getReleaseDate());
-            collapsingToolbar.setTitle(getResources().getString(R.string.tvShow_detail));
-
-            if (tvShowItems.getGenres() != null) {
-                ArrayList<String> currentGenres = new ArrayList<>();
-                for (Genre genre : tvShowItems.getGenres()) {
-                    currentGenres.add(genre.getName());
-                }
-                tvShowGenres.setText(TextUtils.join(", ", currentGenres));
-            } else {
-                tvShowGenres.setText((CharSequence) genreArrayList);
-            }
-
-            Glide.with(TvShowDetailActivity.this)
-                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getBackdrop())
-                    .error(R.drawable.error)
-                    .placeholder(R.drawable.placeholder)
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
-                    .into(tvShowBackdrop);
-            showLoading(false);
-
-            tvShowTrailers.removeAllViews();
-            for (final Trailer trailer : trailerArrayList) {
-                View parent = getLayoutInflater().inflate(R.layout.thumbnail_trailer, tvShowTrailers, false);
-                ImageView thumbnail = parent.findViewById(R.id.thumbnail_trailer);
-                TextView tvTrailerTitle = parent.findViewById(R.id.trailerTitle);
-
-                tvTrailerTitle.setText(trailer.getName());
-                thumbnail.requestLayout();
-                thumbnail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showTrailer(String.format(BuildConfig.YOUTUBE_VIDEO_URL, trailer.getKey()));
-                    }
-                });
-
-                Glide.with(TvShowDetailActivity.this)
-                        .load(String.format(BuildConfig.YOUTUBE_THUMBNAIL_URL, trailer.getKey()))
-                        .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
-                        .into(thumbnail);
-                tvShowTrailers.addView(parent);
-            }
-
-            tvShowSimilar.removeAllViews();
-            for (final Similar similar : similarArrayList) {
-                View parent = getLayoutInflater().inflate(R.layout.thumbnail_similar, tvShowSimilar, false);
-                ImageView thumbnailSimilar = parent.findViewById(R.id.thumbnail_similar);
-                TextView tvSimilarTitle = parent.findViewById(R.id.similarMovieTitle);
-                TextView tvSimilarRating = parent.findViewById(R.id.cv_movie_rating);
-
-                tvSimilarTitle.setText(similar.getName());
-                tvSimilarRating.setText(String.valueOf(similar.getRating()));
-
-                thumbnailSimilar.requestLayout();
-                thumbnailSimilar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(TvShowDetailActivity.this, TvShowDetailActivity.class);
-                        intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, similar.getId());
-                        startActivity(intent);
-                    }
-                });
-
-                Glide.with(TvShowDetailActivity.this)
-                        .load(BuildConfig.TMDB_IMAGE_BASE_URL + similar.getPosterPath())
-                        .error(R.drawable.error)
-                        .placeholder(R.drawable.placeholder)
-                        .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark).centerCrop())
-                        .into(thumbnailSimilar);
-                tvShowSimilar.addView(parent);
-            }
-        }
-    };
-    private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
-        @Override
-        public void onChanged(GenresResponse genresResponse) {
-            ArrayList<Genre> genreItems = genresResponse.getGenres();
-            genreArrayList.addAll(genreItems);
-        }
-    };
-    private Observer<TrailerResponse> getTrailers = new Observer<TrailerResponse>() {
-        @Override
-        public void onChanged(TrailerResponse trailerResponse) {
-            ArrayList<Trailer> trailerItems = trailerResponse.getTrailers();
-            trailerArrayList.addAll(trailerItems);
-        }
-    };
-    private Observer<SimilarResponse> getSimilar = new Observer<SimilarResponse>() {
-        @Override
-        public void onChanged(SimilarResponse similarResponse) {
-            ArrayList<Similar> similarItems = similarResponse.getSimilar();
-            similarArrayList.addAll(similarItems);
-        }
-    };
 }

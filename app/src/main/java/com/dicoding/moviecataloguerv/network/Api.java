@@ -15,19 +15,22 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET("discover/movie")
-    Call<MovieResponse> getDiscoverMovies(
+    @GET("movie/{category}")
+    Call<MovieResponse> getMovies(
+            @Path("category") String category,
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page
     );
 
-    @GET("discover/tv")
-    Call<TvShowResponse> getDiscoverTvShows(
+    @GET("tv/{category}")
+    Call<TvShowResponse> getTvShows(
+            @Path("category") String category,
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page
     );
+
 
     @GET("movie/{movie_id}")
     Call<MovieItems> getMovie(
@@ -43,43 +46,46 @@ public interface Api {
             @Query("language") String language
     );
 
-    @GET("genre/movie/list")
-    Call<GenresResponse> getMovieGenres(
+    @GET("genre/{type}/list")
+    Call<GenresResponse> getGenres(
+            @Path("type") String type,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
+//
+//    @GET("genre/tv/list")
+//    Call<GenresResponse> getTvGenres(
+//            @Query("api_key") String apiKey,
+//            @Query("language") String language
+//    );
 
-    @GET("genre/tv/list")
-    Call<GenresResponse> getTvGenres(
-            @Query("api_key") String apiKey,
-            @Query("language") String language
-    );
-
-    @GET("movie/{movie_id}/videos")
-    Call<TrailerResponse> getMovieTrailers(
+    @GET("{type}/{movie_id}/videos")
+    Call<TrailerResponse> getTrailers(
+            @Path("type") String type,
             @Path("movie_id") int id,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
+//
+//    @GET("tv/{tv_id}/videos")
+//    Call<TrailerResponse> getTvTrailers(
+//            @Path("tv_id") int id,
+//            @Query("api_key") String apiKey,
+//            @Query("language") String language
+//    );
 
-    @GET("tv/{tv_id}/videos")
-    Call<TrailerResponse> getTvTrailers(
-            @Path("tv_id") int id,
-            @Query("api_key") String apiKey,
-            @Query("language") String language
-    );
-
-    @GET("movie/{movie_id}/similar")
-    Call<SimilarResponse> getMovieSimilar(
+    @GET("{type}/{movie_id}/similar")
+    Call<SimilarResponse> getSimilar(
+            @Path("type") String type,
             @Path("movie_id") int id,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
-
-    @GET("tv/{tv_id}/similar")
-    Call<SimilarResponse> getTvSimilar(
-            @Path("tv_id") int id,
-            @Query("api_key") String apiKey,
-            @Query("language") String language
-    );
+//
+//    @GET("tv/{tv_id}/similar")
+//    Call<SimilarResponse> getTvSimilar(
+//            @Path("tv_id") int id,
+//            @Query("api_key") String apiKey,
+//            @Query("language") String language
+//    );
 }

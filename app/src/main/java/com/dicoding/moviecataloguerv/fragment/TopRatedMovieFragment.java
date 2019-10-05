@@ -13,9 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.MovieDetailActivity;
@@ -27,32 +28,26 @@ import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.viewmodel.MoviesViewModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment {
-
-    private ArrayList<MovieItems> movieItemsArrayList = new ArrayList<>();
-    private ArrayList<Genre> genreArrayList = new ArrayList<>();
+public class TopRatedMovieFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private RecyclerView moviesRV;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout refreshLayout;
 
     private MoviesAdapter moviesAdapter;
+    private MoviesViewModel moviesViewModel;
 
-    private Observer<MovieResponse> getMovies = new Observer<MovieResponse>() {
+    private String language;
+
+    private Observer<MovieResponse> getTopRated = new Observer<MovieResponse>() {
         @Override
         public void onChanged(MovieResponse movieResponse) {
             if (movieResponse != null) {
-                ArrayList<MovieItems> movieItems = movieResponse.getMovieItems();
-                movieItemsArrayList.addAll(movieItems);
-                moviesAdapter.notifyDataSetChanged();
-            } else {
-                MoviesViewModel moviesViewModel = new MoviesViewModel();
-                moviesViewModel.getMovies(getResources().getString(R.string.language));
+                moviesAdapter.refillMovie(movieResponse.getMovieItems());
             }
         }
 
@@ -60,12 +55,8 @@ public class MovieFragment extends Fragment {
     private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
         @Override
         public void onChanged(GenresResponse genresResponse) {
-            if (genresResponse != null) {
-                ArrayList<Genre> genreItems = genresResponse.getGenres();
-                genreArrayList.addAll(genreItems);
-//                moviesAdapter.notifyDataSetChanged();
-                showLoading(false);
-            }
+            moviesAdapter.refillGenre(genresResponse.getGenres());
+            showLoading(false);
         }
     };
     private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
@@ -77,41 +68,45 @@ public class MovieFragment extends Fragment {
         }
     };
 
-    public MovieFragment() {
+    public TopRatedMovieFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        language = getResources().getString(R.string.language);
         return inflater.inflate(R.layout.fragment_movies, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         moviesRV = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
-        showLoading(true);
-        MoviesViewModel moviesViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MoviesViewModel.class);
+        refreshLayout = view.findViewById(R.id.refresh_layout);
+        refreshLayout.setOnRefreshListener(this);
 
-        Log.d("FragmentMovie", "Loaded");
-        moviesViewModel.getMovies(getResources().getString(R.string.language)).observe(getActivity(), getMovies);
-        moviesViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), getGenres);
+        moviesRV.setHasFixedSize(true);
+        moviesRV.setLayoutManager(new LinearLayoutManager(getContext()));
 
         setMoviesRV();
+        showLoading(true);
+        moviesViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(MoviesViewModel.class);
+        observeData();
+    }
+
+    private void observeData() {
+        moviesViewModel.getTopRated(getResources().getString(R.string.language)).observe(getActivity(), getTopRated);
+        moviesViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), getGenres);
+        Log.d("FragmentMovieTopRated", "Loaded");
     }
 
     private void setMoviesRV() {
         if (moviesAdapter == null) {
-            moviesAdapter = new MoviesAdapter(movieItemsArrayList, getActivity(), genreArrayList, onItemClicked);
-            moviesRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+            moviesAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), new ArrayList<Genre>(), onItemClicked);
             moviesRV.setAdapter(moviesAdapter);
-        } else {
-            moviesAdapter.notifyDataSetChanged();
         }
     }
 
@@ -123,5 +118,14 @@ public class MovieFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
             moviesRV.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        refreshLayout.setRefreshing(true);
+        moviesViewModel.setTopRatedMovies(language);
+        moviesViewModel.setGenres(language);
+        observeData();
+        refreshLayout.setRefreshing(false);
     }
 }

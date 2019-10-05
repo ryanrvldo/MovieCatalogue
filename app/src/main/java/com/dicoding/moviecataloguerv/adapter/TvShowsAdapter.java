@@ -24,20 +24,35 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
 
     private ArrayList<TvShowItems> tvShowItems;
     private ArrayList<Genre> genreList;
-    private Context context;
     private OnItemClicked onItemClicked;
 
-    public TvShowsAdapter(ArrayList<TvShowItems> tvShowItems, Context context, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
+    public TvShowsAdapter(ArrayList<TvShowItems> tvShowItems, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
         this.tvShowItems = tvShowItems;
-        this.context = context;
         this.genreList = genreList;
         this.onItemClicked = onItemClicked;
+    }
+
+    public void refillTv(ArrayList<TvShowItems> items) {
+        this.tvShowItems = new ArrayList<>();
+        this.tvShowItems.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void refillGenre(ArrayList<Genre> items) {
+        this.genreList = new ArrayList<>();
+        this.genreList.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void clearTv() {
+        this.tvShowItems.clear();
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public TvShowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_movie, viewGroup, false);
         return new TvShowViewHolder(view);
     }
 

@@ -13,13 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -44,9 +45,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     public static String MOVIE_ID = "movie_id";
 
-    private ArrayList<Trailer> trailerArrayList = new ArrayList<>();
-    private ArrayList<Genre> genreArrayList = new ArrayList<>();
-    private ArrayList<Similar> similarArrayList = new ArrayList<>();
+    private MoviesViewModel moviesViewModel;
 
     private ImageView movieBackdrop;
     private TextView movieTitle;
@@ -61,13 +60,18 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ImageView backgroundLoading;
     private AppBarLayout appBarLayout;
     private ConstraintLayout constraintLayout;
+    private TextView movieTrailerLabel;
+    private TextView movieSimilarLabel;
+    private TextView ratingText;
 
+    private String language;
     private int movieId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+        language = getResources().getString(R.string.language);
 
         setupToolbar();
         initUI();
@@ -75,15 +79,47 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         movieId = getIntent().getIntExtra(MOVIE_ID, movieId);
 
-        MoviesViewModel moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
-        Log.d("MovieDetail", "Loaded");
+        moviesViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MoviesViewModel.class);
 
-        moviesViewModel.getSimilar(movieId).observe(this, getSimilar);
-        moviesViewModel.getTrailers(movieId).observe(this, getTrailers);
-        moviesViewModel.getGenres(getResources().getString(R.string.language)).observe(this, getGenres);
-        moviesViewModel.getMovieItems(movieId, getResources().getString(R.string.language)).observe(this, getMovieItems);
+        observeData();
     }
 
+    private void observeData() {
+        moviesViewModel.getMovieItems(movieId, language).observe(this, new Observer<MovieItems>() {
+            @Override
+            public void onChanged(MovieItems movieItems) {
+                if (movieItems != null) {
+                    setMovie();
+                }
+            }
+        });
+        moviesViewModel.getGenres(language).observe(this, new Observer<GenresResponse>() {
+            @Override
+            public void onChanged(GenresResponse genresResponse) {
+                if (genresResponse != null) {
+                    setGenres();
+                }
+            }
+        });
+        moviesViewModel.getTrailers(movieId).observe(this, new Observer<TrailerResponse>() {
+            @Override
+            public void onChanged(TrailerResponse trailerResponse) {
+                if (trailerResponse != null) {
+                    setTrailers();
+                }
+            }
+        });
+        moviesViewModel.getSimilar(movieId).observe(this, new Observer<SimilarResponse>() {
+            @Override
+            public void onChanged(SimilarResponse similarResponse) {
+                if (similarResponse != null) {
+                    setSimilar();
+                    showLoading(false);
+                }
+            }
+        });
+        Log.d("MovieDetail", "Loaded");
+    }
 
     private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar_detail);
@@ -109,6 +145,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         backgroundLoading = findViewById(R.id.background_loading);
         appBarLayout = findViewById(R.id.app_bar);
         constraintLayout = findViewById(R.id.constraint);
+        movieTrailerLabel = findViewById(R.id.trailersLabel);
+        movieSimilarLabel = findViewById(R.id.similarLabel);
+        ratingText = findViewById(R.id.rating_text);
     }
 
     private void showLoading(Boolean state) {
@@ -123,6 +162,120 @@ public class MovieDetailActivity extends AppCompatActivity {
             appBarLayout.setVisibility(View.VISIBLE);
             constraintLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void setMovie() {
+        MovieItems movieItems = moviesViewModel.getMovieItems(movieId, language).getValue();
+        if (movieItems == null) {
+            showError();
+        } else {
+            movieTitle.setText(movieItems.getTitle());
+            movieOverview.setText(movieItems.getOverview());
+            movieRating.setRating(movieItems.getRating() / 2);
+            ratingText.setText(String.format("%s / 10", String.valueOf(movieItems.getRating())));
+            movieReleaseDate.setText(movieItems.getReleaseDate());
+            collapsingToolbar.setTitle(movieItems.getTitle());
+
+            if (movieItems.getGenres() != null) {
+                ArrayList<String> currentGenres = new ArrayList<>();
+                for (Genre genre : movieItems.getGenres()) {
+                    currentGenres.add(genre.getName());
+                }
+                movieGenres.setText(TextUtils.join(", ", currentGenres));
+            }
+
+            Glide.with(MovieDetailActivity.this)
+                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getBackdrop())
+                    .error(R.drawable.error)
+                    .placeholder(R.drawable.placeholder)
+                    .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
+                    .into(movieBackdrop);
+        }
+    }
+
+    private void setGenres() {
+        GenresResponse genresResponse = moviesViewModel.getGenres(language).getValue();
+        if (genresResponse != null && genresResponse.getGenres() == null) {
+            showError();
+        }
+    }
+
+    private void setTrailers() {
+        TrailerResponse trailerResponse = moviesViewModel.getTrailers(movieId).getValue();
+        movieTrailers.removeAllViews();
+        if (trailerResponse != null) {
+            if (trailerResponse.getTrailers() == null) {
+                movieTrailerLabel.setVisibility(View.GONE);
+                movieTrailers.setVisibility(View.GONE);
+                showError();
+            } else {
+                for (final Trailer trailer : trailerResponse.getTrailers()) {
+                    View parent = getLayoutInflater().inflate(R.layout.thumbnail_trailer, movieTrailers, false);
+                    ImageView thumbnailTrailer = parent.findViewById(R.id.thumbnail_trailer);
+                    TextView movieTrailerTitle = parent.findViewById(R.id.trailerTitle);
+
+                    movieTrailerTitle.setText(trailer.getName());
+
+                    Glide.with(MovieDetailActivity.this)
+                            .load(String.format(BuildConfig.YOUTUBE_THUMBNAIL_URL, trailer.getKey()))
+                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
+                            .into(thumbnailTrailer);
+
+                    thumbnailTrailer.requestLayout();
+                    thumbnailTrailer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showTrailer(String.format(YOUTUBE_VIDEO_URL, trailer.getKey()));
+                        }
+                    });
+                    movieTrailers.addView(parent);
+                }
+            }
+        }
+    }
+
+    private void setSimilar() {
+        SimilarResponse similarResponse = moviesViewModel.getSimilar(movieId).getValue();
+        movieSimilar.removeAllViews();
+        if (similarResponse != null) {
+            if (similarResponse.getSimilar() == null) {
+                movieSimilarLabel.setVisibility(View.GONE);
+                movieSimilar.setVisibility(View.GONE);
+                showError();
+            } else {
+                for (final Similar similar : similarResponse.getSimilar()) {
+                    View parent = getLayoutInflater().inflate(R.layout.thumbnail_similar, movieSimilar, false);
+                    ImageView thumbnailSimilar = parent.findViewById(R.id.thumbnail_similar);
+                    TextView movieSimilarTitle = parent.findViewById(R.id.similarMovieTitle);
+                    TextView movieSimilarRating = parent.findViewById(R.id.cv_movie_rating);
+
+                    movieSimilarTitle.setText(similar.getTitle());
+                    movieSimilarRating.setText(String.valueOf(similar.getRating()));
+
+
+                    Glide.with(MovieDetailActivity.this)
+                            .load(BuildConfig.TMDB_IMAGE_BASE_URL + similar.getPosterPath())
+                            .error(R.drawable.error)
+                            .placeholder(R.drawable.placeholder)
+                            .into(thumbnailSimilar);
+
+                    thumbnailSimilar.requestLayout();
+                    thumbnailSimilar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(MovieDetailActivity.this, MovieDetailActivity.class);
+                            intent.putExtra(MovieDetailActivity.MOVIE_ID, similar.getId());
+                            startActivity(intent);
+                        }
+                    });
+                    movieSimilar.addView(parent);
+                }
+            }
+        }
+    }
+
+    private void showError() {
+        Toast.makeText(this, "Check your internet connection.", Toast.LENGTH_SHORT).show();
     }
 
     private void showTrailer(String url) {
@@ -144,108 +297,14 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.favorite:
+                Toast.makeText(this, "Added to favorite movies.", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.add:
+                Toast.makeText(this, "Added to watch later movies.", Toast.LENGTH_SHORT).show();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
-
-
-    private Observer<MovieItems> getMovieItems = new Observer<MovieItems>() {
-        @Override
-        public void onChanged(MovieItems movieItems) {
-            movieTitle.setText(movieItems.getTitle());
-            movieOverview.setText(movieItems.getOverview());
-            movieRating.setRating(movieItems.getRating() / 2);
-            movieReleaseDate.setText(movieItems.getReleaseDate());
-            collapsingToolbar.setTitle(getResources().getString(R.string.movie_detail));
-
-            if (movieItems.getGenres() != null) {
-                ArrayList<String> currentGenres = new ArrayList<>();
-                for (Genre genre : movieItems.getGenres()) {
-                    currentGenres.add(genre.getName());
-                }
-                movieGenres.setText(TextUtils.join(", ", currentGenres));
-            } else {
-                movieGenres.setText((CharSequence) genreArrayList);
-            }
-
-            Glide.with(MovieDetailActivity.this)
-                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getBackdrop())
-                    .error(R.drawable.error)
-                    .placeholder(R.drawable.placeholder)
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
-                    .into(movieBackdrop);
-            showLoading(false);
-
-            movieTrailers.removeAllViews();
-            for (final Trailer trailer : trailerArrayList) {
-                View parent = getLayoutInflater().inflate(R.layout.thumbnail_trailer, movieTrailers, false);
-                ImageView thumbnailTrailer = parent.findViewById(R.id.thumbnail_trailer);
-                TextView movieTrailerTitle = parent.findViewById(R.id.trailerTitle);
-
-                movieTrailerTitle.setText(trailer.getName());
-
-                thumbnailTrailer.requestLayout();
-                thumbnailTrailer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showTrailer(String.format(YOUTUBE_VIDEO_URL, trailer.getKey()));
-                    }
-                });
-
-                Glide.with(MovieDetailActivity.this)
-                        .load(String.format(BuildConfig.YOUTUBE_THUMBNAIL_URL, trailer.getKey()))
-                        .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
-                        .into(thumbnailTrailer);
-                movieTrailers.addView(parent);
-            }
-
-            movieSimilar.removeAllViews();
-            for (final Similar similar : similarArrayList) {
-                View parent = getLayoutInflater().inflate(R.layout.thumbnail_similar, movieSimilar, false);
-                ImageView thumbnailSimilar = parent.findViewById(R.id.thumbnail_similar);
-                TextView movieSimilarTitle = parent.findViewById(R.id.similarMovieTitle);
-                TextView movieSimilarRating = parent.findViewById(R.id.cv_movie_rating);
-
-                movieSimilarTitle.setText(similar.getTitle());
-                movieSimilarRating.setText(String.valueOf(similar.getRating()));
-
-                thumbnailSimilar.requestLayout();
-                thumbnailSimilar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MovieDetailActivity.this, MovieDetailActivity.class);
-                        intent.putExtra(MovieDetailActivity.MOVIE_ID, similar.getId());
-                        startActivity(intent);
-                    }
-                });
-
-                Glide.with(MovieDetailActivity.this)
-                        .load(BuildConfig.TMDB_IMAGE_BASE_URL + similar.getPosterPath())
-                        .error(R.drawable.error)
-                        .placeholder(R.drawable.placeholder)
-                        .into(thumbnailSimilar);
-                movieSimilar.addView(parent);
-            }
-        }
-    };
-    private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
-        @Override
-        public void onChanged(GenresResponse genresResponse) {
-            ArrayList<Genre> genreItems = genresResponse.getGenres();
-            genreArrayList.addAll(genreItems);
-        }
-    };
-    private Observer<TrailerResponse> getTrailers = new Observer<TrailerResponse>() {
-        @Override
-        public void onChanged(TrailerResponse trailerResponse) {
-            ArrayList<Trailer> trailerItems = trailerResponse.getTrailers();
-            trailerArrayList.addAll(trailerItems);
-        }
-    };
-    private Observer<SimilarResponse> getSimilar = new Observer<SimilarResponse>() {
-        @Override
-        public void onChanged(SimilarResponse similarResponse) {
-            ArrayList<Similar> similarItems = similarResponse.getSimilar();
-            similarArrayList.addAll(similarItems);
-        }
-    };
 }
