@@ -16,12 +16,13 @@ import com.dicoding.moviecataloguerv.network.Repository;
 public class TvShowsViewModel extends ViewModel {
 
     private MutableLiveData<TvShowResponse> popularTv;
-    private MutableLiveData<TvShowResponse> upcomingTv;
+    private MutableLiveData<TvShowResponse> nowPlayingTv;
     private MutableLiveData<TvShowResponse> topRatedTv;
     private MutableLiveData<GenresResponse> genres;
     private MutableLiveData<TvShowItems> itemsTv;
     private MutableLiveData<TrailerResponse> trailers;
     private MutableLiveData<SimilarResponse> similar;
+    private MutableLiveData<SimilarResponse> recommendations;
 
     private Repository repository = Repository.getInstance();
     private String type = "tv";
@@ -29,7 +30,7 @@ public class TvShowsViewModel extends ViewModel {
     public void setPopularTv(String language) {
         popularTv = new MutableLiveData<>();
         popularTv = repository.getTvShows("popular", language);
-        Log.d("FragmentPopularTvShows", "Data Created");
+        Log.d("PopularTv", "Data Created");
     }
 
     public LiveData<TvShowResponse> getPopularTv(String language) {
@@ -39,23 +40,23 @@ public class TvShowsViewModel extends ViewModel {
         return popularTv;
     }
 
-    public void setUpcomingTv(String language) {
-        upcomingTv = new MutableLiveData<>();
-        upcomingTv = repository.getTvShows("airing_today", language);
-        Log.d("FragmentUpcomingTvShows", "Data Created");
+    public void setNowPlayingTv(String language) {
+        nowPlayingTv = new MutableLiveData<>();
+        nowPlayingTv = repository.getTvShows("on_the_air", language);
+        Log.d("NowPlayingTv", "Data Created");
     }
 
     public LiveData<TvShowResponse> getUpcomingTv(String language) {
-        if (upcomingTv == null) {
-            setUpcomingTv(language);
+        if (nowPlayingTv == null) {
+            setNowPlayingTv(language);
         }
-        return upcomingTv;
+        return nowPlayingTv;
     }
 
     public void setTopRatedTv(String language) {
         topRatedTv = new MutableLiveData<>();
         topRatedTv = repository.getTvShows("top_rated", language);
-        Log.d("FragmentTopRatedTvShows", "Data Created");
+        Log.d("TopRatedTv", "Data Created");
     }
 
     public LiveData<TvShowResponse> getTopRatedTv(String language) {
@@ -97,8 +98,16 @@ public class TvShowsViewModel extends ViewModel {
     public LiveData<SimilarResponse> getSimilar(int tvShowId) {
         if (similar == null) {
             similar = new MutableLiveData<>();
-            similar = repository.getSimilar(type, tvShowId);
+            similar = repository.getSimilar(type, tvShowId, "similar");
         }
         return similar;
+    }
+
+    public LiveData<SimilarResponse> getRecommendations(int tvShowId) {
+        if (recommendations == null) {
+            recommendations = new MutableLiveData<>();
+            recommendations = repository.getSimilar(type, tvShowId, "recommendations");
+        }
+        return recommendations;
     }
 }

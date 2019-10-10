@@ -33,6 +33,7 @@ import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.Trailer;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.viewmodel.FavoritesViewModel;
 import com.dicoding.moviecataloguerv.viewmodel.TvShowsViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -44,6 +45,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
     public static String TV_SHOW_ID = "tvShow_id";
 
     private TvShowsViewModel tvShowsViewModel;
+    private FavoritesViewModel favoritesViewModel;
 
     private ImageView tvShowBackdrop;
     private TextView tvShowTitle;
@@ -64,6 +66,9 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
     private String language;
     private int tvShowId;
+    private TvShowItems tvShowItems;
+    private boolean favorite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,33 +83,46 @@ public class TvShowDetailActivity extends AppCompatActivity {
         tvShowId = getIntent().getIntExtra(TV_SHOW_ID, tvShowId);
 
         tvShowsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvShowsViewModel.class);
+        favoritesViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication())).get(FavoritesViewModel.class);
         observeData();
     }
 
     private void observeData() {
         tvShowsViewModel.getTvShowItems(tvShowId, language).observe(this, new Observer<TvShowItems>() {
             @Override
-            public void onChanged(TvShowItems tvShowItems) {
-                setTvShow();
+            public void onChanged(TvShowItems items) {
+                if (items != null) {
+                    setTvShow();
+                    if (favoritesViewModel.selectFavTv(tvShowId) != null) {
+                        favorite = true;
+                        invalidateOptionsMenu();
+                    }
+                }
             }
         });
         tvShowsViewModel.getGenres(language).observe(this, new Observer<GenresResponse>() {
             @Override
             public void onChanged(GenresResponse genresResponse) {
-                setGenres();
+                if (genresResponse != null) {
+                    setGenres();
+                }
             }
         });
         tvShowsViewModel.getTrailers(tvShowId).observe(this, new Observer<TrailerResponse>() {
             @Override
             public void onChanged(TrailerResponse trailerResponse) {
-                setTrailers();
+                if (trailerResponse != null) {
+                    setTrailers();
+                }
             }
         });
         tvShowsViewModel.getSimilar(tvShowId).observe(this, new Observer<SimilarResponse>() {
             @Override
             public void onChanged(SimilarResponse similarResponse) {
-                setSimilar();
-                showLoading(false);
+                if (similarResponse != null) {
+                    setSimilar();
+                    showLoading(false);
+                }
             }
         });
         Log.d("TvShowDetail", "Loaded");
@@ -154,7 +172,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
     }
 
     private void setTvShow() {
-        TvShowItems tvShowItems = tvShowsViewModel.getTvShowItems(tvShowId, language).getValue();
+        this.tvShowItems = tvShowsViewModel.getTvShowItems(tvShowId, language).getValue();
         if (tvShowItems == null) {
             showError();
         } else {
@@ -175,8 +193,8 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
             Glide.with(TvShowDetailActivity.this)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getBackdrop())
-                    .error(R.drawable.error)
-                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.ic_image)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
                     .into(tvShowBackdrop);
         }
@@ -254,8 +272,8 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
                     Glide.with(TvShowDetailActivity.this)
                             .load(BuildConfig.TMDB_IMAGE_BASE_URL + similar.getPosterPath())
-                            .error(R.drawable.error)
-                            .placeholder(R.drawable.placeholder)
+                            .error(R.drawable.ic_broken_image)
+                            .placeholder(R.drawable.ic_image)
                             .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark).centerCrop())
                             .into(thumbnailSimilar);
                     tvShowSimilar.addView(parent);
@@ -284,16 +302,39 @@ public class TvShowDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.details_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (favorite) {
+            menu.findItem(R.id.favorite).setIcon(R.drawable.ic_favorite);
+        } else {
+            menu.findItem(R.id.favorite).setIcon(R.drawable.ic_favorite_border);
+        }
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.favorite:
-                Toast.makeText(this, "Added to favorite tv shows.", Toast.LENGTH_SHORT).show();
+                if (favoritesViewModel.selectFavTv(tvShowId) == null) {
+                    favoritesViewModel.addFavoriteTvShow(tvShowItems);
+                    favorite = true;
+                    item.setIcon(R.drawable.ic_favorite);
+                    Toast.makeText(this, "Added to favorite tv shows.", Toast.LENGTH_SHORT).show();
+                } else {
+                    favoritesViewModel.deleteFavTv(tvShowItems);
+                    favorite = false;
+                    item.setIcon(R.drawable.ic_favorite_border);
+                    Toast.makeText(this, "Deleted from favorite tv shows.", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.add:
+                item.setIcon(R.drawable.ic_playlist_add_check);
                 Toast.makeText(this, "Added to watch later tv shows", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);

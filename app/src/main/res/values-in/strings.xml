@@ -25,5 +25,9 @@
     <string name="favorite">Favorit</string>
     <string name="trailer_title">Judul Cuplikan Video</string>
     <string name="similar">Serupa</string>
+    <string name="_5_5_10">5.5/10</string>
+    <string name="popular">Populer</string>
+    <string name="top_rated">Rating Tertinggi</string>
+    <string name="now_playing">Sedang Tayang</string>
 
 </resources>

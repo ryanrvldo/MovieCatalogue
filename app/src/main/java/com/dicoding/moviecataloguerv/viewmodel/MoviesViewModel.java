@@ -16,12 +16,13 @@ import com.dicoding.moviecataloguerv.network.Repository;
 public class MoviesViewModel extends ViewModel {
 
     private MutableLiveData<MovieResponse> popularMovies;
-    private MutableLiveData<MovieResponse> upcomingMovies;
+    private MutableLiveData<MovieResponse> nowPlayingMovies;
     private MutableLiveData<MovieResponse> topRatedMovies;
     private MutableLiveData<GenresResponse> genres;
     private MutableLiveData<MovieItems> itemsMovie;
     private MutableLiveData<TrailerResponse> trailers;
     private MutableLiveData<SimilarResponse> similar;
+    private MutableLiveData<SimilarResponse> recommendations;
 
     private Repository repository = Repository.getInstance();
     private String type = "movie";
@@ -29,7 +30,7 @@ public class MoviesViewModel extends ViewModel {
     public void setPopularMovies(String language) {
         popularMovies = new MutableLiveData<>();
         popularMovies = repository.getMovies("popular", language);
-        Log.d("FragmentPopularMovies", "Data Created");
+        Log.d("PopularMovies", "Data Created");
     }
 
     public LiveData<MovieResponse> getPopularMovies(String language) {
@@ -39,23 +40,23 @@ public class MoviesViewModel extends ViewModel {
         return popularMovies;
     }
 
-    public void setUpcomingMovies(String language) {
-        upcomingMovies = new MutableLiveData<>();
-        upcomingMovies = repository.getMovies("now_playing", language);
-        Log.d("FragmentUpcomingMovies", "Data Created");
+    public void setNowPlayingMovies(String language) {
+        nowPlayingMovies = new MutableLiveData<>();
+        nowPlayingMovies = repository.getMovies("now_playing", language);
+        Log.d("UpcomingMovies", "Data Created");
     }
 
-    public LiveData<MovieResponse> getUpcomingMovies(String language) {
-        if (upcomingMovies == null) {
-            setUpcomingMovies(language);
+    public LiveData<MovieResponse> getNowPlayingMovies(String language) {
+        if (nowPlayingMovies == null) {
+            setNowPlayingMovies(language);
         }
-        return upcomingMovies;
+        return nowPlayingMovies;
     }
 
     public void setTopRatedMovies(String language) {
         topRatedMovies = new MutableLiveData<>();
         topRatedMovies = repository.getMovies("top_rated", language);
-        Log.d("FragmentTopRatedMovies", "Data Created");
+        Log.d("TopRatedMovies", "Data Created");
     }
 
     public LiveData<MovieResponse> getTopRated(String language) {
@@ -77,7 +78,7 @@ public class MoviesViewModel extends ViewModel {
         return genres;
     }
 
-    public void setItemsMovie(int movieId, String language) {
+    private void setItemsMovie(int movieId, String language) {
         itemsMovie = new MutableLiveData<>();
         itemsMovie = repository.getMovieItems(movieId, language);
         Log.d("MovieDetail", "Data Created");
@@ -101,8 +102,16 @@ public class MoviesViewModel extends ViewModel {
     public LiveData<SimilarResponse> getSimilar(int movieId) {
         if (similar == null) {
             similar = new MutableLiveData<>();
-            similar = repository.getSimilar(type, movieId);
+            similar = repository.getSimilar(type, movieId, "similar");
         }
         return similar;
+    }
+
+    public LiveData<SimilarResponse> getRecommendations(int tvShowId) {
+        if (recommendations == null) {
+            recommendations = new MutableLiveData<>();
+            recommendations = repository.getSimilar(type, tvShowId, "recommendations");
+        }
+        return recommendations;
     }
 }

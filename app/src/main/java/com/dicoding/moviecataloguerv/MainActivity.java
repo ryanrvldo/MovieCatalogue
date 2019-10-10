@@ -1,21 +1,26 @@
 package com.dicoding.moviecataloguerv;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.dicoding.moviecataloguerv.fragment.FavoriteFragment;
+import com.dicoding.moviecataloguerv.fragment.NowPlayingFragment;
 import com.dicoding.moviecataloguerv.fragment.PopularFragment;
 import com.dicoding.moviecataloguerv.fragment.TopRatedFragment;
-import com.dicoding.moviecataloguerv.fragment.NowPlayingFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String KEY_FRAGMENT = "fragment";
 
     private Fragment pageContent = new PopularFragment();
-    private String title = "Movie Catalogue";
+    private String title = "Popular";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -52,19 +57,23 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_popular:
                         pageContent = new PopularFragment();
-                        title = "Popular";
+                        title = getResources().getString(R.string.popular);
                         break;
-                    case R.id.menu_topRated:
+                    case R.id.menu_top_rated:
                         pageContent = new TopRatedFragment();
-                        title = "Top Rated";
+                        title = getResources().getString(R.string.top_rated);
                         break;
-                    case R.id.menu_upcoming:
+                    case R.id.menu_now_playing:
                         pageContent = new NowPlayingFragment();
-                        title = "Now Playing";
+                        title = getResources().getString(R.string.now_playing);
                         break;
-//                    case R.id.menu_fav:
-//                        title = "Favorite";
-//                        break;
+                    case R.id.menu_favorite:
+                        pageContent = new FavoriteFragment();
+                        title = getResources().getString(R.string.favorite);
+                        break;
+                    case R.id.menu_watch_later:
+                        title = getResources().getString(R.string.watch_later);
+                        break;
                 }
 
                 getSupportFragmentManager()
@@ -103,6 +112,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            SearchView searchView = (SearchView) (menu.findItem(R.id.search)).getActionView();
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setQueryHint(getResources().getString(R.string.search));
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -1,9 +1,16 @@
 package com.dicoding.moviecataloguerv.network;
 
+import android.app.Application;
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.dicoding.moviecataloguerv.BuildConfig;
+import com.dicoding.moviecataloguerv.database.FavoriteDatabase;
+import com.dicoding.moviecataloguerv.database.MovieDao;
+import com.dicoding.moviecataloguerv.database.TvShowDao;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
@@ -12,6 +19,8 @@ import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -27,8 +36,23 @@ public class Repository {
 
     private Api api;
 
+    private LiveData<List<MovieItems>> allFavoriteMovies;
+    private LiveData<List<TvShowItems>> allFavoriteTv;
+
+    private MovieDao movieDao;
+    private TvShowDao tvShowDao;
+
+
     private Repository(Api api) {
         this.api = api;
+    }
+
+    public Repository(Application application) {
+        FavoriteDatabase database = FavoriteDatabase.getInstance(application);
+        movieDao = database.movieDao();
+        tvShowDao = database.tvShowDao();
+        allFavoriteMovies = movieDao.getAllFavoriteMovie();
+        allFavoriteTv = tvShowDao.getAllFavoriteTv();
     }
 
     private static OkHttpClient providesOkHttpClientBuilder() {
@@ -160,9 +184,9 @@ public class Repository {
         return tvShowData;
     }
 
-    public MutableLiveData<SimilarResponse> getSimilar(String type, int movieId) {
+    public MutableLiveData<SimilarResponse> getSimilar(String type, int movieId, String category) {
         final MutableLiveData<SimilarResponse> similarData = new MutableLiveData<>();
-        api.getSimilar(type, movieId, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<SimilarResponse>() {
+        api.getSimilar(type, movieId, category, BuildConfig.TMDB_API_KEY, "en-us").enqueue(new Callback<SimilarResponse>() {
             @Override
             public void onResponse(@NonNull Call<SimilarResponse> call, @NonNull Response<SimilarResponse> response) {
                 if (response.isSuccessful()) {
@@ -177,4 +201,144 @@ public class Repository {
         });
         return similarData;
     }
+
+    /*
+     *
+     * Database
+     *
+     */
+    public void addFavMovie(MovieItems movieItems) {
+        new AddFavMovieAsyncTask(movieDao).execute(movieItems);
+    }
+
+    public void deleteFavMovie(MovieItems movieItems) {
+        new DeleteFavMovieAsyncTask(movieDao).execute(movieItems);
+    }
+
+
+    public MovieItems selectFavMovie(final int movieId) {
+        MovieItems items = null;
+        try {
+            items = new SelectFavMovieAsyncTask(movieDao).execute(movieId).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    public LiveData<List<MovieItems>> getAllFavoriteMovies() {
+        return allFavoriteMovies;
+    }
+
+    public void addFavTv(TvShowItems tvShowItems) {
+        new AddFavTvAsyncTask(tvShowDao).execute(tvShowItems);
+    }
+
+    public void deleteFavTv(TvShowItems tvShowItems) {
+        new DeleteFavTvAsyncTask(tvShowDao).execute(tvShowItems);
+    }
+
+    public TvShowItems selectFavTv(final int tvShowId) {
+        TvShowItems items = null;
+        try {
+            items = new SelectFavTvAsyncTask(tvShowDao).execute(tvShowId).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    public LiveData<List<TvShowItems>> getAllFavoriteTv() {
+        return allFavoriteTv;
+    }
+
+
+    private static class AddFavMovieAsyncTask extends AsyncTask<MovieItems, Void, Void> {
+
+        private MovieDao movieDao;
+
+        private AddFavMovieAsyncTask(MovieDao movieDao) {
+            this.movieDao = movieDao;
+        }
+
+        @Override
+        protected Void doInBackground(MovieItems... movieItems) {
+            movieDao.insert(movieItems[0]);
+            return null;
+        }
+
+    }
+
+    private static class DeleteFavMovieAsyncTask extends AsyncTask<MovieItems, Void, Void> {
+
+        private MovieDao movieDao;
+
+        private DeleteFavMovieAsyncTask(MovieDao movieDao) {
+            this.movieDao = movieDao;
+        }
+
+        @Override
+        protected Void doInBackground(MovieItems... movieItems) {
+            movieDao.delete(movieItems[0]);
+            return null;
+        }
+
+    }
+
+    private static class SelectFavMovieAsyncTask extends AsyncTask<Integer, Void, MovieItems> {
+
+        private MovieDao movieDao;
+
+        private SelectFavMovieAsyncTask(MovieDao movieDao) {
+            this.movieDao = movieDao;
+        }
+
+        @Override
+        protected MovieItems doInBackground(Integer... integers) {
+            return movieDao.selectById(integers[0]);
+        }
+    }
+
+    private static class AddFavTvAsyncTask extends AsyncTask<TvShowItems, Void, Void> {
+        private TvShowDao tvShowDao;
+
+        private AddFavTvAsyncTask(TvShowDao tvShowDao) {
+            this.tvShowDao = tvShowDao;
+        }
+
+        @Override
+        protected Void doInBackground(TvShowItems... tvShowItems) {
+            tvShowDao.insert(tvShowItems[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteFavTvAsyncTask extends AsyncTask<TvShowItems, Void, Void> {
+        private TvShowDao tvShowDao;
+
+        private DeleteFavTvAsyncTask(TvShowDao tvShowDao) {
+            this.tvShowDao = tvShowDao;
+        }
+
+        @Override
+        protected Void doInBackground(TvShowItems... tvShowItems) {
+            tvShowDao.delete(tvShowItems[0]);
+            return null;
+        }
+    }
+
+    private static class SelectFavTvAsyncTask extends AsyncTask<Integer, Void, TvShowItems> {
+        private TvShowDao tvShowDao;
+
+        private SelectFavTvAsyncTask(TvShowDao tvShowDao) {
+            this.tvShowDao = tvShowDao;
+        }
+
+        @Override
+        protected TvShowItems doInBackground(Integer... integers) {
+            return tvShowDao.selectById(integers[0]);
+        }
+    }
+
 }
+

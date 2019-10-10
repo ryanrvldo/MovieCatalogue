@@ -125,7 +125,7 @@ public class NowPlayingTvFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
-        tvShowsViewModel.setUpcomingTv(language);
+        tvShowsViewModel.setNowPlayingTv(language);
         tvShowsViewModel.setGenres(language);
         observeData();
         refreshLayout.setRefreshing(false);

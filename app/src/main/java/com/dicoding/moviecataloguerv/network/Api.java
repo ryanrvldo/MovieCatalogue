@@ -52,12 +52,6 @@ public interface Api {
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
-//
-//    @GET("genre/tv/list")
-//    Call<GenresResponse> getTvGenres(
-//            @Query("api_key") String apiKey,
-//            @Query("language") String language
-//    );
 
     @GET("{type}/{movie_id}/videos")
     Call<TrailerResponse> getTrailers(
@@ -66,26 +60,13 @@ public interface Api {
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
-//
-//    @GET("tv/{tv_id}/videos")
-//    Call<TrailerResponse> getTvTrailers(
-//            @Path("tv_id") int id,
-//            @Query("api_key") String apiKey,
-//            @Query("language") String language
-//    );
 
-    @GET("{type}/{movie_id}/similar")
+    @GET("{type}/{type_id}/{category}")
     Call<SimilarResponse> getSimilar(
             @Path("type") String type,
-            @Path("movie_id") int id,
+            @Path("type_id") int id,
+            @Path("category") String category,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
-//
-//    @GET("tv/{tv_id}/similar")
-//    Call<SimilarResponse> getTvSimilar(
-//            @Path("tv_id") int id,
-//            @Query("api_key") String apiKey,
-//            @Query("language") String language
-//    );
 }

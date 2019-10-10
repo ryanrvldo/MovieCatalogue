@@ -37,11 +37,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         notifyDataSetChanged();
     }
 
-    public void clearMovie() {
-        this.movieItems.clear();
-        notifyDataSetChanged();
-    }
-
     public void refillGenre(ArrayList<Genre> genres) {
         this.genreList = new ArrayList<>();
         this.genreList.addAll(genres);
@@ -102,8 +97,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             tvGenres.setText(getGenres(movieItems.getGenreIds()));
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getPosterPath())
-                    .error(R.drawable.error)
-                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.ic_image)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                     .into(tvPoster);
         }

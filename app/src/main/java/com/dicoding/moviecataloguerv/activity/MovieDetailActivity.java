@@ -33,6 +33,7 @@ import com.dicoding.moviecataloguerv.model.Similar;
 import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.Trailer;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
+import com.dicoding.moviecataloguerv.viewmodel.FavoritesViewModel;
 import com.dicoding.moviecataloguerv.viewmodel.MoviesViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -46,6 +47,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static String MOVIE_ID = "movie_id";
 
     private MoviesViewModel moviesViewModel;
+    private FavoritesViewModel favoritesViewModel;
 
     private ImageView movieBackdrop;
     private TextView movieTitle;
@@ -66,6 +68,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private String language;
     private int movieId;
+    private MovieItems movieItems;
+    private boolean favorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,19 +84,24 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieId = getIntent().getIntExtra(MOVIE_ID, movieId);
 
         moviesViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MoviesViewModel.class);
-
+        favoritesViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication())).get(FavoritesViewModel.class);
         observeData();
     }
 
     private void observeData() {
         moviesViewModel.getMovieItems(movieId, language).observe(this, new Observer<MovieItems>() {
             @Override
-            public void onChanged(MovieItems movieItems) {
-                if (movieItems != null) {
+            public void onChanged(MovieItems items) {
+                if (items != null) {
                     setMovie();
+                    if (favoritesViewModel.selectFavMovie(movieId) != null) {
+                        favorite = true;
+                        invalidateOptionsMenu();
+                    }
                 }
             }
         });
+
         moviesViewModel.getGenres(language).observe(this, new Observer<GenresResponse>() {
             @Override
             public void onChanged(GenresResponse genresResponse) {
@@ -118,6 +127,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
         Log.d("MovieDetail", "Loaded");
     }
 
@@ -165,7 +175,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void setMovie() {
-        MovieItems movieItems = moviesViewModel.getMovieItems(movieId, language).getValue();
+        this.movieItems = moviesViewModel.getMovieItems(movieId, language).getValue();
         if (movieItems == null) {
             showError();
         } else {
@@ -186,8 +196,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             Glide.with(MovieDetailActivity.this)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getBackdrop())
-                    .error(R.drawable.error)
-                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.ic_image)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimaryDark))
                     .into(movieBackdrop);
         }
@@ -231,6 +241,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                     movieTrailers.addView(parent);
                 }
             }
+        } else {
+            showError();
         }
     }
 
@@ -255,8 +267,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     Glide.with(MovieDetailActivity.this)
                             .load(BuildConfig.TMDB_IMAGE_BASE_URL + similar.getPosterPath())
-                            .error(R.drawable.error)
-                            .placeholder(R.drawable.placeholder)
+                            .error(R.drawable.ic_broken_image)
+                            .placeholder(R.drawable.ic_image)
                             .into(thumbnailSimilar);
 
                     thumbnailSimilar.requestLayout();
@@ -271,6 +283,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                     movieSimilar.addView(parent);
                 }
             }
+        } else {
+            showError();
         }
     }
 
@@ -292,16 +306,39 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.details_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (favorite) {
+            menu.findItem(R.id.favorite).setIcon(R.drawable.ic_favorite);
+        } else {
+            menu.findItem(R.id.favorite).setIcon(R.drawable.ic_favorite_border);
+        }
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.favorite:
-                Toast.makeText(this, "Added to favorite movies.", Toast.LENGTH_SHORT).show();
+                if (favoritesViewModel.selectFavMovie(movieId) == null) {
+                    favoritesViewModel.addFavoriteMovie(movieItems);
+                    favorite = true;
+                    item.setIcon(R.drawable.ic_favorite);
+                    Toast.makeText(this, "Added to favorite movies.", Toast.LENGTH_SHORT).show();
+                } else {
+                    favoritesViewModel.deleteFavMovie(movieItems);
+                    favorite = false;
+                    item.setIcon(R.drawable.ic_favorite_border);
+                    Toast.makeText(this, "Deleted from favorite movies.", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.add:
+                item.setIcon(R.drawable.ic_playlist_add_check);
                 Toast.makeText(this, "Added to watch later movies.", Toast.LENGTH_SHORT).show();
                 break;
         }

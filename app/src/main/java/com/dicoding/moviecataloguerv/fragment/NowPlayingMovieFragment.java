@@ -98,7 +98,7 @@ public class NowPlayingMovieFragment extends Fragment implements SwipeRefreshLay
     }
 
     private void observeData() {
-        moviesViewModel.getUpcomingMovies(language).observe(getActivity(), getUpcomingMovies);
+        moviesViewModel.getNowPlayingMovies(language).observe(getActivity(), getUpcomingMovies);
         moviesViewModel.getGenres(language).observe(getActivity(), getGenres);
         Log.d("FragmentMovieUpcoming", "Loaded");
     }
@@ -123,7 +123,7 @@ public class NowPlayingMovieFragment extends Fragment implements SwipeRefreshLay
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
-        moviesViewModel.setUpcomingMovies(language);
+        moviesViewModel.setNowPlayingMovies(language);
         moviesViewModel.setGenres(language);
         observeData();
         refreshLayout.setRefreshing(false);

@@ -1,11 +1,18 @@
 package com.dicoding.moviecataloguerv.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+@Entity(tableName = "favorite_tv", ignoredColumns = {"overview", "genreIds", "genres"})
 public class TvShowItems {
+
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private int id;
@@ -18,10 +25,12 @@ public class TvShowItems {
     @Expose
     private String overview;
 
+    @ColumnInfo(name = "poster_path")
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
 
+    @ColumnInfo(name = "release_date")
     @SerializedName("first_air_date")
     @Expose
     private String releaseDate;
@@ -41,6 +50,15 @@ public class TvShowItems {
     @SerializedName("genres")
     @Expose
     private ArrayList<Genre> genres;
+
+    public TvShowItems(int id, String title, String posterPath, String releaseDate, float rating, String backdrop) {
+        this.id = id;
+        this.title = title;
+        this.posterPath = posterPath;
+        this.releaseDate = releaseDate;
+        this.rating = rating;
+        this.backdrop = backdrop;
+    }
 
     public ArrayList<Genre> getGenres() {
         return genres;

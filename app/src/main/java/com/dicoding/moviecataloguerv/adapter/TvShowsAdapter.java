@@ -1,6 +1,5 @@
 package com.dicoding.moviecataloguerv.adapter;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,11 +40,6 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
     public void refillGenre(ArrayList<Genre> items) {
         this.genreList = new ArrayList<>();
         this.genreList.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearTv() {
-        this.tvShowItems.clear();
         notifyDataSetChanged();
     }
 
@@ -103,8 +97,8 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             tvGenres.setText(getGenres(tvShowItems.getGenreIds()));
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getPosterPath())
-                    .error(R.drawable.error)
-                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.ic_image)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                     .into(tvPoster);
         }

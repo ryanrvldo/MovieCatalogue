@@ -26,5 +26,14 @@
     <string name="trailer_title">Trailer Title</string>
     <string name="similar">Similar</string>
     <string name="_5_5_10">5.5/10</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="watch_later">Watch Later</string>
+    <string name="menu2">Setting</string>
+    <string name="search">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
