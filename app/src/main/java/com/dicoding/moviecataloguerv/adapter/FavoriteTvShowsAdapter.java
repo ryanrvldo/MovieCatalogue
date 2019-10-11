@@ -15,11 +15,10 @@ import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteTvShowsAdapter extends RecyclerView.Adapter<FavoriteTvShowsAdapter.FavoriteTvViewHolder> {
-    private List<TvShowItems> tvShowItems = new ArrayList<>();
+    private List<TvShowItems> tvShowItems;
     private OnItemClicked onItemClicked;
 
     public FavoriteTvShowsAdapter(List<TvShowItems> tvShowItems, OnItemClicked onItemClicked) {
@@ -31,6 +30,10 @@ public class FavoriteTvShowsAdapter extends RecyclerView.Adapter<FavoriteTvShows
         this.tvShowItems.clear();
         this.tvShowItems.addAll(items);
         notifyDataSetChanged();
+    }
+
+    public TvShowItems getTvAt(int position) {
+        return tvShowItems.get(position);
     }
 
     @NonNull

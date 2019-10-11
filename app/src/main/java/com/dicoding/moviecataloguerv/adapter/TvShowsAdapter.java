@@ -32,13 +32,13 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
     }
 
     public void refillTv(ArrayList<TvShowItems> items) {
-        this.tvShowItems = new ArrayList<>();
+        this.tvShowItems.clear();
         this.tvShowItems.addAll(items);
         notifyDataSetChanged();
     }
 
     public void refillGenre(ArrayList<Genre> items) {
-        this.genreList = new ArrayList<>();
+        this.genreList.clear();
         this.genreList.addAll(items);
         notifyDataSetChanged();
     }

@@ -17,9 +17,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.dicoding.moviecataloguerv.activity.SearchActivity;
+import com.dicoding.moviecataloguerv.activity.SettingActivity;
 import com.dicoding.moviecataloguerv.fragment.FavoriteFragment;
 import com.dicoding.moviecataloguerv.fragment.NowPlayingFragment;
 import com.dicoding.moviecataloguerv.fragment.PopularFragment;
+import com.dicoding.moviecataloguerv.fragment.SearchFragment;
 import com.dicoding.moviecataloguerv.fragment.TopRatedFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -97,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             pageContent = getSupportFragmentManager().getFragment(savedInstanceState, KEY_FRAGMENT);
             title = savedInstanceState.getString(KEY_TITLE);
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pageContent).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pageContent).addToBackStack(null).commit();
             toolbar.setTitle(title);
         }
     }
@@ -121,7 +124,10 @@ public class MainActivity extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                    Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                    searchIntent.putExtra(SearchActivity.SEARCH_QUERY, query);
+                    startActivity(searchIntent);
+                    invalidateOptionsMenu();
                     return true;
                 }
 
@@ -131,14 +137,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        return super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.localization) {
-            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-            startActivity(mIntent);
+        if (item.getItemId() == R.id.setting) {
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

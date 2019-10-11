@@ -12,6 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 
+
 @Database(entities = {MovieItems.class, TvShowItems.class}, version = 1)
 public abstract class FavoriteDatabase extends RoomDatabase {
 

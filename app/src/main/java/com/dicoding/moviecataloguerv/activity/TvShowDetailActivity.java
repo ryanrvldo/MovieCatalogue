@@ -239,6 +239,8 @@ public class TvShowDetailActivity extends AppCompatActivity {
             }
         } else {
             showError();
+            tvShowTrailerLabel.setVisibility(View.GONE);
+            tvShowTrailers.setVisibility(View.GONE);
         }
     }
 
@@ -281,6 +283,8 @@ public class TvShowDetailActivity extends AppCompatActivity {
             }
         } else {
             showError();
+            tvShowSimilarLabel.setVisibility(View.GONE);
+            tvShowSimilar.setVisibility(View.GONE);
         }
     }
 
@@ -319,23 +323,18 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.favorite:
-                if (favoritesViewModel.selectFavTv(tvShowId) == null) {
-                    favoritesViewModel.addFavoriteTvShow(tvShowItems);
-                    favorite = true;
-                    item.setIcon(R.drawable.ic_favorite);
-                    Toast.makeText(this, "Added to favorite tv shows.", Toast.LENGTH_SHORT).show();
-                } else {
-                    favoritesViewModel.deleteFavTv(tvShowItems);
-                    favorite = false;
-                    item.setIcon(R.drawable.ic_favorite_border);
-                    Toast.makeText(this, "Deleted from favorite tv shows.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.add:
-                item.setIcon(R.drawable.ic_playlist_add_check);
-                Toast.makeText(this, "Added to watch later tv shows", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.favorite) {
+            if (favoritesViewModel.selectFavTv(tvShowId) == null) {
+                favoritesViewModel.addFavoriteTvShow(tvShowItems);
+                favorite = true;
+                item.setIcon(R.drawable.ic_favorite);
+                Toast.makeText(this, "Added to favorite tv shows.", Toast.LENGTH_SHORT).show();
+            } else {
+                favoritesViewModel.deleteFavTv(tvShowItems);
+                favorite = false;
+                item.setIcon(R.drawable.ic_favorite_border);
+                Toast.makeText(this, "Deleted from favorite tv shows.", Toast.LENGTH_SHORT).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

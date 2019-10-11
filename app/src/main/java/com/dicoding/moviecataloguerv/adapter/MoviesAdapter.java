@@ -32,13 +32,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     public void refillMovie(ArrayList<MovieItems> items) {
-        this.movieItems = new ArrayList<>();
+        this.movieItems.clear();
         this.movieItems.addAll(items);
         notifyDataSetChanged();
     }
 
     public void refillGenre(ArrayList<Genre> genres) {
-        this.genreList = new ArrayList<>();
+        this.genreList.clear();
         this.genreList.addAll(genres);
         notifyDataSetChanged();
     }

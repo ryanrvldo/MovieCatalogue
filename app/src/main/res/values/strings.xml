@@ -35,5 +35,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="release_reminder_title">Release Reminder</string>
+    <string name="release_reminder_description">Reminder showing the movie that released today</string>
+    <string name="daily_reminder_title">Daily Reminder</string>
+    <string name="daily_reminder_description">Reminder for return to app</string>
+    <string name="setting">Setting</string>
+    <string name="setting_language">Language</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

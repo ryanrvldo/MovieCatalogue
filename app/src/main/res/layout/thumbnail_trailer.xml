@@ -9,7 +9,7 @@
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:clickable="true"
     android:focusable="true"
-    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardBackgroundColor="@color/dark_grey"
     app:cardCornerRadius="8dp"
     app:cardElevation="3dp"
     app:cardMaxElevation="3dp">

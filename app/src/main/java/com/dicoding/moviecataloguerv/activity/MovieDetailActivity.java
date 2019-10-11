@@ -243,6 +243,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         } else {
             showError();
+            movieTrailerLabel.setVisibility(View.GONE);
+            movieTrailers.setVisibility(View.GONE);
         }
     }
 
@@ -285,6 +287,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         } else {
             showError();
+            movieSimilarLabel.setVisibility(View.GONE);
+            movieSimilar.setVisibility(View.GONE);
         }
     }
 
@@ -323,24 +327,18 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.favorite:
-                if (favoritesViewModel.selectFavMovie(movieId) == null) {
-                    favoritesViewModel.addFavoriteMovie(movieItems);
-                    favorite = true;
-                    item.setIcon(R.drawable.ic_favorite);
-                    Toast.makeText(this, "Added to favorite movies.", Toast.LENGTH_SHORT).show();
-                } else {
-                    favoritesViewModel.deleteFavMovie(movieItems);
-                    favorite = false;
-                    item.setIcon(R.drawable.ic_favorite_border);
-                    Toast.makeText(this, "Deleted from favorite movies.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.add:
-                item.setIcon(R.drawable.ic_playlist_add_check);
-                Toast.makeText(this, "Added to watch later movies.", Toast.LENGTH_SHORT).show();
-                break;
+        if (item.getItemId() == R.id.favorite) {
+            if (favoritesViewModel.selectFavMovie(movieId) == null) {
+                favoritesViewModel.addFavoriteMovie(movieItems);
+                favorite = true;
+                item.setIcon(R.drawable.ic_favorite);
+                Toast.makeText(this, "Added to favorite movies.", Toast.LENGTH_SHORT).show();
+            } else {
+                favoritesViewModel.deleteFavMovie(movieItems);
+                favorite = false;
+                item.setIcon(R.drawable.ic_favorite_border);
+                Toast.makeText(this, "Deleted from favorite movies.", Toast.LENGTH_SHORT).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

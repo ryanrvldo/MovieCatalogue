@@ -23,6 +23,7 @@ public class TvShowsViewModel extends ViewModel {
     private MutableLiveData<TrailerResponse> trailers;
     private MutableLiveData<SimilarResponse> similar;
     private MutableLiveData<SimilarResponse> recommendations;
+    private MutableLiveData<TvShowResponse> searchTv;
 
     private Repository repository = Repository.getInstance();
     private String type = "tv";
@@ -109,5 +110,18 @@ public class TvShowsViewModel extends ViewModel {
             recommendations = repository.getSimilar(type, tvShowId, "recommendations");
         }
         return recommendations;
+    }
+
+    public void setSearchTv(String language, String query) {
+        searchTv = new MutableLiveData<>();
+        searchTv = repository.searchTvShows(language, query);
+        Log.d("SearchTv", "DataFetched");
+    }
+
+    public LiveData<TvShowResponse> getSearchTv(String language, String query) {
+        if (searchTv == null) {
+            setSearchTv(language, query);
+        }
+        return searchTv;
     }
 }

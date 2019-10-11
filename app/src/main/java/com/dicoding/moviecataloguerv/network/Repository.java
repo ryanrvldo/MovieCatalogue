@@ -2,6 +2,7 @@ package com.dicoding.moviecataloguerv.network;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -20,6 +21,7 @@ import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -80,13 +82,13 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    moviesData.setValue(response.body());
+                    moviesData.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
-                moviesData.setValue(null);
+                moviesData.postValue(null);
             }
         });
         return moviesData;
@@ -98,13 +100,13 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<GenresResponse> call, @NonNull Response<GenresResponse> response) {
                 if (response.isSuccessful()) {
-                    genresData.setValue(response.body());
+                    genresData.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<GenresResponse> call, @NonNull Throwable t) {
-                genresData.setValue(null);
+                genresData.postValue(null);
             }
         });
         return genresData;
@@ -116,13 +118,13 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<MovieItems> call, @NonNull Response<MovieItems> response) {
                 if (response.isSuccessful()) {
-                    movieData.setValue(response.body());
+                    movieData.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<MovieItems> call, @NonNull Throwable t) {
-                movieData.setValue(null);
+                movieData.postValue(null);
             }
         });
         return movieData;
@@ -134,13 +136,13 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<TrailerResponse> call, @NonNull Response<TrailerResponse> response) {
                 if (response.isSuccessful()) {
-                    trailersData.setValue(response.body());
+                    trailersData.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<TrailerResponse> call, @NonNull Throwable t) {
-                trailersData.setValue(null);
+                trailersData.postValue(null);
             }
         });
         return trailersData;
@@ -153,14 +155,14 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 if (response.isSuccessful()) {
-                    tvShowsData.setValue(response.body());
+                    tvShowsData.postValue(response.body());
                 }
 
             }
 
             @Override
             public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
-                tvShowsData.setValue(null);
+                tvShowsData.postValue(null);
             }
         });
         return tvShowsData;
@@ -172,13 +174,13 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<TvShowItems> call, @NonNull Response<TvShowItems> response) {
                 if (response.isSuccessful()) {
-                    tvShowData.setValue(response.body());
+                    tvShowData.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<TvShowItems> call, @NonNull Throwable t) {
-                tvShowData.setValue(null);
+                tvShowData.postValue(null);
             }
         });
         return tvShowData;
@@ -190,17 +192,55 @@ public class Repository {
             @Override
             public void onResponse(@NonNull Call<SimilarResponse> call, @NonNull Response<SimilarResponse> response) {
                 if (response.isSuccessful()) {
-                    similarData.setValue(response.body());
+                    similarData.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<SimilarResponse> call, @NonNull Throwable t) {
-                similarData.setValue(null);
+                similarData.postValue(null);
             }
         });
         return similarData;
     }
+
+    public MutableLiveData<MovieResponse> searchMovies(String language, String query) {
+        final MutableLiveData<MovieResponse> searchData = new MutableLiveData<>();
+        api.searchMovies(BuildConfig.TMDB_API_KEY, language, query).enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
+                if (response.isSuccessful()) {
+                    searchData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
+                Log.d("ERROR", Objects.requireNonNull(t.getMessage()));
+            }
+        });
+        return searchData;
+    }
+
+    public MutableLiveData<TvShowResponse> searchTvShows(String language, String query) {
+        final MutableLiveData<TvShowResponse> searchData = new MutableLiveData<>();
+        api.searchTvShows(BuildConfig.TMDB_API_KEY, language, query).enqueue(new Callback<TvShowResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
+                if (response.isSuccessful()) {
+                    searchData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
+                Log.d("ERROR", Objects.requireNonNull(t.getMessage()));
+            }
+        });
+        return searchData;
+    }
+
+
 
     /*
      *

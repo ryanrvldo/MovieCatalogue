@@ -32,6 +32,10 @@ public class FavoriteMoviesAdapter extends RecyclerView.Adapter<FavoriteMoviesAd
         notifyDataSetChanged();
     }
 
+    public MovieItems getMovieAt(int position) {
+        return movieItems.get(position);
+    }
+
     @NonNull
     @Override
     public FavoriteMovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

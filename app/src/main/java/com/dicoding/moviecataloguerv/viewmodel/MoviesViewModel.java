@@ -23,6 +23,7 @@ public class MoviesViewModel extends ViewModel {
     private MutableLiveData<TrailerResponse> trailers;
     private MutableLiveData<SimilarResponse> similar;
     private MutableLiveData<SimilarResponse> recommendations;
+    private MutableLiveData<MovieResponse> searchMovies;
 
     private Repository repository = Repository.getInstance();
     private String type = "movie";
@@ -113,5 +114,18 @@ public class MoviesViewModel extends ViewModel {
             recommendations = repository.getSimilar(type, tvShowId, "recommendations");
         }
         return recommendations;
+    }
+
+    public void setSearchMovies(String language, String query) {
+        searchMovies = new MutableLiveData<>();
+        searchMovies = repository.searchMovies(language, query);
+        Log.d("SearchMovie", "Fetched");
+    }
+
+    public LiveData<MovieResponse> getSearchMovies(String language, String query) {
+        if (searchMovies == null) {
+            setSearchMovies(language, query);
+        }
+        return searchMovies;
     }
 }

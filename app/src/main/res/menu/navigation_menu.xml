@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single"
+    <group
+        android:checkableBehavior="single"
         android:menuCategory="container">
         <item
-            android:checked="true"
             android:id="@+id/menu_popular"
-            android:title="@string/popular"
-            android:icon="@drawable/ic_trending_up"/>
+            android:checked="true"
+            android:icon="@drawable/ic_trending_up"
+            android:title="@string/popular" />
         <item
             android:id="@+id/menu_top_rated"
-            android:title="@string/top_rated"
-            android:icon="@drawable/ic_stars"/>
+            android:icon="@drawable/ic_stars"
+            android:title="@string/top_rated" />
         <item
             android:id="@+id/menu_now_playing"
-            android:title="@string/now_playing"
-            android:icon="@drawable/ic_date_range"/>
+            android:icon="@drawable/ic_date_range"
+            android:title="@string/now_playing" />
     </group>
-    <group android:checkableBehavior="single"
+    <group
+        android:checkableBehavior="single"
         android:menuCategory="container">
         <item
             android:id="@+id/menu_favorite"
@@ -24,7 +26,7 @@
             android:title="@string/favorite" />
         <item
             android:id="@+id/menu_watch_later"
-            android:title="@string/watch_later"
-            android:icon="@drawable/ic_watch_later" />
+            android:icon="@drawable/ic_watch_later"
+            android:title="@string/watch_later" />
     </group>
 </menu>
