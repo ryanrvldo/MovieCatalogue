@@ -4,29 +4,21 @@
         android:checkableBehavior="single"
         android:menuCategory="container">
         <item
-            android:id="@+id/menu_popular"
+            android:id="@+id/menu_movie"
             android:checked="true"
-            android:icon="@drawable/ic_trending_up"
-            android:title="@string/popular" />
+            android:icon="@drawable/ic_movie"
+            android:title="@string/movies_tab" />
         <item
-            android:id="@+id/menu_top_rated"
-            android:icon="@drawable/ic_stars"
-            android:title="@string/top_rated" />
-        <item
-            android:id="@+id/menu_now_playing"
-            android:icon="@drawable/ic_date_range"
-            android:title="@string/now_playing" />
-    </group>
-    <group
-        android:checkableBehavior="single"
-        android:menuCategory="container">
+            android:id="@+id/menu_tv_show"
+            android:icon="@drawable/ic_live_tv"
+            android:title="@string/tv_shows_tab" />
         <item
             android:id="@+id/menu_favorite"
             android:icon="@drawable/ic_collections_bookmark"
             android:title="@string/favorite" />
         <item
-            android:id="@+id/menu_watch_later"
-            android:icon="@drawable/ic_watch_later"
-            android:title="@string/watch_later" />
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/setting" />
     </group>
 </menu>

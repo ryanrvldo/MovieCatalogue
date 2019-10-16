@@ -22,6 +22,9 @@ public interface MovieDao {
     @Query("SELECT * FROM favorite_movie ORDER BY title ASC")
     LiveData<List<MovieItems>> getAllFavoriteMovie();
 
+    @Query("SELECT * FROM favorite_movie")
+    List<MovieItems> getFavoriteMovies();
+
     @Query("SELECT * FROM favorite_movie WHERE id=:id")
     MovieItems selectById(int id);
 }

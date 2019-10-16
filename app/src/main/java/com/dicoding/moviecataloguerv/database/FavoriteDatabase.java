@@ -17,10 +17,13 @@ import com.dicoding.moviecataloguerv.model.TvShowItems;
 public abstract class FavoriteDatabase extends RoomDatabase {
 
     private static FavoriteDatabase instance;
-
-    public abstract MovieDao movieDao();
-
-    public abstract TvShowDao tvShowDao();
+    private static RoomDatabase.Callback initCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            new InitAsyncTask(instance).execute();
+        }
+    };
 
     public static synchronized FavoriteDatabase getInstance(Context context) {
         if (instance == null) {
@@ -32,13 +35,9 @@ public abstract class FavoriteDatabase extends RoomDatabase {
         return instance;
     }
 
-    private static RoomDatabase.Callback initCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            new InitAsyncTask(instance).execute();
-        }
-    };
+    public abstract MovieDao movieDao();
+
+    public abstract TvShowDao tvShowDao();
 
     private static class InitAsyncTask extends AsyncTask<Void, Void, Void> {
 

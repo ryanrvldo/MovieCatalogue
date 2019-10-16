@@ -85,10 +85,10 @@ public class FavoriteTvShowsAdapter extends RecyclerView.Adapter<FavoriteTvShows
         private void bind(TvShowItems tvShowItems) {
             this.tvShowItems = tvShowItems;
 
-            tvReleaseDate.setText(tvShowItems.getReleaseDate().split("-")[0]);
             tvTitle.setText(tvShowItems.getTitle());
             tvGenre.setVisibility(View.GONE);
             tvRating.setText(String.valueOf(tvShowItems.getRating()));
+            tvReleaseDate.setText(tvShowItems.getReleaseDate().split("-")[0]);
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getPosterPath())
                     .error(R.drawable.ic_broken_image)

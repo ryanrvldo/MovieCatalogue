@@ -4,30 +4,35 @@
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginBottom="5dp"
-    app:cardBackgroundColor="@color/dark_grey"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
-    app:cardMaxElevation="4dp"
-    app:cardCornerRadius="10dp">
+    app:cardMaxElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/movie_poster"
-            android:layout_width="130dp"
+        <com.google.android.material.transformation.TransformationChildCard
+            android:id="@+id/img_card"
+            android:layout_width="140dp"
             android:layout_height="0dp"
-            android:contentDescription="@string/poster_content"
-            android:scaleType="centerCrop"
-            app:layout_constraintCircleRadius="18dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/movie_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/poster_content"
+                android:scaleType="center"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+        </com.google.android.material.transformation.TransformationChildCard>
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -51,7 +56,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster"
+            app:layout_constraintStart_toEndOf="@+id/img_card"
             app:layout_constraintTop_toBottomOf="@+id/movie_release_date" />
 
         <TextView
@@ -66,7 +71,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster" />
+            app:layout_constraintStart_toEndOf="@+id/img_card" />
 
         <TextView
             android:id="@+id/movie_release_date"
@@ -79,7 +84,7 @@
             android:text="@string/date_ex"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toStartOf="@+id/movie_rating"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster"
+            app:layout_constraintStart_toEndOf="@+id/img_card"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

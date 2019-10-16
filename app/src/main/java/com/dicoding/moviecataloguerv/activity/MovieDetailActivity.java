@@ -1,5 +1,6 @@
 package com.dicoding.moviecataloguerv.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
+import com.dicoding.moviecataloguerv.contentprovider.MovieFavorite;
 import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
@@ -35,12 +37,20 @@ import com.dicoding.moviecataloguerv.model.Trailer;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.viewmodel.FavoritesViewModel;
 import com.dicoding.moviecataloguerv.viewmodel.MoviesViewModel;
+import com.dicoding.moviecataloguerv.widget.FavoriteMovieWidget;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
 
 import static com.dicoding.moviecataloguerv.BuildConfig.YOUTUBE_VIDEO_URL;
+import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.BACKDROP;
+import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.CONTENT_URI;
+import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.POSTER_PATH;
+import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.RELEASE_DATE;
+import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.TITLE;
+import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.VOTE_AVERAGE;
+import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns._ID;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -327,17 +337,45 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        MovieFavorite movieFavorite = new MovieFavorite();
+        movieFavorite.setId(movieItems.getId());
+        movieFavorite.setTitle(movieItems.getTitle());
+        movieFavorite.setVoteAverage(movieItems.getRating());
+        movieFavorite.setReleaseDate(movieItems.getReleaseDate());
+        movieFavorite.setPosterPath(movieItems.getPosterPath());
+        movieFavorite.setBackdrop(movieItems.getBackdrop());
+
+        ContentValues values = new ContentValues();
+        values.put(_ID, movieItems.getId());
+        values.put(TITLE, movieItems.getTitle());
+        values.put(VOTE_AVERAGE, movieItems.getRating());
+        values.put(RELEASE_DATE, movieItems.getReleaseDate());
+        values.put(POSTER_PATH, movieItems.getPosterPath());
+        values.put(BACKDROP, movieItems.getBackdrop());
+
+        String msg;
         if (item.getItemId() == R.id.favorite) {
             if (favoritesViewModel.selectFavMovie(movieId) == null) {
                 favoritesViewModel.addFavoriteMovie(movieItems);
+                FavoriteMovieWidget.updateWidget(this);
+
+                getContentResolver().insert(CONTENT_URI, values);
+
                 favorite = true;
                 item.setIcon(R.drawable.ic_favorite);
-                Toast.makeText(this, "Added to favorite movies.", Toast.LENGTH_SHORT).show();
+                msg = getString(R.string.add_favorite_movie);
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             } else {
                 favoritesViewModel.deleteFavMovie(movieItems);
+                FavoriteMovieWidget.updateWidget(this);
+
+                Uri uri = Uri.parse(CONTENT_URI + "/" + movieItems.getId());
+                getContentResolver().delete(uri, null, null);
+
                 favorite = false;
                 item.setIcon(R.drawable.ic_favorite_border);
-                Toast.makeText(this, "Deleted from favorite movies.", Toast.LENGTH_SHORT).show();
+                msg = getString(R.string.delete_favorite_movie);
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             }
         }
         return super.onOptionsItemSelected(item);

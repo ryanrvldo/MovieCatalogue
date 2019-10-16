@@ -2,20 +2,19 @@ package com.dicoding.moviecataloguerv.fragment;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.adapter.ViewPagerAdapter;
+import com.dicoding.moviecataloguerv.fragment.movies.SearchMovieFragment;
+import com.dicoding.moviecataloguerv.fragment.tvShows.SearchTvFragment;
 import com.google.android.material.tabs.TabLayout;
 
 /**
@@ -41,7 +40,7 @@ public class SearchFragment extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.tabs);
 
         createViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager, false);
     }
 
     private void createViewPager(ViewPager viewPager) {
@@ -49,6 +48,7 @@ public class SearchFragment extends Fragment {
         adapter.addFragment(new SearchMovieFragment(), getResources().getString(R.string.movies_tab));
         adapter.addFragment(new SearchTvFragment(), getResources().getString(R.string.tv_shows_tab));
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(adapter.getCount());
     }
 
 }

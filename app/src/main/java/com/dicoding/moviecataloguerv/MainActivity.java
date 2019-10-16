@@ -4,10 +4,8 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,10 +18,8 @@ import androidx.fragment.app.Fragment;
 import com.dicoding.moviecataloguerv.activity.SearchActivity;
 import com.dicoding.moviecataloguerv.activity.SettingActivity;
 import com.dicoding.moviecataloguerv.fragment.FavoriteFragment;
-import com.dicoding.moviecataloguerv.fragment.NowPlayingFragment;
-import com.dicoding.moviecataloguerv.fragment.PopularFragment;
-import com.dicoding.moviecataloguerv.fragment.SearchFragment;
-import com.dicoding.moviecataloguerv.fragment.TopRatedFragment;
+import com.dicoding.moviecataloguerv.fragment.MovieFragment;
+import com.dicoding.moviecataloguerv.fragment.TvShowFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,13 +27,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String KEY_TITLE = "title";
     public static final String KEY_FRAGMENT = "fragment";
 
-    private Fragment pageContent = new PopularFragment();
-    private String title = "Popular";
+    private Fragment pageContent = new MovieFragment();
+    private String title;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        title = getString(R.string.movies_tab);
 
         final Toolbar toolbar = findViewById(R.id.toolbar_main);
         final DrawerLayout drawerLayout = findViewById(R.id.main_drawer);
@@ -58,24 +56,21 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 switch (menuItem.getItemId()) {
-                    case R.id.menu_popular:
-                        pageContent = new PopularFragment();
-                        title = getResources().getString(R.string.popular);
+                    case R.id.menu_movie:
+                        pageContent = new MovieFragment();
+                        title = getResources().getString(R.string.movies_tab);
                         break;
-                    case R.id.menu_top_rated:
-                        pageContent = new TopRatedFragment();
-                        title = getResources().getString(R.string.top_rated);
-                        break;
-                    case R.id.menu_now_playing:
-                        pageContent = new NowPlayingFragment();
-                        title = getResources().getString(R.string.now_playing);
+                    case R.id.menu_tv_show:
+                        pageContent = new TvShowFragment();
+                        title = getResources().getString(R.string.tv_shows_tab);
                         break;
                     case R.id.menu_favorite:
                         pageContent = new FavoriteFragment();
                         title = getResources().getString(R.string.favorite);
                         break;
-                    case R.id.menu_watch_later:
-                        title = getResources().getString(R.string.watch_later);
+                    case R.id.menu_settings:
+                        Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                        startActivity(intent);
                         break;
                 }
 
@@ -100,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             pageContent = getSupportFragmentManager().getFragment(savedInstanceState, KEY_FRAGMENT);
             title = savedInstanceState.getString(KEY_TITLE);
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pageContent).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pageContent).commit();
             toolbar.setTitle(title);
         }
     }
@@ -139,15 +134,6 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreateOptionsMenu(menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.setting) {
-            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }

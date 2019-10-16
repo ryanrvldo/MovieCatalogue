@@ -2,12 +2,9 @@ package com.dicoding.moviecataloguerv.activity;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -38,7 +35,7 @@ public class SearchActivity extends AppCompatActivity {
 
         searchQuery = getIntent().getStringExtra(SEARCH_QUERY);
 
-        title = "Search: " + searchQuery;
+        title = getString(R.string.search_title) + " " + searchQuery;
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SearchFragment()).commit();
         toolbar.setTitle(title);
     }
@@ -62,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     searchQuery = query;
-                    title = "Search: " + searchQuery;
+                    title = getString(R.string.search_title) + searchQuery;
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SearchFragment()).commit();
                     toolbar.setTitle(title);
                     invalidateOptionsMenu();
@@ -77,14 +74,5 @@ public class SearchActivity extends AppCompatActivity {
 
         }
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.setting) {
-            Intent intent = new Intent(SearchActivity.this, SettingActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

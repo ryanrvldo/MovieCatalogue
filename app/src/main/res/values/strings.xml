@@ -5,22 +5,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="poster_content">Poster</string>
     <string name="movies_tab">Movies</string>
-    <string name="tv_shows_tab">Tv Shows</string>
+    <string name="tv_shows_tab">TV Shows</string>
     <string name="release">Date Release</string>
-    <string name="title">title</string>
-    <string name="description">desc</string>
     <string name="overview">Overview</string>
-    <string name="menu1">Language</string>
     <string name="rating_ex">5.5</string>
     <string name="genre_ex">Horror, Fiction</string>
     <string name="movie_title">Movie Title</string>
     <string name="date_ex">2019</string>
-    <string name="tvShow_title">Tv Show Title</string>
     <string name="trailers">Trailers</string>
     <string name="language">en-US</string>
     <string name="icStar">icStar</string>
-    <string name="movie_detail">Movie Detail</string>
-    <string name="tvShow_detail">Tv Show Detail</string>
     <string name="image_before_loading">image before loading</string>
     <string name="favorite">Favorite</string>
     <string name="trailer_title">Trailer Title</string>
@@ -29,19 +23,30 @@
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="now_playing">Now Playing</string>
-    <string name="watch_later">Watch Later</string>
     <string name="menu2">Setting</string>
     <string name="search">Search</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="release_reminder_title">Release Reminder</string>
+    <string name="release_reminder_title">Today Release Reminder</string>
     <string name="release_reminder_description">Reminder showing the movie that released today</string>
     <string name="daily_reminder_title">Daily Reminder</string>
     <string name="daily_reminder_description">Reminder for return to app</string>
     <string name="setting">Setting</string>
-    <string name="setting_language">Language</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="setting_language">Language Setting</string>
+    <string name="appwidget_text">Your favorite movies banner.</string>
+    <string name="empty_text">Field are empty.</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="false">Reminder</string>
+    <string name="new_movie">New movie</string>
+    <string name="new_movies"> new movies</string>
+    <string name="new_released_movies">New Released Movies</string>
+    <string name="release_reminder_enabled">Today Release Reminder enabled.</string>
+    <string name="release_reminder_disabled">Today Release Reminder disabled.</string>
+    <string name="daily_reminder_enabled">Daily reminder enabled.</string>
+    <string name="daily_reminder_disabled">Daily reminder disabled</string>
+    <string name="add_favorite_movie">Added to favorite movies.</string>
+    <string name="delete_favorite_movie">Deleted from favorite movies.</string>
+    <string name="search_title">Search: </string>
+    <string name="add_favorite_tv">Added to favorite tv shows.</string>
+    <string name="delete_favorite_tv">Deleted from favorite tv shows.</string>
 
 </resources>

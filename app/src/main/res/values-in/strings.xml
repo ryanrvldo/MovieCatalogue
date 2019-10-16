@@ -7,20 +7,14 @@
     <string name="movies_tab">Film</string>
     <string name="tv_shows_tab">Acara TV</string>
     <string name="release">Tanggal Rilis</string>
-    <string name="title">judul</string>
-    <string name="description">desc</string>
     <string name="overview">Ringkasan</string>
-    <string name="menu1">Bahasa</string>
     <string name="rating_ex">5.5</string>
     <string name="genre_ex">Horor, Fiksi</string>
     <string name="movie_title">Judul Film</string>
     <string name="date_ex">2019</string>
-    <string name="tvShow_title">Judul Acara TV</string>
     <string name="trailers">Cuplikan Video</string>
     <string name="language">id</string>
     <string name="icStar">icStar</string>
-    <string name="movie_detail">Detail Film</string>
-    <string name="tvShow_detail">Detail Acara TV</string>
     <string name="image_before_loading">Gambar sebelum memuat</string>
     <string name="favorite">Favorit</string>
     <string name="trailer_title">Judul Cuplikan Video</string>
@@ -29,5 +23,28 @@
     <string name="popular">Populer</string>
     <string name="top_rated">Rating Tertinggi</string>
     <string name="now_playing">Sedang Tayang</string>
+    <string name="menu2">Pengaturan</string>
+    <string name="search">Pencarian</string>
+
+    <string name="release_reminder_title">Pengingat Rilis Hari Ini</string>
+    <string name="release_reminder_description">Pengingat menunjukkan film yang dirilis hari ini</string>
+    <string name="daily_reminder_title">Pengingat Harian</string>
+    <string name="daily_reminder_description">Pengingat anda untuk kembali ke aplikasi ini setiap harinya.</string>
+    <string name="setting">Pengaturan</string>
+    <string name="setting_language">Pengaturan Bahasa</string>
+    <string name="appwidget_text">Poster film favorit anda.</string>
+    <string name="empty_text">Field kosong.</string>
+    <string name="new_movie">Film baru</string>
+    <string name="new_movies"> film baru</string>
+    <string name="new_released_movies">Film Baru Dirilis</string>
+    <string name="release_reminder_enabled">Pengingat Rilis Hari Ini diaktifkan.</string>
+    <string name="release_reminder_disabled">Pengingat Rilis Hari Ini dimatikan.</string>
+    <string name="daily_reminder_enabled">Pengingat Harian diaktifkan.</string>
+    <string name="daily_reminder_disabled">Pengingat Harian dimatikan.</string>
+    <string name="add_favorite_movie">Ditambahkan ke Film favorit.</string>
+    <string name="delete_favorite_movie">Dihapus dari Film favorit.</string>
+    <string name="search_title">Pencarian: </string>
+    <string name="add_favorite_tv">Ditambahkan ke Serial TV favorit.</string>
+    <string name="delete_favorite_tv">Dihapus dari Serial TV favorit.</string>
 
 </resources>

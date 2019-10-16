@@ -72,10 +72,6 @@ public class TvShowItems {
         return backdrop;
     }
 
-    public void setBackdrop(String backdrop) {
-        this.backdrop = backdrop;
-    }
-
     public int getId() {
         return id;
     }
@@ -96,39 +92,19 @@ public class TvShowItems {
         return overview;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
     public String getPosterPath() {
         return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
     }
 
     public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
     public float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
     public ArrayList<Integer> getGenreIds() {
         return genreIds;
-    }
-
-    public void setGenreIds(ArrayList<Integer> genreIds) {
-        this.genreIds = genreIds;
     }
 }

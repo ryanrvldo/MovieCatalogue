@@ -38,7 +38,6 @@
             app:layout_constraintTop_toTopOf="@+id/cv_movie_rating" />
 
         <ImageView
-            android:id="@+id/icRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_star_black_24dp"

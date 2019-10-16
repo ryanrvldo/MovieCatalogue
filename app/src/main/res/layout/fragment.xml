@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".fragment.PopularFragment">
+    tools:context=".fragment.MovieFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:background="@color/dark_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
+        app:tabSelectedTextColor="@color/common_google_signin_btn_text_dark"
         app:tabMode="fixed"
-        app:tabTextColor="@android:color/white"/>
+        app:tabTextColor="@android:color/secondary_text_dark" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"

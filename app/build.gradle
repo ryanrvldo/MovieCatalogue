@@ -1,5 +1,6 @@
 //noinspection GradleCompatible
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -13,9 +14,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TMDB_API_KEY", '"79cfc0b909c3e2a8083827dc3a084234"')
         buildConfigField("String", "TMDB_BASE_URL", '"https://api.themoviedb.org/3/"')
-        buildConfigField("String", "TMDB_IMAGE_BASE_URL", '"http://image.tmdb.org/t/p/w500"')
-        buildConfigField("String", "YOUTUBE_VIDEO_URL", '"http://www.youtube.com/watch?v=%s"')
-        buildConfigField("String", "YOUTUBE_THUMBNAIL_URL", '"http://img.youtube.com/vi/%s/0.jpg"')
+        buildConfigField("String", "TMDB_IMAGE_BASE_URL", '"https://image.tmdb.org/t/p/w500"')
+        buildConfigField("String", "TMDB_IMAGE_342", '"https://image.tmdb.org/t/p/w342"')
+        buildConfigField("String", "YOUTUBE_VIDEO_URL", '"https://www.youtube.com/watch?v=%s"')
+        buildConfigField("String", "YOUTUBE_THUMBNAIL_URL", '"https://img.youtube.com/vi/%s/0.jpg"')
     }
     buildTypes {
         release {
@@ -26,24 +28,26 @@ android {
 }
 
 dependencies {
-    def lifecycle_version = "2.2.0-alpha05"
-    def room_version = "2.2.0-rc01"
+    def lifecycle_version = "2.2.0-beta01"
+    def room_version = "2.2.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta05'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation 'com.google.android.material:material:1.1.0-beta01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-    implementation 'androidx.fragment:fragment:1.2.0-alpha04'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'androidx.fragment:fragment:1.2.0-beta02'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03'
 
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     //room

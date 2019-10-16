@@ -83,4 +83,11 @@ public interface Api {
             @Query("language") String language,
             @Query("query") String query
     );
+
+    @GET("discover/movie")
+    Call<MovieResponse> getNewReleaseMovie(
+            @Query("api_key") String apiKey,
+            @Query("primary_release_date.gte") String todayDate,
+            @Query("primary_release_date.lte") String today_date
+    );
 }

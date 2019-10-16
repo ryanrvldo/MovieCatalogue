@@ -323,17 +323,20 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String msg;
         if (item.getItemId() == R.id.favorite) {
             if (favoritesViewModel.selectFavTv(tvShowId) == null) {
                 favoritesViewModel.addFavoriteTvShow(tvShowItems);
                 favorite = true;
                 item.setIcon(R.drawable.ic_favorite);
-                Toast.makeText(this, "Added to favorite tv shows.", Toast.LENGTH_SHORT).show();
+                msg = getString(R.string.add_favorite_tv);
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             } else {
                 favoritesViewModel.deleteFavTv(tvShowItems);
                 favorite = false;
                 item.setIcon(R.drawable.ic_favorite_border);
-                Toast.makeText(this, "Deleted from favorite tv shows.", Toast.LENGTH_SHORT).show();
+                msg = getString(R.string.delete_favorite_tv);
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             }
         }
         return super.onOptionsItemSelected(item);

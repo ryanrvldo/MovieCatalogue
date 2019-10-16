@@ -204,9 +204,9 @@ public class Repository {
         return similarData;
     }
 
-    public MutableLiveData<MovieResponse> searchMovies(String language, String query) {
+    public MutableLiveData<MovieResponse> searchMovies(String query) {
         final MutableLiveData<MovieResponse> searchData = new MutableLiveData<>();
-        api.searchMovies(BuildConfig.TMDB_API_KEY, language, query).enqueue(new Callback<MovieResponse>() {
+        api.searchMovies(BuildConfig.TMDB_API_KEY, "en-us", query).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
@@ -222,9 +222,9 @@ public class Repository {
         return searchData;
     }
 
-    public MutableLiveData<TvShowResponse> searchTvShows(String language, String query) {
+    public MutableLiveData<TvShowResponse> searchTvShows(String query) {
         final MutableLiveData<TvShowResponse> searchData = new MutableLiveData<>();
-        api.searchTvShows(BuildConfig.TMDB_API_KEY, language, query).enqueue(new Callback<TvShowResponse>() {
+        api.searchTvShows(BuildConfig.TMDB_API_KEY, "en-us", query).enqueue(new Callback<TvShowResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 if (response.isSuccessful()) {
@@ -239,7 +239,6 @@ public class Repository {
         });
         return searchData;
     }
-
 
 
     /*

@@ -85,10 +85,10 @@ public class FavoriteMoviesAdapter extends RecyclerView.Adapter<FavoriteMoviesAd
         private void bind(MovieItems movieItems) {
             this.movieItems = movieItems;
 
-            tvReleaseDate.setText(movieItems.getReleaseDate().split("-")[0]);
             tvTitle.setText(movieItems.getTitle());
             tvGenre.setVisibility(View.GONE);
             tvRating.setText(String.valueOf(movieItems.getRating()));
+            tvReleaseDate.setText(movieItems.getReleaseDate().split("-")[0]);
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getPosterPath())
                     .error(R.drawable.ic_broken_image)

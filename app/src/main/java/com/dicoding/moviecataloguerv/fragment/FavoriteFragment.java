@@ -13,6 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.adapter.ViewPagerAdapter;
+import com.dicoding.moviecataloguerv.fragment.movies.FavoriteMovieFragment;
+import com.dicoding.moviecataloguerv.fragment.tvShows.FavoriteTvFragment;
 import com.google.android.material.tabs.TabLayout;
 
 /**
@@ -47,5 +49,6 @@ public class FavoriteFragment extends Fragment {
         adapter.addFragment(new FavoriteMovieFragment(), getResources().getString(R.string.movies_tab));
         adapter.addFragment(new FavoriteTvFragment(), getResources().getString(R.string.tv_shows_tab));
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(adapter.getCount());
     }
 }
