@@ -120,6 +120,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
         moviesViewModel.getTrailers(movieId).observe(this, new Observer<TrailerResponse>() {
             @Override
             public void onChanged(TrailerResponse trailerResponse) {
@@ -128,6 +129,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
         moviesViewModel.getSimilar(movieId).observe(this, new Observer<SimilarResponse>() {
             @Override
             public void onChanged(SimilarResponse similarResponse) {

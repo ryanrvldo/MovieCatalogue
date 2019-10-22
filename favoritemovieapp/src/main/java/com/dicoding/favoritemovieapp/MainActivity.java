@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements LoadFavoriteMovie
     private FavoriteMoviesAdapter adapter;
 
     private DataObserver observer;
+    private TextView textViewNull;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements LoadFavoriteMovie
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        textViewNull = findViewById(R.id.item_null);
+
         adapter = new FavoriteMoviesAdapter(this);
         recyclerView.setAdapter(adapter);
 
@@ -54,13 +59,14 @@ public class MainActivity extends AppCompatActivity implements LoadFavoriteMovie
 
     @Override
     public void postExecute(Cursor favoriteMovie) {
-
         ArrayList<MovieFavorite> listFavoriteMovie = mapCursorToArrayList(favoriteMovie);
         if (listFavoriteMovie.size() > 0) {
             adapter.refillMovie(listFavoriteMovie);
+            textViewNull.setVisibility(View.GONE);
         } else {
             Toast.makeText(this, "There is no data now.", Toast.LENGTH_SHORT).show();
             adapter.refillMovie(new ArrayList<MovieFavorite>());
+            textViewNull.setVisibility(View.VISIBLE);
         }
     }
 

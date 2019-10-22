@@ -42,15 +42,6 @@ public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnR
     private FavoriteTvShowsAdapter adapter;
     private TvShowsViewModel tvShowsViewModel;
 
-    private FavoriteTvShowsAdapter.OnItemClicked onItemClicked = new FavoriteTvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShowItems tvShowItems) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
-            startActivity(intent);
-        }
-    };
-
     public SearchTvFragment() {
         // Required empty public constructor
     }
@@ -87,6 +78,15 @@ public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
     }
 
+    private FavoriteTvShowsAdapter.OnItemClicked onItemClicked = new FavoriteTvShowsAdapter.OnItemClicked() {
+        @Override
+        public void onItemClick(TvShowItems tvShowItems) {
+            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
+            startActivity(intent);
+        }
+    };
+
     private void observeData() {
         tvShowsViewModel.getSearchTv(SearchActivity.searchQuery).observe(this, new Observer<TvShowResponse>() {
             @Override
@@ -97,16 +97,15 @@ public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnR
                 }
             }
         });
+
         Log.d("FragmentSearchTv", "Loaded");
     }
 
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(GONE);
         } else {
             progressBar.setVisibility(GONE);
-            recyclerView.setVisibility(View.VISIBLE);
         }
     }
 

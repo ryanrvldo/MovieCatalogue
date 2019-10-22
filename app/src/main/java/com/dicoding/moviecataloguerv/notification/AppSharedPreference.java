@@ -7,24 +7,25 @@ public class AppSharedPreference {
     public static final String DAILY_REMINDER_STATUS = "DAILY_REMINDER_STATUS";
     public static final String RELEASE_REMINDER_STATUS = "RELEASE_REMINDER_STATUS";
     private static final String APP_NAME = "MOVIE_CATALOGUE";
-    private final SharedPreferences preference;
+
+    private final SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
     public AppSharedPreference(Context context) {
-        preference = context.getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
     }
 
     public void saveBoolean(String keySP, boolean status) {
+        editor = preferences.edit();
         editor.putBoolean(keySP, status);
-        editor = preference.edit();
         editor.apply();
     }
 
     public Boolean getStatusDailyReminder() {
-        return preference.getBoolean(DAILY_REMINDER_STATUS, false);
+        return preferences.getBoolean(DAILY_REMINDER_STATUS, false);
     }
 
     public Boolean getStatusReleaseReminder() {
-        return preference.getBoolean(RELEASE_REMINDER_STATUS, false);
+        return preferences.getBoolean(RELEASE_REMINDER_STATUS, false);
     }
 }

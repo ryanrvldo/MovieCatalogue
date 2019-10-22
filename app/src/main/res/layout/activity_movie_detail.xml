@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
@@ -239,14 +238,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/movieDetailsRating"
                 app:layout_constraintStart_toEndOf="@+id/movieDetailsRating"
                 app:layout_constraintTop_toTopOf="@+id/movieDetailsRating" />
-
-            <fragment
-                android:id="@+id/fragment"
-                android:name="com.dicoding.moviecataloguerv.fragment.movies.FavoriteMovieFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="123dp"
-                tools:layout_editor_absoluteY="136dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

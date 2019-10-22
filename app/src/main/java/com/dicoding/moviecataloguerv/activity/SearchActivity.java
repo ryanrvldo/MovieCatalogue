@@ -59,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     searchQuery = query;
-                    title = getString(R.string.search_title) + searchQuery;
+                    title = getString(R.string.search_title) + " " + searchQuery;
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SearchFragment()).commit();
                     toolbar.setTitle(title);
                     invalidateOptionsMenu();

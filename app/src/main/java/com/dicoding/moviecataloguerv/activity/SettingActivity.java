@@ -89,7 +89,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             case R.id.switch_daily:
-                if (releaseSwitch.isChecked()) {
+                if (dailySwitch.isChecked()) {
                     preference.saveBoolean(AppSharedPreference.DAILY_REMINDER_STATUS, true);
                     FirebaseMessaging.getInstance().subscribeToTopic("reminder");
                     FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {

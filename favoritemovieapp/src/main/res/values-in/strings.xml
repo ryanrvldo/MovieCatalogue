@@ -8,5 +8,6 @@
     <string name="movie_title">Judul Film</string>
     <string name="date_ex">2019</string>
     <string name="icStar">icStar</string>
+    <string name="empty_list">Daftar masih kosong.</string>
 
 </resources>

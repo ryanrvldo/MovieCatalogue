@@ -46,5 +46,6 @@
     <string name="search_title">Pencarian: </string>
     <string name="add_favorite_tv">Ditambahkan ke Serial TV favorit.</string>
     <string name="delete_favorite_tv">Dihapus dari Serial TV favorit.</string>
+    <string name="empty_list">Daftar masih kosong.</string>
 
 </resources>

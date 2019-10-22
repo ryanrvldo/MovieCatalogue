@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,9 +44,10 @@ import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.Fav
  */
 public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView moviesRV;
+    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
+    private TextView textViewNull;
 
     private FavoriteMoviesAdapter moviesAdapter;
     private FavoritesViewModel favoritesViewModel;
@@ -57,7 +59,6 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
             startActivity(intent);
         }
     };
-
 
     public FavoriteMovieFragment() {
         // Required empty public constructor
@@ -71,22 +72,22 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        moviesRV = view.findViewById(R.id.rvMovies);
+        recyclerView = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
+        textViewNull = view.findViewById(R.id.item_null);
 
         refreshLayout = view.findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(this);
 
-        moviesRV.setHasFixedSize(true);
-        moviesRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         setMoviesRV();
         showLoading(true);
         favoritesViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(getActivity()).getApplication())).get(FavoritesViewModel.class);
         observeData();
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -97,7 +98,7 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
                 favoritesViewModel.deleteFavMovie(moviesAdapter.getMovieAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity(), "Deleted from Movies favorite list.", Toast.LENGTH_SHORT).show();
             }
-        }).attachToRecyclerView(moviesRV);
+        }).attachToRecyclerView(recyclerView);
     }
 
     private void observeData() {
@@ -106,8 +107,13 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
             public void onChanged(List<MovieItems> movieItems) {
                 if (movieItems != null) {
                     moviesAdapter.refillMovie(movieItems);
+                    if (movieItems.size() == 0) {
+                        textViewNull.setVisibility(View.VISIBLE);
+                    } else {
+                        textViewNull.setVisibility(View.GONE);
+                    }
+                    showLoading(false);
                 }
-                showLoading(false);
             }
         });
 
@@ -117,17 +123,15 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
     private void setMoviesRV() {
         if (moviesAdapter == null) {
             moviesAdapter = new FavoriteMoviesAdapter(new ArrayList<MovieItems>(), onItemClicked);
-            moviesRV.setAdapter(moviesAdapter);
+            recyclerView.setAdapter(moviesAdapter);
         }
     }
 
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            moviesRV.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
-            moviesRV.setVisibility(View.VISIBLE);
         }
     }
 

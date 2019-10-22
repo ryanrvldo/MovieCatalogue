@@ -48,5 +48,6 @@
     <string name="search_title">Search: </string>
     <string name="add_favorite_tv">Added to favorite tv shows.</string>
     <string name="delete_favorite_tv">Deleted from favorite tv shows.</string>
+    <string name="empty_list">The list is still empty.</string>
 
 </resources>

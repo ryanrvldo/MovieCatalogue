@@ -59,8 +59,8 @@ public class Repository {
 
     private static OkHttpClient providesOkHttpClientBuilder() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        return httpClient.readTimeout(1200, TimeUnit.SECONDS)
-                .connectTimeout(1200, TimeUnit.SECONDS).build();
+        return httpClient.readTimeout(5, TimeUnit.SECONDS).retryOnConnectionFailure(true)
+                .connectTimeout(5, TimeUnit.SECONDS).build();
     }
 
     public static Repository getInstance() {

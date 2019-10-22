@@ -42,15 +42,6 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
     private FavoriteMoviesAdapter moviesAdapter;
     private MoviesViewModel moviesViewModel;
 
-    private FavoriteMoviesAdapter.OnItemClicked onItemClicked = new FavoriteMoviesAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(MovieItems movieItems) {
-            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
-            startActivity(intent);
-        }
-    };
-
     public SearchMovieFragment() {
         // Required empty public constructor
     }
@@ -90,6 +81,7 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
                 }
             }
         });
+
         Log.d("FragmentSearchMovies", "Loaded");
     }
 
@@ -100,13 +92,20 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
         }
     }
 
+    private FavoriteMoviesAdapter.OnItemClicked onItemClicked = new FavoriteMoviesAdapter.OnItemClicked() {
+        @Override
+        public void onItemClick(MovieItems movieItems) {
+            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
+            startActivity(intent);
+        }
+    };
+
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(GONE);
         } else {
             progressBar.setVisibility(GONE);
-            recyclerView.setVisibility(View.VISIBLE);
         }
     }
 

@@ -34,7 +34,7 @@ import java.util.ArrayList;
  */
 public class TopRatedMovieFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView moviesRV;
+    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
 
@@ -43,37 +43,9 @@ public class TopRatedMovieFragment extends Fragment implements SwipeRefreshLayou
 
     private String language;
 
-    private Observer<MovieResponse> getTopRated = new Observer<MovieResponse>() {
-        @Override
-        public void onChanged(MovieResponse movieResponse) {
-            if (movieResponse != null) {
-                moviesAdapter.refillMovie(movieResponse.getMovieItems());
-            }
-        }
-
-    };
-    private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
-        @Override
-        public void onChanged(GenresResponse genresResponse) {
-            if (genresResponse != null) {
-                moviesAdapter.refillGenre(genresResponse.getGenres());
-                showLoading(false);
-            }
-        }
-    };
-    private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(MovieItems movieItems) {
-            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
-            startActivity(intent);
-        }
-    };
-
     public TopRatedMovieFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,14 +56,14 @@ public class TopRatedMovieFragment extends Fragment implements SwipeRefreshLayou
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        moviesRV = view.findViewById(R.id.rvMovies);
+        recyclerView = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
         refreshLayout = view.findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(this);
 
-        moviesRV.setHasFixedSize(true);
-        moviesRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         setMoviesRV();
         showLoading(true);
@@ -100,25 +72,49 @@ public class TopRatedMovieFragment extends Fragment implements SwipeRefreshLayou
     }
 
     private void observeData() {
-        moviesViewModel.getTopRated(getResources().getString(R.string.language)).observe(getActivity(), getTopRated);
-        moviesViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), getGenres);
+        moviesViewModel.getTopRated(getResources().getString(R.string.language)).observe(getActivity(), new Observer<MovieResponse>() {
+            @Override
+            public void onChanged(MovieResponse movieResponse) {
+                if (movieResponse != null) {
+                    moviesAdapter.refillMovie(movieResponse.getMovieItems());
+                }
+            }
+        });
+
+        moviesViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), new Observer<GenresResponse>() {
+            @Override
+            public void onChanged(GenresResponse genresResponse) {
+                if (genresResponse != null) {
+                    moviesAdapter.refillGenre(genresResponse.getGenres());
+                    showLoading(false);
+                }
+            }
+        });
+
         Log.d("FragmentMovieTopRated", "Loaded");
     }
 
     private void setMoviesRV() {
         if (moviesAdapter == null) {
             moviesAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), new ArrayList<Genre>(), onItemClicked);
-            moviesRV.setAdapter(moviesAdapter);
+            recyclerView.setAdapter(moviesAdapter);
         }
     }
+
+    private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
+        @Override
+        public void onItemClick(MovieItems movieItems) {
+            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
+            startActivity(intent);
+        }
+    };
 
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            moviesRV.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
-            moviesRV.setVisibility(View.VISIBLE);
         }
     }
 

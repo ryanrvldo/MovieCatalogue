@@ -34,7 +34,7 @@ import java.util.ArrayList;
  */
 public class NowPlayingTvFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView tvShowsRV;
+    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
 
@@ -43,37 +43,9 @@ public class NowPlayingTvFragment extends Fragment implements SwipeRefreshLayout
 
     private String language;
 
-    private Observer<TvShowResponse> getUpcomingTv = new Observer<TvShowResponse>() {
-        @Override
-        public void onChanged(TvShowResponse tvResponse) {
-            if (tvResponse != null) {
-                tvShowsAdapter.refillTv(tvResponse.getTvShowItems());
-            }
-        }
-
-    };
-    private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
-        @Override
-        public void onChanged(GenresResponse genresResponse) {
-            if (genresResponse != null) {
-                tvShowsAdapter.refillGenre(genresResponse.getGenres());
-                showLoading(false);
-            }
-        }
-    };
-    private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShowItems tvShowItems) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
-            startActivity(intent);
-        }
-    };
-
     public NowPlayingTvFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,15 +56,14 @@ public class NowPlayingTvFragment extends Fragment implements SwipeRefreshLayout
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        tvShowsRV = view.findViewById(R.id.rvMovies);
+        recyclerView = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
         refreshLayout = view.findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(this);
 
-
-        tvShowsRV.setHasFixedSize(true);
-        tvShowsRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         setMoviesRV();
         showLoading(true);
@@ -101,26 +72,50 @@ public class NowPlayingTvFragment extends Fragment implements SwipeRefreshLayout
     }
 
     private void observeData() {
-        tvShowsViewModel.getUpcomingTv(language).observe(getActivity(), getUpcomingTv);
-        tvShowsViewModel.getGenres(language).observe(getActivity(), getGenres);
-        Log.d("FragmentTvUpcoming", "Loaded");
+        tvShowsViewModel.getUpcomingTv(language).observe(getActivity(), new Observer<TvShowResponse>() {
+            @Override
+            public void onChanged(TvShowResponse tvShowResponse) {
+                if (tvShowResponse != null) {
+                    tvShowsAdapter.refillTv(tvShowResponse.getTvShowItems());
+                }
+            }
+        });
+
+        tvShowsViewModel.getGenres(language).observe(getActivity(), new Observer<GenresResponse>() {
+            @Override
+            public void onChanged(GenresResponse genresResponse) {
+                if (genresResponse != null) {
+                    tvShowsAdapter.refillGenre(genresResponse.getGenres());
+                    showLoading(false);
+                }
+            }
+        });
+
+        Log.d("FragmentTvNowPlaying", "Loaded");
 
     }
 
     private void setMoviesRV() {
         if (tvShowsAdapter == null) {
             tvShowsAdapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), new ArrayList<Genre>(), onItemClicked);
-            tvShowsRV.setAdapter(tvShowsAdapter);
+            recyclerView.setAdapter(tvShowsAdapter);
         }
     }
+
+    private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
+        @Override
+        public void onItemClick(TvShowItems tvShowItems) {
+            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
+            startActivity(intent);
+        }
+    };
 
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            tvShowsRV.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
-            tvShowsRV.setVisibility(View.VISIBLE);
         }
     }
 

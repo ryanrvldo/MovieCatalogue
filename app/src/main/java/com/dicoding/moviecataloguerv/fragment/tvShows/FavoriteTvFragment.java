@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,20 +36,13 @@ import java.util.Objects;
  */
 public class FavoriteTvFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView tvShowsRV;
+    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
+    private TextView textViewNull;
 
     private FavoriteTvShowsAdapter tvShowsAdapter;
     private FavoritesViewModel favoritesViewModel;
-    private FavoriteTvShowsAdapter.OnItemClicked onItemClicked = new FavoriteTvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShowItems tvShowItems) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
-            startActivity(intent);
-        }
-    };
 
     public FavoriteTvFragment() {
         // Required empty public constructor
@@ -62,22 +56,22 @@ public class FavoriteTvFragment extends Fragment implements SwipeRefreshLayout.O
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        tvShowsRV = view.findViewById(R.id.rvMovies);
+        recyclerView = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
+        textViewNull = view.findViewById(R.id.item_null);
 
         refreshLayout = view.findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(this);
 
-        tvShowsRV.setHasFixedSize(true);
-        tvShowsRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         setTvShowRV();
         showLoading(true);
         favoritesViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(getActivity()).getApplication())).get(FavoritesViewModel.class);
         observeData();
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -88,7 +82,7 @@ public class FavoriteTvFragment extends Fragment implements SwipeRefreshLayout.O
                 favoritesViewModel.deleteFavTv(tvShowsAdapter.getTvAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity(), "Deleted from Tv Show favorite list.", Toast.LENGTH_SHORT).show();
             }
-        }).attachToRecyclerView(tvShowsRV);
+        }).attachToRecyclerView(recyclerView);
     }
 
     private void observeData() {
@@ -97,8 +91,13 @@ public class FavoriteTvFragment extends Fragment implements SwipeRefreshLayout.O
             public void onChanged(List<TvShowItems> items) {
                 if (items != null) {
                     tvShowsAdapter.refillMovie(items);
+                    if (items.size() == 0) {
+                        textViewNull.setVisibility(View.VISIBLE);
+                    } else {
+                        textViewNull.setVisibility(View.GONE);
+                    }
+                    showLoading(false);
                 }
-                showLoading(false);
             }
         });
 
@@ -108,17 +107,24 @@ public class FavoriteTvFragment extends Fragment implements SwipeRefreshLayout.O
     private void setTvShowRV() {
         if (tvShowsAdapter == null) {
             tvShowsAdapter = new FavoriteTvShowsAdapter(new ArrayList<TvShowItems>(), onItemClicked);
-            tvShowsRV.setAdapter(tvShowsAdapter);
+            recyclerView.setAdapter(tvShowsAdapter);
         }
     }
+
+    private FavoriteTvShowsAdapter.OnItemClicked onItemClicked = new FavoriteTvShowsAdapter.OnItemClicked() {
+        @Override
+        public void onItemClick(TvShowItems tvShowItems) {
+            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
+            startActivity(intent);
+        }
+    };
 
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            tvShowsRV.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
-            tvShowsRV.setVisibility(View.VISIBLE);
         }
     }
 

@@ -43,32 +43,6 @@ public class PopularTvFragment extends Fragment implements SwipeRefreshLayout.On
 
     private String language;
 
-    private Observer<TvShowResponse> getTvShows = new Observer<TvShowResponse>() {
-        @Override
-        public void onChanged(TvShowResponse tvShowResponse) {
-            if (tvShowResponse != null) {
-                tvShowsAdapter.refillTv(tvShowResponse.getTvShowItems());
-            }
-        }
-    };
-    private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
-        @Override
-        public void onChanged(GenresResponse genresResponse) {
-            if (genresResponse != null) {
-                tvShowsAdapter.refillGenre(genresResponse.getGenres());
-                showLoading(false);
-            }
-        }
-    };
-    private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShowItems tvShowItems) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
-            startActivity(intent);
-        }
-    };
-
     public PopularTvFragment() {
         // Required empty public constructor
     }
@@ -99,8 +73,25 @@ public class PopularTvFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     private void observeData() {
-        tvShowsViewModel.getPopularTv(getResources().getString(R.string.language)).observe(getActivity(), getTvShows);
-        tvShowsViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), getGenres);
+        tvShowsViewModel.getPopularTv(getResources().getString(R.string.language)).observe(getActivity(), new Observer<TvShowResponse>() {
+            @Override
+            public void onChanged(TvShowResponse tvShowResponse) {
+                if (tvShowResponse != null) {
+                    tvShowsAdapter.refillTv(tvShowResponse.getTvShowItems());
+                }
+            }
+        });
+
+        tvShowsViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), new Observer<GenresResponse>() {
+            @Override
+            public void onChanged(GenresResponse genresResponse) {
+                if (genresResponse != null) {
+                    tvShowsAdapter.refillGenre(genresResponse.getGenres());
+                    showLoading(false);
+                }
+            }
+        });
+
         Log.d("FragmentPopularTV", "Loaded");
     }
 
@@ -111,13 +102,20 @@ public class PopularTvFragment extends Fragment implements SwipeRefreshLayout.On
         }
     }
 
+    private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
+        @Override
+        public void onItemClick(TvShowItems tvShowItems) {
+            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
+            startActivity(intent);
+        }
+    };
+
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            tvShowsRV.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
-            tvShowsRV.setVisibility(View.VISIBLE);
         }
     }
 

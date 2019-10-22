@@ -37,7 +37,7 @@ import static android.view.View.GONE;
  */
 public class PopularMovieFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView moviesRV;
+    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
 
@@ -45,33 +45,6 @@ public class PopularMovieFragment extends Fragment implements SwipeRefreshLayout
     private MoviesViewModel moviesViewModel;
 
     private String language;
-
-    private Observer<MovieResponse> getMovies = new Observer<MovieResponse>() {
-        @Override
-        public void onChanged(MovieResponse movieResponse) {
-            if (movieResponse != null) {
-                moviesAdapter.refillMovie(movieResponse.getMovieItems());
-            }
-        }
-
-    };
-    private Observer<GenresResponse> getGenres = new Observer<GenresResponse>() {
-        @Override
-        public void onChanged(GenresResponse genresResponse) {
-            if (genresResponse != null) {
-                moviesAdapter.refillGenre(genresResponse.getGenres());
-                showLoading(false);
-            }
-        }
-    };
-    private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(MovieItems movieItems) {
-            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
-            startActivity(intent);
-        }
-    };
 
     public PopularMovieFragment() {
         // Required empty public constructor
@@ -89,14 +62,14 @@ public class PopularMovieFragment extends Fragment implements SwipeRefreshLayout
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        moviesRV = view.findViewById(R.id.rvMovies);
+        recyclerView = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
         refreshLayout = view.findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(this);
 
-        moviesRV.setHasFixedSize(true);
-        moviesRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         setMoviesRV();
         showLoading(true);
@@ -105,25 +78,49 @@ public class PopularMovieFragment extends Fragment implements SwipeRefreshLayout
     }
 
     private void observeData() {
-        moviesViewModel.getPopularMovies(language).observe(getActivity(), getMovies);
-        moviesViewModel.getGenres(language).observe(getActivity(), getGenres);
+        moviesViewModel.getPopularMovies(language).observe(getActivity(), new Observer<MovieResponse>() {
+            @Override
+            public void onChanged(MovieResponse movieResponse) {
+                if (movieResponse != null) {
+                    moviesAdapter.refillMovie(movieResponse.getMovieItems());
+                }
+            }
+        });
+
+        moviesViewModel.getGenres(language).observe(getActivity(), new Observer<GenresResponse>() {
+            @Override
+            public void onChanged(GenresResponse genresResponse) {
+                if (genresResponse != null) {
+                    moviesAdapter.refillGenre(genresResponse.getGenres());
+                    showLoading(false);
+                }
+            }
+        });
+
         Log.d("FragmentPopularMovies", "Loaded");
     }
 
     private void setMoviesRV() {
         if (moviesAdapter == null) {
             moviesAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), new ArrayList<Genre>(), onItemClicked);
-            moviesRV.setAdapter(moviesAdapter);
+            recyclerView.setAdapter(moviesAdapter);
         }
     }
+
+    private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
+        @Override
+        public void onItemClick(MovieItems movieItems) {
+            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
+            startActivity(intent);
+        }
+    };
 
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            moviesRV.setVisibility(GONE);
         } else {
             progressBar.setVisibility(GONE);
-            moviesRV.setVisibility(View.VISIBLE);
         }
     }
 

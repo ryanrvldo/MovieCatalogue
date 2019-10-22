@@ -32,15 +32,27 @@
         android:id="@+id/rvMovies"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:clipToPadding="false"
         android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
         android:scrollbars="vertical"
         android:visibility="visible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_movie" />
+
+    <TextView
+        android:id="@+id/item_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/empty_list"
+        android:textColor="@color/common_google_signin_btn_text_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
