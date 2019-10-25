@@ -13,8 +13,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.adapter.ViewPagerAdapter;
-import com.dicoding.moviecataloguerv.fragment.movies.SearchMovieFragment;
-import com.dicoding.moviecataloguerv.fragment.tvShows.SearchTvFragment;
 import com.google.android.material.tabs.TabLayout;
 
 /**
@@ -31,7 +29,7 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment, container, false);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
@@ -50,5 +48,4 @@ public class SearchFragment extends Fragment {
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
     }
-
 }

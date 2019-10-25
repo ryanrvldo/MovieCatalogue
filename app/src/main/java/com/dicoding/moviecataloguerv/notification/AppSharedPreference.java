@@ -9,14 +9,13 @@ public class AppSharedPreference {
     private static final String APP_NAME = "MOVIE_CATALOGUE";
 
     private final SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     public AppSharedPreference(Context context) {
         preferences = context.getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
     }
 
     public void saveBoolean(String keySP, boolean status) {
-        editor = preferences.edit();
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(keySP, status);
         editor.apply();
     }

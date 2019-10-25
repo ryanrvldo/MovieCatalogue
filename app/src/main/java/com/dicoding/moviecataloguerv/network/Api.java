@@ -1,5 +1,6 @@
 package com.dicoding.moviecataloguerv.network;
 
+import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
@@ -68,6 +69,13 @@ public interface Api {
             @Path("category") String category,
             @Query("api_key") String apiKey,
             @Query("language") String language
+    );
+
+    @GET("{type}/{type_id}/credits")
+    Call<CreditsResponse> getCredits(
+            @Path("type") String type,
+            @Path("type_id") int id,
+            @Query("api_key") String apiKey
     );
 
     @GET("search/movie")

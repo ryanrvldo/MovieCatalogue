@@ -1,6 +1,5 @@
 package com.dicoding.moviecataloguerv.adapter;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,45 +13,48 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
-    private ArrayList<MovieItems> movieItems;
-    private ArrayList<Genre> genreList;
+    private List<MovieItems> movieItems;
     private OnItemClicked onItemClicked;
+    private String type;
 
-    public MoviesAdapter(ArrayList<MovieItems> movieItems, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
+    public MoviesAdapter(ArrayList<MovieItems> movieItems, OnItemClicked onItemClicked, String type) {
         this.movieItems = movieItems;
-        this.genreList = genreList;
         this.onItemClicked = onItemClicked;
+        this.type = type;
     }
 
-    public void refillMovie(ArrayList<MovieItems> items) {
+    public void refillMovie(List<MovieItems> items) {
         this.movieItems.clear();
         this.movieItems.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void refillGenre(ArrayList<Genre> genres) {
-        this.genreList.clear();
-        this.genreList.addAll(genres);
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_movie, viewGroup, false);
-        return new MovieViewHolder(view);
+        if (type.equalsIgnoreCase("movie")) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_movie, viewGroup, false);
+            return new MovieViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_search, viewGroup, false);
+            return new MovieViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, final int position) {
-        holder.bind(movieItems.get(position));
+        if (type.equalsIgnoreCase("movie")) {
+            holder.bindMovie(movieItems.get(position));
+        } else {
+            holder.bindSearch(movieItems.get(position));
+        }
     }
 
     @Override
@@ -65,20 +67,18 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        TextView tvReleaseDate;
         TextView tvTitle;
         TextView tvRating;
-        TextView tvGenres;
         ImageView tvPoster;
+        TextView tvOverview;
         MovieItems movieItems;
 
         MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvReleaseDate = itemView.findViewById(R.id.movie_release_date);
             tvTitle = itemView.findViewById(R.id.movie_title);
             tvRating = itemView.findViewById(R.id.movie_rating);
-            tvGenres = itemView.findViewById(R.id.movie_genre);
             tvPoster = itemView.findViewById(R.id.movie_poster);
+            tvOverview = itemView.findViewById(R.id.movie_overview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,13 +88,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             });
         }
 
-        private void bind(MovieItems movieItems) {
+        private void bindMovie(MovieItems movieItems) {
             this.movieItems = movieItems;
 
-            tvReleaseDate.setText(movieItems.getReleaseDate().split("-")[0]);
             tvTitle.setText(movieItems.getTitle());
             tvRating.setText(String.valueOf(movieItems.getRating()));
-            tvGenres.setText(getGenres(movieItems.getGenreIds()));
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getPosterPath())
                     .error(R.drawable.ic_broken_image)
@@ -103,17 +101,17 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
                     .into(tvPoster);
         }
 
-        private String getGenres(ArrayList<Integer> genreIds) {
-            ArrayList<String> movieGenres = new ArrayList<>();
-            for (Integer genreId : genreIds) {
-                for (Genre genre : genreList) {
-                    if (genre.getId() == genreId) {
-                        movieGenres.add(genre.getName());
-                        break;
-                    }
-                }
-            }
-            return TextUtils.join(", ", movieGenres);
+        private void bindSearch(MovieItems movieItems) {
+            this.movieItems = movieItems;
+
+            tvTitle.setText(movieItems.getTitle());
+            tvRating.setText(String.valueOf(movieItems.getRating()));
+            tvOverview.setText(movieItems.getOverview());
+            Glide.with(itemView)
+                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getBackdrop())
+                    .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.ic_image)
+                    .into(tvPoster);
         }
     }
 }

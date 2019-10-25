@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
@@ -22,6 +23,7 @@ public class MoviesViewModel extends ViewModel {
     private MutableLiveData<MovieItems> itemsMovie;
     private MutableLiveData<TrailerResponse> trailers;
     private MutableLiveData<SimilarResponse> similar;
+    private MutableLiveData<CreditsResponse> credits;
     private MutableLiveData<MovieResponse> searchMovies;
 
     private Repository repository = Repository.getInstance();
@@ -105,6 +107,14 @@ public class MoviesViewModel extends ViewModel {
             similar = repository.getSimilar(type, movieId, "similar");
         }
         return similar;
+    }
+
+    public LiveData<CreditsResponse> getCredits(int movieId) {
+        if (credits == null) {
+            credits = new MutableLiveData<>();
+            credits = repository.getCredits(type, movieId);
+        }
+        return credits;
     }
 
     public void setSearchMovies(String query) {

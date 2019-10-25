@@ -1,4 +1,4 @@
-package com.dicoding.moviecataloguerv.fragment.tvShows;
+package com.dicoding.moviecataloguerv.fragment;
 
 
 import android.content.Intent;
@@ -19,44 +19,43 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
+import com.dicoding.moviecataloguerv.activity.SearchActivity;
 import com.dicoding.moviecataloguerv.activity.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.Genre;
-import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 import com.dicoding.moviecataloguerv.viewmodel.TvShowsViewModel;
 
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopRatedTvFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
 
-    private TvShowsAdapter tvShowsAdapter;
+    private TvShowsAdapter adapter;
     private TvShowsViewModel tvShowsViewModel;
 
-    private String language;
-
-    public TopRatedTvFragment() {
+    public SearchTvFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        language = getResources().getString(R.string.language);
-        return inflater.inflate(R.layout.fragment_movies, container, false);
+        return inflater.inflate(R.layout.fragment_tab, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        recyclerView = view.findViewById(R.id.rvMovies);
+        super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView recyclerView = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
         refreshLayout = view.findViewById(R.id.refresh_layout);
@@ -64,41 +63,12 @@ public class TopRatedTvFragment extends Fragment implements SwipeRefreshLayout.O
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), onItemClicked, "search");
+        recyclerView.setAdapter(adapter);
 
-        setMoviesRV();
         showLoading(true);
-        tvShowsViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(TvShowsViewModel.class);
+        tvShowsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvShowsViewModel.class);
         observeData();
-    }
-
-    private void observeData() {
-        tvShowsViewModel.getTopRatedTv(getResources().getString(R.string.language)).observe(getActivity(), new Observer<TvShowResponse>() {
-            @Override
-            public void onChanged(TvShowResponse tvShowResponse) {
-                if (tvShowResponse != null) {
-                    tvShowsAdapter.refillTv(tvShowResponse.getTvShowItems());
-                }
-            }
-        });
-
-        tvShowsViewModel.getGenres(getResources().getString(R.string.language)).observe(getActivity(), new Observer<GenresResponse>() {
-            @Override
-            public void onChanged(GenresResponse genresResponse) {
-                if (genresResponse != null) {
-                    tvShowsAdapter.refillGenre(genresResponse.getGenres());
-                    showLoading(false);
-                }
-            }
-        });
-
-        Log.d("FragmentTvTopRated", "Loaded");
-    }
-
-    private void setMoviesRV() {
-        if (tvShowsAdapter == null) {
-            tvShowsAdapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), new ArrayList<Genre>(), onItemClicked);
-            recyclerView.setAdapter(tvShowsAdapter);
-        }
     }
 
     private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
@@ -110,20 +80,32 @@ public class TopRatedTvFragment extends Fragment implements SwipeRefreshLayout.O
         }
     };
 
+    private void observeData() {
+        tvShowsViewModel.getSearchTv(SearchActivity.searchQuery).observe(this, new Observer<TvShowResponse>() {
+            @Override
+            public void onChanged(TvShowResponse tvShowResponse) {
+                if (tvShowResponse != null) {
+                    adapter.refillTv(tvShowResponse.getTvShowItems());
+                    showLoading(false);
+                }
+            }
+        });
+
+        Log.d("FragmentSearchTv", "Loaded");
+    }
+
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
         } else {
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(GONE);
         }
     }
 
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
-        tvShowsViewModel.setTopRatedTv(language);
-        tvShowsViewModel.setGenres(language);
-        observeData();
+        tvShowsViewModel.setSearchTv(SearchActivity.searchQuery);
         refreshLayout.setRefreshing(false);
     }
 }

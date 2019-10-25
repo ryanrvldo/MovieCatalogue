@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements LoadFavoriteMovie
 
     private FavoriteMoviesAdapter adapter;
 
-    private DataObserver observer;
     private TextView textViewNull;
 
     @Override
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements LoadFavoriteMovie
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
-        observer = new DataObserver(handler, this);
+        DataObserver observer = new DataObserver(handler, this);
         getContentResolver().registerContentObserver(CONTENT_URI, true, observer);
         new getData(this, this).execute();
     }

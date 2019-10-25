@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/background_loading"
@@ -151,7 +151,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:alpha="0.8"
-                android:text="@string/overview"
+                tools:text="@tools:sample/lorem/random"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -194,6 +194,39 @@
             </HorizontalScrollView>
 
             <TextView
+                android:id="@+id/castLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="32dp"
+                android:text="@string/cast"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movieTrailersContainer" />
+            <HorizontalScrollView
+                android:id="@+id/movieCastContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/castLabel">
+
+                <LinearLayout
+                    android:id="@+id/movieCast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <TextView
                 android:id="@+id/similarLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -205,7 +238,7 @@
                 android:textSize="24sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movieTrailersContainer" />
+                app:layout_constraintTop_toBottomOf="@+id/movieCastContainer" />
 
             <HorizontalScrollView
                 android:layout_width="0dp"
@@ -213,7 +246,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="32dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

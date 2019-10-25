@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-@Entity(tableName = "favorite_movie", ignoredColumns = {"overview", "genreIds", "genres"})
+@Entity(tableName = "favorite_movie", ignoredColumns = {"genreIds", "genres"})
 public class MovieItems {
 
     @PrimaryKey
@@ -51,9 +51,10 @@ public class MovieItems {
     @Expose
     private ArrayList<Genre> genres;
 
-    public MovieItems(int id, String title, String posterPath, String releaseDate, float rating, String backdrop) {
+    public MovieItems(int id, String title, String overview, String posterPath, String releaseDate, float rating, String backdrop) {
         this.id = id;
         this.title = title;
+        this.overview = overview;
         this.posterPath = posterPath;
         this.releaseDate = releaseDate;
         this.rating = rating;
@@ -78,6 +79,10 @@ public class MovieItems {
 
     public String getOverview() {
         return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getPosterPath() {

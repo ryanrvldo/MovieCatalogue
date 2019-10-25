@@ -1,4 +1,4 @@
-package com.dicoding.moviecataloguerv.fragment.movies;
+package com.dicoding.moviecataloguerv.fragment;
 
 
 import android.content.Intent;
@@ -21,7 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.activity.SearchActivity;
-import com.dicoding.moviecataloguerv.adapter.FavoriteMoviesAdapter;
+import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.viewmodel.MoviesViewModel;
@@ -35,11 +35,10 @@ import static android.view.View.GONE;
  */
 public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
 
-    private FavoriteMoviesAdapter moviesAdapter;
+    private MoviesAdapter moviesAdapter;
     private MoviesViewModel moviesViewModel;
 
     public SearchMovieFragment() {
@@ -49,14 +48,14 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_movies, container, false);
+        return inflater.inflate(R.layout.fragment_tab, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.rvMovies);
+        RecyclerView recyclerView = view.findViewById(R.id.rvMovies);
         progressBar = view.findViewById(R.id.progressBar);
 
         refreshLayout = view.findViewById(R.id.refresh_layout);
@@ -64,8 +63,9 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        moviesAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), onItemClicked, "search");
+        recyclerView.setAdapter(moviesAdapter);
 
-        setMoviesRV();
         showLoading(true);
         moviesViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MoviesViewModel.class);
         observeData();
@@ -85,14 +85,7 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
         Log.d("FragmentSearchMovies", "Loaded");
     }
 
-    private void setMoviesRV() {
-        if (moviesAdapter == null) {
-            moviesAdapter = new FavoriteMoviesAdapter(new ArrayList<MovieItems>(), onItemClicked);
-            recyclerView.setAdapter(moviesAdapter);
-        }
-    }
-
-    private FavoriteMoviesAdapter.OnItemClicked onItemClicked = new FavoriteMoviesAdapter.OnItemClicked() {
+    private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
         @Override
         public void onItemClick(MovieItems movieItems) {
             Intent intent = new Intent(getContext(), MovieDetailActivity.class);
@@ -113,7 +106,6 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
         moviesViewModel.setSearchMovies(SearchActivity.searchQuery);
-        observeData();
         refreshLayout.setRefreshing(false);
     }
 }

@@ -12,6 +12,7 @@ import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.database.FavoriteDatabase;
 import com.dicoding.moviecataloguerv.database.MovieDao;
 import com.dicoding.moviecataloguerv.database.TvShowDao;
+import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.MovieItems;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
@@ -202,6 +203,24 @@ public class Repository {
             }
         });
         return similarData;
+    }
+
+    public MutableLiveData<CreditsResponse> getCredits(String type, int movieId) {
+        final MutableLiveData<CreditsResponse> creditsData = new MutableLiveData<>();
+        api.getCredits(type, movieId, BuildConfig.TMDB_API_KEY).enqueue(new Callback<CreditsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CreditsResponse> call, @NonNull Response<CreditsResponse> response) {
+                if (response.isSuccessful()) {
+                    creditsData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CreditsResponse> call, @NonNull Throwable t) {
+                Log.e("REPOSITORY", "Error");
+            }
+        });
+        return creditsData;
     }
 
     public MutableLiveData<MovieResponse> searchMovies(String query) {

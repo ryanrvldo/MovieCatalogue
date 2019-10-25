@@ -1,6 +1,5 @@
 package com.dicoding.moviecataloguerv.adapter;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,45 +13,48 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.Genre;
 import com.dicoding.moviecataloguerv.model.TvShowItems;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowViewHolder> {
 
-    private ArrayList<TvShowItems> tvShowItems;
-    private ArrayList<Genre> genreList;
+    private List<TvShowItems> tvShowItems;
     private OnItemClicked onItemClicked;
+    private String type;
 
-    public TvShowsAdapter(ArrayList<TvShowItems> tvShowItems, ArrayList<Genre> genreList, OnItemClicked onItemClicked) {
+    public TvShowsAdapter(ArrayList<TvShowItems> tvShowItems, OnItemClicked onItemClicked, String type) {
         this.tvShowItems = tvShowItems;
-        this.genreList = genreList;
         this.onItemClicked = onItemClicked;
+        this.type = type;
     }
 
-    public void refillTv(ArrayList<TvShowItems> items) {
+    public void refillTv(List<TvShowItems> items) {
         this.tvShowItems.clear();
         this.tvShowItems.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void refillGenre(ArrayList<Genre> items) {
-        this.genreList.clear();
-        this.genreList.addAll(items);
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public TvShowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_movie, viewGroup, false);
-        return new TvShowViewHolder(view);
+        if (type.equalsIgnoreCase("tvShow")) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_movie, viewGroup, false);
+            return new TvShowViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_search, viewGroup, false);
+            return new TvShowViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull TvShowViewHolder holder, int position) {
-        holder.bind(tvShowItems.get(position));
+        if (type.equalsIgnoreCase("tvShow")) {
+            holder.bindTv(tvShowItems.get(position));
+        } else {
+            holder.bindSearch(tvShowItems.get(position));
+        }
     }
 
     @Override
@@ -65,20 +67,18 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
     }
 
     class TvShowViewHolder extends RecyclerView.ViewHolder {
-        TextView tvReleaseDate;
         TextView tvTitle;
         TextView tvRating;
-        TextView tvGenres;
         ImageView tvPoster;
+        TextView tvOverview;
         TvShowItems tvShowItems;
 
         TvShowViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvReleaseDate = itemView.findViewById(R.id.movie_release_date);
             tvTitle = itemView.findViewById(R.id.movie_title);
             tvRating = itemView.findViewById(R.id.movie_rating);
-            tvGenres = itemView.findViewById(R.id.movie_genre);
             tvPoster = itemView.findViewById(R.id.movie_poster);
+            tvOverview = itemView.findViewById(R.id.movie_overview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,13 +88,11 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             });
         }
 
-        private void bind(TvShowItems tvShowItems) {
+        private void bindTv(TvShowItems tvShowItems) {
             this.tvShowItems = tvShowItems;
 
-            tvReleaseDate.setText(tvShowItems.getReleaseDate().split("-")[0]);
             tvTitle.setText(tvShowItems.getTitle());
             tvRating.setText(String.valueOf(tvShowItems.getRating()));
-            tvGenres.setText(getGenres(tvShowItems.getGenreIds()));
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getPosterPath())
                     .error(R.drawable.ic_broken_image)
@@ -103,19 +101,18 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
                     .into(tvPoster);
         }
 
-        private String getGenres(ArrayList<Integer> genreIds) {
-            ArrayList<String> movieGenres = new ArrayList<>();
-            for (Integer genreId : genreIds) {
-                for (Genre genre : genreList) {
-                    if (genre.getId() == genreId) {
-                        movieGenres.add(genre.getName());
-                        break;
-                    }
-                }
-            }
-            return TextUtils.join(", ", movieGenres);
+        private void bindSearch(TvShowItems tvShowItems) {
+            this.tvShowItems = tvShowItems;
+
+            tvTitle.setText(tvShowItems.getTitle());
+            tvRating.setText(String.valueOf(tvShowItems.getRating()));
+            tvOverview.setText(tvShowItems.getOverview());
+            Glide.with(itemView)
+                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShowItems.getBackdrop())
+                    .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.ic_image)
+                    .into(tvPoster);
         }
     }
-
 }
 
