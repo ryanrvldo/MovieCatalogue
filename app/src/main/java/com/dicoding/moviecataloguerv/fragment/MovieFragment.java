@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.viewmodel.MoviesViewModel;
 import com.ethanhua.skeleton.Skeleton;
@@ -66,7 +66,7 @@ public class MovieFragment extends Fragment {
         initUI(view);
 
         popularRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        popularAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), onItemClicked, "movie");
+        popularAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "movie");
         skeletonScreenPopular = Skeleton.bind(popularRV)
                 .adapter(popularAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -74,7 +74,7 @@ public class MovieFragment extends Fragment {
                 .show();
 
         topRatedRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        topRatedAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), onItemClicked, "movie");
+        topRatedAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "movie");
         skeletonScreenTop = Skeleton.bind(topRatedRV)
                 .adapter(topRatedAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -82,7 +82,7 @@ public class MovieFragment extends Fragment {
                 .show();
 
         nowPlayingRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        nowPlayingAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), onItemClicked, "movie");
+        nowPlayingAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "movie");
         skeletonScreenNow = Skeleton.bind(nowPlayingRV)
                 .adapter(nowPlayingAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -150,9 +150,9 @@ public class MovieFragment extends Fragment {
 
     private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
         @Override
-        public void onItemClick(MovieItems movieItems) {
+        public void onItemClick(Movie movie) {
             Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
             startActivity(intent);
         }
     };

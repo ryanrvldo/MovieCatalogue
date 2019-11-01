@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.TvShow;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 import com.dicoding.moviecataloguerv.viewmodel.TvShowsViewModel;
 import com.ethanhua.skeleton.Skeleton;
@@ -65,7 +65,7 @@ public class TvShowFragment extends Fragment {
         initUI(view);
 
         popularRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        popularAdapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), onItemClicked, "tvShow");
+        popularAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "tvShow");
         skeletonScreenPopular = Skeleton.bind(popularRV)
                 .adapter(popularAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -73,7 +73,7 @@ public class TvShowFragment extends Fragment {
                 .show();
 
         topRatedRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        topRatedAdapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), onItemClicked, "tvShow");
+        topRatedAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "tvShow");
         skeletonScreenTop = Skeleton.bind(topRatedRV)
                 .adapter(topRatedAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -81,7 +81,7 @@ public class TvShowFragment extends Fragment {
                 .show();
 
         onTheAirRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        onTheAirAdapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), onItemClicked, "tvShow");
+        onTheAirAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "tvShow");
         onTheAirRV.setAdapter(onTheAirAdapter);
         skeletonScreenOnAir = Skeleton.bind(onTheAirRV)
                 .adapter(onTheAirAdapter)
@@ -150,9 +150,9 @@ public class TvShowFragment extends Fragment {
 
     private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
         @Override
-        public void onItemClick(TvShowItems tvShowItems) {
+        public void onItemClick(TvShow tvShow) {
             Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
+            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
             startActivity(intent);
         }
     };

@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setIcon(R.mipmap.ic_logo);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setTitle(R.string.app_name);
         }
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);

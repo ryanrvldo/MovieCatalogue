@@ -6,11 +6,11 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.dicoding.moviecataloguerv.model.MovieItems;
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.model.TvShow;
 
 
-@Database(entities = {MovieItems.class, TvShowItems.class}, version = 1)
+@Database(entities = {Movie.class, TvShow.class}, version = 1)
 public abstract class FavoriteDatabase extends RoomDatabase {
 
     private static FavoriteDatabase instance;

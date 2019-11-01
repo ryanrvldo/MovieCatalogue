@@ -14,12 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,8 +30,8 @@ import com.dicoding.moviecataloguerv.activity.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.activity.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.MovieItems;
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.model.TvShow;
 import com.dicoding.moviecataloguerv.viewmodel.FavoritesViewModel;
 
 import java.lang.ref.WeakReference;
@@ -72,11 +74,11 @@ public class FavoriteFragment extends Fragment {
         showLoading(true);
 
         movieFavorite.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        moviesAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), onMovieClicked, "favorite");
+        moviesAdapter = new MoviesAdapter(new ArrayList<Movie>(), onMovieClicked, "favorite");
         movieFavorite.setAdapter(moviesAdapter);
 
-        tvShowsFavorite.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        tvShowsAdapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), onTvClicked, "favorite");
+        tvShowsFavorite.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        tvShowsAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onTvClicked, "favorite");
         tvShowsFavorite.setAdapter(tvShowsAdapter);
 
         if (getActivity() != null) {
@@ -103,9 +105,9 @@ public class FavoriteFragment extends Fragment {
 
     private void observeData() {
         if (getActivity() != null) {
-            favoritesViewModel.getFavoriteMovies().observe(getActivity(), new Observer<List<MovieItems>>() {
+            favoritesViewModel.getFavoriteMovies().observe(getActivity(), new Observer<List<Movie>>() {
                 @Override
-                public void onChanged(List<MovieItems> movieItems) {
+                public void onChanged(List<Movie> movieItems) {
                     if (movieItems != null) {
                         moviesAdapter.refillMovie(movieItems);
                         if (movieItems.size() == 0) {
@@ -113,13 +115,26 @@ public class FavoriteFragment extends Fragment {
                         } else {
                             movieNullTV.setVisibility(View.GONE);
                         }
+
+                        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                            @Override
+                            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                                return false;
+                            }
+
+                            @Override
+                            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                                favoritesViewModel.deleteFavMovie(moviesAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+                                Toast.makeText(getActivity(), moviesAdapter.getMovieAt(viewHolder.getAdapterPosition()).getTitle() + " deleted from movies favorite list.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).attachToRecyclerView(movieFavorite);
                     }
                 }
             });
 
-            favoritesViewModel.getFavoriteTvShows().observe(getActivity(), new Observer<List<TvShowItems>>() {
+            favoritesViewModel.getFavoriteTvShows().observe(getActivity(), new Observer<List<TvShow>>() {
                 @Override
-                public void onChanged(List<TvShowItems> tvShowItems) {
+                public void onChanged(List<TvShow> tvShowItems) {
                     if (tvShowItems != null) {
                         tvShowsAdapter.refillTv(tvShowItems);
                         if (tvShowItems.size() == 0) {
@@ -128,6 +143,18 @@ public class FavoriteFragment extends Fragment {
                             tvShowNull.setVisibility(View.GONE);
                         }
                         showLoading(false);
+                        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                            @Override
+                            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                                return false;
+                            }
+
+                            @Override
+                            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                                favoritesViewModel.deleteFavTv(tvShowsAdapter.getTvShowAt(viewHolder.getAdapterPosition()));
+                                Toast.makeText(getActivity(), tvShowsAdapter.getTvShowAt(viewHolder.getAdapterPosition()).getTitle() + " deleted from tv show favorite list.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).attachToRecyclerView(tvShowsFavorite);
                     }
                 }
             });
@@ -146,18 +173,18 @@ public class FavoriteFragment extends Fragment {
 
     private MoviesAdapter.OnItemClicked onMovieClicked = new MoviesAdapter.OnItemClicked() {
         @Override
-        public void onItemClick(MovieItems movieItems) {
+        public void onItemClick(Movie movie) {
             Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
             startActivity(intent);
         }
     };
 
     private TvShowsAdapter.OnItemClicked onTvClicked = new TvShowsAdapter.OnItemClicked() {
         @Override
-        public void onItemClick(TvShowItems tvShowItems) {
+        public void onItemClick(TvShow tvShow) {
             Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
+            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
             startActivity(intent);
         }
     };

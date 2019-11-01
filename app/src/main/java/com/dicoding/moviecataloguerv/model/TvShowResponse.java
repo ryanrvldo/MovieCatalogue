@@ -12,7 +12,7 @@ public class TvShowResponse {
 
     @SerializedName("results")
     @Expose
-    private ArrayList<TvShowItems> tvShowItems;
+    private ArrayList<TvShow> tvShowItems;
 
     @SerializedName("total_pages")
     @Expose
@@ -30,11 +30,11 @@ public class TvShowResponse {
         this.page = page;
     }
 
-    public ArrayList<TvShowItems> getTvShowItems() {
+    public ArrayList<TvShow> getTvShowItems() {
         return tvShowItems;
     }
 
-    public void setTvShowItems(ArrayList<TvShowItems> tvShowItems) {
+    public void setTvShowItems(ArrayList<TvShow> tvShowItems) {
         this.tvShowItems = tvShowItems;
     }
 

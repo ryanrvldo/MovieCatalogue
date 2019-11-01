@@ -17,9 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.dicoding.moviecataloguerv.BuildConfig;
-import com.dicoding.moviecataloguerv.MainActivity;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.activity.NewReleaseActivity;
+import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.network.Api;
 
@@ -48,7 +48,7 @@ public class ReminderReceiver extends BroadcastReceiver {
     private String title;
     private String message;
     private int idNotification = 0;
-    private List<MovieItems> stackNotif = new ArrayList<>();
+    private List<Movie> stackNotif = new ArrayList<>();
 
     public ReminderReceiver() {
     }
@@ -78,7 +78,7 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_movie_black);
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, NewReleaseActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder;

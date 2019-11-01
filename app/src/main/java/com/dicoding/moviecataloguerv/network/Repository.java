@@ -14,14 +14,17 @@ import com.dicoding.moviecataloguerv.database.MovieDao;
 import com.dicoding.moviecataloguerv.database.TvShowDao;
 import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.TvShow;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -39,8 +42,8 @@ public class Repository {
 
     private Api api;
 
-    private LiveData<List<MovieItems>> allFavoriteMovies;
-    private LiveData<List<TvShowItems>> allFavoriteTv;
+    private LiveData<List<Movie>> allFavoriteMovies;
+    private LiveData<List<TvShow>> allFavoriteTv;
 
     private MovieDao movieDao;
     private TvShowDao tvShowDao;
@@ -113,18 +116,18 @@ public class Repository {
         return genresData;
     }
 
-    public MutableLiveData<MovieItems> getMovieItems(int movieId, String language) {
-        final MutableLiveData<MovieItems> movieData = new MutableLiveData<>();
-        api.getMovie(movieId, BuildConfig.TMDB_API_KEY, language).enqueue(new Callback<MovieItems>() {
+    public MutableLiveData<Movie> getMovieItems(int movieId, String language) {
+        final MutableLiveData<Movie> movieData = new MutableLiveData<>();
+        api.getMovie(movieId, BuildConfig.TMDB_API_KEY, language).enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(@NonNull Call<MovieItems> call, @NonNull Response<MovieItems> response) {
+            public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
                 if (response.isSuccessful()) {
                     movieData.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<MovieItems> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
                 movieData.postValue(null);
             }
         });
@@ -169,18 +172,18 @@ public class Repository {
         return tvShowsData;
     }
 
-    public MutableLiveData<TvShowItems> getTvShowItems(int tvShowId, String language) {
-        final MutableLiveData<TvShowItems> tvShowData = new MutableLiveData<>();
-        api.getTvShow(tvShowId, BuildConfig.TMDB_API_KEY, language).enqueue(new Callback<TvShowItems>() {
+    public MutableLiveData<TvShow> getTvShowItems(int tvShowId, String language) {
+        final MutableLiveData<TvShow> tvShowData = new MutableLiveData<>();
+        api.getTvShow(tvShowId, BuildConfig.TMDB_API_KEY, language).enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(@NonNull Call<TvShowItems> call, @NonNull Response<TvShowItems> response) {
+            public void onResponse(@NonNull Call<TvShow> call, @NonNull Response<TvShow> response) {
                 if (response.isSuccessful()) {
                     tvShowData.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<TvShowItems> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<TvShow> call, @NonNull Throwable t) {
                 tvShowData.postValue(null);
             }
         });
@@ -259,23 +262,45 @@ public class Repository {
         return searchData;
     }
 
+    public MutableLiveData<MovieResponse> newReleaseMovies() {
+        final MutableLiveData<MovieResponse> newReleaseData = new MutableLiveData<>();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String currentDate = date.format(new Date());
+        api.getNewReleaseMovie(BuildConfig.TMDB_API_KEY, currentDate, currentDate).enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null && response.body().getMovieItems() != null) {
+                        newReleaseData.postValue(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
+
+            }
+        });
+        return newReleaseData;
+    }
+
 
     /*
      *
      * Database
      *
      */
-    public void addFavMovie(MovieItems movieItems) {
-        new AddFavMovieAsyncTask(movieDao).execute(movieItems);
+    public void addFavMovie(Movie movie) {
+        new AddFavMovieAsyncTask(movieDao).execute(movie);
     }
 
-    public void deleteFavMovie(MovieItems movieItems) {
-        new DeleteFavMovieAsyncTask(movieDao).execute(movieItems);
+    public void deleteFavMovie(Movie movie) {
+        new DeleteFavMovieAsyncTask(movieDao).execute(movie);
     }
 
 
-    public MovieItems selectFavMovie(final int movieId) {
-        MovieItems items = null;
+    public Movie selectFavMovie(final int movieId) {
+        Movie items = null;
         try {
             items = new SelectFavMovieAsyncTask(movieDao).execute(movieId).get();
         } catch (ExecutionException | InterruptedException e) {
@@ -284,20 +309,20 @@ public class Repository {
         return items;
     }
 
-    public LiveData<List<MovieItems>> getAllFavoriteMovies() {
+    public LiveData<List<Movie>> getAllFavoriteMovies() {
         return allFavoriteMovies;
     }
 
-    public void addFavTv(TvShowItems tvShowItems) {
-        new AddFavTvAsyncTask(tvShowDao).execute(tvShowItems);
+    public void addFavTv(TvShow tvShow) {
+        new AddFavTvAsyncTask(tvShowDao).execute(tvShow);
     }
 
-    public void deleteFavTv(TvShowItems tvShowItems) {
-        new DeleteFavTvAsyncTask(tvShowDao).execute(tvShowItems);
+    public void deleteFavTv(TvShow tvShow) {
+        new DeleteFavTvAsyncTask(tvShowDao).execute(tvShow);
     }
 
-    public TvShowItems selectFavTv(final int tvShowId) {
-        TvShowItems items = null;
+    public TvShow selectFavTv(final int tvShowId) {
+        TvShow items = null;
         try {
             items = new SelectFavTvAsyncTask(tvShowDao).execute(tvShowId).get();
         } catch (ExecutionException | InterruptedException e) {
@@ -306,12 +331,12 @@ public class Repository {
         return items;
     }
 
-    public LiveData<List<TvShowItems>> getAllFavoriteTv() {
+    public LiveData<List<TvShow>> getAllFavoriteTv() {
         return allFavoriteTv;
     }
 
 
-    private static class AddFavMovieAsyncTask extends AsyncTask<MovieItems, Void, Void> {
+    private static class AddFavMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
 
         private MovieDao movieDao;
 
@@ -320,14 +345,14 @@ public class Repository {
         }
 
         @Override
-        protected Void doInBackground(MovieItems... movieItems) {
+        protected Void doInBackground(Movie... movieItems) {
             movieDao.insert(movieItems[0]);
             return null;
         }
 
     }
 
-    private static class DeleteFavMovieAsyncTask extends AsyncTask<MovieItems, Void, Void> {
+    private static class DeleteFavMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
 
         private MovieDao movieDao;
 
@@ -336,14 +361,14 @@ public class Repository {
         }
 
         @Override
-        protected Void doInBackground(MovieItems... movieItems) {
+        protected Void doInBackground(Movie... movieItems) {
             movieDao.delete(movieItems[0]);
             return null;
         }
 
     }
 
-    private static class SelectFavMovieAsyncTask extends AsyncTask<Integer, Void, MovieItems> {
+    private static class SelectFavMovieAsyncTask extends AsyncTask<Integer, Void, Movie> {
 
         private MovieDao movieDao;
 
@@ -352,12 +377,12 @@ public class Repository {
         }
 
         @Override
-        protected MovieItems doInBackground(Integer... integers) {
+        protected Movie doInBackground(Integer... integers) {
             return movieDao.selectById(integers[0]);
         }
     }
 
-    private static class AddFavTvAsyncTask extends AsyncTask<TvShowItems, Void, Void> {
+    private static class AddFavTvAsyncTask extends AsyncTask<TvShow, Void, Void> {
         private TvShowDao tvShowDao;
 
         private AddFavTvAsyncTask(TvShowDao tvShowDao) {
@@ -365,13 +390,13 @@ public class Repository {
         }
 
         @Override
-        protected Void doInBackground(TvShowItems... tvShowItems) {
+        protected Void doInBackground(TvShow... tvShowItems) {
             tvShowDao.insert(tvShowItems[0]);
             return null;
         }
     }
 
-    private static class DeleteFavTvAsyncTask extends AsyncTask<TvShowItems, Void, Void> {
+    private static class DeleteFavTvAsyncTask extends AsyncTask<TvShow, Void, Void> {
         private TvShowDao tvShowDao;
 
         private DeleteFavTvAsyncTask(TvShowDao tvShowDao) {
@@ -379,13 +404,13 @@ public class Repository {
         }
 
         @Override
-        protected Void doInBackground(TvShowItems... tvShowItems) {
+        protected Void doInBackground(TvShow... tvShowItems) {
             tvShowDao.delete(tvShowItems[0]);
             return null;
         }
     }
 
-    private static class SelectFavTvAsyncTask extends AsyncTask<Integer, Void, TvShowItems> {
+    private static class SelectFavTvAsyncTask extends AsyncTask<Integer, Void, TvShow> {
         private TvShowDao tvShowDao;
 
         private SelectFavTvAsyncTask(TvShowDao tvShowDao) {
@@ -393,7 +418,7 @@ public class Repository {
         }
 
         @Override
-        protected TvShowItems doInBackground(Integer... integers) {
+        protected TvShow doInBackground(Integer... integers) {
             return tvShowDao.selectById(integers[0]);
         }
     }

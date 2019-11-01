@@ -22,7 +22,7 @@ import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.activity.SearchActivity;
 import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.viewmodel.MoviesViewModel;
 
@@ -63,7 +63,7 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        moviesAdapter = new MoviesAdapter(new ArrayList<MovieItems>(), onItemClicked, "search");
+        moviesAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "search");
         recyclerView.setAdapter(moviesAdapter);
 
         showLoading(true);
@@ -87,9 +87,9 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
 
     private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
         @Override
-        public void onItemClick(MovieItems movieItems) {
+        public void onItemClick(Movie movie) {
             Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movieItems.getId());
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
             startActivity(intent);
         }
     };

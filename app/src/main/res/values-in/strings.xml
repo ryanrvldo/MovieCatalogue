@@ -17,7 +17,7 @@
     <string name="image_before_loading">Gambar sebelum memuat</string>
     <string name="favorite">Favorit</string>
     <string name="trailer_title">Judul Cuplikan Video</string>
-    <string name="similar">Serupa</string>
+    <string name="similar">Mungkin anda akan suka</string>
     <string name="_5_5_10">5.5/10</string>
     <string name="popular">Populer</string>
     <string name="top_rated">Rating tertinggi</string>
@@ -55,5 +55,6 @@
     <string name="on_the_air">Sedang tayang</string>
     <string name="on_the_air_desc">Daftar serial TV yang sedang tayang di televisi</string>
     <string name="cast">Pemain</string>
+    <string name="undo">Urungkan</string>
 
 </resources>

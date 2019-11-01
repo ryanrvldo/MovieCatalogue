@@ -6,7 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.TvShow;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ import java.util.List;
 public interface TvShowDao {
 
     @Insert
-    void insert(TvShowItems tvShowItems);
+    void insert(TvShow tvShow);
 
     @Delete
-    void delete(TvShowItems tvShowItems);
+    void delete(TvShow tvShow);
 
     @Query("SELECT * FROM favorite_tv")
-    LiveData<List<TvShowItems>> getAllFavoriteTv();
+    LiveData<List<TvShow>> getAllFavoriteTv();
 
     @Query("SELECT * FROM favorite_tv WHERE id=:id")
-    TvShowItems selectById(int id);
+    TvShow selectById(int id);
 }

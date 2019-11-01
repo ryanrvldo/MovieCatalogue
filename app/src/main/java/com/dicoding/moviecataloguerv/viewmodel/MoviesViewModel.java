@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
@@ -20,11 +20,12 @@ public class MoviesViewModel extends ViewModel {
     private MutableLiveData<MovieResponse> nowPlayingMovies;
     private MutableLiveData<MovieResponse> topRatedMovies;
     private MutableLiveData<GenresResponse> genres;
-    private MutableLiveData<MovieItems> itemsMovie;
+    private MutableLiveData<Movie> itemsMovie;
     private MutableLiveData<TrailerResponse> trailers;
     private MutableLiveData<SimilarResponse> similar;
     private MutableLiveData<CreditsResponse> credits;
     private MutableLiveData<MovieResponse> searchMovies;
+    private MutableLiveData<MovieResponse> newReleaseMovies;
 
     private Repository repository = Repository.getInstance();
     private String type = "movie";
@@ -86,7 +87,7 @@ public class MoviesViewModel extends ViewModel {
         Log.d("MovieDetail", "Data Created");
     }
 
-    public LiveData<MovieItems> getMovieItems(int movieId, String language) {
+    public LiveData<Movie> getMovieItems(int movieId, String language) {
         if (itemsMovie == null) {
             setItemsMovie(movieId, language);
         }
@@ -128,5 +129,18 @@ public class MoviesViewModel extends ViewModel {
             setSearchMovies(query);
         }
         return searchMovies;
+    }
+
+    public void setNewReleaseMovies() {
+        newReleaseMovies = new MutableLiveData<>();
+        newReleaseMovies = repository.newReleaseMovies();
+        Log.d("NewRelease", "Fetched");
+    }
+
+    public LiveData<MovieResponse> getNewReleaseMovies() {
+        if (newReleaseMovies == null) {
+            setNewReleaseMovies();
+        }
+        return newReleaseMovies;
     }
 }

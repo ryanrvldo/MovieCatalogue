@@ -13,27 +13,31 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
-    private List<MovieItems> movieItems;
+    private List<Movie> movieItems;
     private OnItemClicked onItemClicked;
     private String type;
 
-    public MoviesAdapter(ArrayList<MovieItems> movieItems, OnItemClicked onItemClicked, String type) {
+    public MoviesAdapter(ArrayList<Movie> movieItems, OnItemClicked onItemClicked, String type) {
         this.movieItems = movieItems;
         this.onItemClicked = onItemClicked;
         this.type = type;
     }
 
-    public void refillMovie(List<MovieItems> items) {
+    public void refillMovie(List<Movie> items) {
         this.movieItems.clear();
         this.movieItems.addAll(items);
         notifyDataSetChanged();
+    }
+
+    public Movie getMovieAt(int position) {
+        return movieItems.get(position);
     }
 
     @NonNull
@@ -63,7 +67,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     public interface OnItemClicked {
-        void onItemClick(MovieItems movieItems);
+        void onItemClick(Movie movie);
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -71,7 +75,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         TextView tvRating;
         ImageView tvPoster;
         TextView tvOverview;
-        MovieItems movieItems;
+        Movie movie;
 
         MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,32 +87,32 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClicked.onItemClick(movieItems);
+                    onItemClicked.onItemClick(movie);
                 }
             });
         }
 
-        private void bindMovie(MovieItems movieItems) {
-            this.movieItems = movieItems;
+        private void bindMovie(Movie movie) {
+            this.movie = movie;
 
-            tvTitle.setText(movieItems.getTitle());
-            tvRating.setText(String.valueOf(movieItems.getRating()));
+            tvTitle.setText(movie.getTitle());
+            tvRating.setText(String.valueOf(movie.getRating()));
             Glide.with(itemView)
-                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getPosterPath())
+                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + movie.getPosterPath())
                     .error(R.drawable.ic_broken_image)
                     .placeholder(R.drawable.ic_image)
                     .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                     .into(tvPoster);
         }
 
-        private void bindSearch(MovieItems movieItems) {
-            this.movieItems = movieItems;
+        private void bindSearch(Movie movie) {
+            this.movie = movie;
 
-            tvTitle.setText(movieItems.getTitle());
-            tvRating.setText(String.valueOf(movieItems.getRating()));
-            tvOverview.setText(movieItems.getOverview());
+            tvTitle.setText(movie.getTitle());
+            tvRating.setText(String.valueOf(movie.getRating()));
+            tvOverview.setText(movie.getOverview());
             Glide.with(itemView)
-                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + movieItems.getBackdrop())
+                    .load(BuildConfig.TMDB_IMAGE_BASE_URL + movie.getBackdrop())
                     .error(R.drawable.ic_broken_image)
                     .placeholder(R.drawable.ic_image)
                     .into(tvPoster);

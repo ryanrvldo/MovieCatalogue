@@ -10,7 +10,7 @@ import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.TvShow;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 import com.dicoding.moviecataloguerv.network.Repository;
 
@@ -20,7 +20,7 @@ public class TvShowsViewModel extends ViewModel {
     private MutableLiveData<TvShowResponse> nowPlayingTv;
     private MutableLiveData<TvShowResponse> topRatedTv;
     private MutableLiveData<GenresResponse> genres;
-    private MutableLiveData<TvShowItems> itemsTv;
+    private MutableLiveData<TvShow> itemsTv;
     private MutableLiveData<TrailerResponse> trailers;
     private MutableLiveData<CreditsResponse> credits;
     private MutableLiveData<SimilarResponse> similar;
@@ -80,7 +80,7 @@ public class TvShowsViewModel extends ViewModel {
         return genres;
     }
 
-    public LiveData<TvShowItems> getTvShowItems(int tvShowId, String language) {
+    public LiveData<TvShow> getTvShowItems(int tvShowId, String language) {
         if (itemsTv == null) {
             itemsTv = new MutableLiveData<>();
             itemsTv = repository.getTvShowItems(tvShowId, language);

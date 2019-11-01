@@ -6,7 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 
 import java.util.List;
 
@@ -14,17 +14,17 @@ import java.util.List;
 public interface MovieDao {
 
     @Insert
-    void insert(MovieItems movieItems);
+    void insert(Movie movie);
 
     @Delete
-    void delete(MovieItems movieItems);
+    void delete(Movie movie);
 
     @Query("SELECT * FROM favorite_movie ORDER BY title ASC")
-    LiveData<List<MovieItems>> getAllFavoriteMovie();
+    LiveData<List<Movie>> getAllFavoriteMovie();
 
     @Query("SELECT * FROM favorite_movie")
-    List<MovieItems> getFavoriteMovies();
+    List<Movie> getFavoriteMovies();
 
     @Query("SELECT * FROM favorite_movie WHERE id=:id")
-    MovieItems selectById(int id);
+    Movie selectById(int id);
 }

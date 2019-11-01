@@ -12,7 +12,7 @@ public class MovieResponse {
 
     @SerializedName("results")
     @Expose
-    private ArrayList<MovieItems> movieItems;
+    private ArrayList<Movie> movieItems;
 
     @SerializedName("total_pages")
     @Expose
@@ -30,11 +30,11 @@ public class MovieResponse {
         this.page = page;
     }
 
-    public ArrayList<MovieItems> getMovieItems() {
+    public ArrayList<Movie> getMovieItems() {
         return movieItems;
     }
 
-    public void setMovieItems(ArrayList<MovieItems> movieItems) {
+    public void setMovieItems(ArrayList<Movie> movieItems) {
         this.movieItems = movieItems;
     }
 

@@ -17,7 +17,7 @@
     <string name="image_before_loading">image before loading</string>
     <string name="favorite">Favorite</string>
     <string name="trailer_title">Trailer Title</string>
-    <string name="similar">Similar</string>
+    <string name="similar">You may also like</string>
     <string name="_5_5_10">5.5/10</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
@@ -57,5 +57,9 @@
     <string name="on_the_air">On The Air</string>
     <string name="on_the_air_desc">The list of tv shows on the air</string>
     <string name="cast">Cast</string>
+    <string name="undo">Undo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

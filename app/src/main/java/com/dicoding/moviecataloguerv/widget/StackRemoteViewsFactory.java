@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.database.FavoriteDatabase;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     private final Context mContext;
     private static final String TAG = "Widget";
 
-    private List<MovieItems> movieFavorite = new ArrayList<>();
+    private List<Movie> movieFavorite = new ArrayList<>();
     private FavoriteDatabase database;
 
     StackRemoteViewsFactory(Context context) {
@@ -52,7 +52,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         }
     }
 
-    private static class GetFavMoviesAsyncTask extends AsyncTask<FavoriteDatabase, Void, List<MovieItems>> {
+    private static class GetFavMoviesAsyncTask extends AsyncTask<FavoriteDatabase, Void, List<Movie>> {
         FavoriteDatabase database;
 
         GetFavMoviesAsyncTask(FavoriteDatabase database) {
@@ -60,7 +60,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         }
 
         @Override
-        protected List<MovieItems> doInBackground(FavoriteDatabase... favoriteDatabases) {
+        protected List<Movie> doInBackground(FavoriteDatabase... favoriteDatabases) {
             return database.movieDao().getFavoriteMovies();
         }
     }
@@ -81,7 +81,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
 
         if (movieFavorite.size() > 0) {
-            MovieItems movie = movieFavorite.get(position);
+            Movie movie = movieFavorite.get(position);
 
             try {
                 Bitmap bitmap = Glide.with(mContext)

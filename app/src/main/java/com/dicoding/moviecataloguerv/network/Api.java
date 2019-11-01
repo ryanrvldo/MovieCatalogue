@@ -2,11 +2,11 @@ package com.dicoding.moviecataloguerv.network;
 
 import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
-import com.dicoding.moviecataloguerv.model.MovieItems;
+import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.TvShow;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 
 import retrofit2.Call;
@@ -34,14 +34,14 @@ public interface Api {
 
 
     @GET("movie/{movie_id}")
-    Call<MovieItems> getMovie(
+    Call<Movie> getMovie(
             @Path("movie_id") int id,
             @Query("api_key") String apiKey,
             @Query("language") String language
     );
 
     @GET("tv/{tv_id}")
-    Call<TvShowItems> getTvShow(
+    Call<TvShow> getTvShow(
             @Path("tv_id") int id,
             @Query("api_key") String apiKey,
             @Query("language") String language

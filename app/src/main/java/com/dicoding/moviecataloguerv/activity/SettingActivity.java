@@ -7,15 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.notification.AppSharedPreference;
 import com.dicoding.moviecataloguerv.notification.ReminderReceiver;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -28,6 +29,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private ReminderReceiver receiver;
     private Switch releaseSwitch;
     private Switch dailySwitch;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         releaseSwitch = findViewById(R.id.switch_release);
         dailySwitch = findViewById(R.id.switch_daily);
         TextView languageSetting = findViewById(R.id.language_setting);
+        constraintLayout = findViewById(R.id.constraint_layout);
 
         releaseSwitch.setOnClickListener(this);
         dailySwitch.setOnClickListener(this);
@@ -73,40 +76,19 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        String msg;
         switch (v.getId()) {
             case R.id.switch_release:
                 if (releaseSwitch.isChecked()) {
-                    preference.saveBoolean(AppSharedPreference.RELEASE_REMINDER_STATUS, true);
-                    receiver.setReleaseReminder(this, "08:00", ReminderReceiver.EXTRA_MESSAGE);
-                    msg = getString(R.string.release_reminder_enabled);
-                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                    enableReleaseReminder();
                 } else {
-                    preference.saveBoolean(AppSharedPreference.RELEASE_REMINDER_STATUS, false);
-                    receiver.cancelReleaseReminder(this);
-                    msg = getString(R.string.release_reminder_disabled);
-                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                    disableReleaseReminder();
                 }
                 break;
             case R.id.switch_daily:
                 if (dailySwitch.isChecked()) {
-                    preference.saveBoolean(AppSharedPreference.DAILY_REMINDER_STATUS, true);
-                    FirebaseMessaging.getInstance().subscribeToTopic("reminder");
-                    FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-                        @Override
-                        public void onSuccess(InstanceIdResult instanceIdResult) {
-                            String deviceToken = instanceIdResult.getToken();
-                            Log.d(TAG, "Refreshed token: " + deviceToken);
-                        }
-                    });
-                    msg = getString(R.string.daily_reminder_enabled);
-                    Log.d(TAG, msg);
-                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                    enableDailyReminder();
                 } else {
-                    preference.saveBoolean(AppSharedPreference.DAILY_REMINDER_STATUS, false);
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic("reminder");
-                    msg = getString(R.string.daily_reminder_disabled);
-                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                    disableDailyReminder();
                 }
                 break;
             case R.id.language_setting:
@@ -115,6 +97,92 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
         }
+    }
+
+    private String msg;
+
+    private void enableReleaseReminder() {
+        preference.saveBoolean(AppSharedPreference.RELEASE_REMINDER_STATUS, true);
+        receiver.setReleaseReminder(this, "08:00", ReminderReceiver.EXTRA_MESSAGE);
+        msg = getString(R.string.release_reminder_enabled);
+        checkReminderStatus();
+        Snackbar snackbar = Snackbar
+                .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        disableReleaseReminder();
+                        msg = getString(R.string.release_reminder_disabled);
+                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                        snackbarUndo.show();
+                    }
+                });
+        snackbar.show();
+    }
+
+    private void disableReleaseReminder() {
+        preference.saveBoolean(AppSharedPreference.RELEASE_REMINDER_STATUS, false);
+        receiver.cancelReleaseReminder(this);
+        msg = getString(R.string.release_reminder_disabled);
+        checkReminderStatus();
+        Snackbar snackbar = Snackbar
+                .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        enableReleaseReminder();
+                        msg = getString(R.string.release_reminder_enabled);
+                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                        snackbarUndo.show();
+                    }
+                });
+        snackbar.show();
+    }
+
+    private void enableDailyReminder() {
+        preference.saveBoolean(AppSharedPreference.DAILY_REMINDER_STATUS, true);
+        FirebaseMessaging.getInstance().subscribeToTopic("reminder");
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String deviceToken = instanceIdResult.getToken();
+                Log.d(TAG, "Refreshed token: " + deviceToken);
+            }
+        });
+        msg = getString(R.string.daily_reminder_enabled);
+        checkReminderStatus();
+        Log.d(TAG, msg);
+        Snackbar snackbar = Snackbar
+                .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        disableDailyReminder();
+                        msg = getString(R.string.daily_reminder_disabled);
+                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                        snackbarUndo.show();
+                    }
+                });
+        snackbar.show();
+    }
+
+    private void disableDailyReminder() {
+        preference.saveBoolean(AppSharedPreference.DAILY_REMINDER_STATUS, false);
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("reminder");
+        msg = getString(R.string.daily_reminder_disabled);
+        checkReminderStatus();
+        Snackbar snackbar = Snackbar
+                .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        enableDailyReminder();
+                        msg = getString(R.string.daily_reminder_enabled);
+                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                        snackbarUndo.show();
+                    }
+                });
+        snackbar.show();
     }
 
     @Override

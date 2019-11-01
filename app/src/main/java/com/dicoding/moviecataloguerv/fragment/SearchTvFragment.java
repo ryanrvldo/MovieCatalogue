@@ -22,7 +22,7 @@ import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.activity.SearchActivity;
 import com.dicoding.moviecataloguerv.activity.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.TvShowItems;
+import com.dicoding.moviecataloguerv.model.TvShow;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 import com.dicoding.moviecataloguerv.viewmodel.TvShowsViewModel;
 
@@ -63,7 +63,7 @@ public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new TvShowsAdapter(new ArrayList<TvShowItems>(), onItemClicked, "search");
+        adapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "search");
         recyclerView.setAdapter(adapter);
 
         showLoading(true);
@@ -73,9 +73,9 @@ public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
         @Override
-        public void onItemClick(TvShowItems tvShowItems) {
+        public void onItemClick(TvShow tvShow) {
             Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShowItems.getId());
+            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
             startActivity(intent);
         }
     };

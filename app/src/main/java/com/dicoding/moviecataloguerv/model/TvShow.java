@@ -9,15 +9,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-@Entity(tableName = "favorite_movie", ignoredColumns = {"genreIds", "genres"})
-public class MovieItems {
+@Entity(tableName = "favorite_tv", ignoredColumns = {"genres", "ratingVotes"})
+public class TvShow {
 
     @PrimaryKey
     @SerializedName("id")
     @Expose
     private int id;
 
-    @SerializedName("title")
+    @SerializedName("name")
     @Expose
     private String title;
 
@@ -31,7 +31,7 @@ public class MovieItems {
     private String posterPath;
 
     @ColumnInfo(name = "release_date")
-    @SerializedName("release_date")
+    @SerializedName("first_air_date")
     @Expose
     private String releaseDate;
 
@@ -39,9 +39,9 @@ public class MovieItems {
     @Expose
     private float rating;
 
-    @SerializedName("genre_ids")
+    @SerializedName("vote_count")
     @Expose
-    private ArrayList<Integer> genreIds;
+    private int ratingVotes;
 
     @SerializedName("backdrop_path")
     @Expose
@@ -51,14 +51,25 @@ public class MovieItems {
     @Expose
     private ArrayList<Genre> genres;
 
-    public MovieItems(int id, String title, String overview, String posterPath, String releaseDate, float rating, String backdrop) {
+    public TvShow(int id, String title, String posterPath, String releaseDate, float rating, String backdrop) {
         this.id = id;
         this.title = title;
-        this.overview = overview;
         this.posterPath = posterPath;
         this.releaseDate = releaseDate;
         this.rating = rating;
         this.backdrop = backdrop;
+    }
+
+    public ArrayList<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public String getBackdrop() {
+        return backdrop;
     }
 
     public int getId() {
@@ -97,19 +108,11 @@ public class MovieItems {
         return rating;
     }
 
-    public ArrayList<Integer> getGenreIds() {
-        return genreIds;
+    public int getRatingVotes() {
+        return ratingVotes;
     }
 
-    public String getBackdrop() {
-        return backdrop;
-    }
-
-    public ArrayList<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<Genre> genres) {
-        this.genres = genres;
+    public void setRatingVotes(int ratingVotes) {
+        this.ratingVotes = ratingVotes;
     }
 }
