@@ -21,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .withFullScreen()
                 .withTargetActivity(MainActivity.class)
                 .withSplashTimeOut(2000)
-                .withBackgroundColor(Color.parseColor("#212121"))
+                .withBackgroundColor(Color.parseColor("#1b1b1b"))
                 .withAfterLogoText(getString(R.string.app_name))
                 .withLogo(R.mipmap.ic_launcher);
 

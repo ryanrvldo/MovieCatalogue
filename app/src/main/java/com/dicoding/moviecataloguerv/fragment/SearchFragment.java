@@ -43,8 +43,8 @@ public class SearchFragment extends Fragment {
 
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new SearchMovieFragment(), getResources().getString(R.string.movies_tab));
-        adapter.addFragment(new SearchTvFragment(), getResources().getString(R.string.tv_shows_tab));
+        adapter.addFragment(new SearchMovieFragment(), getString(R.string.movies_tab));
+        adapter.addFragment(new SearchTvFragment(), getString(R.string.tv_shows_tab));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
     }

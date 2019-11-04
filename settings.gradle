@@ -1,2 +1,2 @@
 include ':app', ':favoritemovieapp'
-rootProject.name='MovieCatalogueRV'
+rootProject.name='MovieCatalogue'

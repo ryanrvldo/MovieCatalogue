@@ -14,8 +14,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
         app:tabMode="fixed"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="@android:color/secondary_text_dark" />
+        app:tabTextColor="@android:color/tertiary_text_dark" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
