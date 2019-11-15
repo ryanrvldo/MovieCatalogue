@@ -13,4 +13,10 @@
         android:icon="@drawable/ic_settings"
         android:title="@string/setting"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/delete_recent"
+        android:icon="@drawable/ic_delete_forever"
+        android:title="Delete Search History"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
 </menu>

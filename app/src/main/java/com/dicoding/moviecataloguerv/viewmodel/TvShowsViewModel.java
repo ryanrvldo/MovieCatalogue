@@ -6,11 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.CreditsResponse;
-import com.dicoding.moviecataloguerv.model.GenresResponse;
-import com.dicoding.moviecataloguerv.model.SimilarResponse;
-import com.dicoding.moviecataloguerv.model.TrailerResponse;
-import com.dicoding.moviecataloguerv.model.TvShow;
 import com.dicoding.moviecataloguerv.model.TvShowResponse;
 import com.dicoding.moviecataloguerv.network.Repository;
 
@@ -19,110 +14,59 @@ public class TvShowsViewModel extends ViewModel {
     private MutableLiveData<TvShowResponse> popularTv;
     private MutableLiveData<TvShowResponse> nowPlayingTv;
     private MutableLiveData<TvShowResponse> topRatedTv;
-    private MutableLiveData<GenresResponse> genres;
-    private MutableLiveData<TvShow> itemsTv;
-    private MutableLiveData<TrailerResponse> trailers;
-    private MutableLiveData<CreditsResponse> credits;
-    private MutableLiveData<SimilarResponse> similar;
-    private MutableLiveData<TvShowResponse> searchTv;
+    private MutableLiveData<TvShowResponse> newReleaseMovies;
 
     private Repository repository = Repository.getInstance();
-    private String type = "tv";
 
-    public void setPopularTv(String language) {
+    public void setPopularTv() {
         popularTv = new MutableLiveData<>();
-        popularTv = repository.getTvShows("popular", language);
+        popularTv = repository.getTvShows("popular");
         Log.d("PopularTv", "Data Created");
     }
 
-    public LiveData<TvShowResponse> getPopularTv(String language) {
+    public LiveData<TvShowResponse> getPopularTv() {
         if (popularTv == null) {
-            setPopularTv(language);
+            setPopularTv();
         }
         return popularTv;
     }
 
-    public void setNowPlayingTv(String language) {
+    public void setOnAirTv() {
         nowPlayingTv = new MutableLiveData<>();
-        nowPlayingTv = repository.getTvShows("on_the_air", language);
+        nowPlayingTv = repository.getTvShows("on_the_air");
         Log.d("NowPlayingTv", "Data Created");
     }
 
-    public LiveData<TvShowResponse> getUpcomingTv(String language) {
+    public LiveData<TvShowResponse> getOnAirTv() {
         if (nowPlayingTv == null) {
-            setNowPlayingTv(language);
+            setOnAirTv();
         }
         return nowPlayingTv;
     }
 
-    public void setTopRatedTv(String language) {
+    public void setTopRatedTv() {
         topRatedTv = new MutableLiveData<>();
-        topRatedTv = repository.getTvShows("top_rated", language);
+        topRatedTv = repository.getTvShows("top_rated");
         Log.d("TopRatedTv", "Data Created");
     }
 
-    public LiveData<TvShowResponse> getTopRatedTv(String language) {
+    public LiveData<TvShowResponse> getTopRatedTv() {
         if (topRatedTv == null) {
-            setTopRatedTv(language);
+            setTopRatedTv();
         }
         return topRatedTv;
     }
 
-    public void setGenres(String language) {
-        genres = new MutableLiveData<>();
-        genres = repository.getGenres(type, language);
+    public void setNewReleaseTv() {
+        newReleaseMovies = new MutableLiveData<>();
+        newReleaseMovies = repository.newReleaseTVShow();
+        Log.d("NewRelease", "Fetched");
     }
 
-    public LiveData<GenresResponse> getGenres(String language) {
-        if (genres == null) {
-            setGenres(language);
+    public LiveData<TvShowResponse> getNewReleaseTv() {
+        if (newReleaseMovies == null) {
+            setNewReleaseTv();
         }
-        return genres;
-    }
-
-    public LiveData<TvShow> getTvShowItems(int tvShowId, String language) {
-        if (itemsTv == null) {
-            itemsTv = new MutableLiveData<>();
-            itemsTv = repository.getTvShowItems(tvShowId, language);
-            Log.d("TvDetail", "Data Created");
-        }
-        return itemsTv;
-    }
-
-    public LiveData<TrailerResponse> getTrailers(int tvShowId) {
-        if (trailers == null) {
-            trailers = new MutableLiveData<>();
-            trailers = repository.getTrailers(type, tvShowId);
-        }
-        return trailers;
-    }
-
-    public LiveData<CreditsResponse> getCredits(int tvShowId) {
-        if (credits == null) {
-            credits = new MutableLiveData<>();
-            credits = repository.getCredits(type, tvShowId);
-        }
-        return credits;
-    }
-
-    public LiveData<SimilarResponse> getSimilar(int tvShowId) {
-        if (similar == null) {
-            similar = new MutableLiveData<>();
-            similar = repository.getSimilar(type, tvShowId, "similar");
-        }
-        return similar;
-    }
-
-    public void setSearchTv(String query) {
-        searchTv = new MutableLiveData<>();
-        searchTv = repository.searchTvShows(query);
-        Log.d("SearchTv", "DataFetched");
-    }
-
-    public LiveData<TvShowResponse> getSearchTv(String query) {
-        if (searchTv == null) {
-            setSearchTv(query);
-        }
-        return searchTv;
+        return newReleaseMovies;
     }
 }

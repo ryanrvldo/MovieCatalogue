@@ -5,7 +5,8 @@
     android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SettingActivity">
+    android:background="@color/dark_grey"
+    tools:context=".ui.setting.SettingActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -34,7 +35,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/release_reminder_title"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar" />
 
@@ -68,7 +69,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/daily_reminder_title"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/release_reminder_description" />
 
@@ -109,10 +110,11 @@
         android:layout_marginEnd="16dp"
         android:text="@string/setting_language"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/daily_reminder_description" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,6 @@
     <string name="genre_ex">Horror, Fiction</string>
     <string name="movie_title">Movie Title</string>
     <string name="trailers">Trailers</string>
-    <string name="language">en-US</string>
     <string name="icStar">icStar</string>
     <string name="image_before_loading">image before loading</string>
     <string name="favorite">Favorite</string>
@@ -58,8 +57,5 @@
     <string name="on_the_air_desc">The list of tv shows on the air</string>
     <string name="cast">Cast</string>
     <string name="undo">Undo</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

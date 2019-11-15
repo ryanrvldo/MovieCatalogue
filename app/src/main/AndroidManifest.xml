@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
         android:name="com.dicoding.moviecataloguerv.READ_DATABASE"
@@ -21,8 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.NewReleaseActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.newRelease.NewReleaseActivity" />
+        <activity android:name=".ui.home.MainActivity" />
 
         <receiver android:name=".widget.FavoriteMovieWidget">
             <intent-filter>
@@ -36,19 +37,23 @@
         <receiver
             android:name=".notification.ReminderReceiver"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.SplashScreenActivity">
+        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.home.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MovieDetailActivity" />
-        <activity android:name=".activity.TvShowDetailActivity" />
+        <activity android:name=".ui.detail.MovieDetailActivity" />
+        <activity android:name=".ui.detail.TvShowDetailActivity" />
 
         <service
             android:name=".widget.StackWidgetService"
@@ -64,7 +69,9 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:resource="@string/default_notification_channel_id" />
 
-        <service android:name=".notification.DailyReminderService">
+        <service android:name=".notification.DailyReminderService"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

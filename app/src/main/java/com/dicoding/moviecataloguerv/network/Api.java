@@ -20,7 +20,6 @@ public interface Api {
     Call<MovieResponse> getMovies(
             @Path("category") String category,
             @Query("api_key") String apiKey,
-            @Query("language") String language,
             @Query("page") int page
     );
 
@@ -28,7 +27,6 @@ public interface Api {
     Call<TvShowResponse> getTvShows(
             @Path("category") String category,
             @Query("api_key") String apiKey,
-            @Query("language") String language,
             @Query("page") int page
     );
 
@@ -36,30 +34,26 @@ public interface Api {
     @GET("movie/{movie_id}")
     Call<Movie> getMovie(
             @Path("movie_id") int id,
-            @Query("api_key") String apiKey,
-            @Query("language") String language
+            @Query("api_key") String apiKey
     );
 
     @GET("tv/{tv_id}")
     Call<TvShow> getTvShow(
             @Path("tv_id") int id,
-            @Query("api_key") String apiKey,
-            @Query("language") String language
+            @Query("api_key") String apiKey
     );
 
     @GET("genre/{type}/list")
     Call<GenresResponse> getGenres(
             @Path("type") String type,
-            @Query("api_key") String apiKey,
-            @Query("language") String language
+            @Query("api_key") String apiKey
     );
 
     @GET("{type}/{movie_id}/videos")
     Call<TrailerResponse> getTrailers(
             @Path("type") String type,
             @Path("movie_id") int id,
-            @Query("api_key") String apiKey,
-            @Query("language") String language
+            @Query("api_key") String apiKey
     );
 
     @GET("{type}/{type_id}/{category}")
@@ -67,8 +61,7 @@ public interface Api {
             @Path("type") String type,
             @Path("type_id") int id,
             @Path("category") String category,
-            @Query("api_key") String apiKey,
-            @Query("language") String language
+            @Query("api_key") String apiKey
     );
 
     @GET("{type}/{type_id}/credits")
@@ -81,21 +74,26 @@ public interface Api {
     @GET("search/movie")
     Call<MovieResponse> searchMovies(
             @Query("api_key") String apiKey,
-            @Query("language") String language,
             @Query("query") String query
     );
 
     @GET("search/tv")
     Call<TvShowResponse> searchTvShows(
             @Query("api_key") String apiKey,
-            @Query("language") String language,
             @Query("query") String query
     );
 
     @GET("discover/movie")
-    Call<MovieResponse> getNewReleaseMovie(
+    Call<MovieResponse> getNewReleaseMovies(
             @Query("api_key") String apiKey,
             @Query("primary_release_date.gte") String todayDate,
             @Query("primary_release_date.lte") String today_date
+    );
+
+    @GET("discover/tv")
+    Call<TvShowResponse> getNewReleaseTVShow(
+            @Query("api_key") String apiKey,
+            @Query("first_air_date.gte") String todayDate,
+            @Query("first_air_date.lte") String today_date
     );
 }

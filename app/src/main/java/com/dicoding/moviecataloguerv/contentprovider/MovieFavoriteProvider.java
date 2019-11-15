@@ -10,7 +10,7 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.dicoding.moviecataloguerv.fragment.FavoriteFragment;
+import com.dicoding.moviecataloguerv.ui.favorite.FavoriteMovieFragment;
 
 import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.AUTHORITY;
 import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.CONTENT_URI;
@@ -70,7 +70,7 @@ public class MovieFavoriteProvider extends ContentProvider {
             added = 0;
         }
         if (getContext() != null) {
-            getContext().getContentResolver().notifyChange(CONTENT_URI, new FavoriteFragment.DataObserver(new Handler(), getContext()));
+            getContext().getContentResolver().notifyChange(CONTENT_URI, new FavoriteMovieFragment.DataObserver(new Handler(), getContext()));
         }
         return Uri.parse(CONTENT_URI + "/" + added);
     }
@@ -85,7 +85,7 @@ public class MovieFavoriteProvider extends ContentProvider {
             updated = 0;
         }
         if (getContext() != null) {
-            getContext().getContentResolver().notifyChange(CONTENT_URI, new FavoriteFragment.DataObserver(new Handler(), getContext()));
+            getContext().getContentResolver().notifyChange(CONTENT_URI, new FavoriteMovieFragment.DataObserver(new Handler(), getContext()));
         }
         return updated;
     }
@@ -100,7 +100,7 @@ public class MovieFavoriteProvider extends ContentProvider {
             deleted = 0;
         }
         if (getContext() != null) {
-            getContext().getContentResolver().notifyChange(CONTENT_URI, new FavoriteFragment.DataObserver(new Handler(), getContext()));
+            getContext().getContentResolver().notifyChange(CONTENT_URI, new FavoriteMovieFragment.DataObserver(new Handler(), getContext()));
         }
         return deleted;
     }

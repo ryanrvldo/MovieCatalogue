@@ -6,12 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.CreditsResponse;
-import com.dicoding.moviecataloguerv.model.GenresResponse;
-import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
-import com.dicoding.moviecataloguerv.model.SimilarResponse;
-import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.network.Repository;
 
 public class MoviesViewModel extends ViewModel {
@@ -19,116 +14,47 @@ public class MoviesViewModel extends ViewModel {
     private MutableLiveData<MovieResponse> popularMovies;
     private MutableLiveData<MovieResponse> nowPlayingMovies;
     private MutableLiveData<MovieResponse> topRatedMovies;
-    private MutableLiveData<GenresResponse> genres;
-    private MutableLiveData<Movie> itemsMovie;
-    private MutableLiveData<TrailerResponse> trailers;
-    private MutableLiveData<SimilarResponse> similar;
-    private MutableLiveData<CreditsResponse> credits;
-    private MutableLiveData<MovieResponse> searchMovies;
     private MutableLiveData<MovieResponse> newReleaseMovies;
 
     private Repository repository = Repository.getInstance();
-    private String type = "movie";
 
-    public void setPopularMovies(String language) {
+    public void setPopularMovies() {
         popularMovies = new MutableLiveData<>();
-        popularMovies = repository.getMovies("popular", language);
+        popularMovies = repository.getMovies("popular");
         Log.d("PopularMovies", "Data Created");
     }
 
-    public LiveData<MovieResponse> getPopularMovies(String language) {
+    public LiveData<MovieResponse> getPopularMovies() {
         if (popularMovies == null) {
-            setPopularMovies(language);
+            setPopularMovies();
         }
         return popularMovies;
     }
 
-    public void setNowPlayingMovies(String language) {
+    public void setNowPlayingMovies() {
         nowPlayingMovies = new MutableLiveData<>();
-        nowPlayingMovies = repository.getMovies("now_playing", language);
+        nowPlayingMovies = repository.getMovies("now_playing");
         Log.d("UpcomingMovies", "Data Created");
     }
 
-    public LiveData<MovieResponse> getNowPlayingMovies(String language) {
+    public LiveData<MovieResponse> getNowPlayingMovies() {
         if (nowPlayingMovies == null) {
-            setNowPlayingMovies(language);
+            setNowPlayingMovies();
         }
         return nowPlayingMovies;
     }
 
-    public void setTopRatedMovies(String language) {
+    public void setTopRatedMovies() {
         topRatedMovies = new MutableLiveData<>();
-        topRatedMovies = repository.getMovies("top_rated", language);
+        topRatedMovies = repository.getMovies("top_rated");
         Log.d("TopRatedMovies", "Data Created");
     }
 
-    public LiveData<MovieResponse> getTopRated(String language) {
+    public LiveData<MovieResponse> getTopRated() {
         if (topRatedMovies == null) {
-            setTopRatedMovies(language);
+            setTopRatedMovies();
         }
         return topRatedMovies;
-    }
-
-    public void setGenres(String language) {
-        genres = new MutableLiveData<>();
-        genres = repository.getGenres(type, language);
-    }
-
-    public LiveData<GenresResponse> getGenres(String language) {
-        if (genres == null) {
-            setGenres(language);
-        }
-        return genres;
-    }
-
-    private void setItemsMovie(int movieId, String language) {
-        itemsMovie = new MutableLiveData<>();
-        itemsMovie = repository.getMovieItems(movieId, language);
-        Log.d("MovieDetail", "Data Created");
-    }
-
-    public LiveData<Movie> getMovieItems(int movieId, String language) {
-        if (itemsMovie == null) {
-            setItemsMovie(movieId, language);
-        }
-        return itemsMovie;
-    }
-
-    public LiveData<TrailerResponse> getTrailers(int movieId) {
-        if (trailers == null) {
-            trailers = new MutableLiveData<>();
-            trailers = repository.getTrailers(type, movieId);
-        }
-        return trailers;
-    }
-
-    public LiveData<SimilarResponse> getSimilar(int movieId) {
-        if (similar == null) {
-            similar = new MutableLiveData<>();
-            similar = repository.getSimilar(type, movieId, "similar");
-        }
-        return similar;
-    }
-
-    public LiveData<CreditsResponse> getCredits(int movieId) {
-        if (credits == null) {
-            credits = new MutableLiveData<>();
-            credits = repository.getCredits(type, movieId);
-        }
-        return credits;
-    }
-
-    public void setSearchMovies(String query) {
-        searchMovies = new MutableLiveData<>();
-        searchMovies = repository.searchMovies(query);
-        Log.d("SearchMovie", "Fetched");
-    }
-
-    public LiveData<MovieResponse> getSearchMovies(String query) {
-        if (searchMovies == null) {
-            setSearchMovies(query);
-        }
-        return searchMovies;
     }
 
     public void setNewReleaseMovies() {

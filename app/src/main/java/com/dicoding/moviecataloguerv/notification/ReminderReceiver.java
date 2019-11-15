@@ -18,7 +18,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.activity.NewReleaseActivity;
+import com.dicoding.moviecataloguerv.ui.newRelease.NewReleaseActivity;
 import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.network.Api;
@@ -57,6 +57,9 @@ public class ReminderReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         message = intent.getStringExtra(EXTRA_MESSAGE);
         if (message != null && message.equalsIgnoreCase("EXTRA_MESSAGE")) {
+            getTodayReleaseMovie(context);
+        }
+        if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
             getTodayReleaseMovie(context);
         }
     }
@@ -169,7 +172,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDate = date.format(new Date());
 
-        api.getNewReleaseMovie(BuildConfig.TMDB_API_KEY, currentDate, currentDate).enqueue(new Callback<MovieResponse>() {
+        api.getNewReleaseMovies(BuildConfig.TMDB_API_KEY, currentDate, currentDate).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.isSuccessful()) {

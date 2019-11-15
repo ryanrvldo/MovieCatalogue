@@ -14,7 +14,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.dicoding.moviecataloguerv.MainActivity;
+import com.dicoding.moviecataloguerv.ui.home.MainActivity;
 import com.dicoding.moviecataloguerv.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
