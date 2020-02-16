@@ -12,16 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.detail.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
-import com.dicoding.moviecataloguerv.model.Movie;
-import com.dicoding.moviecataloguerv.model.MovieResponse;
+import com.dicoding.moviecataloguerv.ui.detail.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.viewmodel.MoviesViewModel;
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
@@ -64,7 +61,7 @@ public class MovieFragment extends Fragment {
         initUI(view);
 
         popularRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        popularAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "movie");
+        popularAdapter = new MoviesAdapter(new ArrayList<>(), onItemClicked, "movie");
         skeletonScreenPopular = Skeleton.bind(popularRV)
                 .adapter(popularAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -72,7 +69,7 @@ public class MovieFragment extends Fragment {
                 .show();
 
         topRatedRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        topRatedAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "movie");
+        topRatedAdapter = new MoviesAdapter(new ArrayList<>(), onItemClicked, "movie");
         skeletonScreenTop = Skeleton.bind(topRatedRV)
                 .adapter(topRatedAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -80,7 +77,7 @@ public class MovieFragment extends Fragment {
                 .show();
 
         nowPlayingRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        nowPlayingAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "movie");
+        nowPlayingAdapter = new MoviesAdapter(new ArrayList<>(), onItemClicked, "movie");
         skeletonScreenNow = Skeleton.bind(nowPlayingRV)
                 .adapter(nowPlayingAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -111,63 +108,52 @@ public class MovieFragment extends Fragment {
     }
 
     private void observeData() {
-            moviesViewModel.getPopularMovies().observe(getViewLifecycleOwner(), new Observer<MovieResponse>() {
-                @Override
-                public void onChanged(MovieResponse movieResponse) {
-                    if (movieResponse != null) {
-                        popularAdapter.refillMovie(movieResponse.getMovieItems());
-                        skeletonScreenPopular.hide();
-                    } else {
-                        moviesViewModel.setPopularMovies();
-                        if (moviesViewModel.getPopularMovies().getValue() != null) {
-                            popularAdapter.refillMovie(moviesViewModel.getPopularMovies().getValue().getMovieItems());
-                            skeletonScreenPopular.hide();
-                        }
-                    }
+        moviesViewModel.getPopularMovies().observe(getViewLifecycleOwner(), movieResponse -> {
+            if (movieResponse != null) {
+                popularAdapter.refillMovie(movieResponse.getMovieItems());
+                skeletonScreenPopular.hide();
+            } else {
+                moviesViewModel.setPopularMovies();
+                if (moviesViewModel.getPopularMovies().getValue() != null) {
+                    popularAdapter.refillMovie(moviesViewModel.getPopularMovies().getValue().getMovieItems());
+                    skeletonScreenPopular.hide();
                 }
-            });
+            }
+        });
 
-            moviesViewModel.getTopRated().observe(getViewLifecycleOwner(), new Observer<MovieResponse>() {
-                @Override
-                public void onChanged(MovieResponse movieResponse) {
-                    if (movieResponse != null) {
-                        topRatedAdapter.refillMovie(movieResponse.getMovieItems());
-                        skeletonScreenTop.hide();
-                    } else {
-                        moviesViewModel.setTopRatedMovies();
-                        if (moviesViewModel.getTopRated().getValue() != null) {
-                            topRatedAdapter.refillMovie(moviesViewModel.getTopRated().getValue().getMovieItems());
-                            skeletonScreenTop.hide();
-                        }
-                    }
+        moviesViewModel.getTopRated().observe(getViewLifecycleOwner(), movieResponse -> {
+            if (movieResponse != null) {
+                topRatedAdapter.refillMovie(movieResponse.getMovieItems());
+                skeletonScreenTop.hide();
+            } else {
+                moviesViewModel.setTopRatedMovies();
+                if (moviesViewModel.getTopRated().getValue() != null) {
+                    topRatedAdapter.refillMovie(moviesViewModel.getTopRated().getValue().getMovieItems());
+                    skeletonScreenTop.hide();
                 }
-            });
+            }
+        });
 
-            moviesViewModel.getNowPlayingMovies().observe(getViewLifecycleOwner(), new Observer<MovieResponse>() {
-                @Override
-                public void onChanged(MovieResponse movieResponse) {
-                    if (movieResponse != null) {
-                        nowPlayingAdapter.refillMovie(movieResponse.getMovieItems());
-                        skeletonScreenNow.hide();
-                    } else {
-                        moviesViewModel.setNowPlayingMovies();
-                        if (moviesViewModel.getNowPlayingMovies().getValue() != null) {
-                            nowPlayingAdapter.refillMovie(moviesViewModel.getNowPlayingMovies().getValue().getMovieItems());
-                            skeletonScreenNow.hide();
-                        }
-                    }
+        moviesViewModel.getNowPlayingMovies().observe(getViewLifecycleOwner(), movieResponse -> {
+            if (movieResponse != null) {
+                nowPlayingAdapter.refillMovie(movieResponse.getMovieItems());
+                skeletonScreenNow.hide();
+            } else {
+                moviesViewModel.setNowPlayingMovies();
+                if (moviesViewModel.getNowPlayingMovies().getValue() != null) {
+                    nowPlayingAdapter.refillMovie(moviesViewModel.getNowPlayingMovies().getValue().getMovieItems());
+                    skeletonScreenNow.hide();
                 }
-            });
+            }
+        });
 
-            Log.d("FragmentPopularMovies", "Loaded");
+        Log.d("FragmentPopularMovies", "Loaded");
     }
 
-    private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(Movie movie) {
-            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
-            startActivity(intent);
-        }
+    private MoviesAdapter.OnItemClicked onItemClicked = movie -> {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
+        Log.d("movieID", ": " + movie.getId());
+        startActivity(intent);
     };
 }

@@ -22,6 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.detail.SeasonsActivity"></activity>
         <activity android:name=".ui.newRelease.NewReleaseActivity" />
         <activity android:name=".ui.home.MainActivity" />
 
@@ -69,7 +70,8 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:resource="@string/default_notification_channel_id" />
 
-        <service android:name=".notification.DailyReminderService"
+        <service
+            android:name=".notification.DailyReminderService"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

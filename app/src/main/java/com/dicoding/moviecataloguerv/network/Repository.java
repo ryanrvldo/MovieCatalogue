@@ -19,6 +19,7 @@ import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.model.Search;
+import com.dicoding.moviecataloguerv.model.Season;
 import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShow;
@@ -128,7 +129,7 @@ public class Repository {
 
     public MutableLiveData<Movie> getMovieItems(int movieId) {
         final MutableLiveData<Movie> movieData = new MutableLiveData<>();
-        api.getMovie(movieId, BuildConfig.TMDB_API_KEY).enqueue(new Callback<Movie>() {
+        api.getMovie(movieId, BuildConfig.TMDB_API_KEY, "images").enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
                 if (response.isSuccessful()) {
@@ -184,7 +185,7 @@ public class Repository {
 
     public MutableLiveData<TvShow> getTvShowItems(int tvShowId) {
         final MutableLiveData<TvShow> tvShowData = new MutableLiveData<>();
-        api.getTvShow(tvShowId, BuildConfig.TMDB_API_KEY).enqueue(new Callback<TvShow>() {
+        api.getTvShow(tvShowId, BuildConfig.TMDB_API_KEY, "images").enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(@NonNull Call<TvShow> call, @NonNull Response<TvShow> response) {
                 if (response.isSuccessful()) {
@@ -309,11 +310,31 @@ public class Repository {
             }
 
             @Override
-            public void onFailure(Call<TvShowResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
 
             }
         });
         return newReleaseData;
+    }
+
+    public MutableLiveData<Season> getSeasons(int tvId, int seasonNumber) {
+        final MutableLiveData<Season> seasonData = new MutableLiveData<>();
+        api.getTvSeasons(tvId, seasonNumber, BuildConfig.TMDB_API_KEY).enqueue(new Callback<Season>() {
+            @Override
+            public void onResponse(@NonNull Call<Season> call, @NonNull Response<Season> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null && response.body().getEpisodes() != null) {
+                        seasonData.postValue(response.body());
+                        Log.d("Season:", response.body().toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Season> call, @NonNull Throwable t) {
+            }
+        });
+        return seasonData;
     }
 
 
@@ -384,7 +405,7 @@ public class Repository {
     }
 
     public String getSearch(final String query) {
-        String  search = null;
+        String search = null;
         try {
             search = new SelectSearchAsyncTask(searchDao).execute(query).get();
         } catch (ExecutionException | InterruptedException e) {
@@ -529,7 +550,7 @@ public class Repository {
         }
 
         @Override
-        protected String  doInBackground(String... strings) {
+        protected String doInBackground(String... strings) {
             return searchDao.getSearch(strings[0]);
         }
     }

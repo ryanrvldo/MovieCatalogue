@@ -22,9 +22,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseContract.FavoriteMovieColumns.VOTE_AVERAGE,
             DatabaseContract.FavoriteMovieColumns.BACKDROP
     );
-    public static String DATABASE_NAME = "favorite_movie_database";
+    private static String DATABASE_NAME = "favorite_movie_database";
 
-    public DatabaseHelper(Context context) {
+    DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

@@ -64,18 +64,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             tvQuery = itemView.findViewById(R.id.tv_query);
             imgClear = itemView.findViewById(R.id.clear_recent_item);
 
-            imgClear.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClicked.onDeleteClick(search);
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClicked.onSearchClick(search);
-                }
-            });
+            imgClear.setOnClickListener(v -> onItemClicked.onDeleteClick(search));
+            itemView.setOnClickListener(v -> onItemClicked.onSearchClick(search));
         }
 
         private void bindSearch(Search search) {

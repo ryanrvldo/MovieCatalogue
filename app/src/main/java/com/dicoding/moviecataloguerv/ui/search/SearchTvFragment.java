@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,8 +19,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.TvShow;
-import com.dicoding.moviecataloguerv.model.TvShowResponse;
 import com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.viewmodel.SearchViewModel;
 
@@ -62,7 +59,7 @@ public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "search");
+        adapter = new TvShowsAdapter(new ArrayList<>(), onItemClicked, "search");
         recyclerView.setAdapter(adapter);
 
         showLoading(true);
@@ -72,23 +69,17 @@ public class SearchTvFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
     }
 
-    private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShow tvShow) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
-            startActivity(intent);
-        }
+    private TvShowsAdapter.OnItemClicked onItemClicked = tvShow -> {
+        Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+        intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
+        startActivity(intent);
     };
 
     private void observeData() {
-        viewModel.getSearchTv(SearchActivity.searchQuery).observe(getViewLifecycleOwner(), new Observer<TvShowResponse>() {
-            @Override
-            public void onChanged(TvShowResponse tvShowResponse) {
-                if (tvShowResponse != null) {
-                    adapter.refillTv(tvShowResponse.getTvShowItems());
-                    showLoading(false);
-                }
+        viewModel.getSearchTv(SearchActivity.searchQuery).observe(getViewLifecycleOwner(), tvShowResponse -> {
+            if (tvShowResponse != null) {
+                adapter.refillTv(tvShowResponse.getTvShowItems());
+                showLoading(false);
             }
         });
 

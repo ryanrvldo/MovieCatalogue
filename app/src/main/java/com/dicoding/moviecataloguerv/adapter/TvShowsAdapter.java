@@ -84,12 +84,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             tvPoster = itemView.findViewById(R.id.movie_poster);
             tvOverview = itemView.findViewById(R.id.movie_overview);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClicked.onItemClick(tvShow);
-                }
-            });
+            itemView.setOnClickListener(v -> onItemClicked.onItemClick(tvShow));
         }
 
         private void bindTv(TvShow tvShow) {

@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Toolbar toolbar = findViewById(R.id.toolbar_main);
 
         setSupportActionBar(toolbar);
@@ -57,23 +56,20 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(RecentSearchViewModel.class);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.menu_movie:
-                    pageContent = new MovieFragment();
-                    break;
-                case R.id.menu_tv_show:
-                    pageContent = new TvShowFragment();
-                    break;
-                case R.id.menu_favorite:
-                    pageContent = new FavoriteFragment();
-                    break;
-            }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pageContent).commit();
-            return true;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = item -> {
+        switch (item.getItemId()) {
+            case R.id.menu_movie:
+                pageContent = new MovieFragment();
+                break;
+            case R.id.menu_tv_show:
+                pageContent = new TvShowFragment();
+                break;
+            case R.id.menu_favorite:
+                pageContent = new FavoriteFragment();
+                break;
         }
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pageContent).commit();
+        return true;
     };
 
     @Override
@@ -97,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(searchIntent);
                     isSearch = false;
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pageContent).commit();
-                    bottomNavigation.setVisibility(View.VISIBLE);
                     invalidateOptionsMenu();
+                    bottomNavigation.setVisibility(View.VISIBLE);
                     return true;
                 }
 

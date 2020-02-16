@@ -12,16 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.TvShow;
-import com.dicoding.moviecataloguerv.model.TvShowResponse;
+import com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.viewmodel.TvShowsViewModel;
 import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
@@ -55,7 +52,7 @@ public class TvShowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        return inflater.inflate(R.layout.fragment_tv_show, container, false);
     }
 
     @Override
@@ -63,7 +60,7 @@ public class TvShowFragment extends Fragment {
         initUI(view);
 
         popularRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        popularAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "tvShow");
+        popularAdapter = new TvShowsAdapter(new ArrayList<>(), onItemClicked, "tvShow");
         skeletonScreenPopular = Skeleton.bind(popularRV)
                 .adapter(popularAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -71,7 +68,7 @@ public class TvShowFragment extends Fragment {
                 .show();
 
         topRatedRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        topRatedAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "tvShow");
+        topRatedAdapter = new TvShowsAdapter(new ArrayList<>(), onItemClicked, "tvShow");
         skeletonScreenTop = Skeleton.bind(topRatedRV)
                 .adapter(topRatedAdapter)
                 .load(R.layout.item_movie_skeleton)
@@ -79,7 +76,7 @@ public class TvShowFragment extends Fragment {
                 .show();
 
         onTheAirRV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        onTheAirAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "tvShow");
+        onTheAirAdapter = new TvShowsAdapter(new ArrayList<>(), onItemClicked, "tvShow");
         onTheAirRV.setAdapter(onTheAirAdapter);
         skeletonScreenOnAir = Skeleton.bind(onTheAirRV)
                 .adapter(onTheAirAdapter)
@@ -112,50 +109,41 @@ public class TvShowFragment extends Fragment {
 
     private void observeData() {
 //        if (getActivity() != null) {
-            tvShowsViewModel.getPopularTv().observe(getViewLifecycleOwner(), new Observer<TvShowResponse>() {
-                @Override
-                public void onChanged(TvShowResponse tvShowResponse) {
-                    if (tvShowResponse != null) {
-                        popularAdapter.refillTv(tvShowResponse.getTvShowItems());
+            tvShowsViewModel.getPopularTv().observe(getViewLifecycleOwner(), tvShowResponse -> {
+                if (tvShowResponse != null) {
+                    popularAdapter.refillTv(tvShowResponse.getTvShowItems());
+                    skeletonScreenPopular.hide();
+                } else {
+                    tvShowsViewModel.setPopularTv();
+                    if (tvShowsViewModel.getPopularTv().getValue() != null) {
+                        popularAdapter.refillTv(tvShowsViewModel.getPopularTv().getValue().getTvShowItems());
                         skeletonScreenPopular.hide();
-                    } else {
-                        tvShowsViewModel.setPopularTv();
-                        if (tvShowsViewModel.getPopularTv().getValue() != null) {
-                            popularAdapter.refillTv(tvShowsViewModel.getPopularTv().getValue().getTvShowItems());
-                            skeletonScreenPopular.hide();
-                        }
                     }
                 }
             });
 
-            tvShowsViewModel.getTopRatedTv().observe(getViewLifecycleOwner(), new Observer<TvShowResponse>() {
-                @Override
-                public void onChanged(TvShowResponse tvShowResponse) {
-                    if (tvShowResponse != null) {
-                        topRatedAdapter.refillTv(tvShowResponse.getTvShowItems());
+            tvShowsViewModel.getTopRatedTv().observe(getViewLifecycleOwner(), tvShowResponse -> {
+                if (tvShowResponse != null) {
+                    topRatedAdapter.refillTv(tvShowResponse.getTvShowItems());
+                    skeletonScreenTop.hide();
+                } else {
+                    tvShowsViewModel.setTopRatedTv();
+                    if (tvShowsViewModel.getTopRatedTv().getValue() != null) {
+                        topRatedAdapter.refillTv(tvShowsViewModel.getTopRatedTv().getValue().getTvShowItems());
                         skeletonScreenTop.hide();
-                    } else {
-                        tvShowsViewModel.setTopRatedTv();
-                        if (tvShowsViewModel.getTopRatedTv().getValue() != null) {
-                            topRatedAdapter.refillTv(tvShowsViewModel.getTopRatedTv().getValue().getTvShowItems());
-                            skeletonScreenTop.hide();
-                        }
                     }
                 }
             });
 
-            tvShowsViewModel.getOnAirTv().observe(getViewLifecycleOwner(), new Observer<TvShowResponse>() {
-                @Override
-                public void onChanged(TvShowResponse tvShowResponse) {
-                    if (tvShowResponse != null) {
-                        onTheAirAdapter.refillTv(tvShowResponse.getTvShowItems());
+            tvShowsViewModel.getOnAirTv().observe(getViewLifecycleOwner(), tvShowResponse -> {
+                if (tvShowResponse != null) {
+                    onTheAirAdapter.refillTv(tvShowResponse.getTvShowItems());
+                    skeletonScreenOnAir.hide();
+                } else {
+                    tvShowsViewModel.setOnAirTv();
+                    if (tvShowsViewModel.getOnAirTv().getValue() != null) {
+                        onTheAirAdapter.refillTv(tvShowsViewModel.getOnAirTv().getValue().getTvShowItems());
                         skeletonScreenOnAir.hide();
-                    } else {
-                        tvShowsViewModel.setOnAirTv();
-                        if (tvShowsViewModel.getOnAirTv().getValue() != null) {
-                            onTheAirAdapter.refillTv(tvShowsViewModel.getOnAirTv().getValue().getTvShowItems());
-                            skeletonScreenOnAir.hide();
-                        }
                     }
                 }
             });
@@ -164,13 +152,10 @@ public class TvShowFragment extends Fragment {
 //        }
     }
 
-    private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShow tvShow) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
-            startActivity(intent);
-        }
+    private TvShowsAdapter.OnItemClicked onItemClicked = tvShow -> {
+        Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+        intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
+        startActivity(intent);
     };
 
 }

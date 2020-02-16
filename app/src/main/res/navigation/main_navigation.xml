@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.dicoding.moviecataloguerv.ui.movie.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/action_movieFragment_to_movieDetailActivity"
+            app:destination="@id/movieDetailActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowFragment"
+        android:name="com.dicoding.moviecataloguerv.ui.tvShow.TvShowFragment"
+        android:label="fragment_tv_show"
+        tools:layout="@layout/fragment_tv_show" >
+        <action
+            android:id="@+id/action_tvShowFragment_to_tvShowDetailActivity"
+            app:destination="@id/tvShowDetailActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.dicoding.moviecataloguerv.ui.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/recentSearchFragment"
+        android:name="com.dicoding.moviecataloguerv.ui.search.RecentSearchFragment"
+        android:label="fragment_recent_search"
+        tools:layout="@layout/fragment_recent_search" />
+    <activity
+        android:id="@+id/searchActivity"
+        android:name="com.dicoding.moviecataloguerv.ui.search.SearchActivity"
+        android:label="activity_search"
+        tools:layout="@layout/activity_search" />
+    <activity
+        android:id="@+id/settingActivity"
+        android:name="com.dicoding.moviecataloguerv.ui.setting.SettingActivity"
+        android:label="activity_setting"
+        tools:layout="@layout/activity_setting" />
+    <activity
+        android:id="@+id/movieDetailActivity"
+        android:name="com.dicoding.moviecataloguerv.ui.detail.MovieDetailActivity"
+        android:label="activity_movie_detail"
+        tools:layout="@layout/activity_movie_detail" />
+    <activity
+        android:id="@+id/tvShowDetailActivity"
+        android:name="com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity"
+        android:label="activity_tv_detail"
+        tools:layout="@layout/activity_tv_detail" />
+</navigation>

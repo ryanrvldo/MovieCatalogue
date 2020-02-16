@@ -6,7 +6,6 @@
     <string name="poster_content">Poster</string>
     <string name="movies_tab">Movies</string>
     <string name="tv_shows_tab">TV Shows</string>
-    <string name="release">Date Release</string>
     <string name="overview">Overview</string>
     <string name="rating_ex">5.5</string>
     <string name="genre_ex">Horror, Fiction</string>
@@ -17,7 +16,6 @@
     <string name="favorite">Favorite</string>
     <string name="trailer_title">Trailer Title</string>
     <string name="similar">You may also like</string>
-    <string name="_5_5_10">5.5/10</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="now_playing">Now Playing</string>
@@ -32,7 +30,7 @@
     <string name="appwidget_text">Your favorite movies banner</string>
     <string name="empty_text">Field are empty</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="default_notification_channel_name" translatable="false">Reminder</string>
+    <string name="default_notification_channel_name" translatable="false">Daily Reminder</string>
     <string name="new_movie">New movie</string>
     <string name="new_movies"> new movies</string>
     <string name="new_released_movies">New Released Movies</string>
@@ -46,8 +44,6 @@
     <string name="add_favorite_tv">added to favorite tv shows</string>
     <string name="delete_favorite_tv">deleted from favorite tv shows</string>
     <string name="empty_list">The list is still empty</string>
-    <string name="movie_favorite_tab_desc">Your favorite movies list</string>
-    <string name="tv_favorite_tab_desc">Your favorite tv shows list</string>
     <string name="popular_desc">Most popular movies</string>
     <string name="top_rated_desc">Highest rated movies of all time</string>
     <string name="now_playing_desc">The list of movies in theater</string>
@@ -57,5 +53,9 @@
     <string name="on_the_air_desc">The list of tv shows on the air</string>
     <string name="cast">Cast</string>
     <string name="undo">Undo</string>
+    <string name="seasons">Seasons</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -4,6 +4,7 @@ import com.dicoding.moviecataloguerv.model.CreditsResponse;
 import com.dicoding.moviecataloguerv.model.GenresResponse;
 import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
+import com.dicoding.moviecataloguerv.model.Season;
 import com.dicoding.moviecataloguerv.model.SimilarResponse;
 import com.dicoding.moviecataloguerv.model.TrailerResponse;
 import com.dicoding.moviecataloguerv.model.TvShow;
@@ -34,13 +35,15 @@ public interface Api {
     @GET("movie/{movie_id}")
     Call<Movie> getMovie(
             @Path("movie_id") int id,
-            @Query("api_key") String apiKey
+            @Query("api_key") String apiKey,
+            @Query("append_to_response") String appendQuery
     );
 
     @GET("tv/{tv_id}")
     Call<TvShow> getTvShow(
             @Path("tv_id") int id,
-            @Query("api_key") String apiKey
+            @Query("api_key") String apiKey,
+            @Query("append_to_response") String appendQuery
     );
 
     @GET("genre/{type}/list")
@@ -95,5 +98,12 @@ public interface Api {
             @Query("api_key") String apiKey,
             @Query("first_air_date.gte") String todayDate,
             @Query("first_air_date.lte") String today_date
+    );
+
+    @GET("tv/{tv_id}/season/{season_number}")
+    Call<Season> getTvSeasons(
+            @Path("tv_id") int id,
+            @Path("season_number") int number,
+            @Query("api_key") String apiKey
     );
 }

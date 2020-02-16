@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,14 +25,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.detail.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.ui.detail.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.viewmodel.FavoritesViewModel;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.dicoding.moviecataloguerv.contentprovider.DatabaseContract.FavoriteMovieColumns.CONTENT_URI;
 
@@ -73,7 +70,7 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
 
         movieFavorite.setHasFixedSize(true);
         movieFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
-        moviesAdapter = new MoviesAdapter(new ArrayList<Movie>(), onMovieClicked, "favorite");
+        moviesAdapter = new MoviesAdapter(new ArrayList<>(), onMovieClicked, "favorite");
         movieFavorite.setAdapter(moviesAdapter);
         observeData();
     }
@@ -81,30 +78,27 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
     public void observeData() {
         if (getActivity() != null) {
             favoritesViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(FavoritesViewModel.class);
-            favoritesViewModel.getFavoriteMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
-                @Override
-                public void onChanged(List<Movie> movieItems) {
-                    if (movieItems != null) {
-                        moviesAdapter.refillMovie(movieItems);
-                        if (movieItems.size() == 0) {
-                            movieNullTV.setVisibility(View.VISIBLE);
-                        } else {
-                            movieNullTV.setVisibility(View.GONE);
-                        }
-                        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-                            @Override
-                            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                                return false;
-                            }
-
-                            @Override
-                            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                                favoritesViewModel.deleteFavMovie(moviesAdapter.getMovieAt(viewHolder.getAdapterPosition()));
-                                Toast.makeText(getActivity(), moviesAdapter.getMovieAt(viewHolder.getAdapterPosition()).getTitle() + " deleted from movies favorite list.", Toast.LENGTH_SHORT).show();
-                            }
-                        }).attachToRecyclerView(movieFavorite);
-                        showLoading(false);
+            favoritesViewModel.getFavoriteMovies().observe(getViewLifecycleOwner(), movieItems -> {
+                if (movieItems != null) {
+                    moviesAdapter.refillMovie(movieItems);
+                    if (movieItems.size() == 0) {
+                        movieNullTV.setVisibility(View.VISIBLE);
+                    } else {
+                        movieNullTV.setVisibility(View.GONE);
                     }
+                    new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                        @Override
+                        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                            return false;
+                        }
+
+                        @Override
+                        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                            favoritesViewModel.deleteFavMovie(moviesAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+                            Toast.makeText(getActivity(), moviesAdapter.getMovieAt(viewHolder.getAdapterPosition()).getTitle() + " deleted from movies favorite list.", Toast.LENGTH_SHORT).show();
+                        }
+                    }).attachToRecyclerView(movieFavorite);
+                    showLoading(false);
                 }
             });
         }
@@ -118,13 +112,10 @@ public class FavoriteMovieFragment extends Fragment implements SwipeRefreshLayou
         }
     }
 
-    private MoviesAdapter.OnItemClicked onMovieClicked = new MoviesAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(Movie movie) {
-            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
-            startActivity(intent);
-        }
+    private MoviesAdapter.OnItemClicked onMovieClicked = movie -> {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
+        startActivity(intent);
     };
 
     @Override

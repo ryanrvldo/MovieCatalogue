@@ -12,17 +12,14 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.TvShow;
-import com.dicoding.moviecataloguerv.model.TvShowResponse;
+import com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.viewmodel.TvShowsViewModel;
 
 import java.util.ArrayList;
@@ -63,7 +60,7 @@ public class NewReleaseTvFragment extends Fragment implements SwipeRefreshLayout
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        moviesAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onItemClicked, "search");
+        moviesAdapter = new TvShowsAdapter(new ArrayList<>(), onItemClicked, "search");
         recyclerView.setAdapter(moviesAdapter);
 
         showLoading(true);
@@ -74,26 +71,20 @@ public class NewReleaseTvFragment extends Fragment implements SwipeRefreshLayout
     }
 
     private void observeData() {
-        viewModel.getNewReleaseTv().observe(getViewLifecycleOwner(), new Observer<TvShowResponse>() {
-            @Override
-            public void onChanged(TvShowResponse response) {
-                if (response != null) {
-                    moviesAdapter.refillTv(response.getTvShowItems());
-                    showLoading(false);
-                }
+        viewModel.getNewReleaseTv().observe(getViewLifecycleOwner(), response -> {
+            if (response != null) {
+                moviesAdapter.refillTv(response.getTvShowItems());
+                showLoading(false);
             }
         });
 
         Log.d("NewReleaseTv", "Loaded");
     }
 
-    private TvShowsAdapter.OnItemClicked onItemClicked = new TvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShow tvShow) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
-            startActivity(intent);
-        }
+    private TvShowsAdapter.OnItemClicked onItemClicked = tvShow -> {
+        Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+        intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
+        startActivity(intent);
     };
 
     private void showLoading(Boolean state) {

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +20,6 @@ import com.dicoding.moviecataloguerv.model.Search;
 import com.dicoding.moviecataloguerv.viewmodel.RecentSearchViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,16 +47,13 @@ public class RecentSearchFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rv_recent_search);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SearchAdapter(new ArrayList<Search>(), onItemClicked);
+        adapter = new SearchAdapter(new ArrayList<>(), onItemClicked);
         recyclerView.setAdapter(adapter);
         if (getActivity() != null) {
             viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(RecentSearchViewModel.class);
-            viewModel.getSearchQuery().observe(getViewLifecycleOwner(), new Observer<List<Search>>() {
-                @Override
-                public void onChanged(List<Search> searchList) {
-                    if (searchList != null) {
-                        adapter.refillSearch(searchList);
-                    }
+            viewModel.getSearchQuery().observe(getViewLifecycleOwner(), searchList -> {
+                if (searchList != null) {
+                    adapter.refillSearch(searchList);
                 }
             });
         }

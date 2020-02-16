@@ -28,6 +28,7 @@
             app:srcCompat="@color/colorAccent" />
 
         <ImageView
+            android:id="@+id/play_icon"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:alpha="0.4"

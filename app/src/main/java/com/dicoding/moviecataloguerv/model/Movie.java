@@ -2,6 +2,7 @@ package com.dicoding.moviecataloguerv.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
@@ -54,6 +55,11 @@ public class Movie {
     @SerializedName("genres")
     @Expose
     private ArrayList<Genre> genres;
+
+    @Ignore
+    @SerializedName("images")
+    @Expose
+    private ImageResponse imageResponse;
 
     public Movie(int id, String title, String overview, String posterPath, String releaseDate, float rating, String backdrop) {
         this.id = id;
@@ -127,5 +133,13 @@ public class Movie {
 
     public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
+    }
+
+    public ImageResponse getImageResponse() {
+        return imageResponse;
+    }
+
+    public void setImageResponse(ImageResponse imageResponse) {
+        this.imageResponse = imageResponse;
     }
 }

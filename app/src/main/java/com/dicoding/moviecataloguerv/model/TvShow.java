@@ -2,12 +2,14 @@ package com.dicoding.moviecataloguerv.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(tableName = "favorite_tv", ignoredColumns = {"genres", "ratingVotes"})
 public class TvShow {
@@ -50,6 +52,16 @@ public class TvShow {
     @SerializedName("genres")
     @Expose
     private ArrayList<Genre> genres;
+
+    @Ignore
+    @SerializedName("images")
+    @Expose
+    private ImageResponse imageResponse;
+
+    @Ignore
+    @SerializedName("seasons")
+    @Expose
+    private List<Season> seasons;
 
     public TvShow(int id, String title, String posterPath, String releaseDate, float rating, String backdrop) {
         this.id = id;
@@ -114,5 +126,21 @@ public class TvShow {
 
     public void setRatingVotes(int ratingVotes) {
         this.ratingVotes = ratingVotes;
+    }
+
+    public ImageResponse getImageResponse() {
+        return imageResponse;
+    }
+
+    public void setImageResponse(ImageResponse imageResponse) {
+        this.imageResponse = imageResponse;
+    }
+
+    public List<Season> getSeasons() {
+        return seasons;
+    }
+
+    public void setSeasons(List<Season> seasons) {
+        this.seasons = seasons;
     }
 }

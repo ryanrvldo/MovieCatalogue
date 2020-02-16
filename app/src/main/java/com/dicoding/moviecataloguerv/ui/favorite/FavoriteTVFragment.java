@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,13 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.adapter.TvShowsAdapter;
-import com.dicoding.moviecataloguerv.model.TvShow;
+import com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity;
 import com.dicoding.moviecataloguerv.viewmodel.FavoritesViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +63,7 @@ public class FavoriteTVFragment extends Fragment implements SwipeRefreshLayout.O
         showLoading(true);
 
         tvShowsFavorite.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        tvShowsAdapter = new TvShowsAdapter(new ArrayList<TvShow>(), onTvClicked, "favorite");
+        tvShowsAdapter = new TvShowsAdapter(new ArrayList<>(), onTvClicked, "favorite");
         tvShowsFavorite.setAdapter(tvShowsAdapter);
         observeData();
     }
@@ -74,30 +71,27 @@ public class FavoriteTVFragment extends Fragment implements SwipeRefreshLayout.O
     public void observeData() {
         if (getActivity() != null) {
             favoritesViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(FavoritesViewModel.class);
-            favoritesViewModel.getFavoriteTvShows().observe(getViewLifecycleOwner(), new Observer<List<TvShow>>() {
-                @Override
-                public void onChanged(List<TvShow> tvShowItems) {
-                    if (tvShowItems != null) {
-                        tvShowsAdapter.refillTv(tvShowItems);
-                        if (tvShowItems.size() == 0) {
-                            tvShowNull.setVisibility(View.VISIBLE);
-                        } else {
-                            tvShowNull.setVisibility(View.GONE);
-                        }
-                        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-                            @Override
-                            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                                return false;
-                            }
-
-                            @Override
-                            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                                favoritesViewModel.deleteFavTv(tvShowsAdapter.getTvShowAt(viewHolder.getAdapterPosition()));
-                                Toast.makeText(getActivity(), tvShowsAdapter.getTvShowAt(viewHolder.getAdapterPosition()).getTitle() + " deleted from tv show favorite list.", Toast.LENGTH_SHORT).show();
-                            }
-                        }).attachToRecyclerView(tvShowsFavorite);
-                        showLoading(false);
+            favoritesViewModel.getFavoriteTvShows().observe(getViewLifecycleOwner(), tvShowItems -> {
+                if (tvShowItems != null) {
+                    tvShowsAdapter.refillTv(tvShowItems);
+                    if (tvShowItems.size() == 0) {
+                        tvShowNull.setVisibility(View.VISIBLE);
+                    } else {
+                        tvShowNull.setVisibility(View.GONE);
                     }
+                    new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                        @Override
+                        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                            return false;
+                        }
+
+                        @Override
+                        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                            favoritesViewModel.deleteFavTv(tvShowsAdapter.getTvShowAt(viewHolder.getAdapterPosition()));
+                            Toast.makeText(getActivity(), tvShowsAdapter.getTvShowAt(viewHolder.getAdapterPosition()).getTitle() + " deleted from tv show favorite list.", Toast.LENGTH_SHORT).show();
+                        }
+                    }).attachToRecyclerView(tvShowsFavorite);
+                    showLoading(false);
                 }
             });
         }
@@ -111,13 +105,10 @@ public class FavoriteTVFragment extends Fragment implements SwipeRefreshLayout.O
         }
     }
 
-    private TvShowsAdapter.OnItemClicked onTvClicked = new TvShowsAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(TvShow tvShow) {
-            Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
-            intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
-            startActivity(intent);
-        }
+    private TvShowsAdapter.OnItemClicked onTvClicked = tvShow -> {
+        Intent intent = new Intent(getContext(), TvShowDetailActivity.class);
+        intent.putExtra(TvShowDetailActivity.TV_SHOW_ID, tvShow.getId());
+        startActivity(intent);
     };
 
     @Override

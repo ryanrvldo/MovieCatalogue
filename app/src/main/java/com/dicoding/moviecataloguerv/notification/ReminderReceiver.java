@@ -59,7 +59,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         if (message != null && message.equalsIgnoreCase("EXTRA_MESSAGE")) {
             getTodayReleaseMovie(context);
         }
-        if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
+        if (Objects.equals(intent.getAction(), "android.intent.action.BOOT_COMPLETED")) {
             getTodayReleaseMovie(context);
         }
     }
@@ -77,7 +77,7 @@ public class ReminderReceiver extends BroadcastReceiver {
 
     private void showNotification(Context context, String title, String message) {
         String CHANNEL_ID = "CHANNEL_1";
-        String CHANNEL_NAME = "REMINDER_CHANNEL";
+        String CHANNEL_NAME = "New Movie Reminder";
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_movie_black);

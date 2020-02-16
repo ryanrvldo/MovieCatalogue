@@ -15,15 +15,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.notification.AppSharedPreference;
 import com.dicoding.moviecataloguerv.notification.ReminderReceiver;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "SettingActivity";
+    private static final String TOPIC = "reminder";
 
     private AppSharedPreference preference;
     private ReminderReceiver receiver;
@@ -108,15 +107,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         checkReminderStatus();
         Snackbar snackbar = Snackbar
                 .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
-                .setAction(R.string.undo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        disableReleaseReminder();
-                        msg = getString(R.string.release_reminder_disabled);
-                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
-                        snackbarUndo.show();
-                    }
+                .setAction(R.string.undo, v -> {
+                    disableReleaseReminder();
+                    msg = getString(R.string.release_reminder_disabled);
+                    Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                    snackbarUndo.setActionTextColor(getResources().getColor(R.color.colorAccent));
+                    snackbarUndo.show();
                 });
+        snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
         snackbar.show();
     }
 
@@ -127,61 +125,55 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         checkReminderStatus();
         Snackbar snackbar = Snackbar
                 .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
-                .setAction(R.string.undo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        enableReleaseReminder();
-                        msg = getString(R.string.release_reminder_enabled);
-                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
-                        snackbarUndo.show();
-                    }
+                .setAction(R.string.undo, v -> {
+                    enableReleaseReminder();
+                    msg = getString(R.string.release_reminder_enabled);
+                    Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                    snackbarUndo.setActionTextColor(getResources().getColor(R.color.colorAccent));
+                    snackbarUndo.show();
                 });
+        snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
         snackbar.show();
     }
 
     private void enableDailyReminder() {
         preference.saveBoolean(AppSharedPreference.DAILY_REMINDER_STATUS, true);
-        FirebaseMessaging.getInstance().subscribeToTopic("reminder");
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                String deviceToken = instanceIdResult.getToken();
-                Log.d(TAG, "Refreshed token: " + deviceToken);
-            }
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(instanceIdResult -> {
+            String deviceToken = instanceIdResult.getToken();
+            Log.d(TAG, "Refreshed token: " + deviceToken);
         });
         msg = getString(R.string.daily_reminder_enabled);
         checkReminderStatus();
         Log.d(TAG, msg);
         Snackbar snackbar = Snackbar
                 .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
-                .setAction(R.string.undo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        disableDailyReminder();
-                        msg = getString(R.string.daily_reminder_disabled);
-                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
-                        snackbarUndo.show();
-                    }
+                .setAction(R.string.undo, v -> {
+                    disableDailyReminder();
+                    msg = getString(R.string.daily_reminder_disabled);
+                    Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                    snackbarUndo.setActionTextColor(getResources().getColor(R.color.colorAccent));
+                    snackbarUndo.show();
                 });
+        snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
         snackbar.show();
     }
 
     private void disableDailyReminder() {
         preference.saveBoolean(AppSharedPreference.DAILY_REMINDER_STATUS, false);
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("reminder");
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(TOPIC);
         msg = getString(R.string.daily_reminder_disabled);
         checkReminderStatus();
         Snackbar snackbar = Snackbar
                 .make(constraintLayout, msg, Snackbar.LENGTH_LONG)
-                .setAction(R.string.undo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        enableDailyReminder();
-                        msg = getString(R.string.daily_reminder_enabled);
-                        Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
-                        snackbarUndo.show();
-                    }
+                .setAction(R.string.undo, v -> {
+                    enableDailyReminder();
+                    msg = getString(R.string.daily_reminder_enabled);
+                    Snackbar snackbarUndo = Snackbar.make(constraintLayout, msg, Snackbar.LENGTH_SHORT);
+                    snackbarUndo.setActionTextColor(getResources().getColor(R.color.colorAccent));
+                    snackbarUndo.show();
                 });
+        snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
         snackbar.show();
     }
 

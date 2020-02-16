@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,8 +19,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dicoding.moviecataloguerv.R;
 import com.dicoding.moviecataloguerv.adapter.MoviesAdapter;
-import com.dicoding.moviecataloguerv.model.Movie;
-import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.ui.detail.MovieDetailActivity;
 import com.dicoding.moviecataloguerv.viewmodel.SearchViewModel;
 
@@ -62,7 +59,7 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        moviesAdapter = new MoviesAdapter(new ArrayList<Movie>(), onItemClicked, "search");
+        moviesAdapter = new MoviesAdapter(new ArrayList<>(), onItemClicked, "search");
         recyclerView.setAdapter(moviesAdapter);
 
         showLoading(true);
@@ -73,26 +70,20 @@ public class SearchMovieFragment extends Fragment implements SwipeRefreshLayout.
     }
 
     private void observeData() {
-        viewModel.getSearchMovies(SearchActivity.searchQuery).observe(getViewLifecycleOwner(), new Observer<MovieResponse>() {
-            @Override
-            public void onChanged(MovieResponse movieResponse) {
-                if (movieResponse != null) {
-                    moviesAdapter.refillMovie(movieResponse.getMovieItems());
-                    showLoading(false);
-                }
+        viewModel.getSearchMovies(SearchActivity.searchQuery).observe(getViewLifecycleOwner(), movieResponse -> {
+            if (movieResponse != null) {
+                moviesAdapter.refillMovie(movieResponse.getMovieItems());
+                showLoading(false);
             }
         });
 
         Log.d("FragmentSearchMovies", "Loaded");
     }
 
-    private MoviesAdapter.OnItemClicked onItemClicked = new MoviesAdapter.OnItemClicked() {
-        @Override
-        public void onItemClick(Movie movie) {
-            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
-            startActivity(intent);
-        }
+    private MoviesAdapter.OnItemClicked onItemClicked = movie -> {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra(MovieDetailActivity.MOVIE_ID, movie.getId());
+        startActivity(intent);
     };
 
     private void showLoading(Boolean state) {
