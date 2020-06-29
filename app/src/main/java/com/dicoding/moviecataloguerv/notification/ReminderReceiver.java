@@ -18,10 +18,10 @@ import androidx.core.app.NotificationCompat;
 
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.newRelease.NewReleaseActivity;
 import com.dicoding.moviecataloguerv.model.Movie;
 import com.dicoding.moviecataloguerv.model.MovieResponse;
 import com.dicoding.moviecataloguerv.network.Api;
+import com.dicoding.moviecataloguerv.ui.newRelease.NewReleaseActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;

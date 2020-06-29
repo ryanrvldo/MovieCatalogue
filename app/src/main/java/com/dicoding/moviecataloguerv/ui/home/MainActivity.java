@@ -16,13 +16,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.search.SearchActivity;
-import com.dicoding.moviecataloguerv.ui.setting.SettingActivity;
+import com.dicoding.moviecataloguerv.model.Search;
 import com.dicoding.moviecataloguerv.ui.favorite.FavoriteFragment;
 import com.dicoding.moviecataloguerv.ui.movie.MovieFragment;
 import com.dicoding.moviecataloguerv.ui.search.RecentSearchFragment;
+import com.dicoding.moviecataloguerv.ui.search.SearchActivity;
+import com.dicoding.moviecataloguerv.ui.setting.SettingActivity;
 import com.dicoding.moviecataloguerv.ui.tvShow.TvShowFragment;
-import com.dicoding.moviecataloguerv.model.Search;
 import com.dicoding.moviecataloguerv.viewmodel.RecentSearchViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

@@ -11,8 +11,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.ui.search.SearchActivity;
 import com.dicoding.moviecataloguerv.ui.home.MainActivity;
+import com.dicoding.moviecataloguerv.ui.search.SearchActivity;
 
 public class NewReleaseActivity extends AppCompatActivity {
 
