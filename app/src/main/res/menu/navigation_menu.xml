@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/menu_movie"
-        android:icon="@drawable/ic_movie"
-        android:title="@string/movies_tab" />
-    <item
-        android:id="@+id/menu_tv_show"
-        android:icon="@drawable/ic_live_tv"
-        android:title="@string/tv_shows_tab" />
-    <item
-        android:id="@+id/menu_favorite"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/favorite" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_movie"
+            android:icon="@drawable/ic_movie"
+            android:title="@string/movies_tab" />
+        <item
+            android:id="@+id/menu_tv_show"
+            android:icon="@drawable/ic_live_tv"
+            android:title="@string/tv_shows_tab" />
+        <item
+            android:id="@+id/menu_favorite"
+            android:icon="@drawable/ic_favorite"
+            android:title="@string/favorite" />
+        <item
+            android:id="@+id/menu_setting"
+            android:icon="@drawable/ic_setting_dark"
+            android:title="@string/setting" />
+    </group>
 </menu>

@@ -1,27 +1,28 @@
 package com.dicoding.moviecataloguerv.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.MovieResponse;
-import com.dicoding.moviecataloguerv.network.Repository;
+import com.dicoding.moviecataloguerv.data.Repository;
+import com.dicoding.moviecataloguerv.data.source.remote.response.MovieResponse;
 
 public class MoviesViewModel extends ViewModel {
 
-    private MutableLiveData<MovieResponse> popularMovies;
-    private MutableLiveData<MovieResponse> nowPlayingMovies;
-    private MutableLiveData<MovieResponse> topRatedMovies;
-    private MutableLiveData<MovieResponse> newReleaseMovies;
+    private LiveData<MovieResponse> popularMovies;
+    private LiveData<MovieResponse> nowPlayingMovies;
+    private LiveData<MovieResponse> topRatedMovies;
+    private LiveData<MovieResponse> newReleaseMovies;
 
-    private Repository repository = Repository.getInstance();
+    private Repository repository;
+
+    public MoviesViewModel(Repository repository) {
+        this.repository = repository;
+    }
 
     public void setPopularMovies() {
         popularMovies = new MutableLiveData<>();
         popularMovies = repository.getMovies("popular");
-        Log.d("PopularMovies", "Data Created");
     }
 
     public LiveData<MovieResponse> getPopularMovies() {
@@ -34,7 +35,6 @@ public class MoviesViewModel extends ViewModel {
     public void setNowPlayingMovies() {
         nowPlayingMovies = new MutableLiveData<>();
         nowPlayingMovies = repository.getMovies("now_playing");
-        Log.d("UpcomingMovies", "Data Created");
     }
 
     public LiveData<MovieResponse> getNowPlayingMovies() {
@@ -47,7 +47,6 @@ public class MoviesViewModel extends ViewModel {
     public void setTopRatedMovies() {
         topRatedMovies = new MutableLiveData<>();
         topRatedMovies = repository.getMovies("top_rated");
-        Log.d("TopRatedMovies", "Data Created");
     }
 
     public LiveData<MovieResponse> getTopRated() {
@@ -59,8 +58,7 @@ public class MoviesViewModel extends ViewModel {
 
     public void setNewReleaseMovies() {
         newReleaseMovies = new MutableLiveData<>();
-        newReleaseMovies = repository.newReleaseMovies();
-        Log.d("NewRelease", "Fetched");
+        newReleaseMovies = repository.getNewReleaseMovies();
     }
 
     public LiveData<MovieResponse> getNewReleaseMovies() {

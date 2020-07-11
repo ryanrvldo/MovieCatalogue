@@ -11,6 +11,6 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
-        android:scaleType="fitCenter"
-        tools:srcCompat="@mipmap/ic_logo" />
+        android:scaleType="fitXY"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </LinearLayout>

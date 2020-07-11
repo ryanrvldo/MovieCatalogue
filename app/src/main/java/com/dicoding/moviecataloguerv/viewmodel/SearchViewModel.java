@@ -6,16 +6,20 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.MovieResponse;
-import com.dicoding.moviecataloguerv.model.TvShowResponse;
-import com.dicoding.moviecataloguerv.network.Repository;
+import com.dicoding.moviecataloguerv.data.Repository;
+import com.dicoding.moviecataloguerv.data.source.remote.response.MovieResponse;
+import com.dicoding.moviecataloguerv.data.source.remote.response.TvShowResponse;
 
 public class SearchViewModel extends ViewModel {
 
     private LiveData<MovieResponse> searchMovies;
     private LiveData<TvShowResponse> searchTv;
 
-    private Repository repository = Repository.getInstance();
+    private Repository repository;
+
+    public SearchViewModel(Repository mRepository) {
+        this.repository = mRepository;
+    }
 
     public void setSearchMovies(String query) {
         searchMovies = new MutableLiveData<>();

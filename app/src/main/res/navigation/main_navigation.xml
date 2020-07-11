@@ -4,53 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/movieFragment">
-
     <fragment
         android:id="@+id/movieFragment"
-        android:name="com.dicoding.moviecataloguerv.ui.movie.MovieFragment"
+        android:name="com.dicoding.moviecataloguerv.views.movie.MovieFragment"
         android:label="fragment_movie"
-        tools:layout="@layout/fragment_movie" >
+        tools:layout="@layout/fragment_movie">
         <action
-            android:id="@+id/action_movieFragment_to_movieDetailActivity"
+            android:id="@+id/action_fragment_movie_to_movie_detail"
             app:destination="@id/movieDetailActivity" />
     </fragment>
     <fragment
         android:id="@+id/tvShowFragment"
-        android:name="com.dicoding.moviecataloguerv.ui.tvShow.TvShowFragment"
-        android:label="fragment_tv_show"
-        tools:layout="@layout/fragment_tv_show" >
+        android:name="com.dicoding.moviecataloguerv.views.tvShow.TvShowFragment"
+        android:label="TvShowFragment"
+        tools:layout="@layout/fragment_tv_show">
         <action
             android:id="@+id/action_tvShowFragment_to_tvShowDetailActivity"
             app:destination="@id/tvShowDetailActivity" />
     </fragment>
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.dicoding.moviecataloguerv.ui.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
-    <fragment
         android:id="@+id/recentSearchFragment"
-        android:name="com.dicoding.moviecataloguerv.ui.search.RecentSearchFragment"
+        android:name="com.dicoding.moviecataloguerv.views.search.RecentSearchFragment"
         android:label="fragment_recent_search"
         tools:layout="@layout/fragment_recent_search" />
     <activity
-        android:id="@+id/searchActivity"
-        android:name="com.dicoding.moviecataloguerv.ui.search.SearchActivity"
-        android:label="activity_search"
-        tools:layout="@layout/activity_search" />
-    <activity
-        android:id="@+id/settingActivity"
-        android:name="com.dicoding.moviecataloguerv.ui.setting.SettingActivity"
-        android:label="activity_setting"
-        tools:layout="@layout/activity_setting" />
-    <activity
         android:id="@+id/movieDetailActivity"
-        android:name="com.dicoding.moviecataloguerv.ui.detail.MovieDetailActivity"
-        android:label="activity_movie_detail"
-        tools:layout="@layout/activity_movie_detail" />
+        android:name="com.dicoding.moviecataloguerv.views.detail.MovieDetailActivity"
+        android:label="MovieDetailActivity"
+        tools:layout="@layout/activity_movie_detail">
+        <argument
+            android:name="movie_id"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </activity>
     <activity
         android:id="@+id/tvShowDetailActivity"
-        android:name="com.dicoding.moviecataloguerv.ui.detail.TvShowDetailActivity"
-        android:label="activity_tv_detail"
-        tools:layout="@layout/activity_tv_detail" />
+        android:name="com.dicoding.moviecataloguerv.views.detail.TvShowDetailActivity"
+        android:label="TvShowDetailActivity"
+        tools:layout="@layout/activity_tv_detail">
+        <argument
+            android:name="tv_id"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </activity>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.dicoding.moviecataloguerv.views.favorite.FavoriteFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_favoriteFragment_to_movieDetailActivity"
+            app:destination="@id/movieDetailActivity" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_tvShowDetailActivity"
+            app:destination="@id/tvShowDetailActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.dicoding.moviecataloguerv.views.home.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

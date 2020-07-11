@@ -7,14 +7,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-    <permission
-        android:name="com.dicoding.moviecataloguerv.READ_DATABASE"
-        android:protectionLevel="normal" />
-    <permission
-        android:name="com.dicoding.moviecataloguerv.WRITE_DATABASE"
-        android:protectionLevel="normal" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -22,9 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.detail.SeasonsActivity"></activity>
-        <activity android:name=".ui.newRelease.NewReleaseActivity" />
-        <activity android:name=".ui.home.MainActivity" />
+        <activity android:name=".views.home.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".views.detail.SeasonsActivity" />
+        <activity android:name=".views.newRelease.NewReleaseActivity" />
+        <activity android:name=".views.home.MainActivity"/>
 
         <receiver android:name=".widget.FavoriteMovieWidget">
             <intent-filter>
@@ -38,23 +37,11 @@
         <receiver
             android:name=".notification.ReminderReceiver"
             android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+            android:exported="true" />
 
-        <activity android:name=".ui.setting.SettingActivity" />
-        <activity android:name=".ui.search.SearchActivity" />
-        <activity android:name=".ui.home.SplashScreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.detail.MovieDetailActivity" />
-        <activity android:name=".ui.detail.TvShowDetailActivity" />
+        <activity android:name=".views.search.SearchActivity" />
+        <activity android:name=".views.detail.MovieDetailActivity" />
+        <activity android:name=".views.detail.TvShowDetailActivity" />
 
         <service
             android:name=".widget.StackWidgetService"
@@ -78,13 +65,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <provider
-            android:name=".contentprovider.MovieFavoriteProvider"
-            android:authorities="com.dicoding.moviecataloguerv"
-            android:exported="true"
-            android:readPermission="com.dicoding.moviecataloguerv.READ_DATABASE"
-            android:writePermission="com.dicoding.moviecataloguerv.WRITE_DATABASE" />
     </application>
 
 </manifest>

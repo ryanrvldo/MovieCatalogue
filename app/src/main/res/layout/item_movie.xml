@@ -1,63 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list_item"
-    android:layout_width="154dp"
-    android:layout_height="310dp"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/colorPrimary"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="2dp">
+    android:layout_width="120dp"
+    android:layout_height="235dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_ripple">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/movie_poster"
             android:layout_width="match_parent"
-            android:layout_height="231dp"
+            android:layout_height="180dp"
             android:contentDescription="@string/poster_content"
-            android:scaleType="center"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/ic_launcher" />
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/movie_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_below="@+id/movie_poster"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster"
             tools:text="@string/movie_title" />
-
-        <ImageView
-            android:id="@+id/icon_rating"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="@string/icStar"
-            android:src="@drawable/ic_star_black_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/movie_title" />
-
-        <TextView
-            android:id="@+id/movie_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/icon_rating"
-            app:layout_constraintStart_toEndOf="@+id/icon_rating"
-            app:layout_constraintTop_toTopOf="@+id/icon_rating"
-            tools:text="@string/rating_ex" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+
+</com.google.android.material.card.MaterialCardView>
+
+

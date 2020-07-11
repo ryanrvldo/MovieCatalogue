@@ -6,17 +6,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.TvShowResponse;
-import com.dicoding.moviecataloguerv.network.Repository;
+import com.dicoding.moviecataloguerv.data.Repository;
+import com.dicoding.moviecataloguerv.data.source.remote.response.TvShowResponse;
 
 public class TvShowsViewModel extends ViewModel {
 
-    private MutableLiveData<TvShowResponse> popularTv;
-    private MutableLiveData<TvShowResponse> nowPlayingTv;
-    private MutableLiveData<TvShowResponse> topRatedTv;
-    private MutableLiveData<TvShowResponse> newReleaseMovies;
+    private LiveData<TvShowResponse> popularTv;
+    private LiveData<TvShowResponse> nowPlayingTv;
+    private LiveData<TvShowResponse> topRatedTv;
+    private LiveData<TvShowResponse> newReleaseMovies;
 
-    private Repository repository = Repository.getInstance();
+    private Repository repository;
+
+    public TvShowsViewModel(Repository repository) {
+        this.repository = repository;
+    }
 
     public void setPopularTv() {
         popularTv = new MutableLiveData<>();
@@ -59,7 +63,7 @@ public class TvShowsViewModel extends ViewModel {
 
     public void setNewReleaseTv() {
         newReleaseMovies = new MutableLiveData<>();
-        newReleaseMovies = repository.newReleaseTVShow();
+        newReleaseMovies = repository.getNewReleaseTvShows();
         Log.d("NewRelease", "Fetched");
     }
 

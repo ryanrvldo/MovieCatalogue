@@ -1,51 +1,33 @@
 package com.dicoding.moviecataloguerv.viewmodel;
 
-import android.app.Application;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.Movie;
-import com.dicoding.moviecataloguerv.model.TvShow;
-import com.dicoding.moviecataloguerv.network.Repository;
+import com.dicoding.moviecataloguerv.data.Repository;
+import com.dicoding.moviecataloguerv.data.source.model.Movie;
+import com.dicoding.moviecataloguerv.data.source.model.TvShow;
 
 import java.util.List;
 
-public class FavoritesViewModel extends AndroidViewModel {
+public class FavoritesViewModel extends ViewModel {
 
     private Repository repository;
     private LiveData<List<Movie>> favoriteMovies;
     private LiveData<List<TvShow>> favoriteTvShows;
 
-    public FavoritesViewModel(@NonNull Application application) {
-        super(application);
-        repository = new Repository(application);
-    }
-
-    public void addFavoriteMovie(Movie movie) {
-        repository.addFavMovie(movie);
-        favoriteMovies = repository.getAllFavoriteMovies();
-        Log.d("DataMovie", "Added");
-    }
-
-    public Movie selectFavMovie(int movieId) {
-        Log.d("DataMovie", "Selected");
-        return repository.selectFavMovie(movieId);
+    public FavoritesViewModel(Repository mRepository) {
+        this.repository = mRepository;
     }
 
     public void deleteFavMovie(Movie movie) {
         repository.deleteFavMovie(movie);
-        favoriteMovies = repository.getAllFavoriteMovies();
-        Log.d("DataMovie", "Deleted");
+        favoriteMovies = repository.getFavMovies();
     }
 
     public void setFavoriteMovies() {
         favoriteMovies = new MutableLiveData<>();
-        favoriteMovies = repository.getAllFavoriteMovies();
-        Log.d("FragmentFavoriteMovies", "Created");
+        favoriteMovies = repository.getFavMovies();
     }
 
     public LiveData<List<Movie>> getFavoriteMovies() {
@@ -55,27 +37,23 @@ public class FavoritesViewModel extends AndroidViewModel {
         return favoriteMovies;
     }
 
-    public void addFavoriteTvShow(TvShow tvShow) {
-        repository.addFavTv(tvShow);
-        favoriteTvShows = repository.getAllFavoriteTv();
-        Log.d("DataTv", "Added");
+    public void insertFavoriteTvShow(TvShow tvShow) {
+        repository.insertFavTv(tvShow);
+        favoriteTvShows = repository.getFavTvShows();
     }
 
-    public TvShow selectFavTv(int tvShowId) {
-        Log.d("DataTv", "Selected");
-        return repository.selectFavTv(tvShowId);
+    public TvShow getFavTv(int tvShowId) {
+        return repository.getFavTv(tvShowId);
     }
 
     public void deleteFavTv(TvShow tvShow) {
         repository.deleteFavTv(tvShow);
-        favoriteTvShows = repository.getAllFavoriteTv();
-        Log.d("DataTv", "Deleted");
+        favoriteTvShows = repository.getFavTvShows();
     }
 
     public void setFavoriteTvShows() {
         favoriteTvShows = new MutableLiveData<>();
-        favoriteTvShows = repository.getAllFavoriteTv();
-        Log.d("FragmentFavoriteTvShows", "Created");
+        favoriteTvShows = repository.getFavTvShows();
     }
 
     public LiveData<List<TvShow>> getFavoriteTvShows() {

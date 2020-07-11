@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_item"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
-    android:layout_marginBottom="10dp"
-    app:cardBackgroundColor="@color/colorPrimary"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardMaxElevation="4dp">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_ripple">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/movie_poster"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:contentDescription="@string/poster_content"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,12 +31,11 @@
             android:id="@+id/movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
             android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/img_star"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster"
             tools:text="@string/movie_title" />
@@ -44,36 +44,35 @@
             android:id="@+id/movie_overview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             android:alpha="0.7"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_title"
             tools:text="@tools:sample/lorem/random" />
 
         <ImageView
+            android:id="@+id/img_star"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginEnd="4dp"
             android:contentDescription="@string/icStar"
             android:src="@drawable/ic_star_black_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/movie_rating"
-            app:layout_constraintEnd_toStartOf="@+id/movie_rating"
 
+            app:layout_constraintEnd_toStartOf="@+id/movie_rating"
             app:layout_constraintTop_toTopOf="@+id/movie_rating" />
 
         <TextView
             android:id="@+id/movie_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginTop="8dp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
+            android:fontFamily="sans-serif-smallcaps"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster"
             tools:text="@string/rating_ex" />

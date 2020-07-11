@@ -10,16 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.Episode;
+import com.dicoding.moviecataloguerv.data.source.model.Episode;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.SeasonViewHolder> {
 
@@ -47,9 +48,9 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.SeasonVi
         Episode episode = episodes.get(position);
         Glide.with(holder.itemView)
                 .load(BuildConfig.TMDB_IMAGE_BASE_URL + episode.getStillPath())
-                .error(R.drawable.ic_broken_image)
-                .placeholder(R.drawable.ic_image)
-                .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                .error(R.drawable.ic_undraw_404)
+                .placeholder(R.drawable.ic_undraw_images)
+                .transition(withCrossFade())
                 .into(holder.episodePoster);
         holder.episodeName.setText(episode.getName());
         holder.episodeDescription.setText(episode.getOverview());

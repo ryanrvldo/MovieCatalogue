@@ -1,57 +1,46 @@
 package com.dicoding.moviecataloguerv.viewmodel;
 
-import android.app.Application;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.Search;
-import com.dicoding.moviecataloguerv.network.Repository;
+import com.dicoding.moviecataloguerv.data.Repository;
+import com.dicoding.moviecataloguerv.data.source.model.Search;
 
 import java.util.List;
 
-public class RecentSearchViewModel extends AndroidViewModel {
-    private static final String TAG = "SearchQuery";
-
+public class RecentSearchViewModel extends ViewModel {
     private Repository repository;
     private LiveData<List<Search>> searchQuery;
 
-    public RecentSearchViewModel(@NonNull Application application) {
-        super(application);
-        repository = new Repository(application);
+    public RecentSearchViewModel(Repository repository) {
+        this.repository = repository;
     }
 
     public LiveData<List<Search>> getSearchQuery() {
         if (searchQuery == null) {
             searchQuery = new MutableLiveData<>();
-            searchQuery = repository.getAllSearch();
+            searchQuery = repository.getSearchHistory();
         }
         return searchQuery;
     }
 
-    public void addSearch(Search search) {
-        repository.addSearch(search);
-        searchQuery = repository.getAllSearch();
-        Log.d(TAG, "addSearch: success");
+    public void insertSearch(Search search) {
+        repository.insertSearch(search);
+        searchQuery = repository.getSearchHistory();
     }
 
     public void deleteSearch(Search search) {
         repository.deleteSearch(search);
-        searchQuery = repository.getAllSearch();
-        Log.d(TAG, "deleteSearch: success");
+        searchQuery = repository.getSearchHistory();
     }
 
     public void deleteAllSearch() {
-        repository.deleteAllSearch();
-        searchQuery = repository.getAllSearch();
-        Log.d(TAG, "deleteAllSearch: success");
+        repository.deleteAllSearchHistory();
+        searchQuery = repository.getSearchHistory();
     }
 
     public String selectSearch(String query) {
-        Log.d(TAG, "selectSearch: selected");
         return repository.getSearch(query);
     }
 }

@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.RecentSearchFragment">
+    tools:context=".views.search.RecentSearchFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recent_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:itemCount="10"
+        tools:itemCount="20"
         tools:listitem="@layout/item_recent_search" />
 
 </ScrollView>

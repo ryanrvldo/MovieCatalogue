@@ -18,10 +18,10 @@ import androidx.core.app.NotificationCompat;
 
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.Movie;
-import com.dicoding.moviecataloguerv.model.MovieResponse;
-import com.dicoding.moviecataloguerv.network.Api;
-import com.dicoding.moviecataloguerv.ui.newRelease.NewReleaseActivity;
+import com.dicoding.moviecataloguerv.data.source.model.Movie;
+import com.dicoding.moviecataloguerv.data.source.remote.TmdbAPI;
+import com.dicoding.moviecataloguerv.data.source.remote.response.MovieResponse;
+import com.dicoding.moviecataloguerv.views.newRelease.NewReleaseActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -57,9 +57,6 @@ public class ReminderReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         message = intent.getStringExtra(EXTRA_MESSAGE);
         if (message != null && message.equalsIgnoreCase("EXTRA_MESSAGE")) {
-            getTodayReleaseMovie(context);
-        }
-        if (Objects.equals(intent.getAction(), "android.intent.action.BOOT_COMPLETED")) {
             getTodayReleaseMovie(context);
         }
     }
@@ -167,12 +164,12 @@ public class ReminderReceiver extends BroadcastReceiver {
                 .baseUrl(BuildConfig.TMDB_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        Api api = retrofit.create(Api.class);
+        TmdbAPI tmdbAPI = retrofit.create(TmdbAPI.class);
 
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDate = date.format(new Date());
 
-        api.getNewReleaseMovies(BuildConfig.TMDB_API_KEY, currentDate, currentDate).enqueue(new Callback<MovieResponse>() {
+        tmdbAPI.getNewReleaseMovies(BuildConfig.TMDB_API_KEY, currentDate, currentDate).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.isSuccessful()) {

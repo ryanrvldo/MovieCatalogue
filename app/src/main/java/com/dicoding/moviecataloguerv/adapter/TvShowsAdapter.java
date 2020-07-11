@@ -3,20 +3,21 @@ package com.dicoding.moviecataloguerv.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.TvShow;
+import com.dicoding.moviecataloguerv.data.source.model.TvShow;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowViewHolder> {
 
@@ -73,7 +74,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
     class TvShowViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         TextView tvRating;
-        ImageView tvPoster;
+        ShapeableImageView tvPoster;
         TextView tvOverview;
         TvShow tvShow;
 
@@ -91,12 +92,10 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             this.tvShow = tvShow;
 
             tvTitle.setText(tvShow.getTitle());
-            tvRating.setText(String.valueOf(tvShow.getRating()));
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShow.getPosterPath())
-                    .error(R.drawable.ic_broken_image)
-                    .placeholder(R.drawable.ic_image)
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .placeholder(R.drawable.ic_undraw_images)
+                    .error(R.drawable.ic_undraw_404).centerCrop().transition(withCrossFade())
                     .into(tvPoster);
         }
 
@@ -108,8 +107,8 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowVi
             tvOverview.setText(tvShow.getOverview());
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + tvShow.getBackdrop())
-                    .error(R.drawable.ic_broken_image)
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.ic_undraw_images)
+                    .error(R.drawable.ic_undraw_404).centerCrop().transition(withCrossFade())
                     .into(tvPoster);
         }
     }

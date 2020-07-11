@@ -12,8 +12,8 @@ import android.widget.RemoteViewsService;
 import com.bumptech.glide.Glide;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.database.FavoriteDatabase;
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.data.source.local.database.AppDatabase;
+import com.dicoding.moviecataloguerv.data.source.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     private static final String TAG = "Widget";
 
     private List<Movie> movieFavorite = new ArrayList<>();
-    private FavoriteDatabase database;
+    private AppDatabase database;
 
     StackRemoteViewsFactory(Context context) {
         mContext = context;
@@ -35,7 +35,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onCreate() {
-        database = FavoriteDatabase.getInstance(mContext);
+        database = AppDatabase.getInstance(mContext);
         try {
             movieFavorite = new GetFavMoviesAsyncTask(database).execute().get();
         } catch (ExecutionException | InterruptedException e) {
@@ -52,15 +52,15 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         }
     }
 
-    private static class GetFavMoviesAsyncTask extends AsyncTask<FavoriteDatabase, Void, List<Movie>> {
-        FavoriteDatabase database;
+    private static class GetFavMoviesAsyncTask extends AsyncTask<AppDatabase, Void, List<Movie>> {
+        AppDatabase database;
 
-        GetFavMoviesAsyncTask(FavoriteDatabase database) {
+        GetFavMoviesAsyncTask(AppDatabase database) {
             this.database = database;
         }
 
         @Override
-        protected List<Movie> doInBackground(FavoriteDatabase... favoriteDatabases) {
+        protected List<Movie> doInBackground(AppDatabase... appDatabases) {
             return database.movieDao().getFavoriteMovies();
         }
     }

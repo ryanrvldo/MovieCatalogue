@@ -5,17 +5,19 @@
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/activity_vertical_margin"
     android:layout_marginBottom="@dimen/activity_vertical_margin"
-    app:cardBackgroundColor="@color/colorPrimary"
+    android:clickable="true"
+    android:focusable="true"
     app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    app:cardMaxElevation="2dp">
+    app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_ripple">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/episode_poster"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -24,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
@@ -32,9 +35,9 @@
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/bg_meta_score"
             android:gravity="center"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorWhite"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/episode_poster"
             tools:text="1" />
@@ -44,7 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/episode_number"
             app:layout_constraintStart_toEndOf="@+id/episode_number"
             app:layout_constraintTop_toTopOf="@+id/episode_number"
@@ -54,10 +56,9 @@
             android:id="@+id/episode_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +73,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:alpha="0.8"
+            android:textIsSelectable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.Search;
+import com.dicoding.moviecataloguerv.data.source.model.Search;
 
 import java.util.ArrayList;
 import java.util.List;

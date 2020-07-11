@@ -2,11 +2,10 @@
 <resources>
     <string name="app_name">Movie Catalogue</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="poster_content">Poster</string>
     <string name="movies_tab">Movies</string>
     <string name="tv_shows_tab">TV Shows</string>
-    <string name="overview">Overview</string>
+    <string name="overview">Plot Summary</string>
     <string name="rating_ex">5.5</string>
     <string name="genre_ex">Horror, Fiction</string>
     <string name="movie_title">Movie Title</string>
@@ -51,11 +50,12 @@
     <string name="top_rated_tv_desc">Highest rated tv shows of all time</string>
     <string name="on_the_air">On The Air</string>
     <string name="on_the_air_desc">The list of tv shows on the air</string>
-    <string name="cast">Cast</string>
+    <string name="cast">Cast \&amp; Credits</string>
     <string name="undo">Undo</string>
     <string name="seasons">Seasons</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="per_10">/10</string>
+    <string name="not_available">N/A</string>
+    <string name="metascore">Metascore</string>
+    <string name="app_version">1.0.0</string>
 
 </resources>

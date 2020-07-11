@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">Movie Catalogue</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="poster_content">Poster</string>
     <string name="movies_tab">Film</string>
     <string name="tv_shows_tab">Acara TV</string>
@@ -51,5 +50,10 @@
     <string name="on_the_air_desc">Daftar serial TV yang sedang tayang di televisi</string>
     <string name="cast">Pemain</string>
     <string name="undo">Urungkan</string>
+    <string name="seasons">Season</string>
+    <string name="per_10">/10</string>
+    <string name="not_available">N/A</string>
+    <string name="metascore">Metascore</string>
+    <string name="app_version">1.0.0</string>
 
 </resources>

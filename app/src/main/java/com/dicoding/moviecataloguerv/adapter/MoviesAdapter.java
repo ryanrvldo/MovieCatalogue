@@ -3,20 +3,21 @@ package com.dicoding.moviecataloguerv.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.dicoding.moviecataloguerv.BuildConfig;
 import com.dicoding.moviecataloguerv.R;
-import com.dicoding.moviecataloguerv.model.Movie;
+import com.dicoding.moviecataloguerv.data.source.model.Movie;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
@@ -73,7 +74,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     class MovieViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         TextView tvRating;
-        ImageView tvPoster;
+        ShapeableImageView tvPoster;
         TextView tvOverview;
         Movie movie;
 
@@ -91,12 +92,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             this.movie = movie;
 
             tvTitle.setText(movie.getTitle());
-            tvRating.setText(String.valueOf(movie.getRating()));
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + movie.getPosterPath())
-                    .error(R.drawable.ic_broken_image)
-                    .placeholder(R.drawable.ic_image)
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+                    .placeholder(R.drawable.ic_undraw_images)
+                    .error(R.drawable.ic_undraw_404).centerCrop().transition(withCrossFade())
                     .into(tvPoster);
         }
 
@@ -108,8 +107,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             tvOverview.setText(movie.getOverview());
             Glide.with(itemView)
                     .load(BuildConfig.TMDB_IMAGE_BASE_URL + movie.getBackdrop())
-                    .error(R.drawable.ic_broken_image)
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.ic_undraw_images)
+                    .error(R.drawable.ic_undraw_404).centerCrop().transition(withCrossFade())
                     .into(tvPoster);
         }
     }

@@ -8,15 +8,15 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_grey"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="@android:color/tertiary_text_dark" />
+        app:tabIndicatorColor="@color/colorPrimaryLight"
+        app:tabSelectedTextColor="@color/colorPrimaryLight"
+        app:tabTextColor="@color/colorPrimary" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"

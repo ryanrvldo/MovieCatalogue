@@ -4,17 +4,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dicoding.moviecataloguerv.model.Season;
-import com.dicoding.moviecataloguerv.network.Repository;
+import com.dicoding.moviecataloguerv.data.Repository;
+import com.dicoding.moviecataloguerv.data.source.model.Season;
 
 public class SeasonsViewModel extends ViewModel {
-    private MutableLiveData<Season> seasons;
+    private LiveData<Season> seasons;
 
-    private Repository repository = Repository.getInstance();
+    private Repository repository;
+
+    public SeasonsViewModel(Repository repository) {
+        this.repository = repository;
+    }
 
     private void setSeasons(int tvId, int seasonNumber) {
         seasons = new MutableLiveData<>();
-        seasons = repository.getSeasons(tvId, seasonNumber);
+        seasons = repository.getSeasonDetail(tvId, seasonNumber);
     }
 
     public LiveData<Season> getSeasons(int tvId, int seasonNumber) {
