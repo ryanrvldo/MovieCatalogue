@@ -57,5 +57,6 @@
     <string name="not_available">N/A</string>
     <string name="metascore">Metascore</string>
     <string name="app_version">1.0.0</string>
+    <string name="tmdb_logo">TMDB Logo</string>
 
 </resources>

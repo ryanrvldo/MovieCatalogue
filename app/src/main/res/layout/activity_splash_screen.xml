@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_splash_screen"
-    tools:context=".views.home.SplashScreenActivity">
+    tools:context=".ui.home.SplashScreenActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_logo"

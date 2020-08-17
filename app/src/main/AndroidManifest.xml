@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.dicoding.moviecataloguerv"
+    package="com.ryanrvldo.moviecatalogue"
     tools:ignore="GoogleAppIndexingWarning, AllowBackup">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,18 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.home.SplashScreenActivity">
+        <activity android:name="com.ryanrvldo.moviecatalogue.ui.home.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.detail.SeasonsActivity" />
-        <activity android:name=".views.newRelease.NewReleaseActivity" />
-        <activity android:name=".views.home.MainActivity"/>
+        <activity android:name="com.ryanrvldo.moviecatalogue.ui.detail.SeasonsActivity" />
+        <activity android:name="com.ryanrvldo.moviecatalogue.ui.newRelease.NewReleaseActivity" />
+        <activity android:name="com.ryanrvldo.moviecatalogue.ui.home.MainActivity"/>
 
-        <receiver android:name=".widget.FavoriteMovieWidget">
+        <receiver android:name="com.ryanrvldo.moviecatalogue.widget.FavoriteMovieWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -35,16 +35,16 @@
                 android:resource="@xml/favorite_image_widget_info" />
         </receiver>
         <receiver
-            android:name=".notification.ReminderReceiver"
+            android:name="com.ryanrvldo.moviecatalogue.notification.ReminderReceiver"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".views.search.SearchActivity" />
-        <activity android:name=".views.detail.MovieDetailActivity" />
-        <activity android:name=".views.detail.TvShowDetailActivity" />
+        <activity android:name="com.ryanrvldo.moviecatalogue.ui.search.SearchActivity" />
+        <activity android:name="com.ryanrvldo.moviecatalogue.ui.detail.MovieDetailActivity" />
+        <activity android:name="com.ryanrvldo.moviecatalogue.ui.detail.TvShowDetailActivity" />
 
         <service
-            android:name=".widget.StackWidgetService"
+            android:name="com.ryanrvldo.moviecatalogue.widget.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <meta-data
@@ -58,7 +58,7 @@
             android:resource="@string/default_notification_channel_id" />
 
         <service
-            android:name=".notification.DailyReminderService"
+            android:name="com.ryanrvldo.moviecatalogue.notification.DailyReminderService"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

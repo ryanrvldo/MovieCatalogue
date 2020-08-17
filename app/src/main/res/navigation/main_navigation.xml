@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/movieFragment">
+    app:startDestination="@id/menu_movie">
     <fragment
-        android:id="@+id/movieFragment"
-        android:name="com.dicoding.moviecataloguerv.views.movie.MovieFragment"
+        android:id="@+id/menu_movie"
+        android:name="com.ryanrvldo.moviecatalogue.ui.movie.MovieFragment"
         android:label="fragment_movie"
         tools:layout="@layout/fragment_movie">
         <action
@@ -14,8 +14,8 @@
             app:destination="@id/movieDetailActivity" />
     </fragment>
     <fragment
-        android:id="@+id/tvShowFragment"
-        android:name="com.dicoding.moviecataloguerv.views.tvShow.TvShowFragment"
+        android:id="@+id/menu_tv_show"
+        android:name="com.ryanrvldo.moviecatalogue.ui.tvShow.TvShowFragment"
         android:label="TvShowFragment"
         tools:layout="@layout/fragment_tv_show">
         <action
@@ -24,12 +24,12 @@
     </fragment>
     <fragment
         android:id="@+id/recentSearchFragment"
-        android:name="com.dicoding.moviecataloguerv.views.search.RecentSearchFragment"
+        android:name="com.ryanrvldo.moviecatalogue.ui.search.RecentSearchFragment"
         android:label="fragment_recent_search"
         tools:layout="@layout/fragment_recent_search" />
     <activity
         android:id="@+id/movieDetailActivity"
-        android:name="com.dicoding.moviecataloguerv.views.detail.MovieDetailActivity"
+        android:name="com.ryanrvldo.moviecatalogue.ui.detail.MovieDetailActivity"
         android:label="MovieDetailActivity"
         tools:layout="@layout/activity_movie_detail">
         <argument
@@ -39,7 +39,7 @@
     </activity>
     <activity
         android:id="@+id/tvShowDetailActivity"
-        android:name="com.dicoding.moviecataloguerv.views.detail.TvShowDetailActivity"
+        android:name="com.ryanrvldo.moviecatalogue.ui.detail.TvShowDetailActivity"
         android:label="TvShowDetailActivity"
         tools:layout="@layout/activity_tv_detail">
         <argument
@@ -48,8 +48,8 @@
             app:argType="integer" />
     </activity>
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.dicoding.moviecataloguerv.views.favorite.FavoriteFragment"
+        android:id="@+id/menu_favorite"
+        android:name="com.ryanrvldo.moviecatalogue.ui.favorite.FavoriteFragment"
         android:label="FavoriteFragment"
         tools:layout="@layout/fragment_search">
         <action
@@ -60,8 +60,8 @@
             app:destination="@id/tvShowDetailActivity" />
     </fragment>
     <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.dicoding.moviecataloguerv.views.home.SettingFragment"
+        android:id="@+id/menu_setting"
+        android:name="com.ryanrvldo.moviecatalogue.ui.home.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
 </navigation>

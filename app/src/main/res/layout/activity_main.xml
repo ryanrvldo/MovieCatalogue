@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".views.home.MainActivity">
+    tools:context=".ui.home.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -35,7 +35,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:contentDescription="TMDB Logo"
+                    android:contentDescription="@string/tmdb_logo"
                     android:src="@drawable/ic_tmdb_logo_wide" />
             </androidx.appcompat.widget.Toolbar>
 
@@ -47,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/main_navigation" />
+            app:navGraph="@navigation/main_navigation"
+            tools:ignore="FragmentTagUsage" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

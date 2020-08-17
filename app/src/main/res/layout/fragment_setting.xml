@@ -5,7 +5,7 @@
     android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.home.SettingFragment">
+    tools:context=".ui.home.SettingFragment">
 
     <TextView
         android:id="@+id/release_reminder_title"
@@ -28,13 +28,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/release_reminder_title" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toBottomOf="@+id/release_reminder_description"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toTopOf="@+id/release_reminder_title" />
 
@@ -60,13 +61,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/daily_reminder_title" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_daily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toBottomOf="@+id/daily_reminder_description"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toTopOf="@+id/daily_reminder_title" />
 
