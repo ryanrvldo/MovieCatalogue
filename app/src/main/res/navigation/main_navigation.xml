@@ -6,16 +6,16 @@
     app:startDestination="@id/menu_movie">
     <fragment
         android:id="@+id/menu_movie"
-        android:name="com.ryanrvldo.moviecatalogue.ui.movie.MovieFragment"
+        android:name="com.ryanrvldo.moviecatalogue.ui.home.MoviesFragment"
         android:label="fragment_movie"
-        tools:layout="@layout/fragment_movie">
+        tools:layout="@layout/fragment_movies">
         <action
             android:id="@+id/action_fragment_movie_to_movie_detail"
             app:destination="@id/movieDetailActivity" />
     </fragment>
     <fragment
         android:id="@+id/menu_tv_show"
-        android:name="com.ryanrvldo.moviecatalogue.ui.tvShow.TvShowFragment"
+        android:name="com.ryanrvldo.moviecatalogue.ui.home.TvShowFragment"
         android:label="TvShowFragment"
         tools:layout="@layout/fragment_tv_show">
         <action
@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_recent_search" />
     <activity
         android:id="@+id/movieDetailActivity"
-        android:name="com.ryanrvldo.moviecatalogue.ui.detail.MovieDetailActivity"
+        android:name="com.ryanrvldo.moviecatalogue.ui.detail.MovieDetailsActivity"
         android:label="MovieDetailActivity"
         tools:layout="@layout/activity_movie_detail">
         <argument
@@ -39,7 +39,7 @@
     </activity>
     <activity
         android:id="@+id/tvShowDetailActivity"
-        android:name="com.ryanrvldo.moviecatalogue.ui.detail.TvShowDetailActivity"
+        android:name="com.ryanrvldo.moviecatalogue.ui.detail.TvShowDetailsActivity"
         android:label="TvShowDetailActivity"
         tools:layout="@layout/activity_tv_detail">
         <argument
