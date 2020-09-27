@@ -6,8 +6,9 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'dagger.hilt.android.plugin'
 
-def apiKeyProperties = new Properties()
-apiKeyProperties.load(new FileInputStream(rootProject.file('apiKey.properties')))
+Properties properties = new Properties()
+properties.load(rootProject.file('apiKey.properties').newDataInputStream())
+def apiKey = properties['TMDB_API_KEY']
 
 android {
     compileSdkVersion 30
@@ -20,7 +21,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "TMDB_API_KEY", apiKeyProperties['TMDB_API_KEY'])
+        buildConfigField("String", "TMDB_API_KEY", apiKey)
         buildConfigField("String", "TMDB_BASE_URL", '"https://api.themoviedb.org/3/"')
         buildConfigField("String", "TMDB_IMAGE_BASE_URL", '"https://image.tmdb.org/t/p/w500"')
         buildConfigField("String", "TMDB_IMAGE_342", '"https://image.tmdb.org/t/p/w342"')
