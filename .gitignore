@@ -38,4 +38,3 @@ proguard-project.txt
 captures/
 .externalNativeBuild
 .cxx
-apiKey.properties
