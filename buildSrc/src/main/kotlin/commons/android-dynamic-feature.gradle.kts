@@ -1,6 +1,7 @@
 package commons
 
 import BuildAndroidConfig
+import BuildModules
 import BuildProductDimensions
 import ProductFlavorDevelop
 import ProductFlavorProduction
@@ -84,7 +85,7 @@ dependencies {
 //    implementation(project(BuildModules.CORE))
 
     implementation(Dependencies.KOTLIN)
-    implementation(Dependencies.ANDROID_CORE)
+    implementation(Dependencies.CORE_KTX)
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.ACTIVITY_KTX)
     implementation(Dependencies.FRAGMENT_KTX)

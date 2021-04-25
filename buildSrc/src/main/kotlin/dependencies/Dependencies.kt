@@ -7,7 +7,7 @@ package dependencies
 object Dependencies {
     // CORE
     const val KOTLIN = "org.jetbrains.kotlin:kotlin-stdlib:${BuildDependenciesVersions.KOTLIN}"
-    const val ANDROID_CORE = "androidx.core:core-ktx:${BuildDependenciesVersions.ANDROID_CORE}"
+    const val CORE_KTX = "androidx.core:core-ktx:${BuildDependenciesVersions.ANDROID_CORE}"
     const val APPCOMPAT = "androidx.appcompat:appcompat:${BuildDependenciesVersions.APPCOMPAT}"
     const val ACTIVITY_KTX =
         "androidx.activity:activity-ktx:${BuildDependenciesVersions.ACTIVITY_KTX}"

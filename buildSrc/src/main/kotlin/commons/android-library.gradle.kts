@@ -14,6 +14,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-allopen")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -70,11 +71,9 @@ dependencies {
     implementation(Dependencies.COROUTINES)
     implementation(Dependencies.COROUTINES_ANDROID)
     implementation(Dependencies.HILT)
-    implementation(Dependencies.HILT_VIEW_MODEL)
     implementation(Dependencies.TIMBER)
 
     kapt(AnnotationProcessorDependencies.HILT)
-    kapt(AnnotationProcessorDependencies.HILT_ANDROID)
 
     addTestsDependencies()
 }

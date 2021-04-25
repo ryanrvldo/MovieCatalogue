@@ -105,7 +105,7 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.ANDROID_CORE)
+    implementation(Dependencies.CORE_KTX)
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.ACTIVITY_KTX)
     implementation(Dependencies.FRAGMENT_KTX)
@@ -133,12 +133,10 @@ dependencies {
     implementation(Dependencies.COROUTINES_ANDROID)
     implementation(Dependencies.GLIDE)
     implementation(Dependencies.HILT)
-//    implementation(Dependencies.HILT_VIEW_MODEL)
     implementation(Dependencies.TIMBER)
     implementation(Dependencies.ESPRESSO_IDLING_RESOURCE)
 
     kapt(AnnotationProcessorDependencies.ROOM)
     kapt(AnnotationProcessorDependencies.GLIDE)
     kapt(AnnotationProcessorDependencies.HILT)
-//    kapt(AnnotationProcessorDependencies.HILT_ANDROID)
 }
