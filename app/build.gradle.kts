@@ -121,7 +121,6 @@ dependencies {
     implementation(Dependencies.FIREBASE_MESSAGING)
     implementation(Dependencies.LIFECYCLE_VIEW_MODEL_KTX)
     implementation(Dependencies.LIFECYCLE_LIVE_DATA_KTX)
-    implementation(Dependencies.LIFECYCLE_RUNTIME_KTX)
     implementation(Dependencies.LIFECYCLE_COMPILER)
     implementation(Dependencies.RETROFIT)
     implementation(Dependencies.RETROFIT_CONVERTER)

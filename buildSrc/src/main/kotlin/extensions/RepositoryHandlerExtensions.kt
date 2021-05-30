@@ -8,7 +8,6 @@ import org.gradle.kotlin.dsl.maven
  */
 fun RepositoryHandler.applyDefault() {
     google()
-    jcenter()
     mavenCentral()
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://plugins.gradle.org/m2/")

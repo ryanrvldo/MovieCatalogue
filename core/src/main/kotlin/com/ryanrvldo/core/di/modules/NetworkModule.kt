@@ -3,9 +3,6 @@ package com.ryanrvldo.core.di.modules
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.ryanrvldo.core.BuildConfig
-import com.ryanrvldo.core.data.source.remote.network.config.NetworkInterceptor
-import com.ryanrvldo.core.data.source.remote.network.service.MovieService
-import com.ryanrvldo.core.data.source.remote.network.service.TvShowService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +21,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideHttpClientBuilder(): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(NetworkInterceptor())
+        .addInterceptor(com.ryanrvldo.data.network.config.NetworkInterceptor())
         .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .readTimeout(60, TimeUnit.SECONDS)
         .connectTimeout(60, TimeUnit.SECONDS)
@@ -46,14 +43,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideMovieService(retrofit: Retrofit): MovieService {
-        return retrofit.create(MovieService::class.java)
+    fun provideMovieService(retrofit: Retrofit): com.ryanrvldo.data.network.service.MovieService {
+        return retrofit.create(com.ryanrvldo.data.network.service.MovieService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideTvShowService(retrofit: Retrofit): TvShowService {
-        return retrofit.create(TvShowService::class.java)
+    fun provideTvShowService(retrofit: Retrofit): com.ryanrvldo.data.network.service.TvShowService {
+        return retrofit.create(com.ryanrvldo.data.network.service.TvShowService::class.java)
     }
 
 }

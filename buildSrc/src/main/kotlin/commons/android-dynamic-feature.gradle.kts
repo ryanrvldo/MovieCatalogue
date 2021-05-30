@@ -82,7 +82,7 @@ android {
 
 dependencies {
     implementation(project(BuildModules.APP))
-//    implementation(project(BuildModules.CORE))
+    implementation(project(BuildModules.CORE))
 
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.CORE_KTX)
@@ -96,15 +96,12 @@ dependencies {
     implementation(Dependencies.NAVIGATION_UI)
     implementation(Dependencies.LIFECYCLE_VIEW_MODEL_KTX)
     implementation(Dependencies.LIFECYCLE_LIVE_DATA_KTX)
-    implementation(Dependencies.LIFECYCLE_RUNTIME_KTX)
     implementation(Dependencies.LIFECYCLE_COMPILER)
     implementation(Dependencies.HILT)
-    implementation(Dependencies.HILT_VIEW_MODEL)
     implementation(Dependencies.TIMBER)
     implementation(Dependencies.OK_HTTP_LOGGING)
 
     kapt(AnnotationProcessorDependencies.HILT)
-    kapt(AnnotationProcessorDependencies.HILT_ANDROID)
     kapt(AnnotationProcessorDependencies.DATA_BINDING)
     kapt(AnnotationProcessorDependencies.ROOM)
 

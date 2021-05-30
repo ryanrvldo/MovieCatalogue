@@ -1,6 +1,8 @@
 include(
     ":app",
-    ":core"
+    ":core",
+    ":data",
+    ":domain"
 )
 
 rootProject.buildFileName = "build.gradle.kts"

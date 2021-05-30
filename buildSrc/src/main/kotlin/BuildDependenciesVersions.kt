@@ -3,13 +3,13 @@
  */
 object BuildDependenciesVersions {
     // CORE
-    const val KOTLIN = "1.4.32"
+    const val KOTLIN = "1.5.10"
     const val ANDROID_CORE = "1.3.2"
     const val APPCOMPAT = "1.2.0"
     const val ACTIVITY_KTX = "1.2.2"
     const val FRAGMENT_KTX = "1.3.2"
-    const val COROUTINES = "1.4.3"
-    const val HILT = "2.35"
+    const val COROUTINES = "1.5.0"
+    const val HILT = "2.36"
     const val HILT_ANDROID = "1.0.0-alpha03"
     const val DATA_BINDING = "3.1.4"
 
@@ -32,6 +32,7 @@ object BuildDependenciesVersions {
     // NETWORK
     const val RETROFIT = "2.9.0"
     const val OK_HTTP_LOGGING = "4.9.1"
+    const val MOSHI = "1.12.0"
 
     // FIREBASE
     const val FIREBASE_ANALYTICS = "18.0.2"

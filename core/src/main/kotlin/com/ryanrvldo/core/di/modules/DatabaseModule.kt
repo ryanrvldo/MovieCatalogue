@@ -2,10 +2,6 @@ package com.ryanrvldo.core.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.ryanrvldo.core.data.source.local.database.AppDatabase
-import com.ryanrvldo.core.data.source.local.database.dao.MovieFavoriteDao
-import com.ryanrvldo.core.data.source.local.database.dao.SearchHistoryDao
-import com.ryanrvldo.core.data.source.local.database.dao.TvShowFavoriteDao
 import com.ryanrvldo.core.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -22,21 +18,24 @@ object DatabaseModule {
     @Provides
     fun provideAppDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
         context,
-        AppDatabase::class.java,
+        com.ryanrvldo.data.database.AppDatabase::class.java,
         Constants.APP_DATABASE_NAME
     ).fallbackToDestructiveMigration()
         .build()
 
     @Singleton
     @Provides
-    fun provideMovieDao(database: AppDatabase): MovieFavoriteDao = database.movieFavoriteDao()
+    fun provideMovieDao(database: com.ryanrvldo.data.database.AppDatabase): com.ryanrvldo.data.database.dao.MovieFavoriteDao =
+        database.movieFavoriteDao()
 
     @Singleton
     @Provides
-    fun provideTvShowDao(database: AppDatabase): TvShowFavoriteDao = database.tvShowFavoriteDao()
+    fun provideTvShowDao(database: com.ryanrvldo.data.database.AppDatabase): com.ryanrvldo.data.database.dao.TvShowFavoriteDao =
+        database.tvShowFavoriteDao()
 
     @Singleton
     @Provides
-    fun provideSearchDao(database: AppDatabase): SearchHistoryDao = database.searchHistoryDao()
+    fun provideSearchDao(database: com.ryanrvldo.data.database.AppDatabase): com.ryanrvldo.data.database.dao.SearchHistoryDao =
+        database.searchHistoryDao()
 
 }

@@ -18,8 +18,6 @@ object Dependencies {
     const val COROUTINES_ANDROID =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${BuildDependenciesVersions.COROUTINES}"
     const val HILT = "com.google.dagger:hilt-android:${BuildDependenciesVersions.HILT}"
-    const val HILT_VIEW_MODEL =
-        "androidx.hilt:hilt-lifecycle-viewmodel:${BuildDependenciesVersions.HILT_ANDROID}"
 
     // VIEW
     const val CONSTRAINT_LAYOUT =
@@ -42,8 +40,6 @@ object Dependencies {
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${BuildDependenciesVersions.LIFECYCLE}"
     const val LIFECYCLE_LIVE_DATA_KTX =
         "androidx.lifecycle:lifecycle-livedata-ktx:${BuildDependenciesVersions.LIFECYCLE}"
-    const val LIFECYCLE_RUNTIME_KTX =
-        "androidx.lifecycle:lifecycle-runtime-ktx:${BuildDependenciesVersions.LIFECYCLE}"
     const val LIFECYCLE_COMPILER =
         "androidx.lifecycle:lifecycle-common-java8:${BuildDependenciesVersions.LIFECYCLE}"
     const val NAVIGATION_FRAGMENT =
@@ -58,6 +54,7 @@ object Dependencies {
         "com.squareup.retrofit2:converter-gson:${BuildDependenciesVersions.RETROFIT}"
     const val OK_HTTP_LOGGING =
         "com.squareup.okhttp3:logging-interceptor:${BuildDependenciesVersions.OK_HTTP_LOGGING}"
+    const val MOSHI = "com.squareup.moshi:moshi:${BuildDependenciesVersions.MOSHI}"
 
     // FIREBASE
     const val FIREBASE_ANALYTICS =

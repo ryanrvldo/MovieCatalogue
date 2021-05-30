@@ -1,8 +1,5 @@
-import dependencies.AnnotationProcessorDependencies
-import dependencies.Dependencies
 import extensions.buildConfigStringField
 import extensions.getLocalProperty
-import extensions.implementation
 
 plugins {
     id("commons.android-library")
@@ -26,15 +23,6 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.CORE_KTX)
-    implementation(Dependencies.ROOM)
-    implementation(Dependencies.NAVIGATION_UI)
-    implementation(Dependencies.FRAGMENT_KTX)
-    implementation(Dependencies.ACTIVITY_KTX)
-    implementation(Dependencies.RETROFIT)
-    implementation(Dependencies.RETROFIT_CONVERTER)
-    implementation(Dependencies.OK_HTTP_LOGGING)
-
-    kapt(AnnotationProcessorDependencies.DATA_BINDING)
-    kapt(AnnotationProcessorDependencies.ROOM)
+    api(project(":data"))
+    api(project(":domain"))
 }
