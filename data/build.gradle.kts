@@ -1,8 +1,10 @@
 import dependencies.AnnotationProcessorDependencies
 import dependencies.Dependencies
+import dependencies.TestDependencies
 import extensions.buildConfigStringField
 import extensions.getLocalProperty
 import extensions.implementation
+import extensions.testImplementation
 
 plugins {
     id("commons.android-library")
@@ -37,4 +39,6 @@ dependencies {
     implementation(Dependencies.RETROFIT_CONVERTER)
     implementation(Dependencies.OK_HTTP_LOGGING)
     implementation(Dependencies.MOSHI)
+
+    testImplementation(TestDependencies.MOCK_WEB_SERVER)
 }

@@ -2,7 +2,6 @@ package com.ryanrvldo.data.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Date
 import java.util.*
 
 @Entity(tableName = "search_histories")

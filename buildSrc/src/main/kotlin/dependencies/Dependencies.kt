@@ -6,7 +6,6 @@ package dependencies
  */
 object Dependencies {
     // CORE
-    const val KOTLIN = "org.jetbrains.kotlin:kotlin-stdlib:${BuildDependenciesVersions.KOTLIN}"
     const val CORE_KTX = "androidx.core:core-ktx:${BuildDependenciesVersions.ANDROID_CORE}"
     const val APPCOMPAT = "androidx.appcompat:appcompat:${BuildDependenciesVersions.APPCOMPAT}"
     const val ACTIVITY_KTX =
@@ -64,8 +63,6 @@ object Dependencies {
 
     // UTIL
     const val TIMBER = "com.jakewharton.timber:timber:${BuildDependenciesVersions.TIMBER}"
-
-    // TEST
-    const val ESPRESSO_IDLING_RESOURCE =
-        "androidx.test.espresso:espresso-idling-resource:${BuildDependenciesVersions.ESPRESSO}"
+    const val LEAK_CANARY =
+        "com.squareup.leakcanary:leakcanary-android:${BuildDependenciesVersions.LEAK_CANARY}"
 }

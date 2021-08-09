@@ -67,10 +67,23 @@ fun DependencyHandler.androidTestImplementation(dependencyNotation: String): Dep
     add("androidTestImplementation", dependencyNotation)
 
 /**
- * Adds all the tests dependencies to specific configuration.
+ * Adds all the unit tests dependencies to specific configuration.
  */
 fun DependencyHandler.addTestsDependencies() {
-    testImplementation(TestDependencies.ROOM)
+    testImplementation(TestDependencies.JUNIT5_API)
+    testImplementation(TestDependencies.JUNIT5_ENGINE)
+    testImplementation(TestDependencies.ANDROIDX_CORE)
+    testImplementation(TestDependencies.COROUTINES)
+    testImplementation(TestDependencies.MOCKITO)
+    testImplementation(TestDependencies.TRUTH)
+}
 
+fun DependencyHandler.addUnitTestsDependencies() {
+    androidTestImplementation(TestDependencies.ANDROIDX_CORE)
+    androidTestImplementation(TestAndroidDependencies.ANDROID_CORE)
+    androidTestImplementation(TestAndroidDependencies.ANDROID_RULES)
     androidTestImplementation(TestAndroidDependencies.FRAGMENT_TEST)
+    androidTestImplementation(TestAndroidDependencies.NAVIGATION_TEST)
+    androidTestImplementation(TestAndroidDependencies.ESPRESSO)
+    androidTestImplementation(TestAndroidDependencies.ESPRESSO_IDLING_RESOURCE)
 }

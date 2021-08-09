@@ -3,7 +3,7 @@ package plugins
 val ktlint: Configuration by configurations.creating
 
 dependencies {
-    ktlint("com.pinterest:ktlint:0.39.0")
+    ktlint("com.pinterest:ktlint:0.42.1")
 }
 
 tasks {
@@ -11,7 +11,7 @@ tasks {
         group = BuildTasksGroups.VERIFICATION
         description = "Check Kotlin code style."
         classpath = ktlint
-        main = "com.pinterest.ktlint.Main"
+        mainClass.set("com.pinterest.ktlint.Main")
         args("--android", "src/**/*.kt")
     }
 
@@ -19,7 +19,7 @@ tasks {
         group = BuildTasksGroups.FORMATTING
         description = "Fix Kotlin code style deviations."
         classpath = ktlint
-        main = "com.pinterest.ktlint.Main"
+        mainClass.set("com.pinterest.ktlint.Main")
         args("--android", "-F", "src/**/*.kt")
     }
 }

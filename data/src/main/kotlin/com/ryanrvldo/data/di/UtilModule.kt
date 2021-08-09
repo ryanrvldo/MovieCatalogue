@@ -1,6 +1,6 @@
-package com.ryanrvldo.core.di.modules
+package com.ryanrvldo.data.di
 
-import com.ryanrvldo.core.util.Constants
+import com.ryanrvldo.data.constants.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

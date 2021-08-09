@@ -1,26 +1,23 @@
 import dependencies.AnnotationProcessorDependencies
 import dependencies.Dependencies
-import extensions.buildConfigStringField
-import extensions.getLocalProperty
-import extensions.implementation
-import extensions.kapt
+import dependencies.TestAndroidDependencies
+import extensions.*
 
 plugins {
     id(BuildPlugins.ANDROID_APPLICATION)
     id(BuildPlugins.KOTLIN_ANDROID)
     id(BuildPlugins.KOTLIN_KAPT)
-    id(BuildPlugins.KOTLIN_ALLOPEN)
     id(BuildPlugins.NAVIGATION_SAFE_ARGS)
     id(BuildPlugins.HILT)
 }
 
 android {
-    compileSdkVersion(BuildAndroidConfig.COMPILE_SDK_VERSION)
+    compileSdk = BuildAndroidConfig.COMPILE_SDK_VERSION
     defaultConfig {
         applicationId = BuildAndroidConfig.APPLICATION_ID
-        minSdkVersion(BuildAndroidConfig.MIN_SDK_VERSION)
-        targetSdkVersion(BuildAndroidConfig.TARGET_SDK_VERSION)
-        buildToolsVersion(BuildAndroidConfig.BUILD_TOOLS_VERSION)
+        minSdk = BuildAndroidConfig.MIN_SDK_VERSION
+        targetSdk = BuildAndroidConfig.TARGET_SDK_VERSION
+        buildToolsVersion = BuildAndroidConfig.BUILD_TOOLS_VERSION
 
         versionCode = BuildAndroidConfig.VERSION_CODE
         versionName = BuildAndroidConfig.VERSION_NAME
@@ -52,35 +49,29 @@ android {
             it.buildConfigStringField("YOUTUBE_THUMBNAIL_URL",
                 "https://img.youtube.com/vi/%s/0.jpg")
         } catch (ignored: Exception) {
-            throw InvalidUserDataException("You should define 'TMDB_API_KEY' in local.properties. Visit 'https://www.themoviedb.org/' " +
-                    "to obtain them.")
+            throw Exception(
+                "You should define 'TMDB_API_KEY' in local.properties. Visit 'https://www.themoviedb.org/' " +
+                        "to obtain them."
+            )
         }
     }
 
-    flavorDimensions(BuildProductDimensions.ENVIRONMENT)
-    productFlavors {
-        ProductFlavorDevelop.appCreate(this)
-        ProductFlavorQA.appCreate(this)
-        ProductFlavorProduction.appCreate(this)
-    }
-
-    dynamicFeatures = mutableSetOf()
+    dynamicFeatures.addAll(emptyList())
 
     buildFeatures {
-        dataBinding = true
         viewBinding = true
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-    lintOptions {
+    lint {
         lintConfig = rootProject.file(".lint/config.xml")
         isCheckAllWarnings = true
         isWarningsAsErrors = true
@@ -133,7 +124,9 @@ dependencies {
     implementation(Dependencies.GLIDE)
     implementation(Dependencies.HILT)
     implementation(Dependencies.TIMBER)
-    implementation(Dependencies.ESPRESSO_IDLING_RESOURCE)
+    implementation(TestAndroidDependencies.ESPRESSO_IDLING_RESOURCE)
+
+    debugImplementation(Dependencies.LEAK_CANARY)
 
     kapt(AnnotationProcessorDependencies.ROOM)
     kapt(AnnotationProcessorDependencies.GLIDE)
