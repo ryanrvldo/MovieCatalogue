@@ -63,6 +63,4 @@ object Dependencies {
 
     // UTIL
     const val TIMBER = "com.jakewharton.timber:timber:${BuildDependenciesVersions.TIMBER}"
-    const val LEAK_CANARY =
-        "com.squareup.leakcanary:leakcanary-android:${BuildDependenciesVersions.LEAK_CANARY}"
 }

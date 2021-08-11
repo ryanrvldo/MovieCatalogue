@@ -4,7 +4,7 @@ import com.ryanrvldo.data.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class NetworkInterceptor : Interceptor {
+class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val prevRequest = chain.request()
         val newUrl = prevRequest.url.newBuilder()

@@ -1,7 +1,7 @@
 package com.ryanrvldo.data.di
 
 import com.ryanrvldo.data.BuildConfig
-import com.ryanrvldo.data.network.config.NetworkInterceptor
+import com.ryanrvldo.data.network.config.AuthInterceptor
 import com.ryanrvldo.data.network.service.MovieService
 import com.ryanrvldo.data.network.service.TvShowService
 import dagger.Module
@@ -23,7 +23,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideHttpClientBuilder(): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(NetworkInterceptor())
+        .addInterceptor(AuthInterceptor())
         .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .readTimeout(60, TimeUnit.SECONDS)
         .connectTimeout(60, TimeUnit.SECONDS)

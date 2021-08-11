@@ -39,15 +39,15 @@ object BuildDependenciesVersions {
     const val FIREBASE_MESSAGING = "22.0.0"
 
     // UTIL
-    const val TIMBER = "4.7.1"
+    const val TIMBER = "5.0.0"
     const val LEAK_CANARY = "2.7"
 
     object Test {
-        const val JUNIT5 = "5.7.2"
-        const val ANDROIDX_TEST = "1.3.0"
+        const val JUNIT5 = "5.7.1"
+        const val ANDROIDX_TEST = "1.4.0"
         const val ANDROIDX_TESTING_CORE = "2.1.0"
         const val ANDROIDX_ESPRESSO = "3.4.0"
-        const val MOCKITO = "3.11.2"
+        const val MOCKK = "1.12.0"
         const val MOCK_WEB_SERVER = "4.9.1"
         const val TRUTH = "1.1.3"
     }

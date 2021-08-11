@@ -7,8 +7,6 @@ object Constants {
     const val TV_APPEND_QUERY = "images,content_ratings,videos,credits,similar"
     const val SHARED_PREF_NAME = "MOVIE_CATALOGUE_SP"
 
-    const val POPULAR_CATEGORY: String = "popular"
-
     const val DAILY_REMINDER_STATUS = "DAILY_REMINDER_STATUS"
     const val RELEASE_REMINDER_STATUS = "RELEASE_REMINDER_STATUS"
 

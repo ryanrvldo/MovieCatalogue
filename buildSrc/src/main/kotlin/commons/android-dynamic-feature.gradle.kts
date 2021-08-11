@@ -4,7 +4,7 @@ import BuildAndroidConfig
 import BuildModules
 import dependencies.AnnotationProcessorDependencies
 import dependencies.Dependencies
-import extensions.addTestsDependencies
+import extensions.addTestDependencies
 import extensions.implementation
 import extensions.kapt
 
@@ -14,6 +14,7 @@ plugins {
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("dagger.hilt.android.plugin")
+    id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -32,6 +33,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xuse-experimental=kotlinx.coroutines.FlowPreview"
+        )
     }
 
     buildFeatures {
@@ -85,5 +90,5 @@ dependencies {
     kapt(AnnotationProcessorDependencies.HILT)
     kapt(AnnotationProcessorDependencies.ROOM)
 
-    addTestsDependencies()
+    addTestDependencies()
 }

@@ -15,17 +15,17 @@ interface MovieService {
         @Query("page") page: Int = 1,
     ): PagingResponse<MovieResponse>
 
-    @GET("discover/movie")
-    fun getNewReleases(
-        @Query("primary_release_date.gte") startDate: String,
-        @Query("primary_release_date.lte") endDate: String,
-    ): PagingResponse<MovieResponse>
-
     @GET("movie/{movie_id}")
     suspend fun getDetails(
         @Path("movie_id") id: Int,
         @Query("append_to_response") appendQuery: String = Constants.MOVIE_APPEND_QUERY,
     ): MovieResponse
+
+    @GET("discover/movie")
+    fun getNewReleases(
+        @Query("primary_release_date.gte") startDate: String,
+        @Query("primary_release_date.lte") endDate: String,
+    ): PagingResponse<MovieResponse>
 
     @GET("search/movie")
     suspend fun search(@Query("query") query: String): PagingResponse<MovieResponse>

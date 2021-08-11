@@ -8,10 +8,10 @@ object BuildPlugins {
 
     const val KOTLIN_ANDROID = "kotlin-android"
     const val KOTLIN_KAPT = "kotlin-kapt"
-    const val KOTLIN_ALLOPEN = "kotlin-allopen"
 
     const val NAVIGATION_SAFE_ARGS = "androidx.navigation.safeargs.kotlin"
     const val HILT = "dagger.hilt.android.plugin"
+    const val JUNIT5 = "de.mannodermaus.android-junit5"
 
     const val DETEKT = "plugins.detekt"
     const val DOKKA = "plugins.dokka"

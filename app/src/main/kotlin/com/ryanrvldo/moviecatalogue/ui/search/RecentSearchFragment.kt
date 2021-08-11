@@ -29,7 +29,7 @@ class RecentSearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentRecentSearchBinding.inflate(inflater, container, false);
+        _binding = FragmentRecentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 

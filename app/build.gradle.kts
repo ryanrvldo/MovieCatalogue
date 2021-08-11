@@ -1,4 +1,5 @@
 import dependencies.AnnotationProcessorDependencies
+import dependencies.DebugDependencies
 import dependencies.Dependencies
 import dependencies.TestAndroidDependencies
 import extensions.*
@@ -9,6 +10,7 @@ plugins {
     id(BuildPlugins.KOTLIN_KAPT)
     id(BuildPlugins.NAVIGATION_SAFE_ARGS)
     id(BuildPlugins.HILT)
+    id(BuildPlugins.JUNIT5)
 }
 
 android {
@@ -69,6 +71,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xuse-experimental=kotlinx.coroutines.FlowPreview"
+        )
     }
 
     lint {
@@ -126,7 +132,7 @@ dependencies {
     implementation(Dependencies.TIMBER)
     implementation(TestAndroidDependencies.ESPRESSO_IDLING_RESOURCE)
 
-    debugImplementation(Dependencies.LEAK_CANARY)
+    debugImplementation(DebugDependencies.LEAK_CANARY)
 
     kapt(AnnotationProcessorDependencies.ROOM)
     kapt(AnnotationProcessorDependencies.GLIDE)

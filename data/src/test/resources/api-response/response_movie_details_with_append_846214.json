@@ -1,0 +1,1964 @@
+{
+  "adult": false,
+  "backdrop_path": "/zsH3iW60T1t2HBTtrSKzzxJ406J.jpg",
+  "belongs_to_collection": null,
+  "budget": 0,
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    }
+  ],
+  "homepage": "https://www.disneyplus.com/movies/the-good-the-bart-and-the-loki/6xwLjCmfTVem",
+  "id": 846214,
+  "imdb_id": "tt14957270",
+  "original_language": "en",
+  "original_title": "The Simpsons: The Good, the Bart, and the Loki",
+  "overview": "Loki is banished from Asgard once again and must face his toughest opponents yet: the Simpsons and Springfield’s mightiest heroes. The God of Mischief teams up with Bart Simpson in the ultimate crossover event paying tribute to the Marvel Cinematic Universe of superheroes and villains.",
+  "popularity": 951.549,
+  "poster_path": "/rtMdtzywcAGOrF6t8fbxJBqpdcq.jpg",
+  "production_companies": [
+    {
+      "id": 18,
+      "logo_path": "/uqhagSwM7NAkQWVCQhKTyoqF8XH.png",
+      "name": "Gracie Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 21659,
+      "logo_path": "/uJhjhEJEPDoCSSOci44tYoe5BjZ.png",
+      "name": "20th Television",
+      "origin_country": "US"
+    },
+    {
+      "id": 80853,
+      "logo_path": null,
+      "name": "AKOM Production Company",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2021-07-07",
+  "revenue": 0,
+  "runtime": 6,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "The Simpsons: The Good, the Bart, and the Loki",
+  "video": false,
+  "vote_average": 7.9,
+  "vote_count": 338,
+  "images": {
+    "backdrops": [
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": null,
+        "file_path": "/zsH3iW60T1t2HBTtrSKzzxJ406J.jpg",
+        "vote_average": 5.318,
+        "vote_count": 3,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "pt",
+        "file_path": "/708m7sERbCF4S4yclm1nK6tHtve.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "ko",
+        "file_path": "/p8QSIVYoFW8hVW7wSLndJgsv28I.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "en",
+        "file_path": "/oPgN8fxjgPqI4lyEG0nqdzGDa5u.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "de",
+        "file_path": "/ogBUYuzmY7ivN4zAlJ08TdcQD67.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "es",
+        "file_path": "/hZeh4im3CIRhAVxYVZ3vnx417mC.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "ja",
+        "file_path": "/zlbHpU7Wmaq9fkNPnih2fuaisRN.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "it",
+        "file_path": "/k25AosvlK7IYryoZCd56Pys5mbB.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": null,
+        "file_path": "/jBUukLTCmXL79itbmK5JtQvImYS.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "en",
+        "file_path": "/oKLZwbRqb1vmpA2pi6CpE9MciMe.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "es",
+        "file_path": "/jWLiQjJE5JzUgFVGHzF1qBUNi8J.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "ja",
+        "file_path": "/hzmb0pfOccXyEtNZXkxJ5fX9Gdr.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "it",
+        "file_path": "/r0pgcMhOCyibquWqLkn8KJfCqZ5.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 1843,
+        "iso_639_1": null,
+        "file_path": "/gSiSE6TRdN0dgrG88eMMT4he4X9.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3276
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 1080,
+        "iso_639_1": "en",
+        "file_path": "/bqJ7xdad6TcgeEhJ2qjWHaQyGT9.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "pt",
+        "file_path": "/jjVTSR43tCi47GGA3biNJISCtF5.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": null,
+        "file_path": "/mmA6eQX33X0N3I68bzbTc8T0sDP.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "ko",
+        "file_path": "/nntlnfK5KerhRKuEGs0vzaBKbK0.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "fr",
+        "file_path": "/h6qkI2FRXRtqZeT6jMnl0KwfdfR.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": null,
+        "file_path": "/afAkAX7DOmMg9thnFPbG8OFlvTr.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "fr",
+        "file_path": "/RawEoL2qyI7tKNLFeFNiCjMhSO.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": null,
+        "file_path": "/53FHye9sIo5tnGSX0s2uBOkIENW.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "de",
+        "file_path": "/dGJFDegnszquGZeNvQSZL1F23aM.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "es",
+        "file_path": "/kLWHNX1QPVdYquaqFjMJflknHet.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "es",
+        "file_path": "/fObKuBDYT6qPNfFern18GlAgssN.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "zh",
+        "file_path": "/lsQM8ywtg8HAV6vVSxcqKN63t8e.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "zh",
+        "file_path": "/gUt8cllATX3I2LoGNMTsMyfuhn7.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "zh",
+        "file_path": "/fm3h8ZxYJPIuzGIOtfsSZMuHxrm.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "zh",
+        "file_path": "/bekOgIixYdL1WJPM6tSmR616cnh.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "zh",
+        "file_path": "/6KvtRBsOXr1lxiVJdz6gAcXBQ0u.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "zh",
+        "file_path": "/2dcCzYCHBoUKsfjut7ee20am5BB.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "pt",
+        "file_path": "/elXBfyrioAzBuyzZIcLpbHFaMlK.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "pt",
+        "file_path": "/6s2IEQQj2TKNIJGZSZs5chEGgvb.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3840
+      }
+    ],
+    "logos": [
+      {
+        "aspect_ratio": 2.387,
+        "height": 1273,
+        "iso_639_1": "pt",
+        "file_path": "/7Sk0z0LjuvdE0gRgbD3BAGHG62w.png",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3039
+      },
+      {
+        "aspect_ratio": 2.372,
+        "height": 1281,
+        "iso_639_1": "en",
+        "file_path": "/jH2ci1ZeE3n5dF8htou0vprrUiC.png",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3039
+      },
+      {
+        "aspect_ratio": 2.471,
+        "height": 1230,
+        "iso_639_1": "de",
+        "file_path": "/a1knoGLBBeGN7iugl6Qcms8T5bO.png",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 3039
+      },
+      {
+        "aspect_ratio": 2.238,
+        "height": 1272,
+        "iso_639_1": "it",
+        "file_path": "/7hMNZaQTKmq5MCbkHmMkpz1EvbQ.png",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 2847
+      },
+      {
+        "aspect_ratio": 2.365,
+        "height": 1273,
+        "iso_639_1": "pt",
+        "file_path": "/sUrjxhtQY6UrIgCay2FZksaoTmw.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3011
+      },
+      {
+        "aspect_ratio": 3.082,
+        "height": 1233,
+        "iso_639_1": "ko",
+        "file_path": "/9HXVGq3pGno0YvwMgNK2XRAPhXh.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3800
+      },
+      {
+        "aspect_ratio": 3.124,
+        "height": 1206,
+        "iso_639_1": "ko",
+        "file_path": "/vK7OAIsq8J5H7LQNI8U9GmLOgfp.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3767
+      },
+      {
+        "aspect_ratio": 2.35,
+        "height": 1282,
+        "iso_639_1": "en",
+        "file_path": "/1SDdCEAUyhybxGQYXFus4T96PRg.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3013
+      },
+      {
+        "aspect_ratio": 2.123,
+        "height": 897,
+        "iso_639_1": "fr",
+        "file_path": "/AplKawyD1Yvs0YxLlzdNVj8tRAb.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1904
+      },
+      {
+        "aspect_ratio": 2.471,
+        "height": 773,
+        "iso_639_1": "de",
+        "file_path": "/zZJDIYHSkApxFYSIbj6mSPp2M5n.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1910
+      },
+      {
+        "aspect_ratio": 2.235,
+        "height": 851,
+        "iso_639_1": "it",
+        "file_path": "/AoyTR2Ist2bXxjUgPSk0p2Dmcpn.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1902
+      },
+      {
+        "aspect_ratio": 2.448,
+        "height": 1230,
+        "iso_639_1": "de",
+        "file_path": "/wDRP6JFRxXt8q6NrpXIdajfIJ28.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3011
+      },
+      {
+        "aspect_ratio": 2.125,
+        "height": 1266,
+        "iso_639_1": "es",
+        "file_path": "/5PIpzTOHfaVbEDP8xlrwRp3Up6G.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2690
+      },
+      {
+        "aspect_ratio": 2.144,
+        "height": 1266,
+        "iso_639_1": "es",
+        "file_path": "/lk50pgoER7xpkTw6tnJ7SXq60uF.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2714
+      },
+      {
+        "aspect_ratio": 2.125,
+        "height": 1277,
+        "iso_639_1": "es",
+        "file_path": "/90Cg9lPHGVFHvXVXHtHzZm9yDE2.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2714
+      },
+      {
+        "aspect_ratio": 2.106,
+        "height": 1277,
+        "iso_639_1": "es",
+        "file_path": "/8OqgrzDanftKyYuQDrt2yZVKgoN.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2690
+      },
+      {
+        "aspect_ratio": 3.323,
+        "height": 1215,
+        "iso_639_1": "zh",
+        "file_path": "/tZIJCpSqykhrqh2TirC1yckXcDR.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 4037
+      },
+      {
+        "aspect_ratio": 3.3,
+        "height": 1215,
+        "iso_639_1": "zh",
+        "file_path": "/scSu5PBI13KMtplsnEDsH6UfxG6.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 4009
+      },
+      {
+        "aspect_ratio": 3.378,
+        "height": 1197,
+        "iso_639_1": "zh",
+        "file_path": "/54Qh7NXNPOwGTbnkWtTFFhzr4M1.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 4044
+      },
+      {
+        "aspect_ratio": 3.355,
+        "height": 1197,
+        "iso_639_1": "zh",
+        "file_path": "/hM2uXG9AeoahcWumyOdq8SgPmsZ.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 4016
+      },
+      {
+        "aspect_ratio": 2.97,
+        "height": 1249,
+        "iso_639_1": "cn",
+        "file_path": "/hLWFOIuS8McuZjtd3Us2m4VWmTv.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3709
+      },
+      {
+        "aspect_ratio": 2.986,
+        "height": 1249,
+        "iso_639_1": "cn",
+        "file_path": "/nt5uqwl19PENi47uysskyeWy2Ce.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3730
+      },
+      {
+        "aspect_ratio": 3.995,
+        "height": 1065,
+        "iso_639_1": "ja",
+        "file_path": "/5AeUqmhmpMMhUYIuKHDJKDVs1wK.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 4255
+      },
+      {
+        "aspect_ratio": 4.092,
+        "height": 1035,
+        "iso_639_1": "ja",
+        "file_path": "/gj4p9t1mVFyqNB1nGy92WcKuSXm.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 4235
+      },
+      {
+        "aspect_ratio": 2.385,
+        "height": 1274,
+        "iso_639_1": "pt",
+        "file_path": "/o5c4Gi1oN6GoxlVsi25WWYaqxza.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3039
+      },
+      {
+        "aspect_ratio": 2.363,
+        "height": 1274,
+        "iso_639_1": "pt",
+        "file_path": "/ymlmx0uxoFHEwBLxxaHECsh8R3r.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 3011
+      },
+      {
+        "aspect_ratio": 2.219,
+        "height": 1272,
+        "iso_639_1": "it",
+        "file_path": "/iAlTesOM8NSFIsVj0njExdS0vOm.png",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2822
+      }
+    ],
+    "posters": [
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/rtMdtzywcAGOrF6t8fbxJBqpdcq.jpg",
+        "vote_average": 5.388,
+        "vote_count": 4,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "it",
+        "file_path": "/b6HeWNoG3BLeTg3uiy8eNUSsxTW.jpg",
+        "vote_average": 5.384,
+        "vote_count": 2,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "pt",
+        "file_path": "/jTBiR84Pyt22VMNsxvCQfFPf6iq.jpg",
+        "vote_average": 5.318,
+        "vote_count": 3,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "ko",
+        "file_path": "/cXjxClTB6gHpXtRPHZw4bgCN7jK.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "ko",
+        "file_path": "/svJqBImlVFVMaNcfCTGVldVzqt4.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "en",
+        "file_path": "/jZiSWDKNceZ90KQlFfkx6Tud3Pv.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "de",
+        "file_path": "/j2hN9pkYNPeTCoFSXSRLXkiOLfY.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "de",
+        "file_path": "/rKCU2oPOcQaoJVf3ZseKVM0C2BE.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "es",
+        "file_path": "/u10ZfFwbCMB4UrFy7OlHq08fBRr.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "zh",
+        "file_path": "/2czvknMtatyg05jJP71mUEBLd2B.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "zh",
+        "file_path": "/61Teewg2qyKMilS30QUe6pvItzW.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "ja",
+        "file_path": "/kPab7Qsv3YD7JuFAI7G1AmaOjAS.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "ja",
+        "file_path": "/tjrd22j2qVFoyCMADeeZs1h3gAd.jpg",
+        "vote_average": 5.312,
+        "vote_count": 1,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "pt",
+        "file_path": "/5hO4RYsWZqP7U9ikLZquJAB3oSH.jpg",
+        "vote_average": 5.252,
+        "vote_count": 4,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "es",
+        "file_path": "/yOQTrCZXuD25gExnuUUEmAsH9MD.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "zh",
+        "file_path": "/bjCIbDrbZpj6rchzUwW3bnLGm6J.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "it",
+        "file_path": "/iSO5tI4FlkLlLKynuxdwL3tK072.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "es",
+        "file_path": "/1VUjADslVhPvXin6NStRuwSsRN4.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "es",
+        "file_path": "/fl24GQ5k8iyvw4OVDtmcGYBhgH9.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "zh",
+        "file_path": "/2K2J5gaqW2ZyqDLOkij1zr8H9oZ.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 1500,
+        "iso_639_1": "pt",
+        "file_path": "/iEZmcrt8SjAyuc5YEb3ZzhAMLf1.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 1500,
+        "iso_639_1": "fr",
+        "file_path": "/n3kZA1Uhv2CdSQ4AVhbCjEQwTpP.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "de",
+        "file_path": "/7EZqj9qQ0pMQRivSDCFc9z8YOAN.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "cn",
+        "file_path": "/d09i0pO3G03vVTi0kE7XttsSs9j.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "cn",
+        "file_path": "/kIIEm1VkcbKvLmS0g3Ih01QraI.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "pt",
+        "file_path": "/fjkcqGXMq6LXZzuQ92v3OkHbMev.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2880,
+        "iso_639_1": "pt",
+        "file_path": "/30OLSZwDeVRHwMvDAvoKVLz7x5l.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 1920
+      },
+      {
+        "aspect_ratio": 0.714,
+        "height": 2800,
+        "iso_639_1": "ru",
+        "file_path": "/ibYMcRiSPJShNrVsdaTFyXkPA7o.jpg",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "width": 2000
+      }
+    ]
+  },
+  "videos": {
+    "results": [
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Official Clip",
+        "key": "K_PcaDs-tEc",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Clip",
+        "official": true,
+        "published_at": "2021-07-07T15:49:50.000Z",
+        "id": "60ef70eb97fdec002f833597"
+      }
+    ]
+  },
+  "credits": {
+    "cast": [
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 91606,
+        "known_for_department": "Acting",
+        "name": "Tom Hiddleston",
+        "original_name": "Tom Hiddleston",
+        "popularity": 23.397,
+        "profile_path": "/mclHxMm8aPlCPKptP67257F5GPo.jpg",
+        "cast_id": 1,
+        "character": "Loki (voice)",
+        "credit_id": "60dc7c5def9d72007e06498c",
+        "order": 0
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 198,
+        "known_for_department": "Acting",
+        "name": "Dan Castellaneta",
+        "original_name": "Dan Castellaneta",
+        "popularity": 7.22,
+        "profile_path": "/AmeqWhP4A46AWkM4kVphg6jOTQX.jpg",
+        "cast_id": 6,
+        "character": "Homer Simpson / Barney Gumble (voice)",
+        "credit_id": "60e59445b76cbb005d00147b",
+        "order": 1
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 200,
+        "known_for_department": "Acting",
+        "name": "Nancy Cartwright",
+        "original_name": "Nancy Cartwright",
+        "popularity": 6.3,
+        "profile_path": "/40qNhyYJhSE2Yiy4pnXSZhdufO6.jpg",
+        "cast_id": 4,
+        "character": "Bart Simpson / Ralph Wiggum (voice)",
+        "credit_id": "60dc7e19a12856005eac8ceb",
+        "order": 2
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 5586,
+        "known_for_department": "Acting",
+        "name": "Yeardley Smith",
+        "original_name": "Yeardley Smith",
+        "popularity": 4.465,
+        "profile_path": "/9AjPwbb3uz4GfgOPBYsy2ILvwkB.jpg",
+        "cast_id": 3,
+        "character": "Lisa Simpson (voice)",
+        "credit_id": "60dc7e00b458b8007d00974b",
+        "order": 3
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 34521,
+        "known_for_department": "Acting",
+        "name": "Maurice LaMarche",
+        "original_name": "Maurice LaMarche",
+        "popularity": 3.157,
+        "profile_path": "/qCiL3EYAhLcNo0rNj5pczWo9MwG.jpg",
+        "cast_id": 7,
+        "character": "Odin (voice)",
+        "credit_id": "60e594836ee3d70046c33abc",
+        "order": 4
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 87819,
+        "known_for_department": "Acting",
+        "name": "Dawnn Lewis",
+        "original_name": "Dawnn Lewis",
+        "popularity": 14.423,
+        "profile_path": "/ppxGgmkTczev2VsiOSMfaGUy580.jpg",
+        "cast_id": 8,
+        "character": "Ravonna Renslayer (voice)",
+        "credit_id": "60e594b5d7cd06007d946e90",
+        "order": 5
+      }
+    ],
+    "crew": [
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 197,
+        "known_for_department": "Writing",
+        "name": "David Silverman",
+        "original_name": "David Silverman",
+        "popularity": 13.38,
+        "profile_path": "/4ia152M03hntrS7FBHveRx2VeuP.jpg",
+        "credit_id": "60e58f71d7cd06005de90394",
+        "department": "Directing",
+        "job": "Director"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 197,
+        "known_for_department": "Writing",
+        "name": "David Silverman",
+        "original_name": "David Silverman",
+        "popularity": 13.38,
+        "profile_path": "/4ia152M03hntrS7FBHveRx2VeuP.jpg",
+        "credit_id": "60e5ae366ee3d7007543b5cf",
+        "department": "Writing",
+        "job": "Storyboard"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 5741,
+        "known_for_department": "Writing",
+        "name": "Matt Groening",
+        "original_name": "Matt Groening",
+        "popularity": 6.152,
+        "profile_path": "/2HmAw3AN93DGESPi3ibLZgBa8cT.jpg",
+        "credit_id": "60e5ac9e2811a100470fc4ab",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 3388,
+        "known_for_department": "Production",
+        "name": "James L. Brooks",
+        "original_name": "James L. Brooks",
+        "popularity": 1.4,
+        "profile_path": "/vGiq4Fny4uRu3y5zOUMnklfw8n6.jpg",
+        "credit_id": "60e5ac8883ee670027c59e3d",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 28924,
+        "known_for_department": "Sound",
+        "name": "Chris Ledesma",
+        "original_name": "Chris Ledesma",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5b89726dac100455be481",
+        "department": "Sound",
+        "job": "Music Editor"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 57572,
+        "known_for_department": "Production",
+        "name": "Richard Sakai",
+        "original_name": "Richard Sakai",
+        "popularity": 1.38,
+        "profile_path": "/lvvO9kRkatORzpbc1hEUBh42MsL.jpg",
+        "credit_id": "60e5acd70e5aba0073e6f9fb",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 162931,
+        "known_for_department": "Writing",
+        "name": "Al Jean",
+        "original_name": "Al Jean",
+        "popularity": 13.478,
+        "profile_path": "/sw2v78mdWg6JpDbGCwPsWDiIW6b.jpg",
+        "credit_id": "60e5acb44ca676005e17f90e",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 162931,
+        "known_for_department": "Writing",
+        "name": "Al Jean",
+        "original_name": "Al Jean",
+        "popularity": 13.478,
+        "profile_path": "/sw2v78mdWg6JpDbGCwPsWDiIW6b.jpg",
+        "credit_id": "60e594e9b76cbb005d0014e0",
+        "department": "Writing",
+        "job": "Writer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 165843,
+        "known_for_department": "Writing",
+        "name": "Matt Selman",
+        "original_name": "Matt Selman",
+        "popularity": 1.4,
+        "profile_path": null,
+        "credit_id": "60e5acbe83ee670074c2d184",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 165901,
+        "known_for_department": "Writing",
+        "name": "John Frink",
+        "original_name": "John Frink",
+        "popularity": 3.335,
+        "profile_path": "/dfHjKOt6oVKl1vfoq2dWhyOI7C6.jpg",
+        "credit_id": "60e5accbb76cbb0046195fea",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 165901,
+        "known_for_department": "Writing",
+        "name": "John Frink",
+        "original_name": "John Frink",
+        "popularity": 3.335,
+        "profile_path": "/dfHjKOt6oVKl1vfoq2dWhyOI7C6.jpg",
+        "credit_id": "60e594e06ee3d700754399f5",
+        "department": "Writing",
+        "job": "Writer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1175223,
+        "known_for_department": "Production",
+        "name": "Richard Raynis",
+        "original_name": "Richard Raynis",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5acefd7cd06007d948663",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 1216636,
+        "known_for_department": "Writing",
+        "name": "Jeff Westbrook",
+        "original_name": "Jeff Westbrook",
+        "popularity": 1.96,
+        "profile_path": null,
+        "credit_id": "60e594f3db154f0074cc6115",
+        "department": "Writing",
+        "job": "Writer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1216674,
+        "known_for_department": "Production",
+        "name": "Denise Sirkot",
+        "original_name": "Denise Sirkot",
+        "popularity": 0.694,
+        "profile_path": null,
+        "credit_id": "60e5ace2db154f0074cc7f57",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1267192,
+        "known_for_department": "Writing",
+        "name": "Jessica Conrad",
+        "original_name": "Jessica Conrad",
+        "popularity": 1.013,
+        "profile_path": null,
+        "credit_id": "60e594d86ee3d700754399f0",
+        "department": "Writing",
+        "job": "Writer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1419664,
+        "known_for_department": "Visual Effects",
+        "name": "Brent M. Bowen",
+        "original_name": "Brent M. Bowen",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bc168de0ae002d42801c",
+        "department": "Visual Effects",
+        "job": "CG Artist"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1451263,
+        "known_for_department": "Acting",
+        "name": "Tommy Tejeda",
+        "original_name": "Tommy Tejeda",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bce68de0ae002d428199",
+        "department": "Visual Effects",
+        "job": "Character Designer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 1459506,
+        "known_for_department": "Crew",
+        "name": "Roger Injarusorn",
+        "original_name": "Roger Injarusorn",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5add583ee670027c5a042",
+        "department": "Editing",
+        "job": "Editor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1459634,
+        "known_for_department": "Camera",
+        "name": "William Bemiller",
+        "original_name": "William Bemiller",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bb466bdec30046121a6f",
+        "department": "Art",
+        "job": "Prop Designer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 1459645,
+        "known_for_department": "Sound",
+        "name": "Christine Sirois",
+        "original_name": "Christine Sirois",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5afacb76cbb005d003335",
+        "department": "Sound",
+        "job": "Sound Recordist"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 1579774,
+        "known_for_department": "Writing",
+        "name": "Elisabeth Kiernan Averick",
+        "original_name": "Elisabeth Kiernan Averick",
+        "popularity": 1.094,
+        "profile_path": "/7alcpCVbPZrTyoJeDa4MCQXNkQY.jpg",
+        "credit_id": "60e594ce83ee670046f91349",
+        "department": "Writing",
+        "job": "Writer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1749870,
+        "known_for_department": "Production",
+        "name": "Lisa Walder",
+        "original_name": "Lisa Walder",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5af132811a10027ac940b",
+        "department": "Crew",
+        "job": "Thanks"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 2314592,
+        "known_for_department": "Production",
+        "name": "Richard K. Chung",
+        "original_name": "Richard K. Chung",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5ad036ee3d7007543b3f2",
+        "department": "Production",
+        "job": "Co-Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 2611489,
+        "known_for_department": "Production",
+        "name": "Alexander Duke",
+        "original_name": "Alexander Duke",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5ad134ca676005e17f990",
+        "department": "Production",
+        "job": "Co-Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 2858372,
+        "known_for_department": "Writing",
+        "name": "Danielle Weisberg",
+        "original_name": "Danielle Weisberg",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5b14dd7cd06007d948c37",
+        "department": "Directing",
+        "job": "Script Coordinator"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 2951636,
+        "known_for_department": "Visual Effects",
+        "name": "Dale Hendrickson",
+        "original_name": "Dale Hendrickson",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bc9526dac10023642b9c",
+        "department": "Visual Effects",
+        "job": "Character Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3050139,
+        "known_for_department": "Sound",
+        "name": "Travis Powers",
+        "original_name": "Travis Powers",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5b88926dac100455be478",
+        "department": "Sound",
+        "job": "Sound Effects Editor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3050157,
+        "known_for_department": "Art",
+        "name": "Darrel Bowen",
+        "original_name": "Darrel Bowen",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bb856bdec30046121c41",
+        "department": "Art",
+        "job": "Prop Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3078655,
+        "known_for_department": "Production",
+        "name": "Dominique Braud",
+        "original_name": "Dominique Braud",
+        "popularity": 1.38,
+        "profile_path": null,
+        "credit_id": "60e5ad6ba3b5e600743f7af1",
+        "department": "Production",
+        "job": "Associate Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3126290,
+        "known_for_department": "Art",
+        "name": "Kevin M. Newman",
+        "original_name": "Kevin M. Newman",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bcd68de0ae0046987f43",
+        "department": "Visual Effects",
+        "job": "Character Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149076,
+        "known_for_department": "Visual Effects",
+        "name": "Eli Balser",
+        "original_name": "Eli Balser",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5aea10e5aba005d51be38",
+        "department": "Visual Effects",
+        "job": "Color Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149077,
+        "known_for_department": "Visual Effects",
+        "name": "Anne Legge",
+        "original_name": "Anne Legge",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5aeaca3b5e600458d2519",
+        "department": "Visual Effects",
+        "job": "Color Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149081,
+        "known_for_department": "Crew",
+        "name": "Dillon Kennedy",
+        "original_name": "Dillon Kennedy",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5af398de0ae004698680a",
+        "department": "Crew",
+        "job": "Thanks"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149082,
+        "known_for_department": "Crew",
+        "name": "Emma Wright",
+        "original_name": "Emma Wright",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5af786ee3d7005e50b1d7",
+        "department": "Crew",
+        "job": "Thanks"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149092,
+        "known_for_department": "Crew",
+        "name": "Brian J. Kaufman",
+        "original_name": "Brian J. Kaufman",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5b1650e5aba002779a1bc",
+        "department": "Crew",
+        "job": "Post Production Supervisor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149123,
+        "known_for_department": "Production",
+        "name": "Nick Conti",
+        "original_name": "Nick Conti",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5b861d7cd06002dddb432",
+        "department": "Production",
+        "job": "Casting Associate"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149124,
+        "known_for_department": "Production",
+        "name": "Scott Muller",
+        "original_name": "Scott Muller",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5b8764ca6760075085728",
+        "department": "Production",
+        "job": "Casting"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149131,
+        "known_for_department": "Production",
+        "name": "Ashlyn Lardinois",
+        "original_name": "Ashlyn Lardinois",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5b8de4ca676002de5a9b8",
+        "department": "Production",
+        "job": "Production Coordinator"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149131,
+        "known_for_department": "Production",
+        "name": "Ashlyn Lardinois",
+        "original_name": "Ashlyn Lardinois",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5b91a8de0ae005d4e8f04",
+        "department": "Editing",
+        "job": "Additional Editor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149139,
+        "known_for_department": "Production",
+        "name": "Matthew Fisher",
+        "original_name": "Matthew Fisher",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5b94cdb154f001e69458e",
+        "department": "Production",
+        "job": "Production Supervisor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149141,
+        "known_for_department": "Production",
+        "name": "Frank Magasich",
+        "original_name": "Frank Magasich",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5b9612811a10027aca394",
+        "department": "Production",
+        "job": "Production Supervisor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149144,
+        "known_for_department": "Production",
+        "name": "Rio Sakurai",
+        "original_name": "Rio Sakurai",
+        "popularity": 0.98,
+        "profile_path": null,
+        "credit_id": "60e5b96eb76cbb0046197405",
+        "department": "Production",
+        "job": "Production Supervisor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149166,
+        "known_for_department": "Art",
+        "name": "Seth Cooper",
+        "original_name": "Seth Cooper",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bbe70e5aba002779b6c8",
+        "department": "Art",
+        "job": "Prop Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149168,
+        "known_for_department": "Visual Effects",
+        "name": "Sam Grinberg",
+        "original_name": "Sam Grinberg",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bc782811a1005e9798c5",
+        "department": "Visual Effects",
+        "job": "Character Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3149169,
+        "known_for_department": "Visual Effects",
+        "name": "Eric S. Keyes",
+        "original_name": "Eric S. Keyes",
+        "popularity": 0.6,
+        "profile_path": null,
+        "credit_id": "60e5bcb3db154f004704395d",
+        "department": "Visual Effects",
+        "job": "Character Designer"
+      }
+    ]
+  },
+  "similar": {
+    "page": 1,
+    "results": [
+      {
+        "adult": false,
+        "backdrop_path": "/zsH3iW60T1t2HBTtrSKzzxJ406J.jpg",
+        "genre_ids": [
+          16,
+          35,
+          10751
+        ],
+        "id": 846214,
+        "title": "The Simpsons: The Good, the Bart, and the Loki",
+        "original_language": "en",
+        "original_title": "The Simpsons: The Good, the Bart, and the Loki",
+        "overview": "Loki is banished from Asgard once again and must face his toughest opponents yet: the Simpsons and Springfield’s mightiest heroes. The God of Mischief teams up with Bart Simpson in the ultimate crossover event paying tribute to the Marvel Cinematic Universe of superheroes and villains.",
+        "popularity": 951.549,
+        "poster_path": "/rtMdtzywcAGOrF6t8fbxJBqpdcq.jpg",
+        "release_date": "2021-07-07",
+        "video": false,
+        "vote_average": 7.865,
+        "vote_count": 338
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/buGNPL2zNGjPirZTMT3DwwkVdw1.jpg",
+        "genre_ids": [
+          18,
+          36
+        ],
+        "id": 43838,
+        "title": "Young Mr. Lincoln",
+        "original_language": "en",
+        "original_title": "Young Mr. Lincoln",
+        "overview": "In this dramatized account of his early law career in Illinois, Abraham Lincoln is born into a modest log cabin, where he is encouraged by his first love, Ann Rutledge, to pursue law. Following her tragic death, Lincoln establishes a law practice in Springfield, where he meets a young Mary Todd. Lincoln's law skills are put to the test when he takes on the difficult task of defending two brothers who have been accused of murder.",
+        "popularity": 6.765,
+        "poster_path": "/gVHbi2AZfWsZB10FJcwaFV59kIo.jpg",
+        "release_date": "1939-06-09",
+        "video": false,
+        "vote_average": 7.415,
+        "vote_count": 106
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/ArNNCDc3Ndg9d0PkkOYHsZeLsbo.jpg",
+        "genre_ids": [
+          10751,
+          35,
+          12
+        ],
+        "id": 17414,
+        "title": "Dunston Checks In",
+        "original_language": "en",
+        "original_title": "Dunston Checks In",
+        "overview": "Hotel manager Robert Grant is forced by his boss to postpone his family vacation when a hotel critic checks in. Trouble is, the critic is really a villainous jewel thief with an orangutan assistant named Dunston. When Dunston gets loose and tries to escape a life of crime -- aided by Robert's sons -- havoc, hijinks and lots of laughs abound!",
+        "popularity": 6.433,
+        "poster_path": "/kn0iqDYsWN4b6u9zmhQCIZg19yR.jpg",
+        "release_date": "1996-01-12",
+        "video": false,
+        "vote_average": 5.31,
+        "vote_count": 163
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/1Fi9ltooVTygW8x9Uo7gmmOa5C1.jpg",
+        "genre_ids": [
+          10770,
+          12,
+          35,
+          10749
+        ],
+        "id": 32195,
+        "title": "My Date with the President's Daughter",
+        "original_language": "en",
+        "original_title": "My Date with the President's Daughter",
+        "overview": "Duncan is just an ordinary high school student. Hallie dreams of an ordinary life, but is actually the daughter of the president of the United States, living with a high profile and a rigid schedule. The unlikely pair happen to meet at the local mall, and Duncan nervously asks Hallie out, unaware of her family situation. When their eventual date is ruined by the intrusive Secret Service, the young lovebirds cut loose for a night of mischief.",
+        "popularity": 4.9,
+        "poster_path": "/9at6NYvT5Z6jZRS27ZrCGPCM54c.jpg",
+        "release_date": "1998-04-19",
+        "video": false,
+        "vote_average": 6.956,
+        "vote_count": 68
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/5RQFP6MKmOAn0WlYXWxRyhP1lfK.jpg",
+        "genre_ids": [
+          37,
+          36
+        ],
+        "id": 71068,
+        "title": "The Iron Horse",
+        "original_language": "en",
+        "original_title": "The Iron Horse",
+        "overview": "Brandon, a surveyor, dreams of building a railway to the west. He sets off with his son, Davy, to survey a route. They discover a new pass which will shave 200 miles off the expected distance, but they are set upon by a party of Cheyenne. One of them, a white renegade with only two fingers on his right hand, kills Brandon and scalps him. Davy is all alone now.",
+        "popularity": 3.316,
+        "poster_path": "/bHKKddjh7fmOAsMxeKL3cplugFT.jpg",
+        "release_date": "1924-08-24",
+        "video": false,
+        "vote_average": 6.7,
+        "vote_count": 42
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/dFYguAfeVt19qAbzJ5mArn7DEJw.jpg",
+        "genre_ids": [
+          16,
+          10751
+        ],
+        "id": 12,
+        "title": "Finding Nemo",
+        "original_language": "en",
+        "original_title": "Finding Nemo",
+        "overview": "Nemo, an adventurous young clownfish, is unexpectedly taken from his Great Barrier Reef home to a dentist's office aquarium. It's up to his worrisome father Marlin and a friendly but forgetful fish Dory to bring Nemo home -- meeting vegetarian sharks, surfer dude turtles, hypnotic jellyfish, hungry seagulls, and more along the way.",
+        "popularity": 78.814,
+        "poster_path": "/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg",
+        "release_date": "2003-05-30",
+        "video": false,
+        "vote_average": 7.818,
+        "vote_count": 15313
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/tlEFuIlaxRPXIYVHXbOSAMCfWqk.jpg",
+        "genre_ids": [
+          35,
+          18,
+          10749
+        ],
+        "id": 13,
+        "title": "Forrest Gump",
+        "original_language": "en",
+        "original_title": "Forrest Gump",
+        "overview": "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.",
+        "popularity": 47.886,
+        "poster_path": "/h5J4W4veyxMXDMjeNxZI46TsHOb.jpg",
+        "release_date": "1994-07-06",
+        "video": false,
+        "vote_average": 8.467,
+        "vote_count": 21017
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/o7XHctO2t4fIdzch8v8ApNaJMcX.jpg",
+        "genre_ids": [
+          16,
+          35,
+          10751
+        ],
+        "id": 35,
+        "title": "The Simpsons Movie",
+        "original_language": "en",
+        "original_title": "The Simpsons Movie",
+        "overview": "After Homer accidentally pollutes the town's water supply, Springfield is encased in a gigantic dome by the EPA and the Simpsons are declared fugitives.",
+        "popularity": 91.558,
+        "poster_path": "/s3b8TZWwmkYc2KoJ5zk77qB6PzY.jpg",
+        "release_date": "2007-07-25",
+        "video": false,
+        "vote_average": 6.975,
+        "vote_count": 6287
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/29J7uZUKixJ7Rm76JkjUW9DCi4R.jpg",
+        "genre_ids": [
+          18,
+          35,
+          10402
+        ],
+        "id": 71,
+        "title": "Billy Elliot",
+        "original_language": "en",
+        "original_title": "Billy Elliot",
+        "overview": "Set against the background of the 1984 Miners' Strike, 11-year-old Billy Elliot stumbles out of the boxing ring and onto the ballet floor. He faces many trials and triumphs as he strives to conquer his family's set ways, inner conflict, and standing on his toes.",
+        "popularity": 17.356,
+        "poster_path": "/pDHBtRHknscIfxBYDqT2w0SDDzA.jpg",
+        "release_date": "2000-05-18",
+        "video": false,
+        "vote_average": 7.591,
+        "vote_count": 2988
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/ELsTifJ2lu4vsMhoHeZ5EnncHw.jpg",
+        "genre_ids": [
+          35,
+          14,
+          878
+        ],
+        "id": 75,
+        "title": "Mars Attacks!",
+        "original_language": "en",
+        "original_title": "Mars Attacks!",
+        "overview": "'We come in peace' is not what those green men from Mars mean when they invade our planet, armed with irresistible weapons and a cruel sense of humor.  This star studded cast must play victim to the alien’s fun and games in this comedy homage to science fiction films of the '50s and '60s.",
+        "popularity": 18.321,
+        "poster_path": "/hll4O5vSAfnZDb6JbnP06GPtz7b.jpg",
+        "release_date": "1996-12-12",
+        "video": false,
+        "vote_average": 6.354,
+        "vote_count": 4126
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/ulVUa2MvnJAjAeRt7h23FFJVRKH.jpg",
+        "genre_ids": [
+          12,
+          16,
+          14
+        ],
+        "id": 81,
+        "title": "Nausicaä of the Valley of the Wind",
+        "original_language": "ja",
+        "original_title": "風の谷のナウシカ",
+        "overview": "After a global war, the seaside kingdom known as the Valley of the Wind remains one of the last strongholds on Earth untouched by a poisonous jungle and the powerful insects that guard it. Led by the courageous Princess Nausicaä, the people of the Valley engage in an epic struggle to restore the bond between humanity and Earth.",
+        "popularity": 24.764,
+        "poster_path": "/sIpcATxMrKHRRUJAGI5UIUT7XMG.jpg",
+        "release_date": "1984-03-11",
+        "video": false,
+        "vote_average": 7.9,
+        "vote_count": 2401
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/tilClWjFZeUTGJu0pxgF72fvUmN.jpg",
+        "genre_ids": [
+          35,
+          18
+        ],
+        "id": 99,
+        "title": "All About My Mother",
+        "original_language": "es",
+        "original_title": "Todo sobre mi madre",
+        "overview": "A single mother in Madrid sees her only son die on his birthday as he runs to seek an actress' autograph. Beside herself with grief, she returns to Barcelona to tell the boy's father about the death of the son he never knew he had.",
+        "popularity": 13.177,
+        "poster_path": "/9Z1kGuWJrjdYYeot2NJsVdYrF0b.jpg",
+        "release_date": "1999-04-19",
+        "video": false,
+        "vote_average": 7.705,
+        "vote_count": 1263
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/32V4uHVRU2fbDsQl1dsYsZm3uba.jpg",
+        "genre_ids": [
+          80,
+          35
+        ],
+        "id": 107,
+        "title": "Snatch",
+        "original_language": "en",
+        "original_title": "Snatch",
+        "overview": "Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.",
+        "popularity": 20.683,
+        "poster_path": "/56mOJth6DJ6JhgoE2jtpilVqJO.jpg",
+        "release_date": "2000-09-01",
+        "video": false,
+        "vote_average": 7.783,
+        "vote_count": 6765
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/2eBL3wXDZqemW8SJ1RNxqtx6bgJ.jpg",
+        "genre_ids": [
+          35,
+          18,
+          9648
+        ],
+        "id": 109,
+        "title": "Three Colors: White",
+        "original_language": "fr",
+        "original_title": "Trois couleurs : Blanc",
+        "overview": "Polish immigrant Karol Karol finds himself out of a marriage, a job and a country when his French wife, Dominique, divorces him after six months due to his impotence. Forced to leave France after losing the business they jointly owned, Karol enlists fellow Polish expatriate Mikolah to smuggle him back to their homeland.",
+        "popularity": 9.255,
+        "poster_path": "/4jDSCLCWxHutCAZRve8Kkso2UfA.jpg",
+        "release_date": "1994-01-26",
+        "video": false,
+        "vote_average": 7.483,
+        "vote_count": 749
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/77ElMccPnTMPouRxSdbJ4nEjf69.jpg",
+        "genre_ids": [
+          35,
+          80
+        ],
+        "id": 115,
+        "title": "The Big Lebowski",
+        "original_language": "en",
+        "original_title": "The Big Lebowski",
+        "overview": "Jeffrey 'The Dude' Lebowski, a Los Angeles slacker who only wants to bowl and drink White Russians, is mistaken for another Jeffrey Lebowski, a wheelchair-bound millionaire, and finds himself dragged into a strange series of events involving nihilists, adult film producers, ferrets, errant toes, and large sums of money.",
+        "popularity": 20.712,
+        "poster_path": "/48auuGpzl9KSZixAKwj8yKBNIv4.jpg",
+        "release_date": "1998-03-06",
+        "video": false,
+        "vote_average": 7.856,
+        "vote_count": 8560
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/bSvUW4JQ6g4QiKvwejcfcPRd4Ke.jpg",
+        "genre_ids": [
+          12,
+          35,
+          10751,
+          14
+        ],
+        "id": 118,
+        "title": "Charlie and the Chocolate Factory",
+        "original_language": "en",
+        "original_title": "Charlie and the Chocolate Factory",
+        "overview": "A young boy wins a tour through the most magnificent chocolate factory in the world, led by the world's most unusual candy maker.",
+        "popularity": 129.498,
+        "poster_path": "/wfGfxtBkhBzQfOZw4S8IQZgrH0a.jpg",
+        "release_date": "2005-07-13",
+        "video": false,
+        "vote_average": 7.019,
+        "vote_count": 11611
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/jOuCWdh0BE6XPu2Vpjl08wDAeFz.jpg",
+        "genre_ids": [
+          12,
+          16,
+          14
+        ],
+        "id": 123,
+        "title": "The Lord of the Rings",
+        "original_language": "en",
+        "original_title": "The Lord of the Rings",
+        "overview": "The Fellowship of the Ring embark on a journey to destroy the One Ring and end Sauron's reign over Middle-earth.",
+        "popularity": 18.128,
+        "poster_path": "/4O3s0IGZJirPBecqEnP9qsjlTQw.jpg",
+        "release_date": "1978-11-15",
+        "video": false,
+        "vote_average": 6.529,
+        "vote_count": 577
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/mpNd0rTVrp6vHJ9Je7wSa3zC8JS.jpg",
+        "genre_ids": [
+          12,
+          14,
+          16
+        ],
+        "id": 128,
+        "title": "Princess Mononoke",
+        "original_language": "ja",
+        "original_title": "もののけ姫",
+        "overview": "Ashitaka, a prince of the disappearing Emishi people, is cursed by a demonized boar god and must journey to the west to find a cure. Along the way, he encounters San, a young human woman fighting to protect the forest, and Lady Eboshi, who is trying to destroy it. Ashitaka must find a way to bring balance to this conflict.",
+        "popularity": 30.374,
+        "poster_path": "/jHWmNr7m544fJ8eItsfNk8fs2Ed.jpg",
+        "release_date": "1997-07-12",
+        "video": false,
+        "vote_average": 8.349,
+        "vote_count": 5747
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/Ab8mkHmkYADjU7wQiOkia9BzGvS.jpg",
+        "genre_ids": [
+          16,
+          10751,
+          14
+        ],
+        "id": 129,
+        "title": "Spirited Away",
+        "original_language": "ja",
+        "original_title": "千と千尋の神隠し",
+        "overview": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transformation, she must call upon the courage she never knew she had to free her family.",
+        "popularity": 72.354,
+        "poster_path": "/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+        "release_date": "2001-07-20",
+        "video": false,
+        "vote_average": 8.534,
+        "vote_count": 11660
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/rbsm633lnt3hKHEpk7FOt3dy82a.jpg",
+        "genre_ids": [
+          12,
+          35,
+          80
+        ],
+        "id": 134,
+        "title": "O Brother, Where Art Thou?",
+        "original_language": "en",
+        "original_title": "O Brother, Where Art Thou?",
+        "overview": "In the deep south during the 1930s, three escaped convicts search for hidden treasure while a relentless lawman pursues them. On their journey they come across many comical characters and incredible situations. Based upon Homer's 'Odyssey'.",
+        "popularity": 16.617,
+        "poster_path": "/2YztYilviFCYcEtDAnrOstUWGie.jpg",
+        "release_date": "2000-08-30",
+        "video": false,
+        "vote_average": 7.3,
+        "vote_count": 3032
+      }
+    ],
+    "total_pages": 500,
+    "total_results": 10000
+  }
+}
