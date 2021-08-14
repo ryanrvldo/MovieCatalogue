@@ -1,6 +1,5 @@
 package com.ryanrvldo.data.network.service
 
-import com.ryanrvldo.data.constants.Constants
 import com.ryanrvldo.data.network.response.PagingResponse
 import com.ryanrvldo.data.network.response.movies.MovieResponse
 import retrofit2.http.GET
@@ -8,6 +7,10 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieService {
+
+    companion object {
+        const val DETAIL_APPEND_QUERY = "images,videos,credits,similar"
+    }
 
     @GET("movie/{category}")
     suspend fun getByCategory(
@@ -18,7 +21,7 @@ interface MovieService {
     @GET("movie/{movie_id}")
     suspend fun getDetails(
         @Path("movie_id") id: Int,
-        @Query("append_to_response") appendQuery: String = Constants.MOVIE_APPEND_QUERY,
+        @Query("append_to_response") appendQuery: String = DETAIL_APPEND_QUERY,
     ): MovieResponse
 
     @GET("discover/movie")

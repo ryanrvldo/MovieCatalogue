@@ -20,5 +20,5 @@ data class TvShowResponse(
     @SerializedName("content_ratings") val contentRatings: ListResponse<ContentRatingResponse>,
     @SerializedName("videos") val videos: ListResponse<VideoResponse>,
     @SerializedName("credits") val credits: CreditsResponse,
-    @SerializedName("similar") val similars: PagingResponse<SimilarResponse>,
+    @SerializedName("similar") val similar: PagingResponse<SimilarResponse>,
 )

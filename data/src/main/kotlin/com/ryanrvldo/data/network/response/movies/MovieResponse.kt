@@ -19,5 +19,5 @@ data class MovieResponse(
     @SerializedName("images") var images: ImagesResponse,
     @SerializedName("videos") var videos: ListResponse<VideoResponse>,
     @SerializedName("credits") var credits: CreditsResponse,
-    @SerializedName("similar") var similars: PagingResponse<SimilarResponse>,
+    @SerializedName("similar") var similar: PagingResponse<SimilarResponse>,
 )

@@ -2,7 +2,6 @@ package com.ryanrvldo.data.network.service
 
 import com.google.common.truth.Truth.assertThat
 import com.ryanrvldo.data.BuildConfig
-import com.ryanrvldo.data.TestCoroutineExtension
 import com.ryanrvldo.data.constants.HttpMethod
 import com.ryanrvldo.data.di.NetworkInjection
 import com.ryanrvldo.data.error.NetworkException
@@ -13,7 +12,6 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.QueueDispatcher
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.extension.RegisterExtension
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import java.net.HttpURLConnection
@@ -25,12 +23,6 @@ import java.net.HttpURLConnection.*
  *
  */
 internal abstract class BaseServiceTest {
-
-    companion object {
-        @JvmField
-        @RegisterExtension
-        val testCoroutineExtension = TestCoroutineExtension()
-    }
 
     lateinit var mockWebServer: MockWebServer
     lateinit var fakeRetrofit: Retrofit
