@@ -2,6 +2,7 @@ package com.ryanrvldo.data.source.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingData
+import com.ryanrvldo.data.network.response.movies.MovieDetailsResponse
 import com.ryanrvldo.data.network.response.movies.MovieResponse
 import com.ryanrvldo.data.network.service.MovieService
 import com.ryanrvldo.data.source.paging.MoviePagingSource
@@ -19,6 +20,6 @@ class MovieRemoteDataSource @Inject constructor(
         return pager.flow
     }
 
-    suspend fun getMovieDetails(id: Int): MovieResponse = service.getDetails(id)
+    suspend fun getMovieDetails(id: Int): MovieDetailsResponse = service.getDetails(id)
 
 }

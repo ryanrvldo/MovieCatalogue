@@ -2,6 +2,7 @@ package com.ryanrvldo.data.source.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingData
+import com.ryanrvldo.data.network.response.tvshows.TvShowDetailsResponse
 import com.ryanrvldo.data.network.response.tvshows.TvShowResponse
 import com.ryanrvldo.data.network.service.TvShowService
 import com.ryanrvldo.data.source.paging.TvPagingSource
@@ -19,6 +20,6 @@ class TvRemoteDataSource @Inject constructor(
         return pager.flow
     }
 
-    suspend fun getTvShowDetails(id: Int): TvShowResponse = service.getDetails(id)
+    suspend fun getTvShowDetails(id: Int): TvShowDetailsResponse = service.getDetails(id)
 
 }

@@ -2,6 +2,7 @@ package com.ryanrvldo.data.network.service
 
 import com.ryanrvldo.data.network.response.PagingResponse
 import com.ryanrvldo.data.network.response.tvshows.SeasonResponse
+import com.ryanrvldo.data.network.response.tvshows.TvShowDetailsResponse
 import com.ryanrvldo.data.network.response.tvshows.TvShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,7 +11,7 @@ import retrofit2.http.Query
 interface TvShowService {
 
     companion object {
-        const val DETAIL_APPEND_QUERY = "images,content_ratings,videos,credits,similar"
+        const val DETAIL_APPEND_QUERY = "images,content_ratings,videos,credits"
     }
 
     @GET("tv/{category}")
@@ -23,7 +24,7 @@ interface TvShowService {
     suspend fun getDetails(
         @Path("tv_id") id: Int,
         @Query("append_to_response") appendQuery: String = DETAIL_APPEND_QUERY,
-    ): TvShowResponse
+    ): TvShowDetailsResponse
 
     @GET("discover/tv")
     fun getNewReleases(

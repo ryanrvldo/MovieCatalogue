@@ -3,7 +3,7 @@ package com.ryanrvldo.data.source.remote
 import com.google.common.truth.Truth.assertThat
 import com.ryanrvldo.data.TestCoroutineExtension
 import com.ryanrvldo.data.network.response.FakeResponse
-import com.ryanrvldo.data.network.response.tvshows.TvShowResponse
+import com.ryanrvldo.data.network.response.tvshows.TvShowDetailsResponse
 import com.ryanrvldo.data.network.service.TvShowService
 import com.ryanrvldo.data.source.paging.TvPagingSource
 import com.ryanrvldo.data.util.convertToObjectFromJson
@@ -63,7 +63,7 @@ internal class TvRemoteDataSourceTest {
         internal fun testGetTvShowDetails_WithValidId() = testCoroutineExtension.runBlockingTest {
             // GIVEN
             val id = 95281
-            val expected: TvShowResponse =
+            val expected: TvShowDetailsResponse =
                 convertToObjectFromJson(FakeResponse.TV_SHOW_DETAILS_WITH_APPEND_95281)!!
             coEvery { mockTvShowService.getDetails(id) } returns expected
 

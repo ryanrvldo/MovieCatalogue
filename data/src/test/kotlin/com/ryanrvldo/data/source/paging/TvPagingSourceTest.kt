@@ -9,6 +9,7 @@ import com.ryanrvldo.data.constants.Category
 import com.ryanrvldo.data.constants.Constants
 import com.ryanrvldo.data.network.response.FakeResponse
 import com.ryanrvldo.data.network.response.PagingResponse
+import com.ryanrvldo.data.network.response.tvshows.TvShowDetailsResponse
 import com.ryanrvldo.data.network.response.tvshows.TvShowResponse
 import com.ryanrvldo.data.network.service.TvShowService
 import com.ryanrvldo.data.util.convertToObjectFromJson
@@ -116,7 +117,7 @@ internal class TvPagingSourceTest {
         ) as Error<Int, TvShowResponse>
 
         // THEN
-        val expected = Error<Int, TvShowResponse>(fakeException)
+        val expected = Error<Int, TvShowDetailsResponse>(fakeException)
         assertThat(actual).isEqualTo(expected)
         assertThat(actual.throwable).isEqualTo(expected.throwable)
         coVerify(exactly = 1) { mockTvShowService.getByCategory(Category.POPULAR) }

@@ -151,15 +151,6 @@ internal class TvShowServiceTest : BaseServiceTest() {
                 assertThat(actual.credits.casts)
                     .containsExactlyElementsIn(expected.credits.casts)
                     .inOrder()
-                assertThat(actual.credits.crews)
-                    .containsExactlyElementsIn(expected.credits.crews)
-                    .inOrder()
-
-                assertThat(actual.similar).isNotNull()
-                assertThat(actual.similar.page).isEqualTo(1)
-                assertThat(actual.similar.results)
-                    .containsExactlyElementsIn(expected.similar.results)
-                    .inOrder()
             }
         }
 

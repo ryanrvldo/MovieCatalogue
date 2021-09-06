@@ -3,7 +3,7 @@ package com.ryanrvldo.data.source.remote
 import com.google.common.truth.Truth.assertThat
 import com.ryanrvldo.data.TestCoroutineExtension
 import com.ryanrvldo.data.network.response.FakeResponse
-import com.ryanrvldo.data.network.response.movies.MovieResponse
+import com.ryanrvldo.data.network.response.movies.MovieDetailsResponse
 import com.ryanrvldo.data.network.service.MovieService
 import com.ryanrvldo.data.source.paging.MoviePagingSource
 import com.ryanrvldo.data.util.convertToObjectFromJson
@@ -63,7 +63,7 @@ internal class MovieRemoteDataSourceTest {
         internal fun testGetMovieDetails_WithValidId() = testCoroutineExtension.runBlockingTest {
             // GIVEN
             val id = 846214
-            val expected: MovieResponse =
+            val expected: MovieDetailsResponse =
                 convertToObjectFromJson(FakeResponse.MOVIE_DETAILS_WITH_APPEND_846214)!!
             coEvery { mockMovieService.getDetails(id) } returns expected
 
