@@ -22,4 +22,5 @@ object TestDependencies {
     const val MOCK_WEB_SERVER =
         "com.squareup.okhttp3:mockwebserver:${BuildDependenciesVersions.Test.MOCK_WEB_SERVER}"
     const val TRUTH = "com.google.truth:truth:${BuildDependenciesVersions.Test.TRUTH}"
+    const val PAGING_KTX = "androidx.paging:paging-common-ktx:${BuildDependenciesVersions.PAGING}"
 }

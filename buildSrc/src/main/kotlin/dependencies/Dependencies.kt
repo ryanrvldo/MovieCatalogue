@@ -46,6 +46,7 @@ object Dependencies {
     const val NAVIGATION_UI =
         "androidx.navigation:navigation-ui-ktx:${BuildDependenciesVersions.NAVIGATION}"
     const val ROOM = "androidx.room:room-ktx:${BuildDependenciesVersions.ROOM}"
+    const val PAGING_KTX = "androidx.paging:paging-runtime-ktx:${BuildDependenciesVersions.PAGING}"
 
     // NETWORK
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${BuildDependenciesVersions.RETROFIT}"

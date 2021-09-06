@@ -28,6 +28,7 @@ object BuildDependenciesVersions {
     const val LIFECYCLE = "2.3.1"
     const val NAVIGATION = "2.3.5"
     const val ROOM = "2.3.0"
+    const val PAGING = "3.0.1"
 
     // NETWORK
     const val RETROFIT = "2.9.0"

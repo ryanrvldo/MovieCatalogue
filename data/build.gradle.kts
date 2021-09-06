@@ -3,8 +3,6 @@ import dependencies.Dependencies
 import dependencies.TestDependencies
 import extensions.buildConfigStringField
 import extensions.getLocalProperty
-import extensions.implementation
-import extensions.testImplementation
 
 plugins {
     id("commons.android-library")
@@ -34,6 +32,7 @@ android {
 dependencies {
     implementation(Dependencies.ROOM)
     kapt(AnnotationProcessorDependencies.ROOM)
+    implementation(Dependencies.PAGING_KTX)
 
     implementation(Dependencies.RETROFIT)
     implementation(Dependencies.RETROFIT_CONVERTER)
@@ -41,4 +40,5 @@ dependencies {
     implementation(Dependencies.MOSHI)
 
     testImplementation(TestDependencies.MOCK_WEB_SERVER)
+    testImplementation(TestDependencies.PAGING_KTX)
 }

@@ -1,41 +1,24 @@
 package com.ryanrvldo.data.source.remote
 
-import com.ryanrvldo.data.network.ApiResponse
-import com.ryanrvldo.data.network.response.tvshows.SeasonResponse
+import androidx.paging.Pager
+import androidx.paging.PagingData
 import com.ryanrvldo.data.network.response.tvshows.TvShowResponse
 import com.ryanrvldo.data.network.service.TvShowService
-import com.ryanrvldo.data.util.handleNetworkException
-import com.ryanrvldo.data.util.handleNetworkExceptionFromPagingResponse
+import com.ryanrvldo.data.source.paging.TvPagingSource
 import kotlinx.coroutines.flow.Flow
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class TvRemoteDataSource @Inject constructor(
     private val service: TvShowService,
-    private val simpleDateFormat: SimpleDateFormat
+    private val tvPagingSource: TvPagingSource
 ) {
 
-    suspend fun getByCategory(category: String): Flow<ApiResponse<List<TvShowResponse>>> {
-        return handleNetworkExceptionFromPagingResponse { service.getByCategory(category) }
+    fun getTvByCategory(category: String): Flow<PagingData<TvShowResponse>> {
+        tvPagingSource.setCategory(category)
+        val pager = Pager(tvPagingSource.pagingConfig) { tvPagingSource }
+        return pager.flow
     }
 
-    suspend fun getNewReleases(): Flow<ApiResponse<List<TvShowResponse>>> {
-        val currentDate: String = simpleDateFormat.format(Date())
-        return handleNetworkExceptionFromPagingResponse {
-            service.getNewReleases(currentDate, currentDate)
-        }
-    }
-
-    suspend fun getById(id: Int): Flow<ApiResponse<TvShowResponse>> =
-        handleNetworkException { service.getDetails(id) }
-
-    suspend fun getSeason(tvId: Int, seasonNumber: Int): Flow<ApiResponse<SeasonResponse>> {
-        return handleNetworkException { service.getSeasonDetails(tvId, seasonNumber) }
-    }
-
-    suspend fun searchTvShows(query: String): Flow<ApiResponse<List<TvShowResponse>>> {
-        return handleNetworkExceptionFromPagingResponse { service.search(query) }
-    }
+    suspend fun getTvShowDetails(id: Int): TvShowResponse = service.getDetails(id)
 
 }
