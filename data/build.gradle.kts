@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation(project(BuildModules.DOMAIN))
     implementation(Dependencies.ROOM)
     kapt(AnnotationProcessorDependencies.ROOM)
     implementation(Dependencies.PAGING_KTX)
