@@ -37,6 +37,14 @@ gradlePlugin {
             id = "movielibrary.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidApplicationJacoco") {
+            id = "movielibrary.android.application.jacoco"
+            implementationClass = "AndroidApplicationJacocoConventionPlugin"
+        }
+        register("androidLibraryJacoco") {
+            id = "movielibrary.android.library.jacoco"
+            implementationClass = "AndroidLibraryJacocoConventionPlugin"
+        }
         register("spotless") {
             id = "movielibrary.spotless"
             implementationClass = "SpotlessConventionPlugin"

@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
     id("movielibrary.android.application")
+    id("movielibrary.android.application.jacoco")
+    id("jacoco")
     id("movielibrary.spotless")
 }
 
