@@ -25,9 +25,10 @@ android {
     defaultConfig {
         applicationId = "com.ryanrvldo.movielibrary"
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "0.0.1"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Custom test runner to set up Hilt dependency graph
+        testInstrumentationRunner = "com.ryanrvldo.core.testing.MovieLibraryTestRunner"
     }
 
     buildTypes {
@@ -39,14 +40,32 @@ android {
             )
         }
     }
+
+    packagingOptions {
+        resources {
+            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+        }
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
+    androidTestImplementation(project(":core-testing"))
+
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material3)
-    testImplementation(libs.junit4)
-    androidTestImplementation(libs.androidx.test.ext)
-    androidTestImplementation(libs.androidx.test.espresso.core)
+
+    // androidx.test is forcing JUnit, 4.12. This forces it to use 4.13
+    configurations.configureEach {
+        resolutionStrategy {
+            force(libs.junit4)
+        }
+    }
 }

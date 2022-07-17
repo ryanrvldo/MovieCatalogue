@@ -40,3 +40,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MovieLibrary"
 include(":app")
+include(":core-testing")
