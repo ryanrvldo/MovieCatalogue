@@ -15,6 +15,7 @@
  */
 
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.ryanrvldo.movielibrary.BuildAndroidConfig
 import com.ryanrvldo.movielibrary.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -31,7 +32,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
             extensions.configure<BaseAppModuleExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 32
+                defaultConfig.targetSdk = BuildAndroidConfig.TARGET_SDK
             }
         }
     }
