@@ -17,7 +17,9 @@
 plugins {
     id("movielibrary.android.application")
     id("movielibrary.android.application.jacoco")
+    kotlin("kapt")
     id("jacoco")
+    id("dagger.hilt.android.plugin")
     id("movielibrary.spotless")
 }
 
@@ -41,6 +43,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     packagingOptions {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
@@ -56,11 +62,19 @@ android {
 
 dependencies {
     androidTestImplementation(project(":core-testing"))
+    androidTestImplementation(libs.androidx.navigation.test)
 
+    implementation(libs.androidx.acitvity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material3)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    kaptAndroidTest(libs.hilt.compiler)
 
     // androidx.test is forcing JUnit, 4.12. This forces it to use 4.13
     configurations.configureEach {
