@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.core.testing
+package com.ryanrvldo.movielibrary.core.testing
 
 import android.app.Application
 import android.content.Context

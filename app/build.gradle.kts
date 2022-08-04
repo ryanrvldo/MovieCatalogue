@@ -30,7 +30,7 @@ android {
         versionName = "0.0.1"
 
         // Custom test runner to set up Hilt dependency graph
-        testInstrumentationRunner = "com.ryanrvldo.core.testing.MovieLibraryTestRunner"
+        testInstrumentationRunner = "com.ryanrvldo.movielibrary.core.testing.MovieLibraryTestRunner"
     }
 
     buildTypes {

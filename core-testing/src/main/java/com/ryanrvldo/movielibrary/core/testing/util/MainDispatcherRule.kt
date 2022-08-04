@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.core.testing.util
+package com.ryanrvldo.movielibrary.core.testing.util
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestDispatcher
