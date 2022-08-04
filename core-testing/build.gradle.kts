@@ -28,6 +28,7 @@ dependencies {
     api(libs.junit4)
     api(libs.androidx.test.core)
     api(libs.kotlinx.coroutines.test)
+    api(libs.turbine)
 
     api(libs.androidx.test.espresso.core)
     api(libs.androidx.test.runner)
