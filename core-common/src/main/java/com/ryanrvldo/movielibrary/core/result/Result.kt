@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-plugins {
-    id("movielibrary.android.library")
-    kotlin("kapt")
-    id("movielibrary.spotless")
+package com.ryanrvldo.movielibrary.core.result
+
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+
+sealed interface Result<out T> {
+    data class Success<T>(val data: T) : Result<T>
+    data class Error(val exception: Throwable) : Result<Nothing>
+    object Loading : Result<Nothing>
 }
 
-dependencies {
-    implementation(project(":core-common"))
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
-}
+fun <T> Flow<T>.asResult(): Flow<Result<T>> = this
+    .map<T, Result<T>> {
+        Result.Success(it)
+    }
+    .onStart { emit(Result.Loading) }
+    .catch { emit(Result.Error(it)) }

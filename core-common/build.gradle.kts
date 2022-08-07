@@ -16,23 +16,15 @@
 
 plugins {
     id("movielibrary.android.library")
+    id("movielibrary.android.library.jacoco")
     kotlin("kapt")
     id("movielibrary.spotless")
 }
 
 dependencies {
-    implementation(project(":core-common"))
-
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
+    testImplementation(project(":core-testing"))
 }

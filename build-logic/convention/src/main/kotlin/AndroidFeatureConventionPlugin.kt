@@ -30,6 +30,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
         val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
         dependencies {
+            add("implementation", project(":core-common"))
+
             add("testImplementation", project(":core-testing"))
             add("androidTestImplementation", project(":core-testing"))
 

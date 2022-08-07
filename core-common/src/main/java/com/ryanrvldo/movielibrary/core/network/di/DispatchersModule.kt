@@ -14,25 +14,21 @@
  * limitations under the License.
  */
 
-plugins {
-    id("movielibrary.android.library")
-    kotlin("kapt")
-    id("movielibrary.spotless")
-}
+package com.ryanrvldo.movielibrary.core.network.di
 
-dependencies {
-    implementation(project(":core-common"))
+import com.ryanrvldo.movielibrary.core.network.AppDispatchers.IO
+import com.ryanrvldo.movielibrary.core.network.Dispatcher
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
+@Module
+@InstallIn(SingletonComponent::class)
+object DispatchersModule {
+    @Provides
+    @Dispatcher(IO)
+    fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }

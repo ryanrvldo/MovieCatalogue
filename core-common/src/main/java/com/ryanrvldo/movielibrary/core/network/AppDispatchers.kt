@@ -14,25 +14,15 @@
  * limitations under the License.
  */
 
-plugins {
-    id("movielibrary.android.library")
-    kotlin("kapt")
-    id("movielibrary.spotless")
-}
+package com.ryanrvldo.movielibrary.core.network
 
-dependencies {
-    implementation(project(":core-common"))
+import javax.inject.Qualifier
+import kotlin.annotation.AnnotationRetention.RUNTIME
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+@Qualifier
+@Retention(RUNTIME)
+annotation class Dispatcher(val appDispatcher: AppDispatchers)
 
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
+enum class AppDispatchers {
+    IO
 }
