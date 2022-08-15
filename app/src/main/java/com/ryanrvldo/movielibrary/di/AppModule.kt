@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.movielibrary
+package com.ryanrvldo.movielibrary.di
 
-import android.app.Application
-import com.ryanrvldo.movielibrary.initializers.AppInitializers
-import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-@HiltAndroidApp
-class MovieLibraryApplication : Application() {
-
-    @Inject lateinit var initializers: AppInitializers
-
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init()
-    }
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    @Provides
+    @Singleton
+    fun providesFirebaseCrashlytics(): FirebaseCrashlytics = Firebase.crashlytics
 }

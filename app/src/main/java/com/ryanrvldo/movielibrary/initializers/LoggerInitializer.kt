@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.movielibrary
+package com.ryanrvldo.movielibrary.initializers
 
-import android.app.Application
-import com.ryanrvldo.movielibrary.initializers.AppInitializers
-import dagger.hilt.android.HiltAndroidApp
+import com.ryanrvldo.movielibrary.BuildConfig
+import com.ryanrvldo.movielibrary.core.initializer.AppInitializer
+import com.ryanrvldo.movielibrary.core.logging.Logger
 import javax.inject.Inject
 
-@HiltAndroidApp
-class MovieLibraryApplication : Application() {
-
-    @Inject lateinit var initializers: AppInitializers
-
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init()
-    }
+class LoggerInitializer @Inject constructor(
+    private val logger: Logger
+) : AppInitializer {
+    override fun init() = logger.setup(BuildConfig.DEBUG)
 }

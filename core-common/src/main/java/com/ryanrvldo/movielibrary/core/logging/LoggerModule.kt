@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.movielibrary
+package com.ryanrvldo.movielibrary.core.logging
 
-import android.app.Application
-import com.ryanrvldo.movielibrary.initializers.AppInitializers
-import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-@HiltAndroidApp
-class MovieLibraryApplication : Application() {
-
-    @Inject lateinit var initializers: AppInitializers
-
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init()
-    }
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class LoggerModule {
+    @Binds
+    @Singleton
+    internal abstract fun providesLogger(logger: MovieLibraryLogger): Logger
 }

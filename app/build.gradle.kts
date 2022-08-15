@@ -20,6 +20,8 @@ plugins {
     kotlin("kapt")
     id("jacoco")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     id("movielibrary.spotless")
 }
 
@@ -61,7 +63,9 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(project(":core-testing"))
+    implementation(projects.coreCommon)
+
+    androidTestImplementation(projects.coreTesting)
     androidTestImplementation(libs.androidx.navigation.test)
 
     implementation(libs.androidx.acitvity.ktx)
@@ -71,6 +75,10 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.crashlytics.ktx)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

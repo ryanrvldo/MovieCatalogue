@@ -22,6 +22,11 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
+      - name: Decrypt secrets
+        run: ./release/decrypt-secrets.sh
+        env:
+          MOVIE_LIBRARY_ENCRYPT_KEY: ${{ secrets.MOVIE_LIBRARY_ENCRYPT_KEY }}
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
@@ -52,3 +57,7 @@ jobs:
 
       - name: Run local tests
         run: ./gradlew test
+
+      - name: Clean secrets
+        if: always()
+        run: ./release/clean-secrets.sh

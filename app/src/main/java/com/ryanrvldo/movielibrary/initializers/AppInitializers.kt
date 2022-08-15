@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.movielibrary
+package com.ryanrvldo.movielibrary.initializers
 
-import android.app.Application
-import com.ryanrvldo.movielibrary.initializers.AppInitializers
-import dagger.hilt.android.HiltAndroidApp
+import com.ryanrvldo.movielibrary.core.initializer.AppInitializer
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@HiltAndroidApp
-class MovieLibraryApplication : Application() {
-
-    @Inject lateinit var initializers: AppInitializers
-
-    override fun onCreate() {
-        super.onCreate()
-        initializers.init()
+@Singleton
+class AppInitializers @Inject constructor(
+    private val initializers: Set<@JvmSuppressWildcards AppInitializer>
+) {
+    fun init() {
+        initializers.forEach {
+            it.init()
+        }
     }
 }
