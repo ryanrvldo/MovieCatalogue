@@ -14,27 +14,11 @@
  * limitations under the License.
  */
 
-plugins {
-    id("movielibrary.android.library")
-    kotlin("kapt")
-    id("movielibrary.spotless")
-}
+package com.ryanrvldo.movielibrary.core.network.util
 
-dependencies {
-    implementation(project(":core-common"))
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-    api(libs.mockk)
-    api(libs.truth)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
+enum class HttpMethod {
+    GET,
+    POST,
+    PUT,
+    PATCH
 }

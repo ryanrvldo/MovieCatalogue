@@ -14,27 +14,11 @@
  * limitations under the License.
  */
 
-plugins {
-    id("movielibrary.android.library")
-    kotlin("kapt")
-    id("movielibrary.spotless")
-}
+package com.ryanrvldo.movielibrary.core.network.model
 
-dependencies {
-    implementation(project(":core-common"))
+import com.google.gson.annotations.SerializedName
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-    api(libs.mockk)
-    api(libs.truth)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
-}
+data class ErrorResponse(
+    @SerializedName("status_message") val statusMessage: String,
+    @SerializedName("status_code") val statusCode: Int
+)

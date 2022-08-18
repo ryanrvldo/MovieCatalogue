@@ -16,25 +16,31 @@
 
 plugins {
     id("movielibrary.android.library")
+    id("movielibrary.android.library.jacoco")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
     id("movielibrary.spotless")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+}
+
+secrets {
+    defaultPropertiesFileName = "credentials.properties"
 }
 
 dependencies {
-    implementation(project(":core-common"))
+    implementation(projects.coreCommon)
+
+    testImplementation(projects.coreTesting)
+
+    implementation(libs.kotlinx.coroutines.android)
+
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-    api(libs.mockk)
-    api(libs.truth)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
+    testImplementation(libs.retrofit.mock)
+    testImplementation(libs.okhttp.mockwebserver)
 }

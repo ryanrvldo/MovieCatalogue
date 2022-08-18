@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-plugins {
-    id("movielibrary.android.library")
-    kotlin("kapt")
-    id("movielibrary.spotless")
-}
+package com.ryanrvldo.movielibrary.core.network.api
 
-dependencies {
-    implementation(project(":core-common"))
+import com.ryanrvldo.movielibrary.core.network.model.MovieResponse
+import com.ryanrvldo.movielibrary.core.network.model.PagingResponse
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-    api(libs.mockk)
-    api(libs.truth)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
+/**
+ * Retrofit API declaration for TMDB Movies Network API
+ */
+interface TmdbMoviesNetworkApi {
+    @GET(value = "movie/now_playing")
+    suspend fun getNowPlayingMovies(
+        @Query("page") page: Int = 1
+    ): PagingResponse<MovieResponse>
 }

@@ -14,27 +14,21 @@
  * limitations under the License.
  */
 
-plugins {
-    id("movielibrary.android.library")
-    kotlin("kapt")
-    id("movielibrary.spotless")
-}
+package com.ryanrvldo.movielibrary.core.network.di
 
-dependencies {
-    implementation(project(":core-common"))
+import com.ryanrvldo.movielibrary.core.network.api.TmdbMoviesNetworkApi
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+import retrofit2.Retrofit
+import retrofit2.create
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    api(libs.junit4)
-    api(libs.androidx.test.core)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.turbine)
-    api(libs.mockk)
-    api(libs.truth)
-
-    api(libs.androidx.test.espresso.core)
-    api(libs.androidx.test.runner)
-    api(libs.androidx.test.rules)
-    api(libs.hilt.android.testing)
+@Module(includes = [NetworkConfigModule::class])
+@InstallIn(SingletonComponent::class)
+object NetworkApiModule {
+    @Provides
+    @Singleton
+    fun providesTmdbMoviesNetworkApi(retrofit: Retrofit): TmdbMoviesNetworkApi = retrofit.create()
 }

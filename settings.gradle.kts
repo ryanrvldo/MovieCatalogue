@@ -41,4 +41,5 @@ dependencyResolutionManagement {
 rootProject.name = "MovieLibrary"
 include(":app")
 include(":core-common")
+include(":core-network")
 include(":core-testing")
