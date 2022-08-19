@@ -14,21 +14,10 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.movielibrary.core.network.api
+package com.ryanrvldo.movielibrary.core.network.fake
 
-import com.ryanrvldo.movielibrary.core.network.MoviesNetworkDataSource
-import com.ryanrvldo.movielibrary.core.network.model.MovieResponse
-import com.ryanrvldo.movielibrary.core.network.model.PagingResponse
 import com.ryanrvldo.movielibrary.core.network.util.withRetry
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class TmdbMoviesNetworkDataSource @Inject constructor(
-    private val moviesNetworkApi: TmdbMoviesNetworkApi
-) : MoviesNetworkDataSource {
-
-    override suspend fun getNowPlayingMovies(page: Int): PagingResponse<MovieResponse> {
-        return withRetry { moviesNetworkApi.getNowPlayingMovies(page) }
-    }
+class FakeNetworkDataSource(private val networkApi: FakeNetworkApi) {
+    suspend fun getFakeData(): String = withRetry { networkApi.getFakeData() }
 }

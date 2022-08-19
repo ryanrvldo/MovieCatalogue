@@ -50,12 +50,10 @@ internal fun Project.configureKotlinAndroid(
                 // Enable experimental coroutines APIs, including Flow
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-opt-in=kotlinx.coroutines.FlowPreview",
-                "-opt-in=kotlin.Experimental",
-                // Enable experimental kotlinx serialization APIs
-                "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+                "-opt-in=kotlin.Experimental"
             )
 
-            // Set JVM target to 1.8
+            // Set JVM target to 11
             jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
