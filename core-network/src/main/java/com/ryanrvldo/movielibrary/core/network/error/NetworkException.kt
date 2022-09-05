@@ -16,6 +16,8 @@
 
 package com.ryanrvldo.movielibrary.core.network.error
 
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY
 import java.io.IOException
 import java.net.HttpURLConnection.HTTP_CLIENT_TIMEOUT
 import java.net.HttpURLConnection.HTTP_INTERNAL_ERROR
@@ -30,7 +32,8 @@ import retrofit2.Response
  * @param message The error message from server
  * @param exception The throwable when call remote API
  */
-class NetworkException(
+@RestrictTo(LIBRARY)
+internal class NetworkException(
     val code: Int?,
     val url: String?,
     val errorType: Type,
@@ -39,7 +42,7 @@ class NetworkException(
 ) : RuntimeException(message, exception) {
 
     companion object {
-        internal fun httpError(
+        private fun httpError(
             response: Response<*>?,
             httpException: HttpException
         ) = NetworkException(
@@ -50,7 +53,7 @@ class NetworkException(
             exception = httpException
         )
 
-        internal fun networkError(exception: IOException) = NetworkException(
+        private fun networkError(exception: IOException) = NetworkException(
             code = HTTP_CLIENT_TIMEOUT,
             url = null,
             errorType = Type.NETWORK,
@@ -58,7 +61,7 @@ class NetworkException(
             exception = exception
         )
 
-        internal fun unexpectedError(exception: Throwable) = NetworkException(
+        private fun unexpectedError(exception: Throwable) = NetworkException(
             code = HTTP_INTERNAL_ERROR,
             url = null,
             errorType = Type.UNEXPECTED,
@@ -84,6 +87,6 @@ class NetworkException(
     }
 
     override fun toString(): String {
-        return super.toString() + " : " + errorType + " : " + url + " : "
+        return "${super.toString()} : $errorType : $url : "
     }
 }

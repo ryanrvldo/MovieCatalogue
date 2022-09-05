@@ -17,9 +17,9 @@
 package com.ryanrvldo.movielibrary.core.network.api
 
 import com.google.common.truth.Truth.assertThat
-import com.ryanrvldo.movielibrary.core.network.MoviesNetworkDataSource
 import com.ryanrvldo.movielibrary.core.network.model.MovieResponse
 import com.ryanrvldo.movielibrary.core.network.model.PagingResponse
+import com.ryanrvldo.movielibrary.core.network.util.withRetry
 import io.mockk.clearMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -38,7 +38,7 @@ import retrofit2.Response
 
 internal class TmdbMoviesNetworkDataSourceTest {
 
-    private lateinit var subject: MoviesNetworkDataSource
+    private lateinit var subject: TmdbMoviesNetworkDataSource
 
     private val mockApi: TmdbMoviesNetworkApi = mockk()
 
@@ -55,12 +55,13 @@ internal class TmdbMoviesNetworkDataSourceTest {
     @Test
     fun `when get now playing movies, should call network api`() = runTest {
         val expected = PagingResponse<MovieResponse>(1, emptyList(), 1, 0)
-        coEvery { mockApi.getNowPlayingMovies(1) } returns expected
+        coEvery { mockApi.getNowPlayingMovies() } returns expected
 
-        val actual = subject.getNowPlayingMovies(1)
+        val actual = subject.getNowPlayingMovies()
 
         assertThat(actual).isEqualTo(expected)
-        coVerify(exactly = 1) { mockApi.getNowPlayingMovies(1) }
+        coVerify(exactly = 1) { withRetry { mockApi.getNowPlayingMovies() } }
+        coVerify(exactly = 1) { mockApi.getNowPlayingMovies() }
     }
 
     @Test
@@ -73,6 +74,7 @@ internal class TmdbMoviesNetworkDataSourceTest {
         }
 
         assertThat(actual).hasMessageThat().contains(expected.message())
+        coVerify(exactly = 1) { withRetry { mockApi.getNowPlayingMovies(any()) } }
         coVerify(exactly = 1) { mockApi.getNowPlayingMovies(any()) }
     }
 }

@@ -33,7 +33,9 @@ private val coverageExclusions = listOf(
     "**/R.class",
     "**/R\$*.class",
     "**/BuildConfig.*",
-    "**/Manifest*.*"
+    "**/Manifest*.*",
+    "**/model/*",
+    "**/di/*"
 )
 
 internal fun Project.configureJacoco(

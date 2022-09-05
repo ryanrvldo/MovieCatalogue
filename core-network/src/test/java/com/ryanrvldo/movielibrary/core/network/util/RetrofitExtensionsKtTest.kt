@@ -18,6 +18,7 @@ package com.ryanrvldo.movielibrary.core.network.util
 
 import com.google.common.truth.Truth.assertThat
 import com.ryanrvldo.movielibrary.core.network.error.NetworkException
+import com.ryanrvldo.movielibrary.core.network.error.NetworkException.Companion.asNetworkException
 import com.ryanrvldo.movielibrary.core.network.fake.FakeNetworkApi
 import com.ryanrvldo.movielibrary.core.network.fake.FakeNetworkDataSource
 import io.mockk.clearMocks
@@ -26,21 +27,14 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import java.net.SocketTimeoutException
 import kotlinx.coroutines.test.runTest
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.Protocol
-import okhttp3.Request
-import okhttp3.ResponseBody
-import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.After
 import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
-import retrofit2.HttpException
-import retrofit2.Response
 
 /* ktlint-disable max-line-length */
 
-class RetrofitExtensionsTest {
+class RetrofitExtensionsKtTest {
 
     private lateinit var subject: FakeNetworkDataSource
 
@@ -60,7 +54,7 @@ class RetrofitExtensionsTest {
     fun `given HttpException with 429 response code when call api, should retry call api 3 times and throws NetworkException`() {
         val httpException = buildHttpException(429, "Retry-After" to 3600L.toString())
         coEvery { mockApi.getFakeData() } throws httpException
-        val expected = NetworkException.httpError(httpException.response(), httpException)
+        val expected = httpException.asNetworkException()
 
         val actual = assertThrows(NetworkException::class.java) {
             runTest { subject.getFakeData() }
@@ -78,7 +72,7 @@ class RetrofitExtensionsTest {
     fun `given HttpException with non-429 response code when call api, should not retry call api and throws NetworkException`() {
         val exception = buildHttpException(500)
         coEvery { mockApi.getFakeData() } throws exception
-        val expected = NetworkException.httpError(exception.response(), exception)
+        val expected = exception.asNetworkException()
 
         val actual = assertThrows(NetworkException::class.java) {
             runTest { subject.getFakeData() }
@@ -96,7 +90,7 @@ class RetrofitExtensionsTest {
     fun `given IOException when call api, should retry call api 3 times and throws NetworkException`() {
         val ioException = SocketTimeoutException("timeout")
         coEvery { mockApi.getFakeData() } throws ioException
-        val expected = NetworkException.networkError(ioException)
+        val expected = ioException.asNetworkException()
 
         val actual = assertThrows(NetworkException::class.java) {
             runTest { subject.getFakeData() }
@@ -115,7 +109,7 @@ class RetrofitExtensionsTest {
     fun `given unexpected exception when call api, should not retry call api and throws NetworkException`() {
         val exception = Exception("ERROR")
         coEvery { mockApi.getFakeData() } throws exception
-        val expected = NetworkException.unexpectedError(exception)
+        val expected = exception.asNetworkException()
 
         val actual = assertThrows(NetworkException::class.java) {
             runTest { subject.getFakeData() }
@@ -174,19 +168,9 @@ class RetrofitExtensionsTest {
         assertThat(actual).isNull()
     }
 
-    private fun buildHttpException(
-        code: Int,
-        vararg headers: Pair<String, String>,
-        body: ResponseBody = FakeResponse.Error.NOT_FOUND.toResponseBody("application/json".toMediaTypeOrNull())
-    ): HttpException {
-        val rawResponseBuilder = okhttp3.Response.Builder()
-            .code(code)
-            .request(Request.Builder().url("https://example.com").build())
-            .protocol(Protocol.HTTP_1_1)
-            .message("Error")
-        headers.forEach {
-            rawResponseBuilder.header(it.first, it.second)
-        }
-        return HttpException(Response.error<Any>(body, rawResponseBuilder.build()))
+    @Test
+    fun `given HttpException with unexpected retry-after response head, should return null`() {
+        val subject = buildHttpException(429, "Retry-After" to "Unexpected")
+        assertThat(subject.retryAfter).isNull()
     }
 }

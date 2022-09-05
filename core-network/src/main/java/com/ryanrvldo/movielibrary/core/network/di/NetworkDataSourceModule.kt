@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-package com.ryanrvldo.movielibrary.core.network
+package com.ryanrvldo.movielibrary.core.network.di
 
-import com.ryanrvldo.movielibrary.core.network.model.MovieResponse
-import com.ryanrvldo.movielibrary.core.network.model.PagingResponse
+import com.ryanrvldo.movielibrary.core.network.MoviesNetworkDataSource
+import com.ryanrvldo.movielibrary.core.network.api.TmdbMoviesNetworkDataSource
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-/**
- * Interface representing network calls for movies to the TMDB API
- */
-interface MoviesNetworkDataSource {
-    suspend fun getNowPlayingMovies(page: Int = 1): PagingResponse<MovieResponse>
+@Module
+@InstallIn(SingletonComponent::class)
+interface NetworkDataSourceModule {
+
+    @Binds
+    @Singleton
+    fun bindsMoviesNetworkDataSource(impl: TmdbMoviesNetworkDataSource): MoviesNetworkDataSource
 }
