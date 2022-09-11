@@ -63,9 +63,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.coreCommon)
+    implementation(projects.core.common)
 
-    androidTestImplementation(projects.coreTesting)
+    androidTestImplementation(projects.core.testing)
     androidTestImplementation(libs.androidx.navigation.test)
 
     implementation(libs.androidx.acitvity.ktx)
